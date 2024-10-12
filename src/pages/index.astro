@@ -1,7 +1,62 @@
 ---
-import Layout from "@layouts/Layout.astro";
+import Layout from '@layouts/Layout.astro'
 ---
 
 <Layout title="Welcome to Roland Franke">
-    <h1>Under construction</h1>
+    <section>
+        <h1>roland<span>.</span></h1>
+        <div>
+            [ro.land] <span>•</span>
+            <b>frontend developer</b>
+        </div>
+        <p>
+            <i>roland</i> is a <b>frontend developer</b> with a passion for creative coding and a sharp
+            focus on CSS, HTML, and <b>accessibility</b>. I thrive on building web experiences that
+            are not only visually appealing but accessible and performant for everyone.
+        </p>
+    </section>
 </Layout>
+
+<style>
+    section {
+        display: grid;
+        gap: clamp(1rem, 2.67vw, 2rem);
+        max-inline-size: 86ch;
+        margin-inline: 1rem;
+    }
+
+    h1 {
+        font-size: clamp(5rem, 0.552rem + 20.93vw, 16.25rem);
+
+        > span {
+            color: var(--color-primary-400);
+        }
+    }
+
+    div {
+        display: flex;
+        align-items: center;
+        gap: clamp(1rem, 0.5rem + 1.33vw, 1.5rem);
+        font-size: clamp(1.25rem, 0.125rem + 3vw, 2.375rem);
+
+        > span {
+            font-size: clamp(0.5rem, 1.33vw, 1rem);
+            color: var(--color-primary-400);
+            font-feature-settings: 'aalt' on;
+        }
+    }
+
+    p {
+        font-size: clamp(1.125rem, 0.5rem + 1.67vw, 1.75rem);
+
+        > i {
+            font-style: italic;
+            font-weight: var(--fw-normal);
+        }
+
+        > b {
+            font-weight: var(--fw-semibold);
+            color: var(--color-primary-400);
+        }
+    }
+</style>
