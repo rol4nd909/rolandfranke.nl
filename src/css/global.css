@@ -1,0 +1,7 @@
+
+@layer --reset, --base, --utils;
+
+@import 'global/reset.css' layer(reset);
+
+@import 'global/variables.css' layer(base);
+@import 'global/global-styles.css' layer(base);

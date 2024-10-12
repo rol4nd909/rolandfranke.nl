@@ -1,0 +1,41 @@
+/* 
+  Global styles 
+
+  Low-specificity, global styles that apply to the whole 
+  project: https://cube.fyi/css.html
+*/
+:root {
+  color-scheme: dark light;
+}
+
+body {
+  display: grid;
+  place-content: center;
+  margin: 0;
+  font-family: system-ui;
+  line-height: var(--leading-standard);
+  font-size: var(--size-base);
+  color: light-dark(var(--color-neutral-900), var(--color-neutral-100));
+  background-color: light-dark(var(--color-neutral-100), var(--color-neutral-900));
+
+  &::before {
+    --size: 3rem;
+    --line: color-mix(
+      in hsl,
+      light-dark(var(--color-neutral-900), var(--color-neutral-100)),
+      transparent 95%
+    );
+
+    content: '';
+    z-index: -1;
+    position: fixed;
+    inset: 0;
+
+    background:
+      linear-gradient(90deg, var(--line) 1px, transparent 1px var(--size)) 50% 50% / var(--size)
+        var(--size),
+      linear-gradient(var(--line) 1px, transparent 1px var(--size)) 50% 50% / var(--size)
+        var(--size);
+    mask: linear-gradient(-25deg, transparent 30%, white);
+  }
+}

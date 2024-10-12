@@ -1,0 +1,29 @@
+@custom-media --motion-ok (prefers-reduced-motion: no-preference);
+@custom-media --motion-not-ok (prefers-reduced-motion: reduce);
+@custom-media --opacity-ok (prefers-reduced-transparency: no-preference);
+@custom-media --opacity-not-ok (prefers-reduced-transparency: reduce);
+@custom-media --use-data-ok (prefers-reduced-data: no-preference);
+@custom-media --use-data-not-ok (prefers-reduced-data: reduce);
+
+@custom-media --os-dark (prefers-color-scheme: dark);
+@custom-media --os-light (prefers-color-scheme: light);
+
+@custom-media --high-contrast (prefers-contrast: more);
+@custom-media --low-contrast (prefers-contrast: less);
+
+@custom-media --is-portrait (orientation: portrait);
+@custom-media --is-landscape (orientation: landscape);
+
+@custom-media --hd-color (dynamic-range: high);
+
+@custom-media --is-touch (hover: none) and (pointer: coarse);
+@custom-media --is-stylus (hover: none) and (pointer: fine);
+@custom-media --is-pointer (hover: hover) and (pointer: coarse);
+@custom-media --is-mouse (hover: hover) and (pointer: fine);
+
+@custom-media --for-phone-only (width < 37.5em);
+@custom-media --for-tablet-p-up (width >= 37.5em);
+@custom-media --until-tablet-l (width < 56.25em);
+@custom-media --for-tablet-l-up (width >= 56.25em);
+@custom-media --for-desktop-up (width >= 75em);
+@custom-media --for-big-desktop-up (width >= 112.5em);
