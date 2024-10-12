@@ -41,7 +41,7 @@ const { title } = Astro.props
 <style>
     header {
         position: absolute;
-        inset: 3rem 1.5rem auto;
+        inset: clamp(1.5rem, 4vw, 3rem) 1.5rem auto;
         display: flex;
         justify-content: space-between;
     }

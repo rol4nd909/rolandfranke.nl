@@ -1,7 +1,7 @@
 :root {
-  --color-neutral-100: #e2e2d2;
-  --color-neutral-900: #141d26;
-  --color-primary-400: #c51f5d;
+  --color-neutral-100: hsl(60 22% 85%);
+  --color-neutral-900: hsl(210 31% 11%);
+  --color-primary-400: hsl(338 73% 45%);
 
   /* typography */
   --ff-base: 'Instrument Sans', system-ui, sans-serif;
