@@ -6,7 +6,8 @@ import Layout from '@layouts/Layout.astro'
     <section>
         <h1>roland<span>.</span></h1>
         <div>
-            [ro.land] <span>•</span>
+            <span>[r<span class="underline">o</span>.land]</span>
+            <span class="dot">•</span>
             <span class="bold">frontend developer</span>
         </div>
         <p>
@@ -43,7 +44,7 @@ import Layout from '@layouts/Layout.astro'
         gap: utopia.clamp(16, 24);
         font-size: utopia.clamp(20, 38);
 
-        > span:not(.bold) {
+        > .dot {
             font-size: utopia.clamp(8, 16);
             color: var(--color-primary-400);
             font-feature-settings: 'aalt' on;
