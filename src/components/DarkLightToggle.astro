@@ -1,13 +1,13 @@
-<button class="js-theme-toggle" title="Toggle dark mode" aria-pressed="false">
-    <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24">
-        <mask id="moon-mask">
+<button class="theme-toggle js-theme-toggle" title="Toggle light mode" aria-pressed="false">
+    <svg class="sun-and-moon" aria-hidden="true" width="24" height="24" viewBox="0 0 24 24">
+        <mask class="moon" id="moon-mask">
             <rect x="0" y="0" width="100%" height="100%" fill="white"></rect>
             <circle cx="0" cy="10" r="6" fill="black"></circle>
         </mask>
 
-        <circle cx="12" cy="12" r="6" mask="url(#moon-mask)" fill="currentColor"></circle>
-
-        <g stroke="currentColor">
+        <circle class="sun" cx="12" cy="12" r="6" mask="url(#moon-mask)" fill="currentColor"
+        ></circle>
+        <g class="sun-beams" stroke="currentColor">
             <line x1="12" y1="1" x2="12" y2="3"></line>
             <line x1="12" y1="21" x2="12" y2="23"></line>
             <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
@@ -23,7 +23,7 @@
 <script>
     const storageKey = 'color-preference'
 
-    const onClick = () => {
+    const SWITCH = () => {
         // flip current value
         theme.value = theme.value === 'light' ? 'dark' : 'light'
 
@@ -47,13 +47,18 @@
     const reflectPreference = () => {
         const pressed = theme.value === 'dark' ? 'true' : 'false'
 
-        document.documentElement.style.setProperty('color-scheme', theme.value)
         document.firstElementChild?.setAttribute('color-scheme', theme.value)
         document.querySelector('.js-theme-toggle')?.setAttribute('aria-pressed', pressed)
     }
 
     const theme = {
         value: getColorPreference(),
+    }
+
+    const TOGGLE_THEME = () => {
+        // SWITCH()
+        if (!document.startViewTransition) SWITCH()
+        document.startViewTransition(SWITCH)
     }
 
     // set early so no page flashes / CSS is made aware
@@ -64,7 +69,7 @@
         reflectPreference()
 
         // now this script can find and listen for clicks on the control
-        document.querySelector('.js-theme-toggle')?.addEventListener('click', onClick)
+        document.querySelector('.js-theme-toggle')?.addEventListener('click', TOGGLE_THEME)
     }
 
     // sync with system changes
@@ -76,14 +81,19 @@
         })
 </script>
 
-<style>
-    button {
+<style is:global>
+    .theme-toggle {
         --size: 3rem;
-        --icon-fill: currentcolor;
+        --icon-fill: currentColor;
 
-        padding: 0.5rem;
-        border: none;
+        --ease: cubic-bezier(0.25, 0, 0.3, 1);
+        --ease-out: cubic-bezier(0, 0, 0, 1);
+        --ease-elastic-1: cubic-bezier(0.5, 1.25, 0.75, 1.25);
+        --ease-elastic-2: cubic-bezier(0.5, 1.5, 0.75, 1.25);
+
         background: none;
+        border: none;
+        padding: 0.5rem;
         inline-size: var(--size);
         block-size: var(--size);
         aspect-ratio: 1;
@@ -92,37 +102,62 @@
         touch-action: manipulation;
         -webkit-tap-highlight-color: transparent;
         outline-offset: 0.25rem;
+        outline-color: currentColor;
         color: inherit;
+
+        & > svg {
+            inline-size: 100%;
+            block-size: 100%;
+            stroke-linecap: round;
+        }
     }
 
-    svg {
-        inline-size: 100%;
-        block-size: 100%;
-        stroke-linecap: round;
-
-        & > :is(mask, circle, g) {
+    .sun-and-moon {
+        & > :is(.moon, .sun, .sun-beams) {
             transform-origin: center center;
         }
 
-        & > :is(mask, circle) {
+        & > :is(.moon, .sun) {
             fill: var(--icon-fill);
         }
 
-        & > g {
+        & > .sun-beams {
             stroke: var(--icon-fill);
             stroke-width: 0.125rem;
         }
 
-        /* :global([color-scheme='dark']) & {
-            & > circle {
+        @media (--motion-ok) {
+            & > .sun {
+                transition: transform 0.5s var(--ease-elastic-1);
+            }
+
+            & > .sun-beams {
+                transition:
+                    transform 0.5s var(--ease-elastic-2),
+                    opacity 0.5s var(--ease);
+            }
+
+            & > .moon > circle {
+                transition: transform 0.25s var(--ease-out);
+
+                @supports (cx: 1) {
+                    transition: cx 0.25s var(--ease-out);
+                }
+            }
+        }
+    }
+
+    [color-scheme='light'] {
+        .sun-and-moon {
+            & > .sun {
                 transform: scale(1.75);
             }
 
-            & > g {
+            & > .sun-beams {
                 opacity: 0;
             }
 
-            & > mask > circle {
+            & > .moon > circle {
                 transform: translateX(7px);
 
                 @supports (cx: 1) {
@@ -130,109 +165,50 @@
                     cx: 7;
                 }
             }
-        } */
 
-        /* @media (--motion-ok) {
-            & > circle {
-                transition:
-                    transform 0.5s var(--ease-elastic-3),
-                    fill 0.25s var(--ease-3);
-            }
-
-            & > g {
-                transition:
-                    transform 0.5s var(--ease-elastic-4),
-                    opacity 0.5s var(--ease-3),
-                    stroke 0.25s var(--ease-3);
-            }
-
-            mask > circle {
-                transition: transform 0.25s var(--ease-out-5);
-
-                @supports (cx: 1) {
-                    transition: cx 0.25s var(--ease-out-5);
-                }
-            }
-
-            :global([color-scheme='dark']) & {
-                & > circle {
+            @media (--motion-ok) {
+                & > .sun {
                     transform: scale(1.75);
-                    transition-timing-function: var(--ease-3);
+                    transition-timing-function: var(--ease);
                     transition-duration: 0.25s;
                 }
 
-                & > g {
+                & > .sun-beams {
                     transform: rotateZ(-25deg);
                     transition-duration: 0.15s;
                 }
 
-                & > mask > circle {
+                & > .moon > circle {
                     transition-delay: 0.25s;
                     transition-duration: 0.5s;
                 }
             }
-        } */
-    }
-
-    :global([color-scheme='light'] svg) {
-        & > circle {
-            transform: scale(1.75);
-        }
-
-        & > g {
-            opacity: 0;
-        }
-
-        & > mask > circle {
-            transform: translateX(7px);
-
-            @supports (cx: 1) {
-                transform: translateX(0);
-                cx: 7;
-            }
         }
     }
 
-    @media (prefers-reduced-motion: no-preference) {
-        svg {
-            & > circle {
-                transition:
-                    transform 0.5s var(--ease-elastic-3),
-                    fill 0.25s var(--ease-3);
-            }
+    /* VIEW TRANSITION ANIMATION */
+    ::view-transition-new(root) {
+        animation: reveal 1s;
+        clip-path: inset(0 0 0 0);
+        z-index: 2;
+    }
 
-            & > g {
-                transition:
-                    transform 0.5s var(--ease-elastic-4),
-                    opacity 0.5s var(--ease-3),
-                    stroke 0.25s var(--ease-3);
-            }
+    ::view-transition-old(root) {
+        z-index: -1;
+        animation: none;
+    }
 
-            mask > circle {
-                transition: transform 0.25s var(--ease-out-5);
-
-                @supports (cx: 1) {
-                    transition: cx 0.25s var(--ease-out-5);
-                }
-            }
+    @keyframes reveal {
+        from {
+            clip-path: inset(var(--from));
         }
+    }
 
-        :global([color-scheme='light'] svg) {
-            & > circle {
-                transform: scale(1.75);
-                transition-timing-function: var(--ease-3);
-                transition-duration: 0.25s;
-            }
+    [color-scheme='light'] {
+        --from: 100% 0 0 0;
+    }
 
-            & > g {
-                transform: rotateZ(-25deg);
-                transition-duration: 0.15s;
-            }
-
-            & > mask circle {
-                transition-delay: 0.25s;
-                transition-duration: 0.5s;
-            }
-        }
+    [color-scheme='dark'] {
+        --from: 0 0 100% 0;
     }
 </style>
