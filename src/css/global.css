@@ -8,4 +8,5 @@
 
 @import 'utilities/sr-only.css' layer(--utils);
 @import 'utilities/flow.css' layer(--utils);
+@import 'utilities/colors.css' layer(--utils.colors);
 @import 'utilities/typography.css' layer(--utils.typography);

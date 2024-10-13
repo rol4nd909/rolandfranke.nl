@@ -1,0 +1,23 @@
+.text-primary-400 {
+  color: var(--color-primary-400);
+}
+
+.text-light-dark {
+  color: light-dark(var(--color-neutral-100), var(--color-neutral-900));
+}
+
+.text-dark-light {
+  color: light-dark(var(--color-neutral-900), var(--color-neutral-100));
+}
+
+.bg-primary-400 {
+  background-color: var(--color-primary-400);
+}
+
+.bg-light-dark {
+  background-color: light-dark(var(--color-neutral-100), var(--color-neutral-900));
+}
+
+.bg-dark-light {
+  background-color: light-dark(var(--color-neutral-900), var(--color-neutral-100));
+}

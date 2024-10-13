@@ -7,12 +7,15 @@ import Layout from '@layouts/Layout.astro'
         <h1>roland<span>.</span></h1>
         <div>
             [ro.land] <span>•</span>
-            <b>frontend developer</b>
+            <span class="bold">frontend developer</span>
         </div>
         <p>
-            <i>roland</i> is a <b>frontend developer</b> with a passion for creative coding and a sharp
-            focus on CSS, HTML, and <b>accessibility</b>. I thrive on building web experiences that
-            are not only visually appealing but accessible and performant for everyone.
+            <span class="italic">roland</span> is a <span class="bold text-primary-400"
+                >frontend developer</span
+            > with a passion for creative coding and a sharp focus on CSS, HTML, and <span
+                class="bold text-primary-400">accessibility</span
+            >. I thrive on building web experiences that are not only visually appealing but
+            accessible and performant for everyone.
         </p>
     </section>
 </Layout>
@@ -20,14 +23,14 @@ import Layout from '@layouts/Layout.astro'
 <style>
     section {
         display: grid;
-        gap: clamp(1rem, 2.67vw, 2rem);
+        gap: utopia.clamp(16, 32);
         max-inline-size: 86ch;
         margin-inline: 1.5rem;
         padding-block: 4rem;
     }
 
     h1 {
-        font-size: clamp(5rem, 0.552rem + 20.93vw, 16.25rem);
+        font-size: utopia.clamp(80, 260, 400, 1200);
 
         > span {
             color: var(--color-primary-400);
@@ -37,27 +40,17 @@ import Layout from '@layouts/Layout.astro'
     div {
         display: flex;
         align-items: center;
-        gap: clamp(1rem, 0.5rem + 1.33vw, 1.5rem);
-        font-size: clamp(1.25rem, 0.125rem + 3vw, 2.375rem);
+        gap: utopia.clamp(16, 24);
+        font-size: utopia.clamp(20, 38);
 
-        > span {
-            font-size: clamp(0.5rem, 1.33vw, 1rem);
+        > span:not(.bold) {
+            font-size: utopia.clamp(8, 16);
             color: var(--color-primary-400);
             font-feature-settings: 'aalt' on;
         }
     }
 
     p {
-        font-size: clamp(1.125rem, 0.5rem + 1.67vw, 1.75rem);
-
-        > i {
-            font-style: italic;
-            font-weight: var(--fw-normal);
-        }
-
-        > b {
-            font-weight: var(--fw-semibold);
-            color: var(--color-primary-400);
-        }
+        font-size: utopia.clamp(18, 28);
     }
 </style>

@@ -41,7 +41,7 @@ const { title } = Astro.props
 <style>
     header {
         position: absolute;
-        inset: clamp(1.5rem, 4vw, 3rem) 1.5rem auto;
+        inset: utopia.clamp(24, 48) 1.5rem auto;
         display: flex;
         justify-content: space-between;
     }
@@ -51,5 +51,6 @@ const { title } = Astro.props
         aspect-ratio: 1;
         fill: var(--color-primary-400);
         background-color: var(--color-neutral-100);
+        align-self: center;
     }
 </style>
