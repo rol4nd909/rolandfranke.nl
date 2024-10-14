@@ -3,8 +3,19 @@
   "short_name": "Roland",
   "id": "/",
   "start_url": "/",
-  "form_factor": "wide",
+  "protocol_handlers": [
+    {
+      "protocol": "web+app",
+      "url": "/%s"
+    }
+  ],
   "icons": [
+    {
+      "purpose": "any",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "src": "favicon.svg"
+    },
     {
       "purpose": "maskable",
       "sizes": "192x192",
@@ -16,6 +27,35 @@
       "sizes": "512x512",
       "src": "maskable_icon_x512.png",
       "type": "image/png"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "screenshot-light.png",
+      "sizes": "800X1200",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "Roland light mode"
+    },
+    {
+      "src": "screenshot-dark.png",
+      "sizes": "800X1200",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "Roland dark mode"
+    },
+
+    {
+      "src": "screenshot-light.png",
+      "sizes": "800X1200",
+      "type": "image/png",
+      "label": "Roland light mode"
+    },
+    {
+      "src": "screenshot-dark.png",
+      "sizes": "800X1200",
+      "type": "image/png",
+      "label": "Roland dark mode"
     }
   ],
   "theme_color": "#000000",
