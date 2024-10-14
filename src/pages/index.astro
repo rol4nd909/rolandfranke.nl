@@ -11,27 +11,30 @@ import Layout from '@layouts/Layout.astro'
             <span class="bold">frontend developer</span>
         </div>
         <p>
-            <span class="italic">roland</span> is a <span class="bold text-primary-400"
-                >frontend developer</span
-            > with a passion for creative coding and a sharp focus on CSS, HTML, and <span
-                class="bold text-primary-400">accessibility</span
-            >. I thrive on building web experiences that are not only visually appealing but
-            accessible and performant for everyone.
+            <span class="italic">Roland</span> is a frontend developer with a passion for creative coding
+            and a sharp focus on CSS, HTML, andaccessibility. I thrive on building web experiences that
+            are not only visually appealing but accessible and performant for everyone.
         </p>
     </section>
+
+    <!-- <section>hello</section> -->
 </Layout>
 
 <style>
     section {
         display: grid;
+        place-content: center;
         gap: utopia.clamp(16, 32);
         max-inline-size: 86ch;
         margin-inline: 1.5rem;
         padding-block: 4rem;
+
+        min-block-size: 100dvh;
     }
 
     h1 {
         font-size: utopia.clamp(80, 260, 400, 1200);
+        font-weight: var(--fw-semibold);
 
         > span {
             color: var(--color-primary-400);

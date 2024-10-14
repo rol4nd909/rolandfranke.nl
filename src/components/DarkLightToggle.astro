@@ -81,7 +81,7 @@
         })
 </script>
 
-<style is:global>
+<style>
     .theme-toggle {
         --size: 3rem;
         --icon-fill: currentColor;
@@ -129,19 +129,23 @@
         @media (--motion-ok) {
             & > .sun {
                 transition: transform 0.5s var(--ease-elastic-1);
+                transition-delay: var(--toggle-delay);
             }
 
             & > .sun-beams {
                 transition:
                     transform 0.5s var(--ease-elastic-2),
                     opacity 0.5s var(--ease);
+                transition-delay: var(--toggle-delay);
             }
 
             & > .moon > circle {
                 transition: transform 0.25s var(--ease-out);
+                transition-delay: var(--toggle-delay);
 
                 @supports (cx: 1) {
                     transition: cx 0.25s var(--ease-out);
+                    transition-delay: var(--toggle-delay);
                 }
             }
         }
@@ -171,31 +175,35 @@
                     transform: scale(1.75);
                     transition-timing-function: var(--ease);
                     transition-duration: 0.25s;
+                    transition-delay: var(--toggle-delay);
                 }
 
                 & > .sun-beams {
                     transform: rotateZ(-25deg);
                     transition-duration: 0.15s;
+                    transition-delay: var(--toggle-delay);
                 }
 
                 & > .moon > circle {
-                    transition-delay: 0.25s;
                     transition-duration: 0.5s;
+                    transition-delay: calc(var(--toggle-delay) + 0.25s);
                 }
             }
         }
     }
 
     /* VIEW TRANSITION ANIMATION */
-    ::view-transition-new(root) {
-        animation: reveal 1s;
-        clip-path: inset(0 0 0 0);
-        z-index: 2;
-    }
+    @media (--motion-ok) {
+        :global(::view-transition-new(root)) {
+            animation: reveal 1s;
+            clip-path: inset(0 0 0 0);
+            z-index: 2;
+        }
 
-    ::view-transition-old(root) {
-        z-index: -1;
-        animation: none;
+        :global(::view-transition-old(root)) {
+            z-index: -1;
+            animation: none;
+        }
     }
 
     @keyframes reveal {
@@ -204,11 +212,13 @@
         }
     }
 
-    [color-scheme='light'] {
+    html:global([color-scheme='light']) {
         --from: 100% 0 0 0;
+        --toggle-delay: 0.5s;
     }
 
-    [color-scheme='dark'] {
+    html:global([color-scheme='dark']) {
         --from: 0 0 100% 0;
+        --toggle-delay: 0.15s;
     }
 </style>

@@ -6,7 +6,6 @@
 @import 'global/variables.css' layer(--base);
 @import 'global/global-styles.css' layer(--base);
 
-@import 'utilities/sr-only.css' layer(--utils);
-@import 'utilities/flow.css' layer(--utils);
-@import 'utilities/colors.css' layer(--utils.colors);
+/* @import 'utilities/sr-only.css' layer(--utils);
+@import 'utilities/flow.css' layer(--utils); */
 @import 'utilities/typography.css' layer(--utils.typography);
