@@ -18,6 +18,8 @@ body {
   line-height: 1.5;
   color: light-dark(var(--color-neutral-900), var(--color-neutral-100));
   background-color: light-dark(var(--color-neutral-100), var(--color-neutral-900));
+  /* Stylistic Sets for & */
+  font-feature-settings: 'ss11' on;
 
   &::before {
     --size: 3rem;

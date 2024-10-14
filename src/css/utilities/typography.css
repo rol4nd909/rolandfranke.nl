@@ -5,6 +5,8 @@
 .italic {
   font-style: italic;
   font-weight: var(--fw-normal);
+  /* Stylistic Sets for R */
+  font-feature-settings: 'ss05' on;
 }
 
 .underline {
