@@ -14,49 +14,50 @@
     {
       "purpose": "any",
       "sizes": "any",
-      "type": "image/svg+xml",
-      "src": "favicon.svg"
+      "src": "/favicon.svg",
+      "type": "image/svg+xml"
     },
     {
       "purpose": "maskable",
       "sizes": "192x192",
-      "src": "maskable_icon_x192.png",
+      "src": "/maskable_icon_x192.png",
       "type": "image/png"
     },
     {
       "purpose": "maskable",
       "sizes": "512x512",
-      "src": "maskable_icon_x512.png",
+      "src": "/maskable_icon_x512.png",
       "type": "image/png"
     }
   ],
   "screenshots": [
     {
-      "src": "screenshot-light.png",
-      "sizes": "800X1200",
+      "src": "/screenshot-dark-wide.png",
+      "sizes": "1200X800",
       "type": "image/png",
       "form_factor": "wide",
-      "label": "Roland light mode"
+      "label": "Roland's site"
     },
     {
-      "src": "screenshot-dark.png",
-      "sizes": "800X1200",
+      "src": "/screenshot-light-wide.png",
+      "sizes": "1200X800",
       "type": "image/png",
       "form_factor": "wide",
-      "label": "Roland dark mode"
-    },
-
-    {
-      "src": "screenshot-light.png",
-      "sizes": "800X1200",
-      "type": "image/png",
-      "label": "Roland light mode"
+      "label": "Roland's site"
     },
     {
-      "src": "screenshot-dark.png",
+      "src": "/screenshot-dark-narrow.png",
       "sizes": "800X1200",
       "type": "image/png",
-      "label": "Roland dark mode"
+      "form_factor": "narrow",
+      "label": "Roland's site"
+    },
+    {
+      "src": "/screenshot-light-narrow.png",
+      "sizes": "800X1200",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Roland's site"
     }
   ],
   "theme_color": "#000000",
