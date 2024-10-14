@@ -1,21 +1,25 @@
 {
   "name": "Roland",
   "short_name": "Roland",
+  "id": "/",
+  "start_url": "/",
+  "form_factor": "wide",
   "icons": [
     {
-      "src": "/web-app-manifest-192x192.png",
+      "purpose": "maskable",
       "sizes": "192x192",
-      "type": "image/png",
-      "purpose": "maskable"
+      "src": "maskable_icon_x192.png",
+      "type": "image/png"
     },
     {
-      "src": "/web-app-manifest-512x512.png",
+      "purpose": "maskable",
       "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "maskable"
+      "src": "maskable_icon_x512.png",
+      "type": "image/png"
     }
   ],
   "theme_color": "#000000",
   "background_color": "#141D26",
-  "display": "standalone"
+  "display": "standalone",
+  "display_override": ["window-controls-overlay"]
 }
