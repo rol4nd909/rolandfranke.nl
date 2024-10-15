@@ -12,14 +12,18 @@ html {
 
 body {
   display: grid;
-  place-content: center;
   margin: 0;
   font-family: var(--ff-base);
   line-height: 1.5;
   color: light-dark(var(--color-neutral-900), var(--color-neutral-100));
   background-color: light-dark(var(--color-neutral-100), var(--color-neutral-900));
+
   /* Stylistic Sets for & */
   font-feature-settings: 'ss11' on;
+
+  > * {
+    grid-area: 1 / 1;
+  }
 
   &::before {
     --size: 3rem;
@@ -27,19 +31,39 @@ body {
     --line: color-mix(
       in hsl,
       light-dark(var(--color-neutral-900), var(--color-neutral-100)),
-      transparent 95%
+      transparent 90%
     );
 
     content: '';
     z-index: -1;
-    position: fixed;
+    position: absolute;
     inset: 0;
 
     background-image: linear-gradient(90deg, var(--line) 1px, transparent 1px var(--size)),
       linear-gradient(var(--line) 1px, transparent 1px var(--size));
     background-position: var(--offset) var(--offset);
     background-size: var(--size) var(--size);
+    background-attachment: fixed;
 
     mask: linear-gradient(-25deg, transparent 30%, white);
+  }
+}
+
+main {
+  --_space: 1.5rem;
+  display: grid;
+  grid-template-columns:
+    [fullbleed-start] minmax(var(--_space), 1fr) [large-start] minmax(
+      0,
+      calc((var(--constrain-large) - var(--constrain-medium)) / 2)
+    )
+    [medium-start] minmax(0, calc((var(--constrain-medium) - var(--constrain-small)) / 2))
+    [small-start] min(100% - (var(--_space) * 2), var(--constrain-small))
+    [small-end] minmax(0, calc((var(--constrain-medium) - var(--constrain-small)) / 2))
+    [medium-end] minmax(0, calc((var(--constrain-large) - var(--constrain-medium)) / 2))
+    [large-end] minmax(var(--_space), 1fr) [fullbleed-end];
+
+  & > * {
+    grid-column: small;
   }
 }

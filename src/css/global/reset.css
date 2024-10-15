@@ -41,7 +41,7 @@ dd {
 
 /* Set core body defaults */
 body {
-  min-block-size: 100dvh;
+  min-block-size: 100%;
   line-height: 1.5;
 }
 
