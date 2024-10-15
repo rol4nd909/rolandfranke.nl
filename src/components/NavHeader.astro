@@ -1,0 +1,78 @@
+---
+import { Icon } from 'astro-icon/components'
+import DarkLightToggle from '@components/DarkLightToggle.astro'
+---
+
+<nav class="nav">
+    <Icon name="logo" size="3rem" />
+
+    <DarkLightToggle />
+</nav>
+
+<script>
+    const nav = document.querySelector('.nav')
+
+    type ScrollDirection = 'up' | 'down'
+
+    // Function to update scroll direction attribute
+    const updateScrollDirection = (direction: ScrollDirection) => {
+        nav?.setAttribute('scroll-direction', direction)
+    }
+
+    // Adding scroll listener with debounced handling
+    let lastScrollTop = 0
+    const scrollThreshold = 50
+
+    const handleScroll = () => {
+        const scrollTop = window.scrollY || document.documentElement.scrollTop
+        const direction: ScrollDirection = scrollTop > lastScrollTop ? 'down' : 'up'
+
+        if (Math.abs(scrollTop - lastScrollTop) > scrollThreshold) {
+            updateScrollDirection(direction)
+            lastScrollTop = scrollTop <= 0 ? 0 : scrollTop // Avoids negative values for scrollTop
+        }
+    }
+
+    // Adding the scroll event listener
+    document.addEventListener('scroll', handleScroll, { passive: true })
+</script>
+
+<style>
+    :root {
+        --header-height: calc((utopia.clamp(24, 48) * 2) + 3rem);
+    }
+
+    nav {
+        position: sticky;
+        inset-block-start: 0;
+        padding: utopia.clamp(24, 48);
+        display: flex;
+        align-items: center;
+        align-self: flex-start;
+        justify-content: space-between;
+        z-index: 1;
+        view-transition-name: site-nav;
+
+        :global(& > *) {
+            &:nth-child(2) {
+                transition-delay: 0.1s;
+            }
+        }
+
+        &[scroll-direction='down']:global(> *) {
+            translate: 0 -200%;
+        }
+
+        @media (--motion-ok) {
+            :global(& > *) {
+                transition: translate 0.3s var(--ease);
+            }
+        }
+    }
+
+    svg {
+        color: var(--color-primary-400);
+        background-color: var(--color-neutral-100);
+        align-self: center;
+    }
+</style>

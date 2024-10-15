@@ -17,7 +17,9 @@ import Layout from '@layouts/Layout.astro'
         </p>
     </section>
 
-    <!-- <section>hello</section> -->
+    <!-- <section>hello</section>
+    <section>hello</section>
+    <section>hello</section> -->
 </Layout>
 
 <style>
@@ -25,11 +27,9 @@ import Layout from '@layouts/Layout.astro'
         display: grid;
         place-content: center;
         gap: utopia.clamp(16, 32);
-        max-inline-size: 86ch;
-        margin-inline: 1.5rem;
-        padding-block: 4rem;
+        padding-block: var(--header-height);
 
-        min-block-size: 100dvh;
+        min-block-size: 100svh;
     }
 
     h1 {
