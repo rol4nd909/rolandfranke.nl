@@ -1,8 +1,7 @@
 ---
 import '@styles/global.css'
 
-import { Icon } from 'astro-icon/components'
-import DarkLightToggle from '@components/DarkLightToggle.astro'
+import NavHeader from '@/components/NavHeader.astro'
 
 interface Props {
     title: string
@@ -32,30 +31,15 @@ const { title } = Astro.props
         <meta name="generator" content={Astro.generator} />
         <title>{title}</title>
     </head>
-    <body>
-        <header>
-            <Icon name="logo" size="3rem" />
+    <body nojs>
+        <NavHeader />
 
-            <DarkLightToggle />
-        </header>
-
-        <main class="scroller-block">
+        <main>
             <slot />
         </main>
     </body>
 </html>
 
-<style>
-    header {
-        position: absolute;
-        inset: utopia.clamp(24, 48) utopia.clamp(24, 48) auto;
-        display: flex;
-        justify-content: space-between;
-    }
-
-    svg {
-        color: var(--color-primary-400);
-        background-color: var(--color-neutral-100);
-        align-self: center;
-    }
-</style>
+<script>
+    document.body.removeAttribute('nojs')
+</script>
