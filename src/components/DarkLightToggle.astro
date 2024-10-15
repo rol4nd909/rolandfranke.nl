@@ -20,7 +20,7 @@
     </svg>
 </button>
 
-<script>
+<script is:inline>
     const storageKey = 'color-preference'
 
     const SWITCH = () => {
@@ -107,6 +107,12 @@
         }
     }
 
+    :global([nojs]) {
+        & .theme-toggle {
+            display: none;
+        }
+    }
+
     .sun-and-moon {
         & > :is(.moon, .sun, .sun-beams) {
             transform-origin: center center;
@@ -190,7 +196,7 @@
     /* VIEW TRANSITION ANIMATION */
     @media (--motion-ok) {
         :global(::view-transition-new(root)) {
-            animation: reveal 1s;
+            animation: reveal 1s var(--ease);
             clip-path: inset(0 0 0 0);
             z-index: 2;
         }
