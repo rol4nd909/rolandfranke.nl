@@ -1,69 +1,52 @@
-html {
-  color-scheme: dark light;
+@layer --base {
+  html {
+    color-scheme: dark light;
 
-  &[color-scheme='light'] {
-    color-scheme: light only;
+    &[color-scheme='light'] {
+      color-scheme: light only;
+    }
+
+    &[color-scheme='dark'] {
+      color-scheme: dark only;
+    }
   }
 
-  &[color-scheme='dark'] {
-    color-scheme: dark only;
-  }
-}
+  body {
+    display: grid;
+    margin: 0;
+    font-family: var(--ff-base);
+    line-height: 1.5;
+    color: var(--text);
+    background-color: var(--surface);
 
-body {
-  display: grid;
-  margin: 0;
-  font-family: var(--ff-base);
-  line-height: 1.5;
-  color: light-dark(var(--color-neutral-900), var(--color-neutral-100));
-  background-color: light-dark(var(--color-neutral-100), var(--color-neutral-900));
+    /* Stylistic Sets for & */
+    font-feature-settings: 'ss11' on;
 
-  /* Stylistic Sets for & */
-  font-feature-settings: 'ss11' on;
+    > * {
+      grid-area: 1 / 1;
+    }
 
-  > * {
-    grid-area: 1 / 1;
-  }
+    &::before {
+      --size: 3rem;
+      --offset: calc(var(--size) / 2);
+      --line: color-mix(
+        in hsl,
+        light-dark(var(--color-neutral-900), var(--color-neutral-100)),
+        transparent 90%
+      );
 
-  &::before {
-    --size: 3rem;
-    --offset: calc(var(--size) / 2);
-    --line: color-mix(
-      in hsl,
-      light-dark(var(--color-neutral-900), var(--color-neutral-100)),
-      transparent 90%
-    );
+      content: '';
+      z-index: -1;
+      position: absolute;
+      inset: 0;
 
-    content: '';
-    z-index: -1;
-    position: absolute;
-    inset: 0;
+      background-image: linear-gradient(90deg, var(--line) 1px, transparent 1px var(--size)),
+        linear-gradient(var(--line) 1px, transparent 1px var(--size));
+      background-position: var(--offset) var(--offset);
+      background-size: var(--size) var(--size);
+      background-attachment: fixed;
 
-    background-image: linear-gradient(90deg, var(--line) 1px, transparent 1px var(--size)),
-      linear-gradient(var(--line) 1px, transparent 1px var(--size));
-    background-position: var(--offset) var(--offset);
-    background-size: var(--size) var(--size);
-    background-attachment: fixed;
-
-    mask: linear-gradient(-25deg, transparent 30%, white);
-  }
-}
-
-main {
-  --_space: 1.5rem;
-  display: grid;
-  grid-template-columns:
-    [fullbleed-start] minmax(var(--_space), 1fr) [large-start] minmax(
-      0,
-      calc((var(--constrain-large) - var(--constrain-medium)) / 2)
-    )
-    [medium-start] minmax(0, calc((var(--constrain-medium) - var(--constrain-small)) / 2))
-    [small-start] min(100% - (var(--_space) * 2), var(--constrain-small))
-    [small-end] minmax(0, calc((var(--constrain-medium) - var(--constrain-small)) / 2))
-    [medium-end] minmax(0, calc((var(--constrain-large) - var(--constrain-medium)) / 2))
-    [large-end] minmax(var(--_space), 1fr) [fullbleed-end];
-
-  & > * {
-    grid-column: small;
+      mask: linear-gradient(-25deg, transparent 30%, white);
+    }
   }
 }

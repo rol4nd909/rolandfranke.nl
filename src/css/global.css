@@ -1,11 +1,15 @@
-@layer --fonts, --reset, --base, --utils;
+@layer --fonts, --reset, --base, --compositions, --utils;
 
-@import 'global/fonts.css' layer(--fonts);
-@import 'global/reset.css' layer(--reset);
+@import 'global/fonts.css';
 
-@import 'global/variables.css' layer(--base);
-@import 'global/global-styles.css' layer(--base);
+@import 'global/reset.css';
 
-/* @import 'utilities/sr-only.css' layer(--utils);
-@import 'utilities/flow.css' layer(--utils); */
-@import 'utilities/typography.css' layer(--utils.typography);
+@import 'global/variables.css';
+@import 'global/global-styles.css';
+
+@import 'compositions/grid.css';
+@import 'compositions/flex.css';
+
+/* @import 'utilities/sr-only.css';
+@import 'utilities/flow.css'; */
+@import 'utilities/typography.css';

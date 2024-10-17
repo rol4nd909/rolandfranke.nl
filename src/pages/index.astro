@@ -5,7 +5,7 @@ import Layout from '@layouts/Layout.astro'
 <Layout title="Welcome to Roland Franke">
     <section>
         <h1>roland<span>.</span></h1>
-        <div>
+        <div class="flex" aria-hidden="true">
             <span>[r<span class="underline">o</span>.land]</span>
             <span class="dot">•</span>
             <span class="bold">frontend developer</span>
@@ -20,6 +20,19 @@ import Layout from '@layouts/Layout.astro'
     <!-- <section>hello</section>
     <section>hello</section>
     <section>hello</section> -->
+
+    <!-- <div class="grid fullbleed">
+        <h2>AAP</h2>
+        <p class="col-medium">
+            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Pariatur ipsum, voluptate qui
+            ab odio natus veritatis cumque! Nulla, expedita. Fugit?
+        </p>
+
+        <p class="col-large">
+            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Pariatur ipsum, voluptate qui
+            ab odio natus veritatis cumque! Nulla, expedita. Fugit?
+        </p>
+    </div> -->
 </Layout>
 
 <style>
@@ -30,6 +43,10 @@ import Layout from '@layouts/Layout.astro'
         padding-block: var(--header-height);
 
         min-block-size: 100svh;
+
+        > div {
+            font-size: utopia.clamp(20, 38);
+        }
     }
 
     h1 {
@@ -41,17 +58,10 @@ import Layout from '@layouts/Layout.astro'
         }
     }
 
-    div {
-        display: flex;
-        align-items: center;
-        gap: utopia.clamp(16, 24);
-        font-size: utopia.clamp(20, 38);
-
-        > .dot {
-            font-size: utopia.clamp(8, 16);
-            color: var(--color-primary-400);
-            font-feature-settings: 'aalt' on;
-        }
+    .dot {
+        font-size: utopia.clamp(8, 16);
+        color: var(--color-primary-400);
+        font-feature-settings: 'aalt' on;
     }
 
     p {
