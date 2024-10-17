@@ -1,4 +1,10 @@
-<button class="theme-toggle js-theme-toggle" title="Toggle light mode" aria-pressed="false">
+<button
+    class="theme-toggle"
+    title="Toggles light & dark"
+    aria-label="auto"
+    aria-live="polite"
+    id="themeToggle"
+>
     <svg class="sun-and-moon" aria-hidden="true" width="24" height="24" viewBox="0 0 24 24">
         <mask class="moon" id="moon-mask">
             <rect x="0" y="0" width="100%" height="100%" fill="white"></rect>
@@ -21,44 +27,38 @@
 </button>
 
 <script is:inline>
-    const storageKey = 'color-preference'
+    const storageKey = 'theme-preference'
 
-    const SWITCH = () => {
+    const toggleTheme = () => {
         // flip current value
         theme.value = theme.value === 'light' ? 'dark' : 'light'
 
         setPreference()
     }
 
+    const onClick = () => {
+        if (!document.startViewTransition) toggleTheme()
+        document.startViewTransition(toggleTheme)
+    }
+
     const getColorPreference = () => {
-        if (localStorage.getItem(storageKey)) {
-            return localStorage.getItem(storageKey) || ''
-        } else {
-            return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
-        }
+        if (localStorage.getItem(storageKey)) return localStorage.getItem(storageKey)
+        else return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
     }
 
     const setPreference = () => {
         localStorage.setItem(storageKey, theme.value)
-
         reflectPreference()
     }
 
     const reflectPreference = () => {
-        const pressed = theme.value === 'dark' ? 'true' : 'false'
+        document.firstElementChild.setAttribute('color-scheme', theme.value)
 
-        document.firstElementChild?.setAttribute('color-scheme', theme.value)
-        document.querySelector('.js-theme-toggle')?.setAttribute('aria-pressed', pressed)
+        themeToggle?.setAttribute('aria-label', theme.value)
     }
 
     const theme = {
         value: getColorPreference(),
-    }
-
-    const TOGGLE_THEME = () => {
-        // SWITCH()
-        if (!document.startViewTransition) SWITCH()
-        document.startViewTransition(SWITCH)
     }
 
     // set early so no page flashes / CSS is made aware
@@ -69,7 +69,7 @@
         reflectPreference()
 
         // now this script can find and listen for clicks on the control
-        document.querySelector('.js-theme-toggle')?.addEventListener('click', TOGGLE_THEME)
+        themeToggle.addEventListener('click', onClick)
     }
 
     // sync with system changes
@@ -99,6 +99,7 @@
         outline-offset: 0.25rem;
         outline-color: currentColor;
         color: inherit;
+        transition: color 1s var(--toggle-delay) var(--ease);
 
         & > svg {
             inline-size: 100%;
