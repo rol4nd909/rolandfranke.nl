@@ -17,11 +17,33 @@ import Layout from '@layouts/Layout.astro'
         </p>
     </section>
 
-    <!-- <section>hello</section>
-    <section>hello</section>
-    <section>hello</section> -->
+    <!-- <div class="grid fullbleed lane light">
+        <h2>AAP</h2>
+        <p class="col-medium">
+            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Pariatur ipsum, voluptate qui
+            ab odio natus veritatis cumque! Nulla, expedita. Fugit?
+        </p>
 
-    <!-- <div class="grid fullbleed">
+        <p class="col-large">
+            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Pariatur ipsum, voluptate qui
+            ab odio natus veritatis cumque! Nulla, expedita. Fugit?
+        </p>
+    </div>
+
+    <div class="grid fullbleed lane">
+        <h2>AAP</h2>
+        <p class="col-medium">
+            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Pariatur ipsum, voluptate qui
+            ab odio natus veritatis cumque! Nulla, expedita. Fugit?
+        </p>
+
+        <p class="col-large">
+            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Pariatur ipsum, voluptate qui
+            ab odio natus veritatis cumque! Nulla, expedita. Fugit?
+        </p>
+    </div>
+
+    <div class="grid fullbleed lane light">
         <h2>AAP</h2>
         <p class="col-medium">
             Lorem ipsum, dolor sit amet consectetur adipisicing elit. Pariatur ipsum, voluptate qui
@@ -66,5 +88,14 @@ import Layout from '@layouts/Layout.astro'
 
     p {
         font-size: utopia.clamp(18, 28);
+    }
+
+    .lane {
+        row-gap: utopia.clamp(48, 96);
+        padding-block: utopia.clamp(48, 96);
+
+        &.light {
+            background-color: color-mix(in hsl, var(--text), transparent 95%);
+        }
     }
 </style>

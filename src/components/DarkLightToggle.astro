@@ -99,12 +99,12 @@
         outline-offset: 0.25rem;
         outline-color: currentColor;
         color: inherit;
-        transition: color 1s var(--toggle-delay) var(--ease);
 
         & > svg {
             inline-size: 100%;
             block-size: 100%;
             stroke-linecap: round;
+            transition: color 0.5s calc(var(--toggle-delay) / 2) var(--ease);
         }
     }
 
@@ -146,7 +146,9 @@
                 transition-delay: var(--toggle-delay);
 
                 @supports (cx: 1) {
-                    transition: cx 0.25s var(--ease-out);
+                    transition:
+                        cx 0.25s var(--ease-out),
+                        fill 1s var(--ease);
                     transition-delay: var(--toggle-delay);
                 }
             }

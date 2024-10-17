@@ -26,9 +26,7 @@
 
 .col-large {
   grid-column: large;
-  background: green;
 }
 .col-medium {
   grid-column: medium;
-  background: red;
 }
