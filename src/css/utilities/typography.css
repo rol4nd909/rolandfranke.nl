@@ -1,16 +1,14 @@
-@layer --utils.typography {
-  .bold {
-    font-weight: var(--fw-semibold);
-  }
+.bold {
+  font-weight: var(--fw-semibold);
+}
 
-  .italic {
-    font-style: italic;
-    font-weight: var(--fw-normal);
-    /* Stylistic Sets for R */
-    font-feature-settings: 'ss05' on;
-  }
+.italic {
+  font-style: italic;
+  font-weight: var(--fw-normal);
+  /* Stylistic Sets for R */
+  font-feature-settings: 'ss05' on;
+}
 
-  .underline {
-    text-decoration: underline;
-  }
+.underline {
+  text-decoration: underline;
 }

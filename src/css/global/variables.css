@@ -1,27 +1,25 @@
-@layer --base {
-  :root {
-    --color-neutral-100: hsl(60 22% 85%);
-    --color-neutral-900: hsl(210 31% 11%);
-    --color-primary-400: hsl(338 73% 45%);
+:root {
+  --color-neutral-100: hsl(60 22% 85%);
+  --color-neutral-900: hsl(210 31% 11%);
+  --color-primary-400: hsl(338 73% 45%);
 
-    --text: light-dark(var(--color-neutral-900), var(--color-neutral-100));
-    --surface: light-dark(var(--color-neutral-100), var(--color-neutral-900));
+  --text: light-dark(var(--color-neutral-900), var(--color-neutral-100));
+  --surface: light-dark(var(--color-neutral-100), var(--color-neutral-900));
 
-    /* typography */
-    --ff-base: 'Instrument Sans', system-ui, sans-serif;
+  /* typography */
+  --ff-base: 'Instrument Sans', system-ui, sans-serif;
 
-    --fw-normal: 400;
-    --fw-semibold: 600;
+  --fw-normal: 400;
+  --fw-semibold: 600;
 
-    /* Easings */
-    --ease: cubic-bezier(0.25, 0, 0.3, 1);
-    --ease-out: cubic-bezier(0, 0, 0, 1);
-    --ease-elastic-1: cubic-bezier(0.5, 1.25, 0.75, 1.25);
-    --ease-elastic-2: cubic-bezier(0.5, 1.5, 0.75, 1.25);
+  /* Easings */
+  --ease: cubic-bezier(0.25, 0, 0.3, 1);
+  --ease-out: cubic-bezier(0, 0, 0, 1);
+  --ease-elastic-1: cubic-bezier(0.5, 1.25, 0.75, 1.25);
+  --ease-elastic-2: cubic-bezier(0.5, 1.5, 0.75, 1.25);
 
-    /* main constrain */
-    --constrain-large: 87rem;
-    --constrain-medium: 69rem;
-    --constrain-small: 57rem;
-  }
+  /* main constrain */
+  --constrain-large: 87rem;
+  --constrain-medium: 69rem;
+  --constrain-small: 57rem;
 }

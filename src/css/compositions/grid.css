@@ -1,36 +1,34 @@
-@layer --compositions {
-  .grid {
-    --_space: 1.5rem;
+.grid {
+  --_space: 1.5rem;
 
-    display: grid;
-    grid-template-columns:
-      [fullbleed-start] minmax(var(--_space), 1fr) [large-start] minmax(
-        0,
-        calc((var(--constrain-large) - var(--constrain-medium)) / 2)
-      )
-      [medium-start] minmax(0, calc((var(--constrain-medium) - var(--constrain-small)) / 2))
-      [small-start] min(100% - (var(--_space) * 2), var(--constrain-small))
-      [small-end] minmax(0, calc((var(--constrain-medium) - var(--constrain-small)) / 2))
-      [medium-end] minmax(0, calc((var(--constrain-large) - var(--constrain-medium)) / 2))
-      [large-end] minmax(var(--_space), 1fr) [fullbleed-end];
-    align-content: start;
+  display: grid;
+  grid-template-columns:
+    [fullbleed-start] minmax(var(--_space), 1fr) [large-start] minmax(
+      0,
+      calc((var(--constrain-large) - var(--constrain-medium)) / 2)
+    )
+    [medium-start] minmax(0, calc((var(--constrain-medium) - var(--constrain-small)) / 2))
+    [small-start] min(100% - (var(--_space) * 2), var(--constrain-small))
+    [small-end] minmax(0, calc((var(--constrain-medium) - var(--constrain-small)) / 2))
+    [medium-end] minmax(0, calc((var(--constrain-large) - var(--constrain-medium)) / 2))
+    [large-end] minmax(var(--_space), 1fr) [fullbleed-end];
+  align-content: start;
 
-    & > * {
-      grid-column: small;
-    }
-
-    &.fullbleed {
-      grid-column: fullbleed;
-      grid-template-columns: subgrid;
-    }
+  & > * {
+    grid-column: small;
   }
 
-  .col-large {
-    grid-column: large;
-    background: green;
+  &.fullbleed {
+    grid-column: fullbleed;
+    grid-template-columns: subgrid;
   }
-  .col-medium {
-    grid-column: medium;
-    background: red;
-  }
+}
+
+.col-large {
+  grid-column: large;
+  background: green;
+}
+.col-medium {
+  grid-column: medium;
+  background: red;
 }

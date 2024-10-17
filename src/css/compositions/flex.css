@@ -1,7 +1,5 @@
-@layer --compositions {
-  .flex {
-    display: flex;
-    align-items: center;
-    gap: utopia.clamp(16, 24);
-  }
+.flex {
+  display: flex;
+  align-items: center;
+  gap: utopia.clamp(16, 24);
 }
