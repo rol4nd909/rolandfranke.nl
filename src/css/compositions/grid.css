@@ -1,32 +1,33 @@
 .grid {
-  --_space: 1.5rem;
+  --_gutter: 1.5rem;
 
   display: grid;
   grid-template-columns:
-    [fullbleed-start] minmax(var(--_space), 1fr) [large-start] minmax(
+    [fullbleed-start] minmax(var(--_gutter), 1fr) [large-start] minmax(
       0,
       calc((var(--constrain-large) - var(--constrain-medium)) / 2)
     )
     [medium-start] minmax(0, calc((var(--constrain-medium) - var(--constrain-small)) / 2))
-    [small-start] min(100% - (var(--_space) * 2), var(--constrain-small))
+    [small-start] min(100% - (var(--_gutter) * 2), var(--constrain-small))
     [small-end] minmax(0, calc((var(--constrain-medium) - var(--constrain-small)) / 2))
     [medium-end] minmax(0, calc((var(--constrain-large) - var(--constrain-medium)) / 2))
-    [large-end] minmax(var(--_space), 1fr) [fullbleed-end];
+    [large-end] minmax(var(--_gutter), 1fr) [fullbleed-end];
   align-content: start;
 
   & > * {
     grid-column: small;
   }
 
-  &.fullbleed {
+  &[data-grid='fullbleed'] {
     grid-column: fullbleed;
     grid-template-columns: subgrid;
   }
 }
 
-.col-large {
+[data-column='large'] {
   grid-column: large;
 }
-.col-medium {
+
+[data-column='medium'] {
   grid-column: medium;
 }

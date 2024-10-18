@@ -1,8 +1,13 @@
 ---
 import Layout from '@layouts/Layout.astro'
+
+const title = 'Welcome to Roland Franke'
+const desription = `
+Roland Franke's personal blog. Discover a creative frontend developer with expertise in HTML, CSS, React, and accessibility, dedicated to build inclusive and innovative web experiences. Explore projects, professional experience, and insights on modern web development.
+`
 ---
 
-<Layout title="Welcome to Roland Franke">
+<Layout {title} description={desription}>
     <section>
         <h1>roland<span>.</span></h1>
         <div class="flex" aria-hidden="true">
@@ -17,40 +22,40 @@ import Layout from '@layouts/Layout.astro'
         </p>
     </section>
 
-    <!-- <div class="grid fullbleed lane light">
+    <!-- <div class="grid lane light" data-grid="fullbleed">
         <h2>AAP</h2>
-        <p class="col-medium">
+        <p>
             Lorem ipsum, dolor sit amet consectetur adipisicing elit. Pariatur ipsum, voluptate qui
             ab odio natus veritatis cumque! Nulla, expedita. Fugit?
         </p>
 
-        <p class="col-large">
+        <p>
             Lorem ipsum, dolor sit amet consectetur adipisicing elit. Pariatur ipsum, voluptate qui
             ab odio natus veritatis cumque! Nulla, expedita. Fugit?
         </p>
     </div>
 
-    <div class="grid fullbleed lane">
+    <div class="grid lane" data-grid="fullbleed">
         <h2>AAP</h2>
-        <p class="col-medium">
+        <p data-column="medium">
             Lorem ipsum, dolor sit amet consectetur adipisicing elit. Pariatur ipsum, voluptate qui
             ab odio natus veritatis cumque! Nulla, expedita. Fugit?
         </p>
 
-        <p class="col-large">
+        <p data-column="large">
             Lorem ipsum, dolor sit amet consectetur adipisicing elit. Pariatur ipsum, voluptate qui
             ab odio natus veritatis cumque! Nulla, expedita. Fugit?
         </p>
     </div>
 
-    <div class="grid fullbleed lane light">
+    <div class="grid lane light" data-grid="fullbleed">
         <h2>AAP</h2>
-        <p class="col-medium">
+        <p>
             Lorem ipsum, dolor sit amet consectetur adipisicing elit. Pariatur ipsum, voluptate qui
             ab odio natus veritatis cumque! Nulla, expedita. Fugit?
         </p>
 
-        <p class="col-large">
+        <p>
             Lorem ipsum, dolor sit amet consectetur adipisicing elit. Pariatur ipsum, voluptate qui
             ab odio natus veritatis cumque! Nulla, expedita. Fugit?
         </p>
@@ -90,12 +95,21 @@ import Layout from '@layouts/Layout.astro'
         font-size: utopia.clamp(18, 28);
     }
 
-    .lane {
-        row-gap: utopia.clamp(48, 96);
-        padding-block: utopia.clamp(48, 96);
+    @media (--motion-ok) {
+        @supports (animation-timeline: scroll()) {
+            .fade-out-down {
+                animation: --fade-out-down linear forwards;
+                animation-timeline: --fade-out-down;
+                view-timeline-name: --fade-out-down;
+                animation-range: cover 50%;
+            }
+        }
+    }
 
-        &.light {
-            background-color: color-mix(in hsl, var(--text), transparent 95%);
+    @keyframes --fade-out-down {
+        to {
+            opacity: 0;
+            transform: translateY(40%);
         }
     }
 </style>

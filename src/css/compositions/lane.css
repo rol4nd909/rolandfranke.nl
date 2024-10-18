@@ -1,0 +1,8 @@
+.lane {
+  --_bg: var(--surface);
+
+  row-gap: utopia.clamp(48, 96);
+  padding-block: utopia.clamp(48, 96);
+  background-color: var(--_bg);
+  transform: translate3d(0, 0, 0);
+}
