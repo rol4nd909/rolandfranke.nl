@@ -8,9 +8,9 @@ Roland Franke's personal blog. Discover a creative frontend developer with exper
 ---
 
 <Layout {title} description={desription}>
-    <section>
+    <section class="fade-out-down">
         <h1>roland<span>.</span></h1>
-        <div class="flex" aria-hidden="true">
+        <div class="explain flex" aria-hidden="true">
             <span>[r<span class="underline">o</span>.land]</span>
             <span class="dot">•</span>
             <span class="bold">frontend developer</span>
@@ -21,6 +21,17 @@ Roland Franke's personal blog. Discover a creative frontend developer with exper
             are not only visually appealing but accessible and performant for everyone.
         </p>
     </section>
+
+    <!-- <div class="grid lane lane-light skills-section" data-grid="fullbleed">
+        <h2>Core Skills</h2>
+        <ul class="skills-list">
+            <li class="skill-item">HTML</li>
+            <li class="skill-item">CSS</li>
+            <li class="skill-item">JavaScript</li>
+            <li class="skill-item">React</li>
+            <li class="skill-item">Accessibility (A11Y)</li>
+        </ul>
+    </div> -->
 
     <!-- <div class="grid lane light" data-grid="fullbleed">
         <h2>AAP</h2>
@@ -70,10 +81,6 @@ Roland Franke's personal blog. Discover a creative frontend developer with exper
         padding-block: var(--header-height);
 
         min-block-size: 100svh;
-
-        > div {
-            font-size: utopia.clamp(20, 38);
-        }
     }
 
     h1 {
@@ -85,10 +92,14 @@ Roland Franke's personal blog. Discover a creative frontend developer with exper
         }
     }
 
-    .dot {
-        font-size: utopia.clamp(8, 16);
-        color: var(--color-primary-400);
-        font-feature-settings: 'aalt' on;
+    .explain {
+        font-size: utopia.clamp(20, 38);
+
+        .dot {
+            font-size: utopia.clamp(8, 16);
+            color: var(--color-primary-400);
+            font-feature-settings: 'aalt' on;
+        }
     }
 
     p {
@@ -113,3 +124,45 @@ Roland Franke's personal blog. Discover a creative frontend developer with exper
         }
     }
 </style>
+
+<!-- <style>
+    .skills-section {
+        min-block-size: 100vh;
+
+        font-size: utopia.clamp(18, 28);
+    }
+
+    h2 {
+        font-size: utopia.clamp(40, 64);
+        color: var(--color-primary-400);
+    }
+
+    .skills-list {
+        display: flex;
+        justify-content: space-around;
+        gap: 2rem;
+        list-style: none;
+        padding: 0;
+    }
+
+    @media (--motion-ok) {
+        @supports (animation-timeline: scroll()) {
+            .skill-item {
+                opacity: 0;
+                transform: translateY(20%);
+
+                animation: slideUp linear forwards;
+                animation-timeline: scroll();
+                animation-range: entry 70%;
+            }
+        }
+    }
+
+    /* Keyframe Animation */
+    @keyframes slideUp {
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+</style> -->
