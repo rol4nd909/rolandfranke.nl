@@ -5,4 +5,8 @@
   padding-block: utopia.clamp(48, 96);
   background-color: var(--_bg);
   transform: translate3d(0, 0, 0);
+
+  &.lane-light {
+    --_bg: color-mix(in hsl, var(--text), var(--surface) 95%);
+  }
 }
