@@ -37,6 +37,7 @@ dd {
 /* Remove list styles and keep semantic meaning on ul, ol elements with a class on it, which suggests default styling will be removed */
 :is(ul, ol)[class] {
   list-style-type: '';
+  margin-block: 0;
 }
 
 /* Set core body defaults */
