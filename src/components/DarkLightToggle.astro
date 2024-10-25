@@ -37,8 +37,11 @@
     }
 
     const onClick = () => {
-        if (!document.startViewTransition) toggleTheme()
-        document.startViewTransition(toggleTheme)
+        if (document.startViewTransition) {
+            document.startViewTransition(toggleTheme)
+        } else {
+            toggleTheme()
+        }
     }
 
     const getColorPreference = () => {

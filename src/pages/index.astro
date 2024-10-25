@@ -1,13 +1,8 @@
 ---
-import Layout from '@layouts/Layout.astro'
-
-const title = 'Welcome to Roland Franke'
-const desription = `
-Roland Franke's personal blog. Discover a creative frontend developer with expertise in HTML, CSS, React, and accessibility, dedicated to build inclusive and innovative web experiences. Explore projects, professional experience, and insights on modern web development.
-`
+import BaseLayout from '@layouts/BaseLayout.astro'
 ---
 
-<Layout {title} description={desription}>
+<BaseLayout>
     <section class="fade-out-down">
         <h1>roland<span>.</span></h1>
         <div class="explain flex" aria-hidden="true">
@@ -71,7 +66,7 @@ Roland Franke's personal blog. Discover a creative frontend developer with exper
             ab odio natus veritatis cumque! Nulla, expedita. Fugit?
         </p>
     </div> -->
-</Layout>
+</BaseLayout>
 
 <style>
     section {

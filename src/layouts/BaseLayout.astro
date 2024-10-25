@@ -1,0 +1,29 @@
+---
+import '@styles/global.css'
+
+import BaseHead from '@layouts/BaseHead.astro'
+import NavHeader from '@/components/NavHeader.astro'
+---
+
+<!doctype html>
+<html lang="en">
+    <BaseHead {...Astro.props} />
+
+    <body nojs>
+        <NavHeader />
+
+        <main class="grid">
+            <slot />
+        </main>
+    </body>
+</html>
+
+<script>
+    const originalTitle = document.title
+
+    document.body.removeAttribute('nojs')
+
+    document.addEventListener('visibilitychange', () => {
+        document.hidden ? (document.title = 'Aw, Snap! 🤯') : (document.title = originalTitle)
+    })
+</script>
