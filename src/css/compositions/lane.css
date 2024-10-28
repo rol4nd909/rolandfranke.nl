@@ -6,7 +6,7 @@
   background-color: var(--_bg);
   transform: translate3d(0, 0, 0);
 
-  &.lane-light {
+  &.lane--light {
     --_bg: color-mix(in hsl, var(--text), var(--surface) 95%);
   }
 }

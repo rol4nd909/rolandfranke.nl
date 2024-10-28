@@ -1,0 +1,25 @@
+---
+import { getCollection } from 'astro:content'
+
+import BaseLayout from '@/layouts/BaseLayout.astro'
+import Hero from '@/components/ui/Hero.astro'
+import PostCard from '@/components/ui/PostCard.astro'
+import FadeOutDown from '@/components/ui/FadeOutDown.astro'
+
+const allPosts = await getCollection('posts', ({ data }) => !data.isDraft)
+---
+
+<BaseLayout title="Blog">
+    <Hero>
+        <FadeOutDown class="hero__animation">
+            <h1 class="hero__title">My writings</h1>
+            <p class="hero__content">
+                Welcome to my blog where I share my thoughts and experiences
+            </p>
+        </FadeOutDown>
+    </Hero>
+
+    <div class="grid lane" data-grid="fullbleed">
+        {allPosts.map((post) => <PostCard post={post} />)}
+    </div>
+</BaseLayout>

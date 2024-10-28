@@ -1,0 +1,31 @@
+---
+import { type CollectionEntry } from 'astro:content'
+import FormattedDate from './FormattedDate.astro'
+
+type Props = {
+    post: CollectionEntry<'posts'>
+}
+
+const { post } = Astro.props
+const { title, description, image, pubDate, tags } = post.data
+---
+
+<article>
+    <h1 set:html={title} />
+    <FormattedDate {pubDate} />
+    <div>
+        {tags.map((tag) => <span>{tag.id}</span>)}
+    </div>
+
+    <p>{description}</p>
+
+    <a href={`/blog/${post.slug}`}>Read Post</a>
+</article>
+
+<style>
+    article {
+        display: grid;
+        gap: utopia.clamp(16, 32);
+        padding-block: var(--header-height);
+    }
+</style>

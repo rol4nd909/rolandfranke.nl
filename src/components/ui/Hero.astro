@@ -1,0 +1,24 @@
+---
+interface Props {
+    class?: 'hero--large' | 'text-center' | 'hero--large text-center'
+}
+
+const { class: providedProps, ...rest } = Astro.props
+---
+
+<section
+    class:list={['hero grid calc-size', providedProps]}
+    data-grid="fullbleed"
+    id="pageHero"
+    {...rest}
+>
+    <slot />
+</section>
+
+<script></script>
+
+<script>
+    import { observeElementById } from '@scripts/diagonalAngle'
+
+    observeElementById('pageHero')
+</script>

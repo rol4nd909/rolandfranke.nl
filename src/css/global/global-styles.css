@@ -1,3 +1,7 @@
+/* @view-transition {
+  navigation: auto;
+} */
+
 html {
   color-scheme: dark light;
 
@@ -11,7 +15,7 @@ html {
 }
 
 body {
-  display: grid;
+  /* display: grid; */
   margin: 0;
   font-family: var(--ff-base);
   line-height: 1.5;
@@ -21,9 +25,9 @@ body {
   /* Stylistic Sets for & */
   font-feature-settings: 'ss11' on;
 
-  > * {
+  /* > * {
     grid-area: 1 / 1;
-  }
+  } */
 
   &::before,
   &::after {
@@ -43,12 +47,5 @@ body {
     background-position: var(--offset) var(--offset);
     background-size: var(--size) var(--size);
     background-attachment: fixed;
-
-    mask: linear-gradient(-25deg, transparent 30%, white);
-  }
-
-  &::after {
-    position: absolute;
-    background-image: linear-gradient(-25deg, var(--surface) 30%, transparent);
   }
 }

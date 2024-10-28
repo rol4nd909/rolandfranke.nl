@@ -1,0 +1,57 @@
+@property --_x {
+  syntax: '<number>';
+  inherits: true;
+  initial-value: 0;
+}
+@property --_y {
+  syntax: '<number>';
+  inherits: true;
+  initial-value: 0;
+}
+@property --w {
+  syntax: '<integer>';
+  inherits: true;
+  initial-value: 0;
+}
+@property --h {
+  syntax: '<integer>';
+  inherits: true;
+  initial-value: 0;
+}
+
+.calc-size {
+  --w: calc(1 / (1 - var(--_x))); /* element width */
+  --h: calc(1 / (1 - var(--_y))); /* element height */
+
+  overflow: auto;
+  position: relative;
+  timeline-scope: --cx, --cy;
+  animation:
+    x linear,
+    y linear;
+  animation-timeline: --cx, --cy;
+  animation-range: entry 100% exit 100%;
+
+  &::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 1px;
+    aspect-ratio: 1;
+    view-timeline:
+      --cx inline,
+      --cy block;
+  }
+}
+
+@keyframes x {
+  to {
+    --_x: 1;
+  }
+}
+@keyframes y {
+  to {
+    --_y: 1;
+  }
+}

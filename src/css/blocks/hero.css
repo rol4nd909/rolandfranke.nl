@@ -1,0 +1,63 @@
+.hero {
+  --_angle: calc(180 - var(--angle));
+
+  position: relative;
+  padding-block: var(--header-height);
+  margin-block-start: calc(var(--header-height) * -1);
+
+  &::after {
+    content: '';
+    z-index: -1;
+    inset: 0;
+    position: absolute;
+    background-image: linear-gradient(calc(var(--_angle) * -1deg), var(--surface) 40%, transparent);
+  }
+
+  &:not(:has(.hero__animation)) {
+    display: grid;
+    row-gap: utopia.clamp(16, 32);
+  }
+
+  &:not(.hero--large) {
+    padding-block-end: 0;
+  }
+
+  &.hero--large {
+    align-content: center;
+    min-block-size: 100svh;
+
+    .hero__title {
+      font-size: utopia.clamp(80, 260, 400, 1200);
+    }
+  }
+}
+
+.hero__animation {
+  display: grid;
+  row-gap: utopia.clamp(16, 32);
+}
+
+.hero__title {
+  /* fix to align the title with text after it */
+  margin-inline-start: -0.085ch;
+  font-size: utopia.clamp(48, 120, 400, 1200);
+  font-weight: var(--fw-semibold);
+
+  > span {
+    color: var(--color-primary-400);
+  }
+}
+
+.hero__explain {
+  font-size: utopia.clamp(20, 38);
+
+  .dot {
+    font-size: utopia.clamp(8, 16);
+    color: var(--color-primary-400);
+    font-feature-settings: 'aalt' on;
+  }
+}
+
+.hero__content {
+  font-size: utopia.clamp(18, 28);
+}

@@ -1,0 +1,17 @@
+---
+type Props = {
+    pubDate: Date
+}
+
+const { pubDate } = Astro.props
+---
+
+<time datetime={pubDate.toISOString()}>
+    {
+        pubDate.toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+        })
+    }
+</time>

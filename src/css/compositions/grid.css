@@ -12,7 +12,7 @@
     [small-end] minmax(0, calc((var(--constrain-medium) - var(--constrain-small)) / 2))
     [medium-end] minmax(0, calc((var(--constrain-large) - var(--constrain-medium)) / 2))
     [large-end] minmax(var(--_gutter), 1fr) [fullbleed-end];
-  align-content: start;
+  /* align-content: start; */
 
   & > * {
     grid-column: small;

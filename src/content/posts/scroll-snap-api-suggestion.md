@@ -1,0 +1,52 @@
+---
+title: Scroll snap api suggestion
+description: '"Snapflyover" describes elements briefly entering but not stopping in the snap zone, providing visual or interactive feedback during scroll snapping.'
+pubDate: 2024-08-27
+tags: 
+  - css
+  - html
+---
+
+# Scroll snap api suggestion
+
+## Describing the State
+
+This state could be described as a "transitory snap" or "flyover snap." It's a state
+where elements are momentarily in the snap zone but aren't selected as the final snap
+target. The key focus is on recognizing that these elements have passed through a
+significant area that could be important for visual feedback or interaction.
+
+## Naming the Event
+
+Given the behavior and the intent, here are some potential names and their reasoning:
+1. `snapflyover`: This directly conveys the idea that the element "flies
+over" the snap zone without being snapped to. It's descriptive and implies a
+transient interaction.
+2. `snaptransit`: Suggests that the element is in transit across the snap
+area, signaling that it's just passing by rather than stopping.
+3. `snapcross`: Indicates that the element has crossed into or through the
+snap area but didn't settle there.
+4. `snaphover`: Evokes the idea of the element hovering or passing over the
+snap area momentarily. However, this could be confusing with traditional "hover"
+events in CSS, which are related to pointer events.
+5. `snapintersect`: Suggests that the element has intersected the snap area,
+emphasizing the geometric or positional relationship rather than the action of
+snapping.
+
+### Is This Still a Snap Event?
+
+Yes, it's still related to snapping, but it's more of an interim or auxiliary snap
+event. It adds a finer level of control and feedback in the snapping process, especially
+for cases where visual or interactive feedback is needed as elements scroll through the
+snap zone.
+
+### Final Thoughts
+
+Out of the options, `snapflyover` seems to be the most intuitive and descriptive
+for what you're trying to achieve. It clearly conveys the idea that the element is moving
+over the snap area without stopping there, which matches your use case well.
+
+If you wanted to focus more on the idea of the event being triggered as the element
+intersects the snap area, then `snapintersect` could be a good alternative. It's
+a bit more technical but might resonate well with developers.
+

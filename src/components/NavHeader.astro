@@ -4,7 +4,13 @@ import DarkLightToggle from '@components/DarkLightToggle.astro'
 ---
 
 <nav class="nav">
-    <Icon name="logo" size="3rem" aria-hidden />
+    <a href="/" aria-label="Go to homepage">
+        <Icon name="logo" size="3rem" aria-hidden />
+    </a>
+
+    <!-- <ul class="menu">
+        <li><a href="/blog">Writings</a></li>
+    </ul> -->
 
     <DarkLightToggle />
 </nav>
@@ -39,23 +45,27 @@ import DarkLightToggle from '@components/DarkLightToggle.astro'
 
 <style>
     :root {
-        --header-height: calc((utopia.clamp(24, 48) * 2) + 3rem);
+        --header-height: 6rem;
     }
 
     nav {
         position: sticky;
         inset-block-start: 0;
-        padding: utopia.clamp(24, 48);
+        padding-block: 1.5rem;
+        /* The 960 value is the minumun constrain value */
+        padding-inline: utopia.clamp(24, 48, 960);
         display: flex;
         align-items: center;
         align-self: flex-start;
         justify-content: space-between;
         z-index: 1;
-        view-transition-name: site-nav;
 
         :global(& > *) {
             &:nth-child(2) {
                 transition-delay: 0.1s;
+            }
+            &:nth-child(3) {
+                transition-delay: 0.2s;
             }
         }
 
@@ -70,9 +80,19 @@ import DarkLightToggle from '@components/DarkLightToggle.astro'
         }
     }
 
+    a {
+        display: flex;
+    }
     svg {
         color: var(--color-primary-400);
         background-color: var(--color-neutral-100);
         align-self: center;
+    }
+
+    .menu {
+        display: flex;
+        gap: 1rem;
+        padding-block: 12px;
+        padding-inline: 0;
     }
 </style>
