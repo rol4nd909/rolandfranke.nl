@@ -204,11 +204,11 @@
         :global(::view-transition-new(root)) {
             animation: reveal 1s var(--ease);
             clip-path: inset(0 0 0 0);
-            z-index: 2;
+
+            /* animation: 2.5s cubic-bezier(0.25, 1, 0.3, 1) circle-in-top-right forwards; */
         }
 
         :global(::view-transition-old(root)) {
-            z-index: -1;
             animation: none;
         }
     }
@@ -218,6 +218,15 @@
             clip-path: inset(var(--from));
         }
     }
+
+    /* @keyframes circle-in-top-right {
+        from {
+            clip-path: circle(0%);
+        }
+        to {
+            clip-path: circle(150% at top right);
+        }
+    } */
 
     @supports selector(::view-transition-old(root)) {
         html:global([color-scheme='light']) {

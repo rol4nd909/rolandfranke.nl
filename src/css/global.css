@@ -11,6 +11,7 @@
 
 @import 'compositions/grid.css' layer(--compositions);
 @import 'compositions/flex.css' layer(--compositions);
+@import 'compositions/flow.css' layer(--compositions);
 @import 'compositions/lane.css' layer(--compositions);
 
 @import 'utilities/typography.css' layer(--utils.typography);

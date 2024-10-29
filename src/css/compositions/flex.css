@@ -3,3 +3,8 @@
   align-items: center;
   gap: utopia.clamp(16, 24);
 }
+
+.inline-wrap {
+  display: inline-flex;
+  flex-wrap: wrap;
+}

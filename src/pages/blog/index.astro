@@ -10,7 +10,7 @@ const allPosts = await getCollection('posts', ({ data }) => !data.isDraft)
 ---
 
 <BaseLayout title="Blog">
-    <Hero>
+    <Hero slot="hero">
         <FadeOutDown class="hero__animation">
             <h1 class="hero__title">My writings</h1>
             <p class="hero__content">
@@ -19,7 +19,7 @@ const allPosts = await getCollection('posts', ({ data }) => !data.isDraft)
         </FadeOutDown>
     </Hero>
 
-    <div class="grid lane" data-grid="fullbleed">
+    <div class="grid lane lane--dark" data-grid="fullbleed">
         {allPosts.map((post) => <PostCard post={post} />)}
     </div>
 </BaseLayout>

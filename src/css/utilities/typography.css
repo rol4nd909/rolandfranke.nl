@@ -16,3 +16,56 @@
 .text-center {
   text-align: center;
 }
+
+code {
+  font-family: 'SyntaxHighlighter', monospace;
+  font-feature-settings: 'dlig' on;
+  font-palette: --kung-fury-dark;
+
+  [color-scheme='light'] & {
+    font-palette: --kung-fury-light;
+  }
+
+  display: inline-flex;
+  padding: 0.15ch 0.5ch;
+  background-color: color-mix(in hsl, var(--text), transparent 90%);
+  border-radius: 0.25rem;
+}
+
+pre {
+  min-width: 0;
+  overflow-x: auto;
+  padding: 2ch;
+  background-color: color-mix(in hsl, var(--text), transparent 90%);
+  border-radius: 0.25rem;
+
+  > code {
+    padding: 0;
+    background-color: transparent;
+  }
+}
+
+/* Markdown content styles */
+.prose {
+  h1 {
+    font-size: var(--fs-5);
+  }
+
+  h2 {
+    font-size: var(--fs-4);
+  }
+
+  h3 {
+    font-size: var(--fs-3);
+  }
+
+  h4 {
+    font-size: var(--fs-2);
+  }
+
+  p,
+  ol,
+  ul {
+    font-size: var(--fs-0);
+  }
+}

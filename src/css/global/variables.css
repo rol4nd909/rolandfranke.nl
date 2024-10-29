@@ -12,6 +12,17 @@
   --fw-normal: 400;
   --fw-semibold: 600;
 
+  @utopia typeScale({
+    minFontSize: 18,
+    maxFontSize: 20,
+    minTypeScale: 1.2,
+    maxTypeScale: 1.25,
+    positiveSteps: 5,
+    negativeSteps: 2,
+    prefix: "fs",
+    relativeTo: "container"
+  });
+
   /* Easings */
   --ease: cubic-bezier(0.25, 0, 0.3, 1);
   --ease-out: cubic-bezier(0, 0, 0, 1);

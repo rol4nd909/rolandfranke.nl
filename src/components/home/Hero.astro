@@ -2,7 +2,7 @@
 import FadeOutDown from '@components/ui/FadeOutDown.astro'
 ---
 
-<section class="hero hero--large grid calc-size" data-grid="fullbleed" id="heroHome">
+<header class="hero hero--large grid js-angle" id="heroHome">
     <!-- <FadeOutDown class="hero__animation"> -->
     <h1 class="hero__title">roland<span>.</span></h1>
     <div class="hero__explain flex" aria-hidden="true">
@@ -16,10 +16,10 @@ import FadeOutDown from '@components/ui/FadeOutDown.astro'
         not only visually appealing but accessible and performant for everyone.
     </p>
     <!-- </FadeOutDown> -->
-</section>
+</header>
 
 <script>
-    import { observeElementById } from '@scripts/diagonalAngle'
+    import { setDiagonalAngle } from '@scripts/diagonalAngle'
 
-    observeElementById('heroHome')
+    setDiagonalAngle('js-angle')
 </script>

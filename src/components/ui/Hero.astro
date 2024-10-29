@@ -6,19 +6,12 @@ interface Props {
 const { class: providedProps, ...rest } = Astro.props
 ---
 
-<section
-    class:list={['hero grid calc-size', providedProps]}
-    data-grid="fullbleed"
-    id="pageHero"
-    {...rest}
->
+<header class:list={['hero grid js-angle', providedProps]} id="pageHero" {...rest}>
     <slot />
-</section>
-
-<script></script>
+</header>
 
 <script>
-    import { observeElementById } from '@scripts/diagonalAngle'
+    import { setDiagonalAngle } from '@scripts/diagonalAngle'
 
-    observeElementById('pageHero')
+    setDiagonalAngle('js-angle')
 </script>

@@ -7,8 +7,6 @@ tags:
   - html
 ---
 
-# Scroll snap api suggestion
-
 ## Describing the State
 
 This state could be described as a "transitory snap" or "flyover snap." It's a state
@@ -19,17 +17,17 @@ significant area that could be important for visual feedback or interaction.
 ## Naming the Event
 
 Given the behavior and the intent, here are some potential names and their reasoning:
-1. `snapflyover`: This directly conveys the idea that the element "flies
+1. `snapflyover:` This directly conveys the idea that the element "flies
 over" the snap zone without being snapped to. It's descriptive and implies a
 transient interaction.
-2. `snaptransit`: Suggests that the element is in transit across the snap
+2. `snaptransit:` Suggests that the element is in transit across the snap
 area, signaling that it's just passing by rather than stopping.
-3. `snapcross`: Indicates that the element has crossed into or through the
+3. `snapcross:` Indicates that the element has crossed into or through the
 snap area but didn't settle there.
-4. `snaphover`: Evokes the idea of the element hovering or passing over the
+4. `snaphover:` Evokes the idea of the element hovering or passing over the
 snap area momentarily. However, this could be confusing with traditional "hover"
 events in CSS, which are related to pointer events.
-5. `snapintersect`: Suggests that the element has intersected the snap area,
+5. `snapintersect:` Suggests that the element has intersected the snap area,
 emphasizing the geometric or positional relationship rather than the action of
 snapping.
 

@@ -18,10 +18,6 @@
     row-gap: utopia.clamp(16, 32);
   }
 
-  &:not(.hero--large) {
-    padding-block-end: 0;
-  }
-
   &.hero--large {
     align-content: center;
     min-block-size: 100svh;

@@ -1,0 +1,79 @@
+---
+import FadeOutDown from '@/components/ui/FadeOutDown.astro'
+import FormattedDate from '@/components/ui/FormattedDate.astro'
+import Hero from '@/components/ui/Hero.astro'
+import BaseLayout from '@/layouts/BaseLayout.astro'
+
+import type { GetStaticPaths } from 'astro'
+import { getCollection } from 'astro:content'
+
+export const getStaticPaths = (async () => {
+    const posts = await getCollection('posts', ({ data }) => !data.isDraft)
+
+    return posts.map((post) => ({
+        params: {
+            slug: post.slug,
+        },
+        props: {
+            post,
+        },
+    }))
+}) satisfies GetStaticPaths
+
+const { post } = Astro.props
+const { Content } = await post.render()
+const { title, description, image, pubDate, tags } = post.data
+---
+
+<BaseLayout {title} {description}>
+    <Hero slot="hero">
+        <FadeOutDown class="hero__animation">
+            <h1 set:html={title} />
+            <FormattedDate {pubDate} />
+            <!-- <small>Updated <time>October 18, 2024</time></small> -->
+            <!-- <span class="read-time">
+                <svg aria-hidden="true" class="filled-icon" width="20" height="20" viewBox="0 0 24 24">
+                    <use href="#icon.clock"></use>
+                </svg>9 min read
+            </span> -->
+            <div class="tags inline-wrap">
+                {
+                    tags.map((tag) => (
+                        <span class="tag" data-topic={tag.id}>
+                            {tag.id}
+                        </span>
+                    ))
+                }
+            </div>
+        </FadeOutDown>
+    </Hero>
+
+    <div class="grid lane lane--light" data-grid="fullbleed">
+        <div class="prose flow">
+            <Content />
+        </div>
+    </div>
+</BaseLayout>
+
+<style>
+    h1 {
+        font-size: var(--fs-5);
+    }
+
+    :global(time) {
+        font-size: var(--fs--1);
+    }
+
+    .tags {
+        gap: 0.5rem;
+    }
+
+    .tag {
+        background-color: var(--color-primary-400);
+        color: var(--color-neutral-100);
+        padding-inline: 0.5rem;
+        border-radius: 0.25rem;
+        font-size: var(--fs--1);
+        font-weight: var(--fw-semibold);
+    }
+</style>

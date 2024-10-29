@@ -1,4 +1,8 @@
-/* Modern reset: https://piccalil.li/blog/a-more-modern-css-reset/ */
+:root {
+  @media (prefers-reduced-motion: no-preference) {
+    interpolate-size: allow-keywords;
+  }
+}
 
 /* Box sizing rules */
 *,
@@ -7,10 +11,9 @@
   box-sizing: border-box;
 }
 
-:root {
-  @media (prefers-reduced-motion: no-preference) {
-    interpolate-size: allow-keywords;
-  }
+/* Remove default margin in favour of better control in authored CSS */
+* {
+  margin: 0;
 }
 
 /* Prevent font size inflation */
@@ -18,20 +21,6 @@ html {
   -moz-text-size-adjust: none;
   -webkit-text-size-adjust: none;
   text-size-adjust: none;
-}
-
-/* Remove default margin in favour of better control in authored CSS */
-body,
-h1,
-h2,
-h3,
-h4,
-p,
-figure,
-blockquote,
-dl,
-dd {
-  margin-block: 0;
 }
 
 /* Remove list styles and keep semantic meaning on ul, ol elements with a class on it, which suggests default styling will be removed */
@@ -44,6 +33,9 @@ dd {
 body {
   min-block-size: 100%;
   line-height: 1.5;
+
+  /* Improve text rendering */
+  -webkit-font-smoothing: antialiased;
 }
 
 /* Set shorter line heights on headings and interactive elements */
@@ -61,12 +53,25 @@ label {
 h1,
 h2,
 h3,
-h4 {
+h4,
+h5,
+h6 {
   text-wrap: balance;
 }
 
 p {
   text-wrap: pretty;
+}
+
+/* Avoid text overflows */
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  overflow-wrap: break-word;
 }
 
 /* A elements that don't have a class get default styles */
@@ -82,13 +87,9 @@ a:not([class]) {
  * 
  * The `max-width: 100%;` ensures that the image does not exceed its container's width, 
  * while maintaining its aspect ratio with `height: auto;`. 
- * 
  * The `vertical-align: middle;` aligns the image vertically with the text. 
- * 
  * The `font-style: italic;` adds a slight italic effect to the image alt text.
- * 
  * The `background-repeat: no-repeat;` ensures that the image does not repeat itself. 
- * 
  * The `background-size: cover;` ensures that the image fills its container without repeating. 
  * 
  * Finally, the `shape-margin: 1rem;` adds some margin around the image to improve its spacing with other elements.

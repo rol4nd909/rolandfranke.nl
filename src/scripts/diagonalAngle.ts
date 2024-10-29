@@ -8,13 +8,13 @@ function diagonalAngle(width: number, height: number): number {
   return 180 - degrees
 }
 
-// Function to observe an element by its ID and update the CSS variable
-export function observeElementById(id: string): void {
-  const element = document.getElementById(id)
+// Function to observe elements by class name and update their CSS variable
+export function setDiagonalAngle(className: string): void {
+  const elements = document.getElementsByClassName(className)
 
-  // If the element doesn't exist, exit the function
-  if (!element) {
-    console.error(`Element with id "${id}" not found.`)
+  // If no elements are found, exit the function
+  if (elements.length === 0) {
+    console.error(`No elements with class "${className}" found.`)
     return
   }
 
@@ -28,10 +28,12 @@ export function observeElementById(id: string): void {
       const angle: number = diagonalAngle(width, height)
 
       // Set the CSS variable for the diagonal angle
-      element.style.setProperty('--angle', `${angle}`)
+      target.style.setProperty('--angle', `${angle}`)
     }
   })
 
-  // Observe the element with the provided ID
-  ro.observe(element)
+  // Loop through all elements with the provided class name and observe each
+  Array.from(elements).forEach((element) => {
+    ro.observe(element as HTMLElement)
+  })
 }
