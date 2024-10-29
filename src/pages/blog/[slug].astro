@@ -1,8 +1,9 @@
 ---
+import BaseLayout from '@/layouts/BaseLayout.astro'
+import Badge from '@/components/ui/Badge.astro'
 import FadeOutDown from '@/components/ui/FadeOutDown.astro'
 import FormattedDate from '@/components/ui/FormattedDate.astro'
 import Hero from '@/components/ui/Hero.astro'
-import BaseLayout from '@/layouts/BaseLayout.astro'
 
 import type { GetStaticPaths } from 'astro'
 import { getCollection } from 'astro:content'
@@ -36,14 +37,8 @@ const { title, description, image, pubDate, tags } = post.data
                     <use href="#icon.clock"></use>
                 </svg>9 min read
             </span> -->
-            <div class="tags inline-wrap">
-                {
-                    tags.map((tag) => (
-                        <span class="tag" data-topic={tag.id}>
-                            {tag.id}
-                        </span>
-                    ))
-                }
+            <div class="flex inline-wrap">
+                {tags.map((tag) => <Badge label={tag.id} />)}
             </div>
         </FadeOutDown>
     </Hero>
@@ -58,23 +53,6 @@ const { title, description, image, pubDate, tags } = post.data
 <style>
     h1 {
         font-size: var(--fs-5);
-    }
-
-    :global(time) {
-        font-size: var(--fs--1);
-    }
-
-    .tags {
-        gap: 0.5rem;
-    }
-
-    .tag {
-        background-color: var(--color-primary-400);
-        color: var(--color-neutral-100);
-        padding-inline: 0.5rem;
-        border-radius: 0.25rem;
-        font-size: var(--fs--1);
-        font-weight: var(--fw-semibold);
     }
 
     .prose {

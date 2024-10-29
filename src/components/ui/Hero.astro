@@ -6,7 +6,7 @@ interface Props {
 const { class: providedProps, ...rest } = Astro.props
 ---
 
-<header class:list={['hero grid js-angle', providedProps]} id="pageHero" {...rest}>
+<header class:list={['hero grid js-angle', providedProps]} {...rest}>
     <slot />
 </header>
 

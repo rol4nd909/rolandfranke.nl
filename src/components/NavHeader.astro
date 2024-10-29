@@ -15,7 +15,7 @@ import DarkLightToggle from '@components/DarkLightToggle.astro'
     <DarkLightToggle />
 </nav>
 
-<script>
+<!-- <script>
     const nav = document.querySelector('.nav')
 
     type ScrollDirection = 'up' | 'down'
@@ -41,7 +41,7 @@ import DarkLightToggle from '@components/DarkLightToggle.astro'
 
     // Adding the scroll event listener
     document.addEventListener('scroll', handleScroll, { passive: true })
-</script>
+</script> -->
 
 <style>
     :root {
@@ -49,8 +49,10 @@ import DarkLightToggle from '@components/DarkLightToggle.astro'
     }
 
     nav {
-        position: sticky;
-        inset-block-start: 0;
+        /* position: sticky; */
+        position: absolute;
+        /* inset-block-start: 0; */
+        inset: 0 0 auto;
         padding-block: 1.5rem;
         /* The 960 value is the minumun constrain value */
         padding-inline: utopia.clamp(24, 48, 960);

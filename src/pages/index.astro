@@ -1,10 +1,26 @@
 ---
-import HeroHome from '@/components/home/Hero.astro'
 import BaseLayout from '@layouts/BaseLayout.astro'
+import FadeOutDown from '@/components/ui/FadeOutDown.astro'
+import Hero from '@/components/ui/Hero.astro'
 ---
 
 <BaseLayout>
-    <HeroHome slot="hero" />
+    <Hero class="hero--large" slot="hero">
+        <!-- <FadeOutDown class="hero__animation"> -->
+        <h1 class="hero__title">roland<span>.</span></h1>
+        <div class="hero__explain flex" aria-hidden="true">
+            <span>[r<span class="underline">o</span>.land]</span>
+            <span class="dot">•</span>
+            <span class="bold">frontend developer</span>
+        </div>
+        <p class="hero__content">
+            <span class="italic">Roland</span> is a frontend developer with a passion for creative coding
+            and a sharp focus on CSS, HTML, andaccessibility. I thrive on building web experiences that
+            are not only visually appealing but accessible and performant for everyone.
+        </p>
+        <!-- </FadeOutDown> -->
+    </Hero>
+
     <!-- <div class="grid lane lane--light" data-grid="fullbleed">
         <h2>AAP</h2>
         <p>
@@ -18,7 +34,7 @@ import BaseLayout from '@layouts/BaseLayout.astro'
         </p>
     </div>
 
-    <div class="grid lane" data-grid="fullbleed">
+    <div class="grid lane lane--dark" data-grid="fullbleed">
         <h2>AAP</h2>
         <p data-column="medium">
             Lorem ipsum, dolor sit amet consectetur adipisicing elit. Pariatur ipsum, voluptate qui

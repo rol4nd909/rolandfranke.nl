@@ -9,24 +9,22 @@ tags:
 
 ## Why CSS Masonry Should be Part of `display: grid;`
 
-
-
 The new CSS Masonry layout is an exciting addition that allows elements to be arranged in a more natural and compact way, similar to popular JavaScript-based libraries like Masonry.js. However, there's an argument to be made that the Masonry layout should be incorporated within the existing `display: grid;` property rather than being introduced as a new display type. Here's why:
 
-## 1. Conceptual Alignment with Grid Layout
+### 1. Conceptual Alignment with Grid Layout
 CSS Grid is already the go-to specification for creating two-dimensional layouts, offering extensive control over rows and columns. Masonry can be seen as a natural extension of this, adding a new dimension to the flexibility of `display: grid;`. This would align Masonry conceptually with Grid, where the purpose is to arrange items within a two-dimensional space.
 
-## 2. Avoiding Unnecessary Fragmentation
+### 2. Avoiding Unnecessary Fragmentation
 Adding Masonry as a standalone display property could introduce unnecessary complexity and fragmentation within the CSS layout ecosystem. Developers would need to learn and understand an entirely new syntax and behavior instead of leveraging their existing knowledge of Grid. By keeping it as part of `display: grid;`, developers can achieve a more consistent experience without switching mental models or learning additional properties.
 
-## 3. Enhanced Developer Experience
+### 3. Enhanced Developer Experience
 Incorporating Masonry into Grid makes the developer experience more streamlined. Consider that many projects already use `display: grid;` and would naturally benefit from the addition of a Masonry layout as an option within that context. For example, a developer could quickly switch between regular grid and masonry-like behavior through an optional setting like `grid-template-rows: masonry;` or `grid-auto-rows: masonry;`. This would significantly reduce cognitive load and enhance code readability.
 
-## 4. Leverage Existing Grid Features
+### 4. Leverage Existing Grid Features
 CSS Grid already provides numerous features like grid lines, named areas, and explicit sizing control, which could seamlessly integrate with a Masonry approach. For instance, named lines or fractional units (`fr`) could be used alongside a Masonry configuration, offering additional customization options. A new display property would likely require re-implementing many of these features, resulting in redundant or fragmented capabilities.
 
-## 5. Consistency with Existing Layouts
+### 5. Consistency with Existing Layouts
 From a design system perspective, the existing separation between Flexbox for one-dimensional layouts and Grid for two-dimensional layouts is intuitive. Introducing a new display property for Masonry would blur this distinction, making it less clear when to use which layout method. Integrating Masonry into `display: grid;` maintains this clear division and reinforces Grid as the go-to tool for two-dimensional layouts.
 
-## 6. Pragmatic Evolution of Grid
+### 6. Pragmatic Evolution of Grid
 CSS is evolving rapidly, and the Grid specification has proven to be both powerful and adaptable. Masonry is an opportunity to enhance Grid's flexibility further. By incorporating it within `display: grid;`, we acknowledge that the Grid layout is capable of evolving with new features without splintering into separate properties for each new pattern that emerges.

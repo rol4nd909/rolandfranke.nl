@@ -1,0 +1,20 @@
+---
+type Props = {
+    label: string
+}
+
+const { label } = Astro.props
+---
+
+<span data-topic={label}>{label}</span>
+
+<style>
+    span {
+        background-color: var(--color-primary-400);
+        color: var(--color-neutral-100);
+        padding-inline: 0.5rem;
+        border-radius: 0.25rem;
+        font-size: var(--fs--1);
+        font-weight: var(--fw-semibold);
+    }
+</style>

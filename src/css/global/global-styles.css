@@ -23,6 +23,8 @@ body {
   /* Stylistic Sets for & */
   font-feature-settings: 'ss11' on;
 
+  scrollbar-gutter: stable;
+
   &::before {
     --size: 3rem;
     --offset: calc(var(--size) / 2);
@@ -38,4 +40,9 @@ body {
     background-position: var(--offset) var(--offset);
     background-size: var(--size) var(--size);
   }
+}
+
+:is(:focus-visible) {
+  outline-color: var(--color-primary-400);
+  outline-offset: 0.25rem;
 }

@@ -1,0 +1,40 @@
+---
+type Props = {
+    href: string
+}
+
+const { href, ...rest } = Astro.props
+---
+
+<a {href} {...rest}>
+    <slot />
+</a>
+
+<style>
+    a {
+        color: currentColor;
+        justify-self: start;
+        text-decoration: none;
+        background-image: linear-gradient(var(--color-primary-400) 0 0);
+        background-size: 0 0.3lh;
+        background-position: 100% 100%;
+        background-repeat: no-repeat;
+        transition: background-size 0.5s var(--ease-elastic-2);
+
+        &:is(:hover, :focus-visible) {
+            background-size: 100% 0.3lh;
+            background-position: 0 100%;
+            transition-delay: 125ms;
+        }
+    }
+
+    :global(p) > a {
+        background-size: 100% 0.3lh;
+        background-position: 0 100%;
+    }
+
+    :global(p) > a:is(:hover, :focus-visible) {
+        background-size: 0 0.3lh;
+        background-position: 100% 100%;
+    }
+</style>

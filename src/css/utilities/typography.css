@@ -26,10 +26,10 @@ code {
     font-palette: --kung-fury-light;
   }
 
-  display: inline-flex;
-  padding: 0.15ch 0.5ch;
+  padding: 0.15rem 0.25rem;
   background-color: color-mix(in hsl, var(--text), transparent 90%);
   border-radius: 0.25rem;
+  box-decoration-break: clone;
 }
 
 pre {
@@ -53,15 +53,15 @@ pre {
   }
 
   h2 {
-    font-size: var(--fs-4);
-  }
-
-  h3 {
     font-size: var(--fs-3);
   }
 
-  h4 {
+  h3 {
     font-size: var(--fs-2);
+  }
+
+  h4 {
+    font-size: var(--fs-1);
   }
 
   p,
