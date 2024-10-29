@@ -18,8 +18,8 @@
 }
 
 code {
-  font-family: 'SyntaxHighlighter', monospace;
-  font-feature-settings: 'dlig' on;
+  font-size: 1em;
+  font-family: 'FontWithASyntaxHighlighter', monospace;
   font-palette: --kung-fury-dark;
 
   [color-scheme='light'] & {
@@ -40,6 +40,7 @@ pre {
   border-radius: 0.25rem;
 
   > code {
+    display: revert;
     padding: 0;
     background-color: transparent;
   }

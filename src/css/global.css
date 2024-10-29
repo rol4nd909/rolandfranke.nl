@@ -1,4 +1,4 @@
-@layer --fonts, --reset, --base, --blocks, --compositions, --utils;
+@layer --fonts, --reset, --base, --compositions, --blocks, --utils;
 
 @import 'global/fonts.css' layer(--fonts);
 
@@ -7,11 +7,11 @@
 @import 'global/variables.css' layer(--base);
 @import 'global/global-styles.css' layer(--base);
 
-@import 'blocks/hero.css' layer(--blocks);
-
 @import 'compositions/grid.css' layer(--compositions);
 @import 'compositions/flex.css' layer(--compositions);
 @import 'compositions/flow.css' layer(--compositions);
 @import 'compositions/lane.css' layer(--compositions);
+
+@import 'blocks/hero.css' layer(--blocks);
 
 @import 'utilities/typography.css' layer(--utils.typography);

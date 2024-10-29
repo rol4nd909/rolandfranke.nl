@@ -18,12 +18,23 @@
     row-gap: utopia.clamp(16, 32);
   }
 
+  &:not(.hero--large) {
+    > * {
+      grid-column-start: medium;
+      max-inline-size: calc(var(--constrain-sm) + 3rem);
+    }
+  }
+
   &.hero--large {
     align-content: center;
     min-block-size: 100svh;
 
     .hero__title {
       font-size: utopia.clamp(80, 260, 400, 1200);
+    }
+
+    .hero__content {
+      font-size: utopia.clamp(18, 28);
     }
   }
 }
@@ -36,7 +47,7 @@
 .hero__title {
   /* fix to align the title with text after it */
   margin-inline-start: -0.085ch;
-  font-size: utopia.clamp(48, 120, 400, 1200);
+  font-size: var(--fs-5);
   font-weight: var(--fw-semibold);
 
   > span {
@@ -55,5 +66,5 @@
 }
 
 .hero__content {
-  font-size: utopia.clamp(18, 28);
+  font-size: var(--fs-1);
 }

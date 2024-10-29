@@ -5,12 +5,14 @@
   grid-template-columns:
     [fullbleed-start] minmax(var(--_gutter), 1fr) [large-start] minmax(
       0,
-      calc((var(--constrain-large) - var(--constrain-medium)) / 2)
+      calc((var(--constrain-lg) - var(--constrain-md)) / 2)
     )
-    [medium-start] minmax(0, calc((var(--constrain-medium) - var(--constrain-small)) / 2))
-    [small-start] min(100% - (var(--_gutter) * 2), var(--constrain-small))
-    [small-end] minmax(0, calc((var(--constrain-medium) - var(--constrain-small)) / 2))
-    [medium-end] minmax(0, calc((var(--constrain-large) - var(--constrain-medium)) / 2))
+    [medium-start] minmax(0, calc((var(--constrain-md) - var(--constrain-sm)) / 2))
+    [small-start] minmax(0, calc((var(--constrain-sm) - var(--constrain-xs)) / 2))
+    [xsmall-start] min(100% - (var(--_gutter) * 2), var(--constrain-xs))
+    [xsmall-end] minmax(0, calc((var(--constrain-sm) - var(--constrain-xs)) / 2))
+    [small-end] minmax(0, calc((var(--constrain-md) - var(--constrain-sm)) / 2))
+    [medium-end] minmax(0, calc((var(--constrain-lg) - var(--constrain-md)) / 2))
     [large-end] minmax(var(--_gutter), 1fr) [fullbleed-end];
   /* align-content: start; */
 

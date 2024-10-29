@@ -30,7 +30,8 @@
   --ease-elastic-2: cubic-bezier(0.5, 1.5, 0.75, 1.25);
 
   /* main constrain */
-  --constrain-large: 87rem;
-  --constrain-medium: 69rem;
-  --constrain-small: 57rem;
+  --constrain-lg: 87rem;
+  --constrain-md: 69rem;
+  --constrain-sm: 57rem;
+  --constrain-xs: 51rem;
 }
