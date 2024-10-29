@@ -47,38 +47,3 @@
   font-family: 'FontWithASyntaxHighlighter';
   src: url('/fonts/FontWithASyntaxHighlighter-Regular.woff2') format('woff2');
 }
-
-/* 0 keywords, {} */
-/* 1 comments */
-/* 2 literals */
-/* 3 numbers */
-/* 4 functions, [] */
-/* 5 js others */
-/* 6 not in use */
-/* 7 inside quotes, css properties, few chars */
-/* 8 few chars */
-@font-palette-values --kung-fury-light {
-  font-family: 'FontWithASyntaxHighlighter';
-  override-colors:
-    0 hsl(225 100% 40%),
-    1 hsl(250 100% 80%),
-    2 hsl(225 100% 40%),
-    3 hsl(225 100% 40%),
-    4 hsl(270 50% 40%),
-    5 hsl(210 40% 2%),
-    7 hsl(210 10% 30%),
-    8 hsl(327 100% 54%);
-}
-
-@font-palette-values --kung-fury-dark {
-  font-family: 'FontWithASyntaxHighlighter';
-  override-colors:
-    0 hsl(188 100% 75%),
-    1 hsl(250 100% 80%),
-    2 hsl(188 100% 75%),
-    3 hsl(188 100% 75%),
-    4 hsl(250 100% 80%),
-    5 hsl(210 40% 98%),
-    7 hsl(210 40% 80%),
-    8 hsl(300 100% 80%);
-}
