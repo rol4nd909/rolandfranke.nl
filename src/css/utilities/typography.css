@@ -1,7 +1,11 @@
+b,
+strong,
 .bold {
   font-weight: var(--fw-semibold);
 }
 
+i,
+em,
 .italic {
   font-style: italic;
   font-weight: var(--fw-normal);
@@ -53,14 +57,20 @@ pre {
   }
 
   h2 {
+    --flow-space: 1.5em;
+
     font-size: var(--fs-3);
   }
 
   h3 {
+    --flow-space: 1.5em;
+
     font-size: var(--fs-2);
   }
 
   h4 {
+    --flow-space: 1.5em;
+
     font-size: var(--fs-1);
   }
 
@@ -68,6 +78,11 @@ pre {
   ol,
   ul {
     font-size: var(--fs-0);
+  }
+
+  ol,
+  ul {
+    --flow-space: 0.5em;
   }
 }
 

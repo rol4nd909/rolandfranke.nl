@@ -1,5 +1,7 @@
 ---
-type Props = {
+import type { HTMLAttributes } from 'astro/types'
+
+interface Props extends HTMLAttributes<'a'> {
     href: string
 }
 
@@ -12,10 +14,15 @@ const { href, ...rest } = Astro.props
 
 <style>
     a {
+        --_clr: light-dark(
+            hsl(from var(--color-primary-400) h s l / 0.5),
+            var(--color-primary-400)
+        );
+
         color: currentColor;
         justify-self: start;
         text-decoration: none;
-        background-image: linear-gradient(var(--color-primary-400) 0 0);
+        background-image: linear-gradient(var(--_clr) 0 0);
         background-size: 0 0.3lh;
         background-position: 100% 100%;
         background-repeat: no-repeat;

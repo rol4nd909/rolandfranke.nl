@@ -7,6 +7,7 @@ import Hero from '@/components/ui/Hero.astro'
 
 import type { GetStaticPaths } from 'astro'
 import { getCollection } from 'astro:content'
+import { getEntries } from 'astro:content'
 
 export const getStaticPaths = (async () => {
     const posts = await getCollection('posts', ({ data }) => !data.isDraft)
@@ -24,6 +25,7 @@ export const getStaticPaths = (async () => {
 const { post } = Astro.props
 const { Content } = await post.render()
 const { title, description, image, pubDate, tags } = post.data
+const tagsData = await getEntries(tags)
 ---
 
 <BaseLayout {title} {description}>
@@ -38,7 +40,7 @@ const { title, description, image, pubDate, tags } = post.data
                 </svg>9 min read
             </span> -->
             <div class="flex inline-wrap">
-                {tags.map((tag) => <Badge label={tag.id} />)}
+                {tagsData.map(({ id, data }) => <Badge label={data.title} id={id} />)}
             </div>
         </FadeOutDown>
     </Hero>
