@@ -25,7 +25,7 @@ body {
 
   scrollbar-gutter: stable;
 
-  &::before {
+  &::after {
     --size: 3rem;
     --offset: calc(var(--size) / 2);
     --line: color-mix(in hsl, var(--text), var(--surface) 90%);
@@ -39,6 +39,8 @@ body {
       linear-gradient(var(--line) 1px, transparent 1px var(--size));
     background-position: var(--offset) var(--offset);
     background-size: var(--size) var(--size);
+
+    pointer-events: none;
   }
 }
 

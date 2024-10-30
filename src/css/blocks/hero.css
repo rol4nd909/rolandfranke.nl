@@ -5,7 +5,7 @@
   padding-block: var(--header-height);
 
   align-content: center;
-  /* margin-block-start: calc(var(--header-height) * -1); */
+  isolation: isolate;
 
   &::after {
     content: '';
@@ -13,6 +13,8 @@
     inset: 0;
     position: absolute;
     background-image: linear-gradient(calc(var(--_angle) * -1deg), var(--surface) 40%, transparent);
+
+    pointer-events: none;
   }
 
   &:not(:has(.hero__animation)) {
