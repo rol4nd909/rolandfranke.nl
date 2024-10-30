@@ -1,13 +1,12 @@
 ---
+import { type GetStaticPaths } from 'astro'
+import { getCollection, getEntries } from 'astro:content'
+
 import BaseLayout from '@/layouts/BaseLayout.astro'
 import Badge from '@/components/ui/Badge.astro'
 import FadeOutDown from '@/components/ui/FadeOutDown.astro'
 import FormattedDate from '@/components/ui/FormattedDate.astro'
 import Hero from '@/components/ui/Hero.astro'
-
-import type { GetStaticPaths } from 'astro'
-import { getCollection } from 'astro:content'
-import { getEntries } from 'astro:content'
 
 export const getStaticPaths = (async () => {
     const posts = await getCollection('posts', ({ data }) => !data.isDraft)

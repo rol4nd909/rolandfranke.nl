@@ -10,6 +10,10 @@ import mdx from '@astrojs/mdx';
 export default defineConfig({
   site: 'https://rolandfranke.nl',
   integrations: [icon(), sitemap(), mdx()],
+  
+  prefetch: {
+    prefetchAll: true,
+  },
 
   markdown: {
     syntaxHighlight: false
