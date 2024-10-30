@@ -22,7 +22,7 @@ const tagsData = await getEntries(tags)
         </h2>
         <FormattedDate {pubDate} />
         <div class="flex inline-wrap">
-            {tagsData.map(({ id, data }) => <Badge label={data.title} id={id} />)}
+            {tagsData.map(({ id, data }) => <Badge id={id}>{data.title}</Badge>)}
         </div>
     </header>
 

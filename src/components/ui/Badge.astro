@@ -1,13 +1,14 @@
 ---
 type Props = {
-    label: string
     id: string
 }
 
-const { label, id } = Astro.props
+const { id } = Astro.props
 ---
 
-<span data-topic={id}>{label}</span>
+<span data-topic={id}>
+    <slot />
+</span>
 
 <style>
     span {
