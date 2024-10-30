@@ -10,18 +10,46 @@ const { title = baseData.title, description = baseData.description } = Astro.pro
 ---
 
 <head>
+    <title>{title}</title>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="description" content={description} />
+    <meta name="apple-mobile-web-app-title" content="Roland" />
+
+    <link
+        rel="preload"
+        href="/fonts/InstrumentSans-Regular.woff2"
+        crossorigin="anonymous"
+        as="font"
+        type="font/woff2"
+    />
+    <link
+        rel="preload"
+        href="/fonts/InstrumentSans-SemiBold.woff2"
+        crossorigin="anonymous"
+        as="font"
+        type="font/woff2"
+    />
+    <link
+        rel="preload"
+        href="/fonts/InstrumentSans-Italic.woff2"
+        crossorigin="anonymous"
+        as="font"
+        type="font/woff2"
+    />
+    <link
+        rel="preload"
+        href="/fonts/FontWithASyntaxHighlighter-Regular.woff2"
+        crossorigin="anonymous"
+        as="font"
+        type="font/woff2"
+    />
 
     <link rel="icon" type="image/png" href="/favicon-48x48.png" sizes="48x48" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="shortcut icon" href="/favicon.ico" />
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-    <meta name="apple-mobile-web-app-title" content="Roland" />
     <link rel="manifest" href="/site.webmanifest" />
     <link rel="sitemap" href="/sitemap-index.xml" />
-
-    <meta name="generator" content={Astro.generator} />
-    <meta name="description" content={description} />
-    <title>{title}</title>
 </head>
