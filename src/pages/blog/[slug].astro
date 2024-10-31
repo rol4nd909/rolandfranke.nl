@@ -28,7 +28,7 @@ const { title, description, image, pubDate, tags } = post.data
 const tagsData = await getEntries(tags)
 ---
 
-<BaseLayout {title} {description}>
+<BaseLayout title=`${title} - Roland Franke` {description}>
     <Hero slot="hero">
         <FadeOutDown class="flow" data-column="medium">
             <Heading tagName="h1" size="h1" set:html={title} />
