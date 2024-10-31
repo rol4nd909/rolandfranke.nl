@@ -12,7 +12,6 @@
     [small-end] minmax(0, calc((var(--constrain-md) - var(--constrain-sm)) / 2))
     [medium-end] minmax(0, calc((var(--constrain-lg) - var(--constrain-md)) / 2))
     [large-end] minmax(var(--gutter, 1rem), 1fr) [fullbleed-end];
-  /* align-content: start; */
 
   & > * {
     grid-column: small;

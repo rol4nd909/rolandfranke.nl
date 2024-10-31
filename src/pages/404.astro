@@ -11,3 +11,22 @@ import BaseLayout from '@layouts/BaseLayout.astro'
         <p class="hero__content">Oeps not found the page you're looking for</p>
     </Hero>
 </BaseLayout>
+
+<style>
+    .hero__title {
+        /* fix to align the title with text after it */
+        margin-inline-start: -0.085ch;
+        font-size: utopia.clamp(80, 260, 400, 1200);
+        font-weight: var(--fw-semibold);
+
+        > span {
+            font-family: var(--ff-serif);
+            color: var(--color-primary-400);
+        }
+    }
+
+    .hero__content {
+        font-family: var(--ff-serif);
+        font-size: utopia.clamp(18, 28);
+    }
+</style>
