@@ -8,8 +8,8 @@ import Hero from '@/components/ui/Hero.astro'
     <Hero class="hero--large" slot="hero">
         <!-- <FadeOutDown class="hero__animation"> -->
         <h1 class="hero__title">roland<span>.</span></h1>
-        <div class="hero__explain flex" aria-hidden="true">
-            <span>[r<span class="underline">o</span>.land]</span>
+        <div class="hero__explain flex letter-spacing" aria-hidden="true">
+            <span>[<span class="ff-serif">r<span class="underline">o</span>.land</span>]</span>
             <span class="dot">•</span>
             <span class="bold">frontend developer</span>
         </div>
@@ -60,3 +60,32 @@ import Hero from '@/components/ui/Hero.astro'
         </p>
     </div> -->
 </BaseLayout>
+
+<style>
+    .hero__title {
+        /* fix to align the title with text after it */
+        margin-inline-start: -0.085ch;
+        font-size: utopia.clamp(80, 260, 400, 1200);
+        font-weight: var(--fw-semibold);
+
+        > span {
+            color: var(--color-primary-400);
+        }
+    }
+
+    .hero__explain {
+        --letter-spacing: 3;
+
+        font-size: utopia.clamp(20, 38);
+
+        .dot {
+            font-size: utopia.clamp(8, 16);
+            color: var(--color-primary-400);
+            font-feature-settings: 'aalt' on;
+        }
+    }
+
+    .hero__content {
+        font-size: utopia.clamp(18, 28);
+    }
+</style>

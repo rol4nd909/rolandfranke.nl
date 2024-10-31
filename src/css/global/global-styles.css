@@ -16,12 +16,15 @@ html {
 
 body {
   margin: 0;
-  font-family: var(--ff-base);
+  font-family: var(--ff-sans);
+  font-size: var(--fs-0);
   line-height: 1.5;
   color: var(--text);
 
-  /* Stylistic Sets for & */
-  font-feature-settings: 'ss11' on;
+  /* Stylistic Sets for & and R */
+  font-feature-settings:
+    'ss11' on,
+    'ss05' on;
 
   scrollbar-gutter: stable;
 
@@ -47,4 +50,11 @@ body {
 :is(:focus-visible) {
   outline-color: var(--color-primary-400);
   outline-offset: 0.25rem;
+}
+
+@layer --base.containers {
+  cq-document-vi {
+    container-name: cq-document-vi;
+    container-type: inline-size;
+  }
 }

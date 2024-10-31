@@ -1,46 +1,117 @@
 ---
-import type { HTMLAttributes } from 'astro/types'
+import { type Polymorphic } from 'astro/types'
 
-interface Props extends HTMLAttributes<'a'> {
-    href: string
+type Tag = 'a' | 'button'
+
+type Props<TagGeneric extends Tag> = {
+    as: TagGeneric
+    variant?: 'link' | 'primary'
+    classList?: string[]
+} & Polymorphic<{ as: TagGeneric }>
+
+const { as: Tag, variant = 'link', classList = [], href, type = 'button', ...rest } = Astro.props
+
+const baseAttributes = {
+    classes: ['btn', variant, ...classList],
+    ...rest,
 }
 
-const { href, ...rest } = Astro.props
+const anchorAttributes = {
+    href: href,
+}
+
+const buttonAttributes = {
+    type: type,
+}
+
+const attributeBasedOnTag = Tag === 'a' ? anchorAttributes : buttonAttributes
+
+const allAttributes = { ...baseAttributes, ...attributeBasedOnTag }
+const { classes, ...attributes } = allAttributes
 ---
 
-<a {href} {...rest}>
-    <slot />
-</a>
+<Tag class:list={[classes]} {...attributes}>
+    <span>
+        <slot />
+    </span>
+</Tag>
 
 <style>
-    a {
+    .btn {
+        justify-self: start;
+
+        color: currentColor;
+        text-decoration: none;
+        padding: 0;
+        border: none;
+        background: none;
+        cursor: pointer;
+
+        touch-action: manipulation;
+    }
+
+    .primary {
+        font-size: var(--fs-0);
+        border: 1px solid var(--text);
+        padding-block: 0.25lh;
+        padding-inline: 1em;
+        text-align: center;
+        position: relative;
+
+        &::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            z-index: -1;
+            background-color: light-dark(
+                hsl(from var(--color-primary-400) h s l / 0.5),
+                var(--color-primary-400)
+            );
+            translate: 0.25lh 0.25lh;
+            transition: translate 0.25s var(--ease-elastic-1);
+        }
+
+        &:is(:hover, :focus-visible) {
+            &::after {
+                translate: 0 0;
+                transition-delay: 125ms;
+            }
+        }
+    }
+
+    .link {
         --_clr: light-dark(
             hsl(from var(--color-primary-400) h s l / 0.5),
             var(--color-primary-400)
         );
 
-        color: currentColor;
-        justify-self: start;
-        text-decoration: none;
-        background-image: linear-gradient(var(--_clr) 0 0);
-        background-size: 0 0.3lh;
-        background-position: 100% 100%;
-        background-repeat: no-repeat;
-        transition: background-size 0.5s var(--ease-elastic-2);
+        &button {
+            text-align: left;
+        }
+
+        > span {
+            background-image: linear-gradient(var(--_clr) 0 0);
+            background-size: 0 0.3lh;
+            background-position: 100% 100%;
+            background-repeat: no-repeat;
+            transition: background-size 0.5s var(--ease-elastic-2);
+        }
 
         &:is(:hover, :focus-visible) {
-            background-size: 100% 0.3lh;
-            background-position: 0 100%;
-            transition-delay: 125ms;
+            > span {
+                background-size: 100% 0.3lh;
+                background-position: 0 100%;
+                transition-delay: 125ms;
+            }
         }
     }
 
-    :global(p) > a {
+    :global(p) > .link > span {
         background-size: 100% 0.3lh;
         background-position: 0 100%;
     }
 
-    :global(p) > a:is(:hover, :focus-visible) {
+    :global(p) > .link:is(:hover, :focus-visible) > span {
         background-size: 0 0.3lh;
         background-position: 100% 100%;
     }

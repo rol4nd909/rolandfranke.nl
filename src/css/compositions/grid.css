@@ -1,19 +1,17 @@
 .grid {
-  --_gutter: 1.5rem;
-
   display: grid;
   grid-template-columns:
-    [fullbleed-start] minmax(var(--_gutter), 1fr) [large-start] minmax(
+    [fullbleed-start] minmax(var(--gutter, 1rem), 1fr) [large-start] minmax(
       0,
       calc((var(--constrain-lg) - var(--constrain-md)) / 2)
     )
     [medium-start] minmax(0, calc((var(--constrain-md) - var(--constrain-sm)) / 2))
     [small-start] minmax(0, calc((var(--constrain-sm) - var(--constrain-xs)) / 2))
-    [xsmall-start] min(100% - (var(--_gutter) * 2), var(--constrain-xs))
+    [xsmall-start] min(100% - (var(--gutter, 1rem) * 2), var(--constrain-xs))
     [xsmall-end] minmax(0, calc((var(--constrain-sm) - var(--constrain-xs)) / 2))
     [small-end] minmax(0, calc((var(--constrain-md) - var(--constrain-sm)) / 2))
     [medium-end] minmax(0, calc((var(--constrain-lg) - var(--constrain-md)) / 2))
-    [large-end] minmax(var(--_gutter), 1fr) [fullbleed-end];
+    [large-end] minmax(var(--gutter, 1rem), 1fr) [fullbleed-end];
   /* align-content: start; */
 
   & > * {

@@ -111,6 +111,9 @@ button,
 textarea,
 select {
   font: inherit;
+  letter-spacing: inherit;
+  word-spacing: inherit;
+  color: currentColor;
 }
 
 /* Make sure textareas without a rows attribute are not tiny */

@@ -13,6 +13,39 @@ em,
   font-feature-settings: 'ss05' on;
 }
 
+.ff-sans {
+  font-family: 'Instrument Sans', sans-serif;
+}
+
+.ff-serif {
+  font-family: 'Hedvig Letters Serif', serif;
+}
+
+.fs-5 {
+  font-size: var(--fs-5);
+}
+.fs-4 {
+  font-size: var(--fs-4);
+}
+.fs-3 {
+  font-size: var(--fs-3);
+}
+.fs-2 {
+  font-size: var(--fs-2);
+}
+.fs-1 {
+  font-size: var(--fs-1);
+}
+.fs-0 {
+  font-size: var(--fs-0);
+}
+.fs--1 {
+  font-size: var(--fs--1);
+}
+.fs--2 {
+  font-size: var(--fs--2);
+}
+
 .underline {
   text-decoration: underline;
 }
@@ -21,63 +54,71 @@ em,
   text-align: center;
 }
 
+.letter-spacing {
+  --ls: calc(var(--letter-spacing, 0) * 0.01em);
+
+  letter-spacing: var(--ls);
+}
+
 code {
-  font-size: 1em;
-  font-family: 'FontWithASyntaxHighlighter', monospace;
-  font-palette: --kung-fury-dark;
-
-  [color-scheme='light'] & {
-    font-palette: --kung-fury-light;
-  }
-
-  padding: 0.15rem 0.25rem;
-  background-color: color-mix(in hsl, var(--text), transparent 90%);
-  border-radius: 0.25rem;
-  box-decoration-break: clone;
+  padding-inline: 0.25ch;
+  background-color: var(--color-primary-400);
+  color: hsl(from var(--color-neutral-100) h s 100%);
+  font-size: 80%;
+  font-family:
+    Consolas,
+    Monaco,
+    Lucida Console,
+    Liberation Mono,
+    DejaVu Sans Mono,
+    Bitstream Vera Sans Mono,
+    Courier New;
 }
 
 pre {
   min-width: 0;
   overflow-x: auto;
-  padding: 2ch;
+  padding: var(--gutter);
   background-color: color-mix(in hsl, var(--text), transparent 90%);
   border-radius: 0.25rem;
 
+  @container cq-document-vi (inline-size < 37.5rem) {
+    margin-inline: calc(var(--gutter) * -1);
+  }
+
   > code {
-    display: revert;
-    padding: 0;
     background-color: transparent;
+    font-family: 'FontWithASyntaxHighlighter', monospace;
+
+    font-palette: --kung-fury-dark;
+
+    [color-scheme='light'] & {
+      font-palette: --kung-fury-light;
+    }
   }
 }
 
 /* Markdown content styles */
 .prose {
-  h1 {
-    font-size: var(--fs-5);
+  h2,
+  h3,
+  h4 {
+    --flow-space: 1.5em;
+
+    font-family: var(--ff-serif);
+    line-height: 1.25;
   }
 
   h2 {
-    --flow-space: 1.5em;
-
     font-size: var(--fs-3);
   }
 
   h3 {
-    --flow-space: 1.5em;
-
     font-size: var(--fs-2);
   }
 
   h4 {
-    --flow-space: 1.5em;
-
     font-size: var(--fs-1);
-  }
-
-  p,
-  ol,
-  ul {
-    font-size: var(--fs-0);
   }
 
   ol,

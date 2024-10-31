@@ -7,7 +7,8 @@
   --surface: light-dark(var(--color-neutral-100), var(--color-neutral-900));
 
   /* typography */
-  --ff-base: 'Instrument Sans', system-ui, sans-serif;
+  --ff-sans: 'Instrument Sans', sans-serif;
+  --ff-serif: 'Hedvig Letters Serif', serif;
 
   --fw-normal: 400;
   --fw-semibold: 600;
@@ -34,4 +35,6 @@
   --constrain-md: 69rem;
   --constrain-sm: 57rem;
   --constrain-xs: 51rem;
+
+  --gutter: 1.5rem;
 }

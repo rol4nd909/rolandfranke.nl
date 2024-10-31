@@ -4,6 +4,7 @@ import { type CollectionEntry, getEntries } from 'astro:content'
 import FormattedDate from '@components/ui/FormattedDate.astro'
 import Badge from '@components/ui/Badge.astro'
 import Link from '@components/ui/Link.astro'
+import Heading from '@components/ui/Heading.astro'
 
 type Props = {
     post: CollectionEntry<'posts'>
@@ -15,11 +16,13 @@ const tagsData = await getEntries(tags)
 ---
 
 <article>
-    <header class="prose">
-        <h2>
-            <Link href={`/blog/${post.slug}`} set:html={title} />
-        </h2>
+    <header>
+        <Heading tagName="h2" size="h3">
+            <Link as="a" href={`/blog/${post.slug}`} set:html={title} />
+        </Heading>
+
         <FormattedDate {pubDate} />
+
         <div class="flex inline-wrap">
             {tagsData.map(({ id, data }) => <Badge id={id}>{data.title}</Badge>)}
         </div>
@@ -27,7 +30,7 @@ const tagsData = await getEntries(tags)
 
     <p>{description}</p>
 
-    <Link href={`/blog/${post.slug}`}>Read Post</Link>
+    <Link as="a" variant="primary" href={`/blog/${post.slug}`}>Read Post</Link>
 </article>
 
 <style>
@@ -45,9 +48,5 @@ const tagsData = await getEntries(tags)
     header {
         display: grid;
         gap: 0.5rem;
-    }
-
-    p {
-        font-size: var(--fs-1);
     }
 </style>

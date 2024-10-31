@@ -7,6 +7,7 @@ import Badge from '@/components/ui/Badge.astro'
 import FadeOutDown from '@/components/ui/FadeOutDown.astro'
 import FormattedDate from '@/components/ui/FormattedDate.astro'
 import Hero from '@/components/ui/Hero.astro'
+import Heading from '@/components/ui/Heading.astro'
 
 export const getStaticPaths = (async () => {
     const posts = await getCollection('posts', ({ data }) => !data.isDraft)
@@ -30,14 +31,10 @@ const tagsData = await getEntries(tags)
 <BaseLayout {title} {description}>
     <Hero slot="hero">
         <FadeOutDown class="hero__animation">
-            <h1 set:html={title} />
+            <Heading tagName="h1" size="h1" set:html={title} />
+
             <FormattedDate {pubDate} />
-            <!-- <small>Updated <time>October 18, 2024</time></small> -->
-            <!-- <span class="read-time">
-                <svg aria-hidden="true" class="filled-icon" width="20" height="20" viewBox="0 0 24 24">
-                    <use href="#icon.clock"></use>
-                </svg>9 min read
-            </span> -->
+
             <div class="flex inline-wrap">
                 {tagsData.map(({ id, data }) => <Badge id={id}>{data.title}</Badge>)}
             </div>
@@ -45,18 +42,16 @@ const tagsData = await getEntries(tags)
     </Hero>
 
     <div class="grid lane lane--light" data-grid="fullbleed">
-        <div class="prose flow">
-            <Content />
-        </div>
+        <cq-document-vi>
+            <div class="prose flow">
+                <Content />
+            </div>
+        </cq-document-vi>
     </div>
 </BaseLayout>
 
 <style>
-    h1 {
-        font-size: var(--fs-5);
-    }
-
-    .prose {
+    cq-document-vi {
         grid-column: xsmall;
     }
 </style>

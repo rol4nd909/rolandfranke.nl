@@ -1,0 +1,22 @@
+---
+const headingOptions = {
+    h1: 'fs-5',
+    h2: 'fs-4',
+    h3: 'fs-3',
+    h4: 'fs-2',
+    h5: 'fs-1',
+    h6: 'fs-0',
+}
+
+type Props = {
+    tagName: keyof typeof headingOptions
+    size: keyof typeof headingOptions
+}
+
+const { tagName, size } = Astro.props
+const Tag = tagName
+---
+
+<Tag class:list={['ff-serif', headingOptions[size]]}>
+    <slot />
+</Tag>
