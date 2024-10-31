@@ -12,7 +12,7 @@ const allPosts = await getCollection('posts', ({ data }) => !data.isDraft)
 
 <BaseLayout title="Blog">
     <Hero slot="hero">
-        <FadeOutDown class="hero__animation">
+        <FadeOutDown class="flow" data-column="medium">
             <Heading tagName="h1" size="h1">My writings</Heading>
             <p class="fs-1">Welcome to my blog where I share my thoughts and experiences</p>
         </FadeOutDown>

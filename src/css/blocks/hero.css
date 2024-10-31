@@ -2,9 +2,7 @@
   --_angle: calc(180 - var(--angle));
 
   position: relative;
-  padding-block: var(--header-height);
-
-  align-content: center;
+  min-block-size: 50vh;
   isolation: isolate;
 
   &::after {
@@ -17,26 +15,24 @@
     pointer-events: none;
   }
 
-  &:not(:has(.hero__animation)) {
-    display: grid;
+  &.hero--large {
+    align-content: center;
     row-gap: utopia.clamp(16, 32);
+    min-block-size: 100svh;
+    padding-block: var(--header-height);
   }
 
-  &:not(.hero--large) {
-    min-block-size: 50vh;
+  &:has(> :only-child) {
+    padding-block: 0;
 
-    > * {
-      grid-column-start: medium;
+    > :only-child {
+      padding-block: var(--header-height);
+      align-content: end;
       max-inline-size: calc(var(--constrain-sm) + 3rem);
+
+      .hero--large & {
+        row-gap: inherit;
+      }
     }
   }
-
-  &.hero--large {
-    min-block-size: 100svh;
-  }
-}
-
-.hero__animation {
-  display: grid;
-  row-gap: utopia.clamp(16, 32);
 }

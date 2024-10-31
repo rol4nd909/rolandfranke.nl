@@ -21,6 +21,6 @@
   }
 
   &:first-child:not(.lane--light) {
-    padding-block-start: 0;
+    padding-block-start: calc(utopia.clamp(48, 96) / 2);
   }
 }
