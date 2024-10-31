@@ -87,6 +87,7 @@ pre {
   }
 
   > code {
+    color: color-mix(in hsl, var(--surface), var(--text) 65%);
     background-color: transparent;
     font-family: 'FontWithASyntaxHighlighter', monospace;
 
