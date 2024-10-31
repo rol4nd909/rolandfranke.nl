@@ -6,6 +6,17 @@
   --text: light-dark(var(--color-neutral-900), var(--color-neutral-100));
   --surface: light-dark(var(--color-neutral-100), var(--color-neutral-900));
 
+  /* iOS 17.5 needs this it won't work with the light-dark() */
+  &[color-scheme='light'] {
+    --text: var(--color-neutral-900);
+    --surface: var(--color-neutral-100);
+  }
+
+  &[color-scheme='dark'] {
+    --text: var(--color-neutral-100);
+    --surface: var(--color-neutral-900);
+  }
+
   /* typography */
   --ff-sans: 'Instrument Sans', sans-serif;
   --ff-serif: 'Hedvig Letters Serif', serif;
