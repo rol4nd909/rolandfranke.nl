@@ -36,9 +36,23 @@
         setPreference()
     }
 
-    const onClick = () => {
+    const onClick = async () => {
+        document.firstElementChild.classList.add('theme-transition')
         if (document.startViewTransition) {
-            document.startViewTransition(toggleTheme)
+            // document.startViewTransition({
+            //     update: toggleTheme,
+            //     types: ['dark-light'],
+            // })
+
+            // Temp until above is supported in Safari
+            const transition = document.startViewTransition(toggleTheme)
+
+            transition
+            try {
+                await transition.finished
+            } finally {
+                document.documentElement.classList.remove('theme-transition')
+            }
         } else {
             toggleTheme()
         }
@@ -194,47 +208,6 @@
                     transition-delay: calc(var(--toggle-delay) + 0.25s);
                 }
             }
-        }
-    }
-
-    /* VIEW TRANSITION ANIMATION */
-    @media (--motion-ok) {
-        :global(::view-transition-new(root)) {
-            animation: reveal 1s var(--ease);
-            clip-path: inset(0 0 0 0);
-
-            /* animation: 2.5s cubic-bezier(0.25, 1, 0.3, 1) circle-in-top-right forwards; */
-        }
-
-        :global(::view-transition-old(root)) {
-            animation: none;
-        }
-    }
-
-    @keyframes reveal {
-        from {
-            clip-path: inset(var(--from));
-        }
-    }
-
-    /* @keyframes circle-in-top-right {
-        from {
-            clip-path: circle(0%);
-        }
-        to {
-            clip-path: circle(150% at top right);
-        }
-    } */
-
-    @supports selector(::view-transition-old(root)) {
-        html:global([color-scheme='light']) {
-            --from: 100% 0 0 0;
-            --toggle-delay: 0.4s;
-        }
-
-        html:global([color-scheme='dark']) {
-            --from: 0 0 100% 0;
-            --toggle-delay: 0.15s;
         }
     }
 </style>

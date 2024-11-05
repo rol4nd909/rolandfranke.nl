@@ -1,7 +1,3 @@
-/* @view-transition {
-  navigation: auto;
-} */
-
 html {
   color-scheme: dark light;
 
@@ -52,9 +48,71 @@ body {
   outline-offset: 0.25rem;
 }
 
-@layer --base.containers {
+@layer --containers {
   cq-document-vi {
     container-name: cq-document-vi;
     container-type: inline-size;
+  }
+}
+
+@layer --view-transitions {
+  html[color-scheme='light'] {
+    --from: 100% 0 0 0;
+    --toggle-delay: 0.4s;
+  }
+
+  html[color-scheme='dark'] {
+    --from: 0 0 100% 0;
+    --toggle-delay: 0.15s;
+  }
+
+  @media (--motion-ok) {
+    @view-transition {
+      navigation: auto;
+      types: default, dark-light;
+    }
+
+    :root {
+      view-transition-name: --dark-light;
+    }
+
+    nav {
+      view-transition-name: nav;
+    }
+
+    h1 {
+      view-transition-name: title;
+    }
+
+    ::view-transition-group(title) {
+      animation-timing-function: ease-in-out;
+    }
+
+    .theme-transition, /* classname for now until safari supports the transition type set by js  */
+    html:active-view-transition-type(dark-light) {
+      h1,
+      nav {
+        view-transition-name: none;
+      }
+
+      &::view-transition-old(--dark-light) {
+        animation: none;
+        z-index: -1;
+      }
+
+      &::view-transition-new(--dark-light) {
+        animation: --reveal 1s var(--ease);
+        clip-path: inset(0 0 0 0);
+        z-index: 2;
+      }
+    }
+  }
+
+  @layer --keyframes {
+    @keyframes --reveal {
+      from {
+        clip-path: inset(var(--from));
+      }
+    }
   }
 }

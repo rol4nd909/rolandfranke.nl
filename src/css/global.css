@@ -14,4 +14,4 @@
 
 @import 'blocks/hero.css' layer(--blocks);
 
-@import 'utilities/typography.css' layer(--utils.typography);
+@import 'utilities/typography.css' layer(--utils.--typography);
