@@ -13,12 +13,14 @@ type Props = {
 const { post } = Astro.props
 const { title, description, image, pubDate, tags } = post.data
 const tagsData = await getEntries(tags)
+
+const slug = `/frontend-stories/${post.slug}`
 ---
 
 <article>
     <header>
         <Heading tagName="h2" size="h3">
-            <Link as="a" href={`/blog/${post.slug}`} set:html={title} />
+            <Link as="a" href={slug} set:html={title} />
         </Heading>
 
         <FormattedDate {pubDate} />
@@ -30,7 +32,7 @@ const tagsData = await getEntries(tags)
 
     <p>{description}</p>
 
-    <Link as="a" variant="primary" href={`/frontend-stories/${post.slug}`}>Read Post</Link>
+    <Link as="a" variant="primary" href={slug}>Read Post</Link>
 </article>
 
 <style>
