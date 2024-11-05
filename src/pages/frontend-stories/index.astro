@@ -11,13 +11,16 @@ const allPosts = await getCollection('posts', ({ data }) => !data.isDraft)
 ---
 
 <BaseLayout
-    title="Things I write about - Roland Franke"
-    description="Welcome to my blog where I share my thoughts and experiences"
+    title="Frontend Stories - Roland Franke"
+    description="Explore CSS, JavaScript, and frontend insights. Tips, techniques, and ideas for building accessible, modern web experiences."
 >
     <Hero slot="hero">
         <FadeOutDown class="flow" data-column="medium">
-            <Heading tagName="h1" size="h1">My writings</Heading>
-            <p class="fs-1">Welcome to my blog where I share my thoughts and experiences</p>
+            <Heading tagName="h1" size="h1">Frontend Stories</Heading>
+            <p class="fs-1">
+                Explore CSS, JavaScript, and frontend insights. Tips, techniques, and ideas for
+                building accessible, modern web experiences.
+            </p>
         </FadeOutDown>
     </Hero>
 
