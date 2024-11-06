@@ -31,17 +31,25 @@ Let's walk through the grid code itself:
 .grid {
   display: grid;
   grid-template-columns:
-    [fullbleed-start] minmax(var(--gutter, 1rem), 1fr) [large-start] minmax(
-      0,
-      calc((var(--constrain-lg) - var(--constrain-md)) / 2)
-    )
-    [medium-start] minmax(0, calc((var(--constrain-md) - var(--constrain-sm)) / 2))
-    [small-start] minmax(0, calc((var(--constrain-sm) - var(--constrain-xs)) / 2))
-    [xsmall-start] min(100% - (var(--gutter, 1rem) * 2), var(--constrain-xs))
-    [xsmall-end] minmax(0, calc((var(--constrain-sm) - var(--constrain-xs)) / 2))
-    [small-end] minmax(0, calc((var(--constrain-md) - var(--constrain-sm)) / 2))
-    [medium-end] minmax(0, calc((var(--constrain-lg) - var(--constrain-md)) / 2))
-    [large-end] minmax(var(--gutter, 1rem), 1fr) [fullbleed-end];
+    [fullbleed-start] 
+      minmax(var(--gutter, 1rem), 1fr)
+    [large-start] 
+      minmax(0, calc((var(--constrain-lg) - var(--constrain-md)) / 2))
+    [medium-start] 
+      minmax(0, calc((var(--constrain-md) - var(--constrain-sm)) / 2))
+    [small-start] 
+      minmax(0, calc((var(--constrain-sm) - var(--constrain-xs)) / 2))
+    [xsmall-start] 
+      min(100% - (var(--gutter, 1rem) * 2), var(--constrain-xs))
+    [xsmall-end] 
+      minmax(0, calc((var(--constrain-sm) - var(--constrain-xs)) / 2))
+    [small-end] 
+      minmax(0, calc((var(--constrain-md) - var(--constrain-sm)) / 2))
+    [medium-end] 
+      minmax(0, calc((var(--constrain-lg) - var(--constrain-md)) / 2))
+    [large-end] 
+      minmax(var(--gutter, 1rem), 1fr)
+    [fullbleed-end];
 }
 ```
 

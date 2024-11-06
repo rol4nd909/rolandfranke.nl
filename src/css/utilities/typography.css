@@ -61,6 +61,7 @@ em,
 }
 
 code {
+  display: inline-flex;
   padding-inline: 0.25ch;
   background-color: var(--color-primary-400);
   color: hsl(from var(--color-neutral-100) h s 100%);
@@ -90,7 +91,6 @@ pre {
     color: color-mix(in hsl, var(--surface), var(--text) 65%);
     background-color: transparent;
     font-family: 'FontWithASyntaxHighlighter', monospace;
-
     font-palette: --kung-fury-dark;
 
     [color-scheme='light'] & {
