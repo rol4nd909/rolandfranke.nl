@@ -7,7 +7,9 @@ import PostCard from '@/components/ui/PostCard.astro'
 import FadeOutDown from '@/components/ui/FadeOutDown.astro'
 import Heading from '@/components/ui/Heading.astro'
 
-const allPosts = await getCollection('posts', ({ data }) => !data.isDraft)
+const allPosts = (await getCollection('posts', ({ data }) => !data.isDraft)).sort(
+    (a, b) => new Date(b.data.pubDate).getTime() - new Date(a.data.pubDate).getTime()
+)
 ---
 
 <BaseLayout
