@@ -11,7 +11,7 @@ type Props = {
 }
 
 const { post } = Astro.props
-const { title, description, image, pubDate, tags } = post.data
+const { title, description, image, pubDate, tags, author } = post.data
 const tagsData = await getEntries(tags)
 
 const slug = `/frontend-stories/${post.slug}`
@@ -23,7 +23,18 @@ const slug = `/frontend-stories/${post.slug}`
             <Link as="a" href={slug} set:html={title} />
         </Heading>
 
-        <FormattedDate {pubDate} />
+        <p class="flex">
+            {
+                author && (
+                    <span>
+                        {' '}
+                        by <span class="italic">{author}</span>
+                    </span>
+                    <span class="dot">•</span>
+                )
+            }
+            <FormattedDate {pubDate} />
+        </p>
 
         <div class="flex inline-wrap">
             {tagsData.map(({ id, data }) => <Badge id={id}>{data.title}</Badge>)}
@@ -36,6 +47,9 @@ const slug = `/frontend-stories/${post.slug}`
 </article>
 
 <style>
+    .flex {
+        gap: 1rem;
+    }
     article {
         grid-column: xsmall;
         display: grid;
@@ -49,6 +63,12 @@ const slug = `/frontend-stories/${post.slug}`
 
     header {
         display: grid;
-        gap: 0.5rem;
+        gap: 1rem;
+    }
+
+    .dot {
+        font-size: .75rem;
+        color: var(--color-primary-400);
+        font-feature-settings: 'aalt' on;
     }
 </style>

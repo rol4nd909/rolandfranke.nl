@@ -7,9 +7,10 @@ import PostCard from '@/components/ui/PostCard.astro'
 import FadeOutDown from '@/components/ui/FadeOutDown.astro'
 import Heading from '@/components/ui/Heading.astro'
 
-const allPosts = (await getCollection('posts', ({ data }) => !data.isDraft)).sort(
-    (a, b) => new Date(b.data.pubDate).getTime() - new Date(a.data.pubDate).getTime()
-)
+import { formatBlogPosts } from '@/utils/formatBlogPosts'
+
+const allPosts = await getCollection('posts')
+const formattedPosts = formatBlogPosts(allPosts)
 ---
 
 <BaseLayout
@@ -27,6 +28,6 @@ const allPosts = (await getCollection('posts', ({ data }) => !data.isDraft)).sor
     </Hero>
 
     <div class="grid lane lane--dark" data-grid="fullbleed">
-        {allPosts.map((post) => <PostCard post={post} />)}
+        {formattedPosts.map((post) => <PostCard post={post} />)}
     </div>
 </BaseLayout>

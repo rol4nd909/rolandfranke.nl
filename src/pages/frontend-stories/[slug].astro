@@ -24,7 +24,7 @@ export const getStaticPaths = (async () => {
 
 const { post } = Astro.props
 const { Content } = await post.render()
-const { title, description, image, pubDate, tags } = post.data
+const { title, description, image, pubDate, tags, author } = post.data
 const tagsData = await getEntries(tags)
 ---
 
@@ -33,7 +33,18 @@ const tagsData = await getEntries(tags)
         <FadeOutDown class="flow" data-column="medium">
             <Heading tagName="h1" size="h1" set:html={title} />
 
-            <FormattedDate {pubDate} />
+            <p class="flex">
+                {
+                    author && (
+                        <span>
+                            {' '}
+                            by <span class="italic">{author}</span>
+                        </span>
+                        <span class="dot">•</span>
+                    )
+                }
+                <FormattedDate {pubDate} />
+            </p>
 
             <div class="flex inline-wrap">
                 {tagsData.map(({ id, data }) => <Badge id={id}>{data.title}</Badge>)}
@@ -53,5 +64,15 @@ const tagsData = await getEntries(tags)
 <style>
     cq-document-vi {
         grid-column: xsmall;
+    }
+
+    .flex {
+        gap: 1rem;
+    }
+
+    .dot {
+        font-size: .75rem;
+        color: var(--color-primary-400);
+        font-feature-settings: 'aalt' on;
     }
 </style>
