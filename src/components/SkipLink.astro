@@ -1,0 +1,28 @@
+<a href="#main">
+    <slot />
+</a>
+
+<style>
+    a {
+        display: flex;
+        background-color: var(--color-primary-400);
+        padding-inline: 2ch;
+        translate: 0 -150%;
+        position: absolute;
+        z-index: 10;
+        inset: 1.5rem 1.5rem auto;
+        font-weight: var(--fw-semibold);
+        color: hsl(from var(--color-neutral-100) h s 100%);
+        text-decoration: none;
+        min-block-size: 3rem;
+        align-items: center;
+        justify-content: center;
+        transition: translate 0.25s var(--ease-elastic-2);
+
+        @media (--motion-ok) {
+            &:is(:focus, :focus-visible) {
+                translate: 0 0;
+            }
+        }
+    }
+</style>

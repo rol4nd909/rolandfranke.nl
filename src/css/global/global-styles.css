@@ -8,6 +8,10 @@ html {
   &[color-scheme='dark'] {
     color-scheme: dark only;
   }
+
+  @media (--motion-ok) {
+    scroll-behavior: smooth;
+  }
 }
 
 body {
@@ -16,6 +20,7 @@ body {
   font-size: var(--fs-0);
   line-height: 1.5;
   color: var(--text);
+  background-color: var(--surface);
 
   /* Stylistic Sets for & and R */
   font-feature-settings:
@@ -23,29 +28,13 @@ body {
     'ss05' on;
 
   scrollbar-gutter: stable;
-
-  &::after {
-    --size: 3rem;
-    --offset: calc(var(--size) / 2);
-    --line: color-mix(in hsl, var(--text), var(--surface) 90%);
-
-    content: '';
-    z-index: -1;
-    position: fixed;
-    inset: 0;
-    background-color: var(--surface);
-    background-image: linear-gradient(90deg, var(--line) 1px, transparent 1px var(--size)),
-      linear-gradient(var(--line) 1px, transparent 1px var(--size));
-    background-position: var(--offset) var(--offset);
-    background-size: var(--size) var(--size);
-
-    pointer-events: none;
-  }
 }
 
 :is(:focus-visible) {
   outline-color: var(--color-primary-400);
   outline-offset: 0.25rem;
+  outline-style: solid;
+  outline-width: 0.25rem;
 }
 
 @layer --containers {

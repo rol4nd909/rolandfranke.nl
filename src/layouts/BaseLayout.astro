@@ -3,6 +3,7 @@ import '@styles/global.css'
 
 import BaseHead from '@layouts/BaseHead.astro'
 import NavHeader from '@/components/NavHeader.astro'
+import SkipLink from '@/components/SkipLink.astro'
 
 type Props = {
     title?: string
@@ -17,11 +18,12 @@ const { title, description } = Astro.props
     <BaseHead {title} {description} />
 
     <body nojs>
+        <SkipLink>Skip to content</SkipLink>
         <NavHeader />
 
         <slot name="hero" />
 
-        <main class="grid">
+        <main class="grid" id="main">
             <slot />
         </main>
     </body>
