@@ -1,0 +1,46 @@
+---
+import Link from '@components/ui/Link.astro'
+
+type Props = {
+    slug: string
+    token?: string
+    title: string
+    user: string
+    userName: string
+    preview?: boolean
+}
+
+const { slug, token, title, user, userName, preview } = Astro.props
+---
+
+<div
+    class="codepen"
+    data-default-tab="css,result"
+    data-slug-hash={slug}
+    data-pen-title={title}
+    data-user={userName}
+    {...!preview && { 'data-preview': 'true' }}
+    {...token && { 'data-token': token }}
+>
+    <p>
+        See the Pen <Link
+            as="a"
+            href={`https://codepen.io/${userName}/pen/${slug}${token ? `/${token}` : ''}`}
+            target="blank">{title}</Link
+        > by
+        {user} (<Link as="a" href=`https://codepen.io/${userName}` target="blank">@{userName}</Link
+        >) on <Link as="a" href="https://codepen.io" target="blank">CodePen</Link>.
+    </p>
+</div>
+<script is:inline src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
+
+<style is:global>
+    .cp_embed_wrapper {
+        aspect-ratio: 3 / 2;
+
+        iframe {
+            width: 100%;
+            height: 100%;
+        }
+    }
+</style>

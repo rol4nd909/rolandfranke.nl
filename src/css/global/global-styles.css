@@ -69,8 +69,8 @@ body {
       view-transition-name: nav;
     }
 
-    h1 {
-      view-transition-name: title;
+    main {
+      view-transition-name: main;
     }
 
     ::view-transition-group(title) {
@@ -79,8 +79,8 @@ body {
 
     .theme-transition, /* classname for now until safari supports the transition type set by js  */
     html:active-view-transition-type(dark-light) {
-      h1,
-      nav {
+      nav,
+      main {
         view-transition-name: none;
       }
 

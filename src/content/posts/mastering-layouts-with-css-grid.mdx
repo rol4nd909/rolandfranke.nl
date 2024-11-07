@@ -7,93 +7,80 @@ tags:
   - css
 ---
 
+import CodepenEmbed from '@components/ui/CodepenEmbed.astro'
+
 ## Introduction
+I still remember the days of tediously adjusting widths, trying to make layouts work across devices, only to have them fall apart on different screen sizes. My approach needed a change, and this led me to dive deep into CSS Grid. Over time, I adopted a system using named grid lines—a technique that became the backbone of my layouts, making them not only responsive but intuitive and easy to manage.
 
-For over four years, I've been using a custom CSS grid system that has become the backbone of my projects. It's versatile, easy to scale, and helps me maintain consistent layouts across various screen sizes. In this post, I'll dive into why this system has been so effective and share how it's structured, so you can apply it to your own projects.
+### Discovering the Problem
+Initially, I used a more basic layout structure with fixed widths and manual breakpoints. However, as projects grew more complex, this approach led to endless tweaks and adjustments. I needed a system that adapted easily across screen sizes without requiring constant micro-adjustments. That's when I discovered the potential of CSS Grid's named grid lines to bring precision and clarity to my layouts.
 
-### Why This Grid System Works
+### The Power of Named Grid Lines
+One of my earliest realizations was that I could define named grid lines within my CSS, turning each layout section into a clearly defined area. Instead of relying on arbitrary pixel values, I could use names like `fullbleed`, `breakout`, `content` to create meaningful, reusable layouts.
 
-The reason I keep returning to this CSS grid layout is simple: it's both flexible and easy to maintain. Here's why:
-
-- **Flexibility for Different Screen Sizes**  
-By breaking down my grid into named columns—like large, medium, and small—I can intuitively place elements based on screen size, which keeps the layout looking great on any device.
-
-- **Consistent Layouts, Even with Content Shifts**  
-Thanks to named columns and constrained widths (--constrain-lg, --constrain-md, etc.), this grid provides a solid structure that adapts easily when content or design requirements change.
-
-- **Improved Readability and Maintainability**  
-Having named columns with intuitive labels like large or fullbleed makes my code cleaner and easier to revisit later. I can place elements consistently without fiddling with pixel-based widths.
-
-#### Breaking Down the Code
-
-Let's walk through the grid code itself:
+Here's a look at the structure I now use:
 
 ```css
 .grid {
   display: grid;
   grid-template-columns:
-    [fullbleed-start] 
+    [fullbleed-start]
       minmax(var(--gutter, 1rem), 1fr)
-    [large-start] 
-      minmax(0, calc((var(--constrain-lg) - var(--constrain-md)) / 2))
-    [medium-start] 
-      minmax(0, calc((var(--constrain-md) - var(--constrain-sm)) / 2))
-    [small-start] 
-      minmax(0, calc((var(--constrain-sm) - var(--constrain-xs)) / 2))
-    [xsmall-start] 
-      min(100% - (var(--gutter, 1rem) * 2), var(--constrain-xs))
-    [xsmall-end] 
-      minmax(0, calc((var(--constrain-sm) - var(--constrain-xs)) / 2))
-    [small-end] 
-      minmax(0, calc((var(--constrain-md) - var(--constrain-sm)) / 2))
-    [medium-end] 
-      minmax(0, calc((var(--constrain-lg) - var(--constrain-md)) / 2))
-    [large-end] 
+    [breakout-start]
+      minmax(0, calc((var(--breakout) - var(--content)) / 2))
+    [content-start]
+      min(50% - (var(--gutter, 1rem) * 2), (var(--content) / 2))
+    [midpoint]
+      min(50% - (var(--gutter, 1rem) * 2), (var(--content) / 2))
+    [content-end]
+      minmax(0, calc((var(--breakout) - var(--content)) / 2))
+    [breakout-end]
       minmax(var(--gutter, 1rem), 1fr)
     [fullbleed-end];
+
 }
 ```
 
-**1. Core Structure**  
-The grid is defined using grid-template-columns, where each named column represents a specific constraint or break in the layout.
+In this setup, each named grid line acts as a landmark, allowing me to place elements precisely in the layout. Named lines like breakout-start or content-end serve as intuitive markers that not only give structure but also make future adjustments simpler and quicker.
 
-- `minmax` Function: This function allows each column to dynamically adapt between a minimum and maximum width. For example,  
-`minmax(0, calc((var(--constrain-lg) - var(--constrain-md)) / 2))` ensures that each column remains responsive.
-- `calc` Function: I use `calc` for precise control over spacing, adjusting each constraint  
-(`--constrain-lg`, `--constrain-md`, etc.) so that they create balanced spacing.
+#### Adding Flexibility with Named Columns
+Named grid lines allow me to control exactly where elements will start and end within the grid. For instance, using `data-column` attributes, I can effortlessly assign content to a column, making my code cleaner and my layout more adaptable:
 
-**2. Column Naming**  
-Each column has a label— `fullbleed`, `large`, `medium`, `small`.—that makes it easy to understand the layout's structure at a glance. This allows you to assign elements to specific areas without relying on absolute widths.
-
-**3. Responsive Constraints**  
-The use of custom properties (`--constrain-lg`, `--constrain-md`, etc.) gives me complete control over how wide each column should be at different screen sizes. With this setup, I can make adjustments in one place, and the layout will automatically adapt across the board.
-
-### How to Apply This Grid
-
-Once you have this grid structure in place, you can start placing elements with ease:
-
-1. **Use `data-column` Attributes for Placement**  
-To place an item in the `large` column, add `[data-column="large"]` to that element. This structure is simple and intuitive, keeping the layout semantic.
-
-2. **Enable Full Bleed for Wide Elements**  
-For full-width elements, set `[data-grid='fullbleed']`. This removes the typical layout constraints, allowing content to span edge-to-edge—a perfect approach for hero sections or banners.
+```html
+<div class="grid">
+  <p>This content will span the content column.</p>
+  <section data-column="breakout">
+    This container will span the breakout column.
+  </section>
+</div>
+```
 
 ```css
-[data-column='large'] {
-  grid-column: large;
-}
-
-[data-column='medium'] {
-  grid-column: medium;
-}
-
-& > * {
-  grid-column: small;
+[data-column='breakout'] {
+  grid-column: breakout;
 }
 ```
 
+With this approach, each section of my layout naturally falls into its place, guided by the named grid lines. The layout remains flexible without requiring hard-coded widths, allowing it to adjust fluidly as screen sizes change.
+
+#### Achieving Full-Bleed Layouts
+One of the most powerful uses of named grid lines has been creating full-bleed sections that span the entire viewport width. By assigning the `data-column='fullbleed'` attribute, I can ensure that specific elements extend beyond the usual column constraints, perfect for hero sections or background images that demand extra visual impact.
+
+What's even more beneficial is that within this full-bleed section, I can apply the same grid structure with named lines, making it a grid within a grid. This means that even in a full-width layout, the internal content can still align to the established grid, giving me control over precise positioning while preserving the visual harmony with the rest of the page.
+
+```css
+[data-column='fullbleed'] {
+  grid-column: fullbleed;
+  grid-template-columns: subgrid;
+}
+```
+
+Using `subgrid` here lets the full-bleed section inherit the parent grid's structure, so any elements within it align consistently with the named lines defined in the main layout. This approach ensures that even my full-width elements don’t disrupt the layout flow; they simply extend beyond it while maintaining the familiar structure inside.
+
+#### Explore the Complete Grid System in Action
+<CodepenEmbed slug='oNKaywm' token='852225a5e1bd6e8bd566ecb77093cc8f' title='CSS Grid with Named Grid Lines' userName='ROL4ND909' user='Roland' preview />
+
 ### Conclusion
+Named grid lines have turned CSS Grid into a tool I rely on in every project. They give me control over layout placement, enable intuitive adjustments, and allow each element to “know” its place in the structure. Using this system has saved me hours of trial and error, and it's become a key part of my development toolkit. I encourage anyone looking to create robust, adaptable layouts to try using named grid lines—they might just change the way you think about layout design.
 
-Using this custom grid setup has made my layouts more flexible, consistent, and easier to maintain. Whether I'm working on a large project or a small one, this system has proved invaluable in keeping my designs cohesive and adaptable.
-
-I hope this inspires you to build your own grid or try mine. Once you start using it, you may find it just as indispensable as I do.
+This journey has been a rewarding one, and I hope sharing my experience with named grid lines inspires you to experiment and build something equally adaptable and reliable.
