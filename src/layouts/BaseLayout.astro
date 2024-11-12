@@ -8,14 +8,16 @@ import SkipLink from '@/components/SkipLink.astro'
 type Props = {
     title?: string
     description?: string
+    ogType?: string
+    image?: string
 }
 
-const { title, description } = Astro.props
+const { title, description, ogType, image } = Astro.props
 ---
 
 <!doctype html>
 <html lang="en">
-    <BaseHead {title} {description} />
+    <BaseHead {title} {description} {ogType} {image} />
 
     <body nojs>
         <SkipLink>Skip to content</SkipLink>
