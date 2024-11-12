@@ -43,4 +43,5 @@
 @font-face {
   font-family: 'FontWithASyntaxHighlighter';
   src: url('/fonts/FontWithASyntaxHighlighter-Regular.woff2') format('woff2');
+  font-display: swap;
 }
