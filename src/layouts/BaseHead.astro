@@ -1,55 +1,133 @@
 ---
-import { baseData } from '@/data/siteData'
+import { SITE } from '@/data/siteData'
+import { SEO } from 'astro-seo'
 
-type Props = {
-    title?: string
-    description?: string
+import defaultImageFile from '/public/images/default-og-image.png'
+
+const {
+    title = SITE.title,
+    description = SITE.description,
+
+    canonical,
+    noindex = false,
+    nofollow = false,
+
+    ogTitle = title,
+    ogType = 'website',
+} = Astro.props
+
+const siteBaseURL = new URL(Astro.url)
+const defaultImage = new URL(defaultImageFile.src, siteBaseURL)
+
+let { image: _image } = Astro.props
+_image = _image || defaultImage
+
+let image = null
+if (typeof _image === 'string') {
+    image = new URL(_image, siteBaseURL)
+} else if (_image && typeof _image['href'] !== 'undefined') {
+    image = new URL(_image['href'], siteBaseURL)
+} else {
+    image = defaultImage
 }
-
-const { title = baseData.title, description = baseData.description } = Astro.props
 ---
 
 <head>
-    <title>{title}</title>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <meta name="generator" content={Astro.generator} />
-    <meta name="description" content={description} />
-    <meta name="apple-mobile-web-app-title" content="Roland" />
-
-    <link
-        rel="preload"
-        href="/fonts/InstrumentSans-Regular.woff2"
-        crossorigin="anonymous"
-        as="font"
-        type="font/woff2"
+    <SEO
+        {title}
+        {description}
+        {canonical}
+        {noindex}
+        {nofollow}
+        charset="UTF-8"
+        openGraph={{
+            basic: {
+                url: canonical,
+                title: ogTitle,
+                type: ogType,
+                image: _image?.src ? _image.src : defaultImage.toString(),
+            },
+            image: {
+                url: image.toString(),
+                secureUrl: image.toString(),
+                alt: ogTitle,
+                height: _image?.height,
+                width: _image?.width,
+                type: _image?.format && `image/${_image.format}`,
+            },
+        }}
+        twitter={{
+            creator: '@rolandfranke',
+            image: image ? image.toString() : undefined,
+            imageAlt: ogTitle,
+            title: ogTitle,
+            site: '@rolandfranke',
+            description: description,
+            card: image ? 'summary_large_image' : 'summary',
+        }}
+        extend={{
+            meta: [
+                {
+                    name: 'generator',
+                    content: Astro.generator,
+                },
+                {
+                    name: 'viewport',
+                    content: 'width=device-width',
+                },
+                {
+                    name: 'apple-mobile-web-app-title',
+                    content: 'Roland',
+                },
+                {
+                    name: 'og:locale',
+                    content: 'en_US',
+                },
+                {
+                    name: 'og:description',
+                    content: description,
+                },
+                {
+                    name: 'og:site_name',
+                    content: SITE.title,
+                },
+            ],
+            link: [
+                {
+                    rel: 'preload',
+                    href: '/fonts/InstrumentSans-Regular.woff2',
+                    crossorigin: 'anonymous',
+                    as: 'font',
+                    type: 'font/woff2',
+                },
+                {
+                    rel: 'preload',
+                    href: '/fonts/InstrumentSans-SemiBold.woff2',
+                    crossorigin: 'anonymous',
+                    as: 'font',
+                    type: 'font/woff2',
+                },
+                {
+                    rel: 'preload',
+                    href: '/fonts/HedvigLettersSerif-Regular.woff2',
+                    crossorigin: 'anonymous',
+                    as: 'font',
+                    type: 'font/woff2',
+                },
+                {
+                    rel: 'preload',
+                    href: '/fonts/FontWithASyntaxHighlighter-Regular.woff2',
+                    crossorigin: 'anonymous',
+                    as: 'font',
+                    type: 'font/woff2',
+                },
+                { rel: 'icon', href: '/favicon-48x48.png', type: 'image/png', sizes: '48x48' },
+                { rel: 'icon', href: '/favicon.svg', type: 'image/svg+xml' },
+                { rel: 'shortcut icon', href: '/favicon.ico' },
+                { rel: 'apple-touch-icon', href: '/apple-touch-icon.png', sizes: '180x180' },
+                { rel: 'manifest', href: '/site.webmanifest' },
+                { rel: 'sitemap', href: '/sitemap-index.xml' },
+            ],
+        }}
     />
-    <link
-        rel="preload"
-        href="/fonts/InstrumentSans-SemiBold.woff2"
-        crossorigin="anonymous"
-        as="font"
-        type="font/woff2"
-    />
-    <link
-        rel="preload"
-        href="/fonts/HedvigLettersSerif-Regular.woff2"
-        crossorigin="anonymous"
-        as="font"
-        type="font/woff2"
-    />
-    <link
-        rel="preload"
-        href="/fonts/FontWithASyntaxHighlighter-Regular.woff2"
-        crossorigin="anonymous"
-        as="font"
-        type="font/woff2"
-    />
-
-    <link rel="icon" type="image/png" href="/favicon-48x48.png" sizes="48x48" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="shortcut icon" href="/favicon.ico" />
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-    <link rel="manifest" href="/site.webmanifest" />
-    <link rel="sitemap" href="/sitemap-index.xml" />
 </head>

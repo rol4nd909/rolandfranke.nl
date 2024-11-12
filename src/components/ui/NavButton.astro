@@ -1,0 +1,72 @@
+---
+
+---
+
+<button
+    class="menu"
+    onclick="this.classList.toggle('opened');this.setAttribute('aria-expanded', this.classList.contains('opened'))"
+    aria-label="Main Menu"
+>
+    <svg
+        aria-hidden="true"
+        version="1.1"
+        xmlns="https://www.w3.org/2000/svg"
+        xmlns:xlink="https://www.w3.org/1999/xlink"
+        viewBox="0 0 100 100"
+        width="100"
+        height="100"
+    >
+        <path class="line line1" d="M20 29h73v64L25 25"></path>
+        <path class="line line2" d="M20 50h60"></path>
+        <path class="line line3" d="M20 71h73V7L25 75"></path>
+    </svg>
+</button>
+
+<style>
+    .menu {
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+        display: flex;
+        padding: 0;
+
+        > svg {
+            inline-size: 3rem;
+            block-size: 3rem;
+        }
+    }
+
+    .line {
+        fill: none;
+        stroke: currentColor;
+        stroke-width: 6;
+        transition:
+            stroke-dasharray 600ms cubic-bezier(0.4, 0, 0.2, 1),
+            stroke-dashoffset 600ms cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .line1 {
+        stroke-dasharray: 60 300;
+    }
+
+    .line2 {
+        stroke-dasharray: 60 60;
+    }
+
+    .line3 {
+        stroke-dasharray: 60 300;
+    }
+
+    .opened .line1 {
+        stroke-dasharray: 90 300;
+        stroke-dashoffset: -162;
+    }
+    .opened .line2 {
+        stroke-dasharray: 1 60;
+        stroke-dashoffset: -30;
+    }
+    .opened .line3 {
+        stroke-dasharray: 90 300;
+        stroke-dashoffset: -162;
+    }
+</style>
