@@ -1,3 +1,11 @@
+[color-scheme='light']::selection {
+  background-color: hsl(from hsl(338 73% 45%) h s l / 0.25);
+}
+
+[color-scheme='dark']::selection {
+  background-color: hsl(from hsl(338 73% 45%) h s l / 0.5);
+}
+
 b,
 strong,
 .bold {
@@ -125,6 +133,11 @@ pre {
   ol,
   ul {
     --flow-space: 0.5em;
+  }
+
+  p:first-of-type {
+    font-family: var(--ff-serif);
+    font-size: var(--fs-1);
   }
 }
 
