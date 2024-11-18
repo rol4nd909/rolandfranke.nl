@@ -1,14 +1,4 @@
 html {
-  color-scheme: dark light;
-
-  &[color-scheme='light'] {
-    color-scheme: light only;
-  }
-
-  &[color-scheme='dark'] {
-    color-scheme: dark only;
-  }
-
   @media (--motion-ok) {
     scroll-behavior: smooth;
   }
