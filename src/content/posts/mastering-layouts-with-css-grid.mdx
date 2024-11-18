@@ -7,7 +7,8 @@ tags:
   - css
 ---
 
-import CodepenEmbed from '@components/ui/CodepenEmbed.astro'
+import { BaselineStatus } from '@astro-community/astro-embed-baseline-status';
+import CodepenEmbed from '@components/ui/CodepenEmbed.astro';
 
 ## Introduction
 I still remember the days of tediously adjusting widths, trying to make layouts work across devices, only to have them fall apart on different screen sizes. My approach needed a change, and this led me to dive deep into CSS Grid. Over time, I adopted a system using named grid lines—a technique that became the backbone of my layouts, making them not only responsive but intuitive and easy to manage.
@@ -84,3 +85,5 @@ Using `subgrid` here lets the full-bleed section inherit the parent grid's struc
 Named grid lines have turned CSS Grid into a tool I rely on in every project. They give me control over layout placement, enable intuitive adjustments, and allow each element to “know” its place in the structure. Using this system has saved me hours of trial and error, and it's become a key part of my development toolkit. I encourage anyone looking to create robust, adaptable layouts to try using named grid lines—they might just change the way you think about layout design.
 
 This journey has been a rewarding one, and I hope sharing my experience with named grid lines inspires you to experiment and build something equally adaptable and reliable.
+
+<BaselineStatus id="grid" />

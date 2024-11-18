@@ -6,7 +6,12 @@
   --text: light-dark(var(--color-neutral-900), var(--color-neutral-100));
   --surface: light-dark(var(--color-neutral-100), var(--color-neutral-900));
 
-  /* iOS 17.5 needs this it won't work with the light-dark() */
+  /* 
+    iOS 17.5 needs this
+    light-dark() won't work with the color-mix()
+    for example: `color-mix(in hsl, var(--text), var(--surface) 90%);`
+    does not work with the above --text and --surface
+  */
   &[color-scheme='light'] {
     --text: var(--color-neutral-900);
     --surface: var(--color-neutral-100);
