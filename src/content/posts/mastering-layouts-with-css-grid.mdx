@@ -30,9 +30,9 @@ Here's a look at the structure I now use:
     [breakout-start]
       minmax(0, calc((var(--breakout) - var(--content)) / 2))
     [content-start]
-      min(50% - (var(--gutter, 1rem) * 2), (var(--content) / 2))
+      min(50% - var(--gutter, 1rem), (var(--content) / 2))
     [midpoint]
-      min(50% - (var(--gutter, 1rem) * 2), (var(--content) / 2))
+      min(50% - var(--gutter, 1rem), (var(--content) / 2))
     [content-end]
       minmax(0, calc((var(--breakout) - var(--content)) / 2))
     [breakout-end]
