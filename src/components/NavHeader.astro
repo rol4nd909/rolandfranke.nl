@@ -5,15 +5,15 @@ import { Icon } from 'astro-icon/components'
 ---
 
 <nav class="nav">
-    <div class="flex">
-        <a href="/" aria-label="Go to homepage">
-            <Icon name="logo" size="3rem" aria-hidden />
-        </a>
+    <!-- <div class="flex"> -->
+    <a href="/" aria-label="Go to homepage">
+        <Icon name="logo" size="3rem" aria-hidden />
+    </a>
+    <!-- </div> -->
 
-        <ul class="menu">
-            <li><Link as="a" href="/frontend-stories">Frontend Stories</Link></li>
-        </ul>
-    </div>
+    <ul class="menu">
+        <li><Link as="a" href="/frontend-stories">Frontend Stories</Link></li>
+    </ul>
 
     <!-- <div class="flex"> -->
     <DarkLightToggle />
