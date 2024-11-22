@@ -122,9 +122,11 @@
 
         transition: border-color 0.25s var(--ease);
 
-        &:is(:hover, :focus-visible) {
-            border-color: currentColor;
-            transition-delay: 125ms;
+        @media (--is-mouse) {
+            &:hover {
+                border-color: currentColor;
+                transition-delay: 125ms;
+            }
         }
 
         & > svg {

@@ -71,10 +71,12 @@ const { classes, ...attributes } = allAttributes
             transition: translate 0.25s var(--ease-elastic-1);
         }
 
-        &:is(:hover, :focus-visible) {
-            &::after {
-                translate: 0 0;
-                transition-delay: 125ms;
+        @media (--is-mouse) {
+            &:hover {
+                &::after {
+                    translate: 0 0;
+                    transition-delay: 125ms;
+                }
             }
         }
     }
@@ -97,11 +99,13 @@ const { classes, ...attributes } = allAttributes
             transition: background-size 0.5s var(--ease-elastic-2);
         }
 
-        &:is(:hover, :focus-visible) {
-            > span {
-                background-size: 100% 0.3lh;
-                background-position: 0 100%;
-                transition-delay: 125ms;
+        @media (--is-mouse) {
+            &:hover {
+                > span {
+                    background-size: 100% 0.3lh;
+                    background-position: 0 100%;
+                    transition-delay: 125ms;
+                }
             }
         }
     }
@@ -111,8 +115,10 @@ const { classes, ...attributes } = allAttributes
         background-position: 0 100%;
     }
 
-    :global(p) > .link:is(:hover, :focus-visible) > span {
-        background-size: 0 0.3lh;
-        background-position: 100% 100%;
+    @media (--is-mouse) {
+        :global(p) > .link:hover > span {
+            background-size: 0 0.3lh;
+            background-position: 100% 100%;
+        }
     }
 </style>
