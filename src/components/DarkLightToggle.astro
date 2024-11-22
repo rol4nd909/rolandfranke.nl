@@ -105,17 +105,27 @@
         --size: 3rem;
         --icon-fill: currentColor;
 
-        background: none;
-        border: none;
+        position: relative;
         padding: 0.5rem;
         inline-size: var(--size);
         block-size: var(--size);
         aspect-ratio: 1;
+
+        background: none;
+        border: 1px dashed transparent;
         border-radius: 50%;
         cursor: pointer;
+        color: inherit;
+
         touch-action: manipulation;
         -webkit-tap-highlight-color: transparent;
-        color: inherit;
+
+        transition: border-color 0.25s var(--ease);
+
+        &:is(:hover, :focus-visible) {
+            border-color: currentColor;
+            transition-delay: 125ms;
+        }
 
         & > svg {
             inline-size: 100%;
