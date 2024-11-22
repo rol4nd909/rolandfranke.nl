@@ -11,9 +11,9 @@ export default defineConfig({
   site: 'https://rolandfranke.nl',
   integrations: [icon(), sitemap(), mdx()],
   
-  prefetch: {
-    prefetchAll: true,
-  },
+  // prefetch: {
+  //   prefetchAll: true,
+  // },
 
   markdown: {
     syntaxHighlight: false

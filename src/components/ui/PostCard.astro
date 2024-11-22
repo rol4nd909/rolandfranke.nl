@@ -15,7 +15,7 @@ const { post } = Astro.props
 const { title, description, pubDate, tags, author } = post.data
 const tagsData = await getEntries(tags)
 
-const slug = `/frontend-stories/${post.slug}/`
+const slug = `/frontend-stories/${post.slug}`
 ---
 
 <article>
