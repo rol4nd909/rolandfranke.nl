@@ -135,7 +135,7 @@ pre {
     --flow-space: 0.5em;
   }
 
-  p:first-of-type {
+  > p:first-of-type {
     font-family: var(--ff-serif);
     font-size: var(--fs-1);
   }
