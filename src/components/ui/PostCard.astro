@@ -13,9 +13,8 @@ type Props = {
 
 const { post } = Astro.props
 const { title, description, pubDate, tags, author } = post.data
-const tagsData = await getEntries(tags)
 
-const slug = `/frontend-stories/${post.slug}`
+const slug = `/frontend-stories/${post.id}`
 ---
 
 <article>
@@ -38,7 +37,7 @@ const slug = `/frontend-stories/${post.slug}`
         </p>
 
         <div class="flex inline-wrap">
-            {tagsData.map(({ id, data }) => <Badge id={id}>{data.title}</Badge>)}
+            {tags.map((tag) => <Badge id={tag}>{tag}</Badge>)}
         </div>
     </header>
 
