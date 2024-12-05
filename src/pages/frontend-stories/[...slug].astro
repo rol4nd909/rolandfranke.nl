@@ -22,7 +22,7 @@ const { title, description, image, pubDate, tags, author } = post.data
 ---
 
 <BaseLayout title=`${title} - Roland Franke` {description} ogType="article" image={image?.url}>
-    <Hero slot="hero" data-grid="fullbleed">
+    <Hero data-grid="fullbleed">
         <FadeOutDown class="flow" data-column="medium">
             <Heading tagName="h1" size="h1" set:html={title} />
 
