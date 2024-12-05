@@ -20,7 +20,11 @@
     }
   }
 
-  &:first-child:not(.lane--light) {
+  /* &:first-child:not(.lane--light) {
+    padding-block-start: calc(utopia.clamp(48, 96) / 2);
+  } */
+
+  .hero ~ &:not(.lane--light) {
     padding-block-start: calc(utopia.clamp(48, 96) / 2);
   }
 }

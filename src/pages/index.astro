@@ -4,7 +4,7 @@ import BaseLayout from '@layouts/BaseLayout.astro'
 ---
 
 <BaseLayout>
-    <Hero class="hero--large" slot="hero">
+    <Hero class="hero--large" slot="hero" data-grid="fullbleed">
         <!-- <FadeOutDown class="grid" data-grid="fullbleed"> -->
         <h1 class="hero__title">roland<span>.</span></h1>
         <div class="hero__explain flex letter-spacing" aria-hidden="true">
@@ -66,6 +66,7 @@ import BaseLayout from '@layouts/BaseLayout.astro'
         margin-inline-start: -0.085ch;
         font-size: utopia.clamp(80, 260, 320, 1200);
         font-weight: var(--fw-semibold);
+        white-space: nowrap;
 
         view-transition-name: none;
 
@@ -81,7 +82,7 @@ import BaseLayout from '@layouts/BaseLayout.astro'
 
         .dot {
             font-size: utopia.clamp(8, 16);
-            color: var(--color-primary-400);
+            color: hsl(from var(--color-primary-400) h 90% 50%);
             font-feature-settings: 'aalt' on;
         }
     }

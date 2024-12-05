@@ -6,9 +6,9 @@ interface Props {
 const { class: providedProps, ...rest } = Astro.props
 ---
 
-<header class:list={['grid js-angle', providedProps]} {...rest}>
+<div class:list={['hero grid js-angle', providedProps]} {...rest}>
     <slot />
-</header>
+</div>
 
 <script>
     import { setDiagonalAngle } from '@utils/diagonalAngle'
@@ -17,7 +17,7 @@ const { class: providedProps, ...rest } = Astro.props
 </script>
 
 <style>
-    header {
+    div {
         --_angle: calc(180 - var(--angle));
 
         position: relative;

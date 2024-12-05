@@ -23,9 +23,10 @@ const { title, description, ogType, image } = Astro.props
         <SkipLink>Skip to content</SkipLink>
         <NavHeader />
 
-        <slot name="hero" />
+        <!-- <slot name="hero" /> -->
 
         <main class="grid" id="main">
+            <slot name="hero" />
             <slot />
         </main>
     </body>

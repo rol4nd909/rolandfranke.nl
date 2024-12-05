@@ -4,32 +4,37 @@ import Link from '@components/ui/Link.astro'
 import { Icon } from 'astro-icon/components'
 ---
 
-<nav class="nav">
-    <!-- <div class="flex"> -->
-    <a href="/" aria-label="Go to homepage">
-        <Icon name="logo" size="3rem" aria-hidden />
-    </a>
-    <!-- </div> -->
+<header>
+    <nav class="nav">
+        <!-- <div class="flex"> -->
+        <a href="/" aria-label="Go to homepage">
+            <Icon name="logo" size="3rem" aria-hidden />
+        </a>
+        <!-- </div> -->
 
-    <ul class="menu">
-        <li><Link as="a" href="/frontend-stories">Frontend Stories</Link></li>
-    </ul>
+        <ul class="menu">
+            <li><Link as="a" href="/frontend-stories">Frontend Stories</Link></li>
+        </ul>
 
-    <!-- <div class="flex"> -->
-    <DarkLightToggle />
-    <!-- <NavButton /> -->
-    <!-- </div> -->
-</nav>
+        <!-- <div class="flex"> -->
+        <DarkLightToggle />
+        <!-- <NavButton /> -->
+        <!-- </div> -->
+    </nav>
+</header>
 
 <style>
     :root {
         --header-height: 6rem;
     }
 
-    nav {
+    header {
         position: absolute;
         inset: 0 0 auto;
         z-index: 1;
+    }
+
+    nav {
         display: flex;
         align-items: center;
         align-self: flex-start;

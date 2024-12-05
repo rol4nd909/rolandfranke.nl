@@ -22,7 +22,7 @@ const { title, description, image, pubDate, tags, author } = post.data
 ---
 
 <BaseLayout title=`${title} - Roland Franke` {description} ogType="article" image={image?.url}>
-    <Hero slot="hero">
+    <Hero slot="hero" data-grid="fullbleed">
         <FadeOutDown class="flow" data-column="medium">
             <Heading tagName="h1" size="h1" set:html={title} />
 
@@ -65,7 +65,7 @@ const { title, description, image, pubDate, tags, author } = post.data
 
     .dot {
         font-size: .75rem;
-        color: var(--color-primary-400);
+        color: hsl(from var(--color-primary-400) h 90% 50%);
         font-feature-settings: 'aalt' on;
     }
 </style>
