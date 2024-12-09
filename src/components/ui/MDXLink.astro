@@ -1,0 +1,39 @@
+---
+const { href } = Astro.props
+---
+
+<a {href} target="blank">
+    <span>
+        <slot />
+    </span>
+</a>
+
+<style>
+    a {
+        --_clr: light-dark(
+            hsl(from var(--color-primary-400) h s l / 0.5),
+            var(--color-primary-400)
+        );
+
+        color: currentColor;
+        text-decoration: none;
+
+        > span {
+            background-image: linear-gradient(var(--_clr) 0 0);
+            background-size: 100% 0.3lh;
+            background-position: 0 100%;
+            background-repeat: no-repeat;
+            transition: background-size 0.5s var(--ease-elastic-2);
+        }
+
+        @media (--is-mouse) {
+            &:hover {
+                > span {
+                    background-size: 0 0.3lh;
+                    background-position: 100% 100%;
+                    transition-delay: 125ms;
+                }
+            }
+        }
+    }
+</style>
