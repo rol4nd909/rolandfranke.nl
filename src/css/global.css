@@ -13,3 +13,4 @@
 @import 'compositions/lane.css' layer(--compositions);
 
 @import 'utilities/typography.css' layer(--utils.--typography);
+@import 'utilities/sr-only.css' layer(--utils.--sr-only);

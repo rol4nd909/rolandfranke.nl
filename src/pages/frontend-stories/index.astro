@@ -7,6 +7,7 @@ import Hero from '@/components/ui/Hero.astro'
 import PostCard from '@/components/ui/PostCard.astro'
 import BaseLayout from '@/layouts/BaseLayout.astro'
 
+import Webring from '@/components/ui/Webring.astro'
 import { formatBlogPosts } from '@/utils/formatBlogPosts'
 
 const allPosts = await getCollection('posts')
@@ -29,5 +30,9 @@ const formattedPosts = formatBlogPosts(allPosts)
 
     <div class="grid lane lane--dark" data-grid="fullbleed">
         {formattedPosts.map((post) => <PostCard post={post} />)}
+    </div>
+
+    <div class="grid lane lane--light" data-grid="fullbleed">
+        <Webring />
     </div>
 </BaseLayout>

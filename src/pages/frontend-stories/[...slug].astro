@@ -8,6 +8,7 @@ import FormattedDate from '@/components/ui/FormattedDate.astro'
 import Hero from '@/components/ui/Hero.astro'
 import Heading from '@/components/ui/Heading.astro'
 import MDXLink from '@/components/ui/MDXLink.astro'
+import Webring from '@/components/ui/Webring.astro'
 
 export async function getStaticPaths() {
     const posts = await getCollection('posts', ({ data }) => !data.isDraft)
@@ -52,6 +53,10 @@ const { title, description, image, pubDate, tags, author } = post.data
                 <Content components={{ a: MDXLink }}/>
             </div>
         </cq-document-vi>
+    </div>
+
+    <div class="grid lane lane--dark" data-grid="fullbleed">
+        <Webring />
     </div>
 </BaseLayout>
 

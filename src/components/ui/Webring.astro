@@ -1,0 +1,94 @@
+---
+import Link from '@/components/ui/Link.astro'
+import { Icon } from 'astro-icon/components'
+
+const siteBaseURL = new URL(Astro.url)
+---
+
+<div class="webring">
+    <p>Crawl the <Link as="a" href="https://CS.Sjoy.lol">CSS Webring</Link></p>
+
+    <div>
+        <a href=`https://webri.ng/webring/cssjoy/previous?via=${siteBaseURL}`>
+            <span class="sr-only">Previous site in the CSS Webring</span>
+            <Icon name="icon-chevron-left" size="2rem" />
+        </a>
+
+        <a href=`https://webri.ng/webring/cssjoy/random?via=${siteBaseURL}`>
+            <span class="sr-only">Random site in the CSS Webring</span>
+            <Icon name="icon-shuffle" size="2rem" />
+        </a>
+
+        <a href=`https://webri.ng/webring/cssjoy/next?via=${siteBaseURL}`>
+            <span class="sr-only">Next site in the CSS Webring</span>
+            <Icon name="icon-chevron-right" size="2rem" />
+        </a>
+    </div>
+</div>
+
+<style>
+    .webring {
+        --ease-spring: linear(
+            0,
+            0.009,
+            0.037 1.7%,
+            0.153 3.6%,
+            0.776 10.3%,
+            1.001,
+            1.142 16%,
+            1.185,
+            1.209 19%,
+            1.215 19.9% 20.8%,
+            1.199,
+            1.165 25%,
+            1.056 30.3%,
+            1.008 33%,
+            0.973,
+            0.955 39.2%,
+            0.953 41.1%,
+            0.957 43.3%,
+            0.998 53.3%,
+            1.009 59.1% 63.7%,
+            0.998 78.9%,
+            1
+        );
+        --ease-out: cubic-bezier(0, 0, 0, 1);
+
+        display: grid;
+        place-items: center;
+
+        > div {
+            display: flex;
+            gap: 0.5rem;
+
+            > a {
+                aspect-ratio: 1;
+                border-radius: 50%;
+                display: inline-flex;
+                align-items: center;
+                inline-size: 3rem;
+                outline: 1px solid transparent;
+                outline-color: transparent;
+                outline-width: 1px;
+                padding: 0.5rem;
+
+                &:is(:hover, :focus-visible) {
+                    outline-color: var(--color-primary-400);
+                    outline-offset: -0.25rem;
+                    outline-width: 0.5rem;
+                }
+
+                @media (--motion-ok) {
+                    transition:
+                        outline-offset 0.7s var(--ease-spring),
+                        outline-color 0.7s var(--ease-out),
+                        outline-width 0.7s var(--ease-spring);
+                }
+
+                > svg {
+                    display: block;
+                }
+            }
+        }
+    }
+</style>
