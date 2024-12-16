@@ -73,7 +73,10 @@ const siteBaseURL = new URL(Astro.url)
                 padding: 0.5rem;
 
                 &:is(:hover, :focus-visible) {
-                    outline-color: var(--color-primary-400);
+                    outline-color: light-dark(
+                        hsl(from var(--color-primary-400) h s l / 0.5),
+                        var(--color-primary-400)
+                    );
                     outline-offset: -0.25rem;
                     outline-width: 0.5rem;
                 }
