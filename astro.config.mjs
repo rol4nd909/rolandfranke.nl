@@ -10,11 +10,6 @@ import icon from 'astro-icon';
 export default defineConfig({
   site: 'https://rolandfranke.nl',
   integrations: [icon(), sitemap(), mdx()],
-  
-  // prefetch: {
-  //   prefetchAll: true,
-  // },
-
   markdown: {
     syntaxHighlight: false
   },
@@ -22,7 +17,4 @@ export default defineConfig({
   redirects: {
     '/frontend-stories/exploring-the-new--search-element-in-html/': '/frontend-stories/exploring-the-new-search-element-in-html/',
   }
-
-  // output: 'static',
-  // adapter: vercel()
 });
