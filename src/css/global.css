@@ -5,6 +5,7 @@
 @import 'global/reset.css' layer(--reset);
 
 @import 'global/variables.css' layer(--base);
+@import 'global/font-scale.css' layer(--base);
 @import 'global/global-styles.css' layer(--base);
 
 @import 'compositions/grid.css' layer(--compositions);

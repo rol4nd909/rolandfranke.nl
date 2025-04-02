@@ -1,0 +1,12 @@
+:root {
+  @utopia typeScale({
+    minFontSize: 18,
+    maxFontSize: 20,
+    minTypeScale: 1.2,
+    maxTypeScale: 1.25,
+    positiveSteps: 5,
+    negativeSteps: 2,
+    prefix: "fs",
+    relativeTo: "container"
+  });
+}
