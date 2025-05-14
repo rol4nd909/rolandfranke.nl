@@ -12,10 +12,11 @@
   "dependencies": {
     "@astro-community/astro-embed-baseline-status": "^0.1.2",
     "@astrojs/check": "^0.9.4",
-    "@astrojs/mdx": "^4.2.4",
+    "@astrojs/mdx": "^4.2.6",
     "@astrojs/rss": "^4.0.11",
-    "@astrojs/sitemap": "^3.3.0",
-    "astro": "^5.7.0",
+    "@astrojs/sitemap": "^3.4.0",
+    "astro": "^5.7.13",
+    "astro-icon": "^1.1.5",
     "astro-seo": "^0.8.4",
     "typescript": "^5.8.3"
   },
@@ -23,7 +24,7 @@
     "@csstools/postcss-global-data": "^3.0.0",
     "postcss": "^8.5.3",
     "postcss-custom-media": "^11.0.5",
-    "postcss-preset-env": "^10.1.5",
+    "postcss-preset-env": "^10.1.6",
     "postcss-utopia": "^1.1.0",
     "prettier": "^3.5.3",
     "prettier-plugin-astro": "^0.14.1",
