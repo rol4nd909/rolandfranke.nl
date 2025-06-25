@@ -15,28 +15,23 @@
     "@astrojs/mdx": "^4.3.0",
     "@astrojs/rss": "^4.0.12",
     "@astrojs/sitemap": "^3.4.1",
-    "astro": "^5.9.2",
+    "astro": "5.10.1",
     "astro-icon": "^1.1.5",
     "astro-seo": "^0.8.4",
     "typescript": "^5.8.3"
   },
   "devDependencies": {
     "@csstools/postcss-global-data": "^3.0.0",
-    "postcss": "^8.5.5",
+    "postcss": "^8.5.6",
     "postcss-custom-media": "^11.0.6",
     "postcss-preset-env": "^10.2.3",
     "postcss-utopia": "^1.1.0",
-    "prettier": "^3.5.3",
+    "prettier": "^3.6.1",
     "prettier-plugin-astro": "^0.14.1",
     "sharp": "^0.34.2"
   },
-  "packageManager": "pnpm@10.4.1",
+  "packageManager": "pnpm@10.12.3",
   "engines": {
-    "node": ">=20.18.3"
-  },
-  "pnpm": {
-    "onlyBuiltDependencies": [
-      "sharp"
-    ]
+    "node": ">=22.16.0"
   }
 }
