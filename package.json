@@ -15,7 +15,7 @@
     "@astrojs/mdx": "^4.3.0",
     "@astrojs/rss": "^4.0.12",
     "@astrojs/sitemap": "^3.4.1",
-    "astro": "5.10.1",
+    "astro": "5.11.0",
     "astro-icon": "^1.1.5",
     "astro-seo": "^0.8.4",
     "typescript": "^5.8.3"
@@ -24,9 +24,9 @@
     "@csstools/postcss-global-data": "^3.0.0",
     "postcss": "^8.5.6",
     "postcss-custom-media": "^11.0.6",
-    "postcss-preset-env": "^10.2.3",
+    "postcss-preset-env": "^10.2.4",
     "postcss-utopia": "^1.1.0",
-    "prettier": "^3.6.1",
+    "prettier": "^3.6.2",
     "prettier-plugin-astro": "^0.14.1",
     "sharp": "^0.34.2"
   },
