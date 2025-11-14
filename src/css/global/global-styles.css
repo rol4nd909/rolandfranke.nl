@@ -75,7 +75,6 @@ body {
       animation-timing-function: ease-in-out;
     }
 
-    .theme-transition, /* classname for now until safari supports the transition type set by js  */
     html:active-view-transition-type(dark-light) {
       nav,
       main {

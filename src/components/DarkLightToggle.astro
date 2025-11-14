@@ -38,23 +38,10 @@
 
     const onClick = async () => {
         if (document.startViewTransition) {
-            // document.startViewTransition({
-            //     update: toggleTheme,
-            //     types: ['dark-light'],
-            // })
-
-            // Temp until above is supported in Safari
-            document.firstElementChild.classList.add('theme-transition')
-
-            const transition = document.startViewTransition(toggleTheme)
-
-            transition
-
-            try {
-                await transition.finished
-            } finally {
-                document.documentElement.classList.remove('theme-transition')
-            }
+            document.startViewTransition({
+                update: toggleTheme,
+                types: ['dark-light'],
+            })
         } else {
             toggleTheme()
         }
