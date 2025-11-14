@@ -10,12 +10,12 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@astro-community/astro-embed-baseline-status": "^0.2.0",
+    "@astro-community/astro-embed-baseline-status": "^0.2.1",
     "@astrojs/check": "^0.9.5",
-    "@astrojs/mdx": "^4.3.8",
+    "@astrojs/mdx": "^4.3.10",
     "@astrojs/rss": "^4.0.13",
     "@astrojs/sitemap": "^3.6.0",
-    "astro": "5.15.1",
+    "astro": "5.15.7",
     "astro-seo": "^0.8.4",
     "typescript": "^5.9.3"
   },
@@ -27,7 +27,7 @@
     "postcss-utopia": "^1.1.0",
     "prettier": "^3.6.2",
     "prettier-plugin-astro": "^0.14.1",
-    "sharp": "^0.34.4"
+    "sharp": "^0.34.5"
   },
   "engines": {
     "node": ">=22.16.0"
