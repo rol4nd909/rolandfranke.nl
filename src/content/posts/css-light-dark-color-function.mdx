@@ -1,0 +1,95 @@
+---
+title: 'Using the CSS light-dark() Function for Easy Theme Colors'
+description: 'A simple introduction to the CSS light-dark() function and how it makes light and dark mode styling much easier.'
+pubDate: 2025-11-14
+author: Roland
+tags: ["css", "theming"]
+---
+
+import { BaselineStatus } from '@astro-community/astro-embed-baseline-status';
+
+## A Simpler Way to Handle Light & Dark Mode
+
+For years, switching colors between light and dark mode meant writing two sets of variables or using media queries. Modern CSS gives us something much cleaner: the `light-dark()` function.
+
+I've been using it on my site since day one, and it has made my color setup much easier to maintain.
+
+### What It Does
+The `light-dark()` function allows you to define a color that automatically adapts based on the user's preferred color scheme. Instead of writing separate styles for light and dark modes, you can specify both colors in one place.
+
+`light-dark()` takes **two colors** as arguments:
+- The first color is for light mode.
+- The second color is for dark mode.
+
+### How to Use It
+Using `light-dark()` is straightforward. You simply call the function with your desired light and dark colors as arguments.
+Here's a quick example:
+
+```css
+body {
+  background-color: light-dark(#ffffff, #121212);
+  color: light-dark(#000000, #ffffff);
+}
+```
+
+In this example, the background color will be white in light mode and dark gray in dark mode, while the text color will switch from black to white accordingly.
+
+## A Real Example From My Site
+This is what I originally had:
+
+```css
+:root {
+  --color-neutral-100: hsl(60 22% 85%);
+  --color-neutral-900: hsl(210 31% 11%);
+  --color-primary-400: hsl(338 73% 45%);
+}
+
+[color-scheme='light'] {
+  --text: var(--color-neutral-900);
+  --surface: var(--color-neutral-100);
+}
+
+[color-scheme='dark'] {
+  --text: var(--color-neutral-100);
+  --surface: var(--color-neutral-900);
+}
+```
+Now, with `light-dark()`, I can simplify it to this:
+
+```css
+:root {
+  --color-neutral-100: hsl(60 22% 85%);
+  --color-neutral-900: hsl(210 31% 11%);
+  --color-primary-400: hsl(338 73% 45%);
+
+  --text: light-dark(var(--color-neutral-900), var(--color-neutral-100));
+  --surface: light-dark(var(--color-neutral-100), var(--color-neutral-900));
+}
+```
+
+Much simpler — the light and dark versions are next to each other, and I don't need two blocks of duplicated variables anymore.
+
+### Controlling the Color Scheme
+You can control the color scheme using the `color-scheme` property in CSS or by setting it in HTML attributes. The `light-dark()` function will automatically adapt based on the active color scheme.
+
+```css
+html {
+  color-scheme: dark light;
+
+  &[color-scheme='light'] {
+    color-scheme: light;
+  }
+
+  &[color-scheme='dark'] {
+    color-scheme: dark;
+  }
+}
+```
+
+### Browser Support
+As of now, the `light-dark()` function is supported in most modern browsers, including Chrome, Edge, and Safari. However, it's always a good idea to check the latest compatibility tables to ensure it works for your target audience.
+
+<BaselineStatus id="light-dark" />
+
+### Conclusion
+The `light-dark()` function is a powerful tool for simplifying theme management in CSS. By allowing you to define light and dark colors in one place, it reduces redundancy and makes your stylesheets easier to maintain. If you're working on a site that supports both light and dark modes, give it a try!
