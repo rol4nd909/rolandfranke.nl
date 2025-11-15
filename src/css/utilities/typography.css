@@ -1,9 +1,8 @@
-[color-scheme='light']::selection {
-  background-color: hsl(from hsl(338 73% 45%) h s l / 0.25);
-}
-
-[color-scheme='dark']::selection {
-  background-color: hsl(from hsl(338 73% 45%) h s l / 0.5);
+::selection {
+  background-color: light-dark(
+    hsl(from var(--color-primary-400) h s l / 0.25),
+    hsl(from var(--color-primary-400) h s l / 0.5)
+  );
 }
 
 b,
