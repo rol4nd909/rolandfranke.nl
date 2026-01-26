@@ -1,0 +1,140 @@
+---
+title: 'Drawing Connections with CSS Anchor Positioning'
+description: 'A practical exploration of CSS Anchor Positioning and the anchor() function to visually connect related elements without extra markup.'
+pubDate: 2026-01-26
+author: Roland
+tags: ["css", "experimental"]
+---
+
+import { BaselineStatus } from '@astro-community/astro-embed-baseline-status';
+import CodepenEmbed from '@components/ui/CodepenEmbed.astro';
+
+## Introduction
+Every now and then, CSS gets a new feature that makes you pause and think: *wait… we can do **that** now?* That was exactly my reaction after watching a short by Kevin Powell on **CSS Anchor Positioning**.
+
+The idea is deceptively simple: let one element position itself relative to another, without JavaScript, without fragile DOM assumptions, and without extra wrapper elements. Naturally, I had to try it myself.
+
+What started as a small experiment turned into a neat little demo that visually connects a comment to its reply using nothing but CSS.
+
+## The Problem
+Visually connecting related UI elements is surprisingly awkward in CSS. Think of:
+
+- Comment threads
+- Tooltips pointing to triggers
+- Callouts referencing specific content
+
+Traditionally, this meant one of three things:
+
+1. Extra markup just to draw a line or arrow
+2. JavaScript calculating positions and injecting styles
+3. Giving up and settling for “close enough”
+
+Anchor positioning changes that equation.
+
+## Enter Anchor Positioning
+CSS Anchor Positioning lets you **name an element as an anchor** and then reference its geometry elsewhere using the `anchor()` function.
+
+At a high level, the flow looks like this:
+
+- Give an element an `anchor-name`
+- Optionally limit its visibility using `anchor-scope`
+- Use `anchor()` to position another element relative to it
+
+No DOM traversal. No layout math. Just relationships.
+
+## Setting Up the Anchors
+In my demo, I have two key elements:
+
+- `.comment`
+- `.reply`
+
+Each becomes an anchor:
+
+```css
+.comment {
+  anchor-name: --comment;
+}
+
+.reply {
+  anchor-name: --reply;
+  anchor-scope: --reply;
+}
+```
+
+The names (`--comment`, `--reply`) behave a lot like custom properties: they're identifiers you can reference later. The `anchor-scope` ensures that only descendants of `.reply` can reference the `--reply` anchor, keeping things predictable and contained.
+
+## Drawing the Connection
+The fun part happens in a pseudo-element. I use `::after` on the reply to draw a subtle connecting line between the comment and the reply.
+
+```css
+.reply::after {
+  content: "";
+  position: absolute;
+
+  inset-block-start: anchor(--comment end);
+  inset-inline-start: calc(anchor(--comment start) + 1.5rem);
+  inset-block-end: anchor(--reply center);
+  inset-inline-end: anchor(--reply start);
+
+  border: 1px solid var(--text);
+  border-block-start-color: transparent;
+  border-inline-end-color: transparent;
+  border-radius: 0 0 0 0.75rem;
+}
+```
+
+This is where the `anchor()` function really shines.
+
+### Reading the Code
+Each `anchor()` call resolves to a **real layout value** taken from another element:
+
+- `anchor(--comment end)` → the block-end edge of the comment
+- `anchor(--comment start)` → the inline-start edge of the comment
+- `anchor(--reply center)` → the vertical center of the reply
+
+By mixing these with logical properties (`inset-block-*`, `inset-inline-*`) the connection adapts automatically to writing mode and layout changes.
+
+No magic numbers. No recalculation when content grows. The line simply follows the elements.
+
+## Why This Is Exciting
+What I love most about anchor positioning is that it feels like **layout-aware CSS**.
+
+Some immediate benefits:
+
+- No JavaScript for positioning logic
+- Relationships stay intact when content changes
+- Fewer wrapper elements and cleaner markup
+- Much easier to reason about intent
+
+This feels especially powerful for UI patterns where *relationships* matter more than strict placement.
+
+## Browser Support (Reality Check)
+
+<BaselineStatus id="anchor-positioning" />
+
+The `anchor()` function has recently reached Baseline: **Newly available**, which means it's supported in the latest versions of major browsers.
+
+That said, anchor positioning as a whole is still evolving. While `anchor()` itself is available, related anchor positioning features like `anchor-name` and `anchor-scope` may still be behind flags or
+rolling out gradually, depending on the browser.
+
+In practice, this makes anchor positioning a great candidate for:
+
+- Progressive enhancement
+- Experiments and demos
+- Forward-looking UI patterns
+
+Used carefully, you can start exploring this today while keeping fallbacks in place for browsers that haven't fully caught up yet.
+
+## See It in Action
+The full demo lives on CodePen:
+
+<CodepenEmbed slug='gbMxLdL' title='CSS Anchor Positioning - Comment Replies' userName='ROL4ND909' user='Roland' preview />
+
+If you inspect the code, you'll notice how little CSS is actually required to make this work. Most of the complexity disappears once the relationship is expressed directly.
+
+## Closing Thoughts
+Anchor positioning feels like a missing puzzle piece. Instead of asking *“where should this element go?”* we can finally say *“this belongs **there**, relative to that.”*
+
+This opens the door to patterns like tooltips, popovers, annotations, and visual relationships that stay correct without ever reaching for JavaScript.
+
+It's early days, but features like this make me genuinely excited about where CSS is heading. If you enjoy experimenting with new layout primitives, this one is absolutely worth your time.
