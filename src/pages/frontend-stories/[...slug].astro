@@ -35,7 +35,7 @@ const { title, description, image, pubDate, tags, author } = post.data
                             {' '}
                             by <span class="italic">{author}</span>
                         </span>
-                        <span class="dot">•</span>
+                        <span class="dot" aria-hidden="true">•</span>
                     )
                 }
                 <FormattedDate {pubDate} />
@@ -71,7 +71,8 @@ const { title, description, image, pubDate, tags, author } = post.data
 
     .dot {
         font-size: .75rem;
-        color: hsl(from var(--color-primary-400) h 90% 50%);
+        /* color: hsl(from var(--color-primary-400) h 90% 50%); */
+        color: var(--color-primary-400);
         font-feature-settings: 'aalt' on;
     }
 </style>
