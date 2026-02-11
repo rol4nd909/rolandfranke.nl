@@ -8,19 +8,22 @@ type Props = {
     user: string
     userName: string
     preview?: boolean
+    themeID?: number
 }
 
-const { slug, token, title, user, userName, preview } = Astro.props
+const { slug, token, title, user, userName, preview, themeID } = Astro.props
 ---
 
+<!-- ?default-tab=css%2Cresult&theme-id=56608 -->
 <div
     class="codepen"
-    data-default-tab="css,result"
+    data-default-tab="result"
     data-slug-hash={slug}
     data-pen-title={title}
     data-user={userName}
     {...!preview && { 'data-preview': 'true' }}
     {...token && { 'data-token': token }}
+    {...themeID && { 'data-theme-id': themeID }}
 >
     <p>
         See the Pen <Link
@@ -36,6 +39,7 @@ const { slug, token, title, user, userName, preview } = Astro.props
 
 <style is:global>
     .cp_embed_wrapper {
+        grid-column: medium;
         aspect-ratio: 3 / 2;
 
         iframe {

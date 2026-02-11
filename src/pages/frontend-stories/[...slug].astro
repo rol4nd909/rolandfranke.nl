@@ -12,7 +12,7 @@ import Webring from '@/components/ui/Webring.astro'
 
 export async function getStaticPaths() {
     const posts = await getCollection('posts', ({ data }) => !data.isDraft)
-    
+
     return posts.map(post => ({
         params: { slug: post.id }, props: { post },
     }));
@@ -47,12 +47,8 @@ const { title, description, image, pubDate, tags, author } = post.data
         </FadeOutDown>
     </Hero>
 
-    <div class="grid lane lane--light" data-grid="fullbleed">
-        <cq-document-vi>
-            <div class="prose flow">
-                <Content components={{ a: MDXLink }}/>
-            </div>
-        </cq-document-vi>
+    <div class="grid lane lane--light prose flow" data-grid="fullbleed">
+      <Content components={{ a: MDXLink }}/>
     </div>
 
     <div class="grid lane lane--dark" data-grid="fullbleed">
@@ -62,6 +58,14 @@ const { title, description, image, pubDate, tags, author } = post.data
 
 <style>
     cq-document-vi {
+        grid-column: xsmall;
+    }
+
+    :global(.prose) {
+        gap: 0;
+    }
+
+    :global(.prose > *) {
         grid-column: xsmall;
     }
 
