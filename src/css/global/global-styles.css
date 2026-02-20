@@ -63,6 +63,10 @@ body {
       view-transition-name: --dark-light;
     }
 
+    header {
+      view-transition-name: header;
+    }
+
     nav {
       view-transition-name: nav;
     }
@@ -77,6 +81,7 @@ body {
 
     .theme-transition, /* classname for now until Firefox supports the transition type set by js  */
     html:active-view-transition-type(dark-light) {
+      header,
       nav,
       main {
         view-transition-name: none;

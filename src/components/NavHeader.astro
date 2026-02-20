@@ -2,25 +2,32 @@
 import Logo from '@/icons/logo.svg'
 import DarkLightToggle from '@components/DarkLightToggle.astro'
 import Link from '@components/ui/Link.astro'
+
+const { pathname } = Astro.url
 ---
 
 <header>
-    <nav class="nav">
-        <!-- <div class="flex"> -->
-        <a href="/" aria-label="Go to homepage">
-            <Logo width="48" height="48" aria-hidden fill="currentColor" />
-        </a>
-        <!-- </div> -->
+    <a href="/" aria-current={pathname.slice(1) === '' ? 'page' : undefined}>
+        <Logo width="48" height="48" aria-label="Logo: RF (Roland Franke)" fill="currentColor" />
+        <span class="sr-only"> - Home page</span>
+    </a>
 
+    <nav class="nav" aria-label="Primary navigation">
         <ul class="menu">
-            <li><Link as="a" href="/frontend-stories">Frontend Stories</Link></li>
+            <li>
+                <Link
+                    as="a"
+                    href="/frontend-stories"
+                    aria-current={pathname.slice(1) === 'frontend-stories' ? 'page' : undefined}
+                    >Frontend Stories</Link
+                >
+            </li>
         </ul>
-
-        <!-- <div class="flex"> -->
-        <DarkLightToggle />
-        <!-- <NavButton /> -->
-        <!-- </div> -->
     </nav>
+
+    <div>
+        <DarkLightToggle />
+    </div>
 </header>
 
 <style>
@@ -32,9 +39,7 @@ import Link from '@components/ui/Link.astro'
         position: absolute;
         inset: 0 0 auto;
         z-index: 1;
-    }
 
-    nav {
         display: flex;
         align-items: center;
         align-self: flex-start;
@@ -44,6 +49,10 @@ import Link from '@components/ui/Link.astro'
         padding-block: 1.5rem;
         /* The 960 value is the minumun constrain value */
         padding-inline: utopia.clamp(24, 72, 960);
+
+        div {
+            min-inline-size: 3rem;
+        }
     }
 
     a:not(.btn) {
