@@ -11,7 +11,6 @@ export default defineConfig({
   markdown: {
     syntaxHighlight: false
   },
-
   redirects: {
     '/frontend-stories/exploring-the-new--search-element-in-html/': '/frontend-stories/exploring-the-new-search-element-in-html/',
   }
