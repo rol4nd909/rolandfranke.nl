@@ -8,11 +8,17 @@ const { pathname } = Astro.url
 
 <header>
     <a href="/" aria-current={pathname.slice(1) === '' ? 'page' : undefined}>
-        <Logo width="48" height="48" aria-label="Logo: RF (Roland Franke)" fill="currentColor" />
+        <Logo
+            width="48"
+            height="48"
+            aria-label="Logo: RF (Roland Franke)"
+            fill="currentColor"
+            role="img"
+        />
         <span class="sr-only"> - Home page</span>
     </a>
 
-    <nav class="nav" aria-label="Primary navigation">
+    <nav class="nav" aria-label="Primary">
         <ul class="menu">
             <li>
                 <Link

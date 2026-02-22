@@ -24,8 +24,12 @@ html {
 }
 
 /* Remove list styles and keep semantic meaning on ul, ol elements with a class on it, which suggests default styling will be removed */
-:is(ul, ol)[class] {
+/* :is(ul, ol)[class] {
   list-style-type: '';
+  margin-block: 0;
+} */
+:is(ul, ol)[class] {
+  list-style-type: none;
   margin-block: 0;
 }
 
@@ -81,17 +85,17 @@ a:not([class]) {
 }
 
 /**
- * This CSS block is a More Effective CSS Image Reset. 
+ * This CSS block is a More Effective CSS Image Reset.
  * It resets the default styles of an image element
- * and adds some additional styles to improve its rendering. 
- * 
- * The `max-width: 100%;` ensures that the image does not exceed its container's width, 
- * while maintaining its aspect ratio with `height: auto;`. 
- * The `vertical-align: middle;` aligns the image vertically with the text. 
+ * and adds some additional styles to improve its rendering.
+ *
+ * The `max-width: 100%;` ensures that the image does not exceed its container's width,
+ * while maintaining its aspect ratio with `height: auto;`.
+ * The `vertical-align: middle;` aligns the image vertically with the text.
  * The `font-style: italic;` adds a slight italic effect to the image alt text.
- * The `background-repeat: no-repeat;` ensures that the image does not repeat itself. 
- * The `background-size: cover;` ensures that the image fills its container without repeating. 
- * 
+ * The `background-repeat: no-repeat;` ensures that the image does not repeat itself.
+ * The `background-size: cover;` ensures that the image fills its container without repeating.
+ *
  * Finally, the `shape-margin: 1rem;` adds some margin around the image to improve its spacing with other elements.
  */
 img,
