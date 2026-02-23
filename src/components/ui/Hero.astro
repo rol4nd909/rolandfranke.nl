@@ -6,19 +6,15 @@ interface Props {
 const { class: providedProps, ...rest } = Astro.props
 ---
 
-<div class:list={['hero grid js-angle', providedProps]} {...rest}>
+<div class:list={['hero grid', providedProps]} {...rest}>
     <slot />
 </div>
 
-<script>
-    import { setDiagonalAngle } from '@utils/diagonalAngle'
-
-    setDiagonalAngle('js-angle')
-</script>
-
 <style>
     div {
-        --_angle: calc(180 - var(--angle));
+        --_size: 3rem;
+        --_offset: calc(var(--_size) / 2);
+        --_line: color-mix(in hsl, var(--text), var(--surface) 90%);
 
         position: relative;
         min-block-size: 50vh;
@@ -34,23 +30,16 @@ const { class: providedProps, ...rest } = Astro.props
         }
 
         &::before {
-            --size: 3rem;
-            --offset: calc(var(--size) / 2);
-            --line: color-mix(in hsl, var(--text), var(--surface) 90%);
-
-            background-image: linear-gradient(90deg, var(--line) 1px, transparent 1px var(--size)),
-                linear-gradient(var(--line) 1px, transparent 1px var(--size));
-            background-position: var(--offset) var(--offset);
-            background-size: var(--size) var(--size);
+            background-image:
+                linear-gradient(90deg, var(--_line) 1px, transparent 1px var(--_size)),
+                linear-gradient(var(--_line) 1px, transparent 1px var(--_size));
+            background-position: var(--_offset) var(--_offset);
+            background-size: var(--_size) var(--_size);
             background-attachment: fixed;
         }
 
         &::after {
-            background-image: linear-gradient(
-                calc(var(--_angle) * -1deg),
-                var(--surface) 40%,
-                transparent
-            );
+            background-image: linear-gradient(to top left, var(--surface) 40%, transparent);
         }
 
         &.hero--large {
