@@ -56,34 +56,36 @@ body {
   @media (--motion-ok) {
     @view-transition {
       navigation: auto;
-      types: default, dark-light;
     }
 
     :root {
       view-transition-name: --dark-light;
     }
 
-    header {
-      view-transition-name: header;
+    .site-header {
+      view-transition-name: --header;
     }
 
-    nav {
-      view-transition-name: nav;
+    /* main {
+      view-transition-name: --main;
     }
 
-    main {
-      view-transition-name: main;
+    ::view-transition-group(--main) {
+      animation-timing-function: var(--ease);
+      animation-duration: 0.5s;
     }
 
-    ::view-transition-group(title) {
-      animation-timing-function: ease-in-out;
+    ::view-transition-old(--main) {
+      animation-name: --scale-out;
     }
 
-    .theme-transition, /* classname for now until Firefox supports the transition type set by js  */
+    ::view-transition-new(--main) {
+      animation-name: --scale-in;
+    } */
+
     html:active-view-transition-type(dark-light) {
-      header,
-      nav,
-      main {
+      main,
+      .site-header {
         view-transition-name: none;
       }
 
@@ -104,6 +106,18 @@ body {
     @keyframes --reveal {
       from {
         clip-path: inset(var(--from));
+      }
+    }
+
+    @keyframes --scale-out {
+      to {
+        scale: 0;
+      }
+    }
+
+    @keyframes --scale-in {
+      from {
+        scale: 0;
       }
     }
   }

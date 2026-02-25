@@ -37,17 +37,10 @@
             return
         }
 
-        // document.startViewTransition({
-        //     update: toggleTheme,
-        //     types: ['dark-light'],
-        // })
-
-        // Temp until above is supported in Firefox
-        document.firstElementChild.classList.add('theme-transition')
-
-        const transition = document.startViewTransition(toggleTheme)
-
-        transition
+        document.startViewTransition({
+            update: toggleTheme,
+            types: ['dark-light'],
+        })
 
         try {
             await transition.finished

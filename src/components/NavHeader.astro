@@ -6,7 +6,7 @@ import Link from '@components/ui/Link.astro'
 const { pathname } = Astro.url
 ---
 
-<header>
+<header class="site-header">
     <a href="/" aria-current={pathname.slice(1) === '' ? 'page' : undefined}>
         <Logo
             width="48"
