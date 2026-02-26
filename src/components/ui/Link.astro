@@ -93,8 +93,12 @@ const { classes, ...attributes } = allAttributes
 
         > span {
             background-image: linear-gradient(var(--_clr) 0 0);
-            background-size: 0 0.3lh;
-            background-position: 100% 100%;
+            /* background-size: 0 0.3lh;
+            background-position: 100% 100%; */
+
+            background-size: 100% 0.3lh;
+            background-position: 0 100%;
+
             background-repeat: no-repeat;
             transition: background-size 0.5s var(--ease-elastic-2);
         }
@@ -102,23 +106,27 @@ const { classes, ...attributes } = allAttributes
         @media (--is-mouse) {
             &:hover {
                 > span {
-                    background-size: 100% 0.3lh;
-                    background-position: 0 100%;
+                    /* background-size: 100% 0.3lh;
+                    background-position: 0 100%; */
+
+                    background-size: 0 0.3lh;
+                    background-position: 100% 100%;
+
                     transition-delay: 125ms;
                 }
             }
         }
     }
 
-    :global(p) > .link > span {
+    /* :global(p, li) > .link > span {
         background-size: 100% 0.3lh;
         background-position: 0 100%;
     }
 
     @media (--is-mouse) {
-        :global(p) > .link:hover > span {
+        :global(p, li) > .link:hover > span {
             background-size: 0 0.3lh;
             background-position: 100% 100%;
         }
-    }
+    } */
 </style>
