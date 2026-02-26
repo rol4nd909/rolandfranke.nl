@@ -82,23 +82,14 @@ const { classes, ...attributes } = allAttributes
     }
 
     .link {
-        --_clr: light-dark(
-            hsl(from var(--color-primary-400) h s l / 0.5),
-            var(--color-primary-400)
-        );
-
         &button {
             text-align: left;
         }
 
         > span {
-            background-image: linear-gradient(var(--_clr) 0 0);
-            /* background-size: 0 0.3lh;
-            background-position: 100% 100%; */
-
+            background-image: linear-gradient(var(--color-primary-400) 0 0);
             background-size: 100% 0.3em;
             background-position: 0 100%;
-
             background-repeat: no-repeat;
             transition: background-size 0.5s var(--ease-elastic-2);
         }
@@ -106,9 +97,6 @@ const { classes, ...attributes } = allAttributes
         @media (--is-mouse) {
             &:hover {
                 > span {
-                    /* background-size: 100% 0.3lh;
-                    background-position: 0 100%; */
-
                     background-size: 0 0.3em;
                     background-position: 100% 100%;
 
@@ -117,16 +105,4 @@ const { classes, ...attributes } = allAttributes
             }
         }
     }
-
-    /* :global(p, li) > .link > span {
-        background-size: 100% 0.3lh;
-        background-position: 0 100%;
-    }
-
-    @media (--is-mouse) {
-        :global(p, li) > .link:hover > span {
-            background-size: 0 0.3lh;
-            background-position: 100% 100%;
-        }
-    } */
 </style>
