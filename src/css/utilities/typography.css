@@ -89,6 +89,7 @@ pre {
   padding: var(--gutter);
   background-color: color-mix(in hsl, var(--text), transparent 90%);
   border-radius: 0.25rem;
+  white-space: break-spaces;
 
   > code {
     color: color-mix(in hsl, var(--surface), var(--text) 65%);
@@ -98,10 +99,6 @@ pre {
 
     [color-scheme='light'] & {
       font-palette: --kung-fury-light;
-    }
-
-    @media (--for-phone-only) {
-      white-space: break-spaces;
     }
   }
 }
