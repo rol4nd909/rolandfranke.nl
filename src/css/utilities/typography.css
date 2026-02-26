@@ -90,10 +90,6 @@ pre {
   background-color: color-mix(in hsl, var(--text), transparent 90%);
   border-radius: 0.25rem;
 
-  @container cq-document-vi (inline-size < 37.5rem) {
-    margin-inline: calc(var(--gutter) * -1);
-  }
-
   > code {
     color: color-mix(in hsl, var(--surface), var(--text) 65%);
     background-color: transparent;
@@ -102,6 +98,10 @@ pre {
 
     [color-scheme='light'] & {
       font-palette: --kung-fury-light;
+    }
+
+    @media (--for-phone-only) {
+      white-space: break-spaces;
     }
   }
 }
