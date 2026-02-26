@@ -28,7 +28,7 @@ const formattedPosts = formatBlogPosts(allPosts)
         </FadeOutDown>
     </Hero>
 
-    <div class="grid lane lane--dark" data-grid="fullbleed">
+    <div class="posts grid lane lane--dark" data-grid="fullbleed">
         {formattedPosts.map((post) => <PostCard post={post} />)}
     </div>
 
@@ -36,3 +36,9 @@ const formattedPosts = formatBlogPosts(allPosts)
         <Webring />
     </div>
 </BaseLayout>
+
+<style>
+    .posts {
+        row-gap: calc(clamp(1rem, 0rem + 2.6667vw, 2rem) * 1.5);
+    }
+</style>
