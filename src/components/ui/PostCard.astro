@@ -50,10 +50,12 @@ const slug = `/frontend-stories/${post.id}`
     .flex {
         gap: 1rem;
     }
+
     article {
         grid-column: xsmall;
         display: grid;
         gap: utopia.clamp(16, 32);
+        position: relative;
 
         + article {
             border-top: 1px solid var(--color-primary-400);
@@ -70,5 +72,13 @@ const slug = `/frontend-stories/${post.id}`
         font-size: .75rem;
         color: var(--color-primary-400);
         font-feature-settings: 'aalt' on;
+    }
+
+    a {
+      &::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+      }
     }
 </style>

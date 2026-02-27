@@ -104,5 +104,14 @@ const { classes, ...attributes } = allAttributes
                 }
             }
         }
+
+        &:focus-visible {
+            > span {
+                background-size: 0 0.3em;
+                background-position: 100% 100%;
+
+                transition-delay: 125ms;
+            }
+        }
     }
 </style>
