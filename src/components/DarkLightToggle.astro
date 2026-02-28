@@ -41,12 +41,6 @@
             update: toggleTheme,
             types: ['dark-light'],
         })
-
-        try {
-            await transition.finished
-        } finally {
-            document.documentElement.classList.remove('theme-transition')
-        }
     }
 
     const getColorPreference = () => {
