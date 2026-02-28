@@ -10,6 +10,16 @@
   border-radius: 0.5rem;
 }
 
+[color-scheme='light'] .codepen-embed-body {
+  --text: var(--color-neutral-900);
+  --surface: var(--color-neutral-100);
+}
+
+[color-scheme='dark'] .codepen-embed-body {
+  --text: var(--color-neutral-100);
+  --surface: var(--color-neutral-900);
+}
+
 .embed-footer,
 .embed-nav {
   background-color: color-mix(in hsl, var(--cp-text), transparent 90%);
