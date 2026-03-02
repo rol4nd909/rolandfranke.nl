@@ -1,4 +1,8 @@
 html {
+  scrollbar-color: var(--color-primary-400) transparent;
+  scrollbar-width: thin;
+  scrollbar-gutter: stable;
+
   @media (--motion-ok) {
     scroll-behavior: smooth;
   }
