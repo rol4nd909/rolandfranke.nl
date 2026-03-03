@@ -2,11 +2,7 @@
 const { href } = Astro.props
 ---
 
-<a {href} target="blank">
-    <span>
-        <slot />
-    </span>
-</a>
+<a {href} target="blank"><span><slot /></span></a>
 
 <style>
     a {

@@ -3,7 +3,11 @@ import Hero from '@/components/ui/Hero.astro'
 import BaseLayout from '@layouts/BaseLayout.astro'
 ---
 
-<BaseLayout title="Oeps page not found | Roland Franke" description="The page you are looking for is not found">
+<BaseLayout
+    title="Oeps page not found | Roland Franke"
+    description="The page you are looking for is not found"
+    showWebring={false}
+>
     <Hero class="hero--large text-center" data-grid="fullbleed">
         <h1 class="hero__title">
             <span>&#123;</span> 404 <span>&#125;</span>

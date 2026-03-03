@@ -13,11 +13,12 @@ type Props = {
     ogType?: string
     image?: string
     footerType?: 'dark' | 'light'
+    showWebring?: boolean
 }
 
 const currentYear = new Date().getFullYear()
 
-const { title, description, ogType, image, footerType = 'dark' } = Astro.props
+const { title, description, ogType, image, footerType = 'dark', showWebring = true } = Astro.props
 ---
 
 <!doctype html>
@@ -39,7 +40,7 @@ const { title, description, ogType, image, footerType = 'dark' } = Astro.props
                 >.
             </p>
 
-            <Webring />
+            {showWebring && <Webring />}
         </footer>
     </body>
 </html>

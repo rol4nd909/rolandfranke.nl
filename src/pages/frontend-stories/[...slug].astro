@@ -8,7 +8,6 @@ import FormattedDate from '@/components/ui/FormattedDate.astro'
 import Hero from '@/components/ui/Hero.astro'
 import Heading from '@/components/ui/Heading.astro'
 import MDXLink from '@/components/ui/MDXLink.astro'
-import Webring from '@/components/ui/Webring.astro'
 
 export async function getStaticPaths() {
     const posts = await getCollection('posts', ({ data }) => !data.isDraft)
