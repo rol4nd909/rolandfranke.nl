@@ -6,15 +6,13 @@ type Props = {
 const { id } = Astro.props
 ---
 
-<span data-topic={id}>
-    <slot />
-</span>
+<span data-topic={id}><slot /></span>
 
 <style>
     span {
         background-color: var(--color-primary-400);
         color: hsl(from var(--color-neutral-100) h s 100%);
-        padding-inline: 0.5rem;
+        padding-inline: 0.25ch;
         border-radius: 0.25rem;
         font-size: var(--fs--1);
         font-weight: var(--fw-semibold);

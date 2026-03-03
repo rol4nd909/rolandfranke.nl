@@ -119,16 +119,30 @@ pre {
   }
 
   h3 {
-    font-size: var(--fs-2);
+    font-size: var(--fs-1);
   }
 
   h4 {
-    font-size: var(--fs-1);
+    font-size: var(--fs-0);
   }
 
   ol,
   ul {
     --flow-space: 0.5em;
+  }
+
+  ul {
+    ::marker {
+      content: '• \a0';
+      font-feature-settings: 'aalt' on;
+      color: var(--color-primary-400);
+    }
+  }
+
+  ol {
+    ::marker {
+      font-weight: 900;
+    }
   }
 
   > p:first-of-type {

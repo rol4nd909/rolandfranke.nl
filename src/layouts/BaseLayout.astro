@@ -4,15 +4,20 @@ import '@styles/global.css'
 import BaseHead from '@layouts/BaseHead.astro'
 import NavHeader from '@/components/NavHeader.astro'
 import SkipLink from '@/components/SkipLink.astro'
+import Webring from '@/components/ui/Webring.astro'
+import Badge from '@/components/ui/Badge.astro'
 
 type Props = {
     title?: string
     description?: string
     ogType?: string
     image?: string
+    footerType?: 'dark' | 'light'
 }
 
-const { title, description, ogType, image } = Astro.props
+const currentYear = new Date().getFullYear()
+
+const { title, description, ogType, image, footerType = 'dark' } = Astro.props
 ---
 
 <!doctype html>
@@ -26,6 +31,16 @@ const { title, description, ogType, image } = Astro.props
         <main class="grid" id="main" aria-label="Main content" tabindex="-1">
             <slot />
         </main>
+
+        <footer class={`grid lane lane--${footerType}`}>
+            <p class="footer-text fs--1">
+                © {currentYear} Roland Franke. Built with semantic HTML and a healthy love for <Badge
+                    id="CSS">CSS</Badge
+                >.
+            </p>
+
+            <Webring />
+        </footer>
     </body>
 </html>
 
@@ -38,3 +53,13 @@ const { title, description, ogType, image } = Astro.props
         document.hidden ? (document.title = 'Aw, Snap! 🤯') : (document.title = originalTitle)
     })
 </script>
+
+<style>
+    footer {
+        gap: 1.5rem;
+    }
+
+    .footer-text {
+        margin-inline: auto;
+    }
+</style>

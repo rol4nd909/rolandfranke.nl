@@ -18,27 +18,45 @@ const { pathname } = Astro.url
         <span class="sr-only"> - Home page</span>
     </a>
 
-    <nav class="nav" aria-label="Primary">
-        <ul class="menu">
-            <li>
-                <Link
-                    as="a"
-                    href="/frontend-stories"
-                    aria-current={pathname.slice(1) === 'frontend-stories/' ? 'page' : undefined}
-                    >Frontend Stories</Link
-                >
-            </li>
-        </ul>
-    </nav>
-
     <div>
-        <DarkLightToggle />
+        <nav aria-label="Primary">
+            <ul class="menu">
+                <li>
+                    <Link
+                        as="a"
+                        href="/frontend-stories"
+                        aria-current={pathname.slice(1) === 'frontend-stories/'
+                            ? 'page'
+                            : undefined}>Frontend Stories</Link
+                    >
+                </li>
+                <li>
+                    <Link
+                        as="a"
+                        href="/about"
+                        aria-current={pathname.slice(1) === 'about/' ? 'page' : undefined}
+                        >About</Link
+                    >
+                </li>
+                <!-- <li>
+                    <Link as="a" href="/rss.xml">RSS</Link>
+                </li> -->
+            </ul>
+        </nav>
+
+        <div>
+            <DarkLightToggle />
+        </div>
     </div>
 </header>
 
 <style>
     :root {
         --header-height: 6rem;
+
+        @media (--for-phone-only) {
+            --header-height: 10rem;
+        }
     }
 
     header {
@@ -47,28 +65,39 @@ const { pathname } = Astro.url
         z-index: 1;
 
         display: flex;
-        align-items: center;
-        align-self: flex-start;
-        justify-content: space-between;
-        gap: utopia.clamp(16, 24);
+        column-gap: 3rem;
 
         padding-block: 1.5rem;
         /* The 960 value is the minumun constrain value */
         padding-inline: utopia.clamp(24, 72, 960);
 
-        div {
-            min-inline-size: 3rem;
+        @media (--for-phone-only) {
+            flex-direction: column;
+            align-items: center;
+            align-self: flex-start;
+            row-gap: 1rem;
+        }
+
+        > div {
+            display: flex;
+            align-items: center;
+            gap: utopia.clamp(16, 24);
+            flex-grow: 1;
+
+            > div {
+                flex-shrink: 0;
+                min-block-size: 3rem;
+                min-inline-size: 3rem;
+                margin-inline-start: auto;
+            }
         }
     }
 
     a:not(.btn) {
-        display: inline-flex;
-    }
+        --logo-bg: var(--color-neutral-100);
+        --logo-color: var(--color-primary-400);
 
-    svg {
-        color: var(--color-primary-400);
-        background-color: var(--color-neutral-100);
-        align-self: center;
+        display: grid;
     }
 
     .menu {

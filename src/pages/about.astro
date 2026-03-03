@@ -1,0 +1,106 @@
+---
+import FadeOutDown from '@/components/ui/FadeOutDown.astro'
+import Heading from '@/components/ui/Heading.astro'
+import Hero from '@/components/ui/Hero.astro'
+import Link from '@/components/ui/Link.astro'
+import BaseLayout from '@/layouts/BaseLayout.astro'
+---
+
+<BaseLayout
+    title="About | Roland Franke"
+    description="About Roland Franke — frontend developer focused on semantic HTML, modern CSS, accessibility and thoughtful web experiences."
+>
+    <Hero data-grid="fullbleed">
+        <FadeOutDown class="flow" data-column="medium">
+            <Heading tagName="h1" size="h1">Hi, I'm Roland 👋</Heading>
+            <p class="fs-1">
+                Frontend developer. HTML enthusiast. CSS explorer. Accessibility advocate. Curious
+                human.
+            </p>
+        </FadeOutDown>
+    </Hero>
+
+    <div class="grid lane lane--light prose flow" data-grid="fullbleed">
+        <h2>I build for humans first.</h2>
+        <p>
+            I'm a frontend developer from the Netherlands who loves crafting accessible, performant
+            and expressive interfaces using semantic HTML and modern CSS.
+        </p>
+        <p>
+            I care deeply about how things are built, not just how they look. Structure matters.
+            Details matter. Experience matters.
+        </p>
+
+        <h2>What I believe</h2>
+        <ul>
+            <li>
+                <strong>Start with HTML.</strong>
+                The web already gives us a powerful foundation. Use it.
+            </li>
+            <li>
+                <strong>CSS is more than styling.</strong>
+                It is layout, interaction, motion and expression.
+            </li>
+            <li>
+                <strong>Accessibility is not optional.</strong>
+                If it does not work for everyone, it does not work.
+            </li>
+            <li>
+                <strong>Clarity beats cleverness.</strong>
+                Simple solutions age better.
+            </li>
+        </ul>
+
+        <h2>How I approach frontend</h2>
+        <article>
+            <h3>Semantic by default</h3>
+            <p>
+                I prefer native HTML over abstraction when possible. The platform is powerful. I
+                lean on it first.
+            </p>
+        </article>
+
+        <article>
+            <h3>Modern CSS, used with intention</h3>
+            <p>
+                Container queries, logical properties, anchor positioning. I enjoy exploring new CSS
+                capabilities and using them when they truly improve the experience.
+            </p>
+        </article>
+
+        <article>
+            <h3>Keep it simple</h3>
+            <p>
+                Small, focused solutions. Clean structure. Minimal complexity. Code that still makes
+                sense six months later.
+            </p>
+        </article>
+
+        <h2>Why I write</h2>
+        <p>
+            On <Link as="a" href="/frontend-stories/">Frontend Stories</Link> I share experiments, discoveries
+            and practical frontend insights.
+        </p>
+
+        <p>
+            Writing helps me think clearly. It also helps others explore what is possible with the
+            modern web, especially when it comes to CSS and semantic HTML.
+        </p>
+
+        <h2>Outside of code</h2>
+        <p>
+            I am endlessly curious about how things work. Interfaces, systems, patterns, people. The
+            web just happens to be my favorite playground.
+        </p>
+    </div>
+</BaseLayout>
+
+<style>
+    :global(.prose) {
+        gap: 0;
+    }
+
+    :global(.prose > *) {
+        grid-column: xsmall;
+    }
+</style>

@@ -99,7 +99,7 @@ body {
       }
 
       &::view-transition-new(--dark-light) {
-        animation: --reveal 1s var(--ease);
+        animation: --reveal 0.75s var(--spring);
         clip-path: inset(0 0 0 0);
         z-index: 2;
       }
