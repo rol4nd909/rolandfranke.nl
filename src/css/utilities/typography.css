@@ -74,8 +74,8 @@ em,
 code {
   display: inline-flex;
   padding-inline: 0.25ch;
-  background-color: hsl(from var(--text) h s l / 0.8);
-  color: var(--surface);
+  background-color: color-mix(in hsl, var(--text), transparent 90%);
+  color: light-dark(hsl(225 100% 30%), hsl(188 100% 75%));
   font-size: 80%;
   font-family:
     Consolas,
@@ -167,10 +167,10 @@ pre {
 @font-palette-values --kung-fury-light {
   font-family: 'FontWithASyntaxHighlighter';
   override-colors:
-    0 hsl(225 100% 40%),
+    0 hsl(225 100% 30%),
     1 hsl(250 100% 80%),
-    2 hsl(225 100% 40%),
-    3 hsl(225 100% 40%),
+    2 hsl(225 100% 30%),
+    3 hsl(225 100% 30%),
     4 hsl(270 50% 40%),
     5 hsl(210 40% 2%),
     7 hsl(210 10% 30%),
