@@ -67,11 +67,15 @@ em,
   letter-spacing: var(--ls);
 }
 
+.dot {
+  user-select: none;
+}
+
 code {
   display: inline-flex;
   padding-inline: 0.25ch;
-  background-color: var(--color-primary-400);
-  color: hsl(from var(--color-neutral-100) h s 100%);
+  background-color: hsl(from var(--text) h s l / 0.8);
+  color: var(--surface);
   font-size: 80%;
   font-family:
     Consolas,
