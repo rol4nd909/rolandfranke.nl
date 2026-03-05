@@ -31,6 +31,40 @@ body {
   outline-width: 0.25rem;
 }
 
+.icon-link {
+  --icon-size: 3rem;
+
+  aspect-ratio: 1;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  inline-size: var(--icon-size);
+  outline: 1px solid transparent;
+  outline-color: transparent;
+  outline-width: 1px;
+  padding: 0.5rem;
+  text-decoration-skip-ink: auto;
+  color: currentColor;
+
+  &:is(:hover, :focus-visible) {
+    outline-color: var(--color-primary-400);
+    outline-offset: -0.25rem;
+    outline-width: 0.5rem;
+  }
+
+  @media (--motion-ok) {
+    transition:
+      outline-offset 0.7s var(--ease-spring),
+      outline-color 0.7s var(--ease-out),
+      outline-width 0.7s var(--ease-spring);
+  }
+
+  > svg {
+    display: block;
+  }
+}
+
 @layer --baseline-status {
   .baseline-status::part(root) {
     --color-text: var(--text) !important;
