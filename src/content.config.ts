@@ -1,5 +1,6 @@
 import { glob } from 'astro/loaders'
-import { defineCollection, z } from 'astro:content'
+import { z } from 'astro/zod'
+import { defineCollection } from 'astro:content'
 
 // Define a `loader` and `schema` for each collection
 const posts = defineCollection({
