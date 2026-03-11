@@ -1,12 +1,12 @@
 .codepen-embed-body {
-  --cp-clr-100: hsl(60 22% 85%);
-  --cp-clr-900: hsl(210 31% 11%);
-  --cp-clr-400: hsl(338 73% 45%);
+  --cp-clr-100: oklch(0.9 0.02 107);
+  --cp-clr-900: oklch(0.22 0.02 249);
+  --cp-clr-400: oklch(0.58 0.23 11);
 
   --cp-text: light-dark(var(--cp-clr-900), var(--cp-clr-100));
   --cp-surface: light-dark(var(--cp-clr-100), var(--cp-clr-900));
 
-  border: 1px solid hsl(from var(--cp-text) h s l / 0.25) !important;
+  border: 1px solid oklch(from var(--cp-text) l c h / 0.25) !important;
   border-radius: 0.5rem;
 }
 
@@ -22,7 +22,7 @@
 
 .embed-footer,
 .embed-nav {
-  background-color: color-mix(in hsl, var(--cp-text), transparent 90%);
+  background-color: color-mix(in oklch, var(--cp-text), transparent 90%);
 }
 
 .embed-nav .logo-wrap .edit-on-codepen {
@@ -40,7 +40,7 @@
   background-color: var(--cp-surface);
 
   &:is(:hover, :focus-visible) {
-    color: hsl(0 0% 100%);
+    color: oklch(1 0 271);
     background-color: var(--cp-clr-400);
   }
 }
@@ -48,7 +48,7 @@
 .embed-nav .code-types a.active,
 .embed-nav .result-button-list a.active,
 .action-button.active {
-  background-color: color-mix(in hsl, var(--cp-text), transparent 80%) !important;
-  box-shadow: inset 0px 3px color-mix(in hsl, var(--cp-text), transparent 70%) !important;
+  background-color: color-mix(in oklch, var(--cp-text), transparent 80%) !important;
+  box-shadow: inset 0px 3px color-mix(in oklch, var(--cp-text), transparent 70%) !important;
   color: var(--cp-text) !important;
 }

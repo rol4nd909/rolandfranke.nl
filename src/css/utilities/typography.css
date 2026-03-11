@@ -1,7 +1,7 @@
 ::selection {
   background-color: light-dark(
-    hsl(from var(--color-primary-400) h s l / 0.25),
-    hsl(from var(--color-primary-400) h s l / 0.5)
+    oklch(from var(--color-primary-400) l c h / 0.25),
+    oklch(from var(--color-primary-400) l c h / 0.5)
   );
 }
 
@@ -74,8 +74,8 @@ em,
 code {
   display: inline-flex;
   padding-inline: 0.25ch;
-  background-color: color-mix(in hsl, var(--text), transparent 90%);
-  color: light-dark(hsl(225 100% 30%), hsl(188 100% 75%));
+  background-color: color-mix(in oklch, var(--text), transparent 90%);
+  color: light-dark(oklch(0.348 0.188 263.575), oklch(0.889 0.104 208.497));
   font-size: 80%;
   font-family:
     Consolas,
@@ -91,12 +91,12 @@ pre {
   min-width: 0;
   overflow-x: auto;
   padding: var(--gutter);
-  background-color: color-mix(in hsl, var(--text), transparent 90%);
+  background-color: color-mix(in oklch, var(--text), transparent 90%);
   border-radius: 0.25rem;
   white-space: break-spaces;
 
   > code {
-    color: color-mix(in hsl, var(--surface), var(--text) 65%);
+    color: color-mix(in oklch, var(--surface), var(--text) 65%);
     background-color: transparent;
     font-family: 'FontWithASyntaxHighlighter', monospace;
     font-palette: --kung-fury-dark;
@@ -167,25 +167,25 @@ pre {
 @font-palette-values --kung-fury-light {
   font-family: 'FontWithASyntaxHighlighter';
   override-colors:
-    0 hsl(225 100% 30%),
-    1 hsl(250 100% 80%),
-    2 hsl(225 100% 30%),
-    3 hsl(225 100% 30%),
-    4 hsl(270 50% 40%),
-    5 hsl(210 40% 2%),
-    7 hsl(210 10% 30%),
-    8 hsl(327 100% 54%);
+    0 oklch(0.348 0.188 263.575),
+    1 oklch(0.739 0.145 290.029),
+    2 oklch(0.348 0.188 263.575),
+    3 oklch(0.348 0.188 263.575),
+    4 oklch(0.44 0.16 303.373),
+    5 oklch(0.113 0.009 242.173),
+    7 oklch(0.415 0.016 248.216),
+    8 oklch(0.655 0.262 356.197);
 }
 
 @font-palette-values --kung-fury-dark {
   font-family: 'FontWithASyntaxHighlighter';
   override-colors:
-    0 hsl(188 100% 75%),
-    1 hsl(250 100% 80%),
-    2 hsl(188 100% 75%),
-    3 hsl(188 100% 75%),
-    4 hsl(250 100% 80%),
-    5 hsl(210 40% 98%),
-    7 hsl(210 40% 80%),
-    8 hsl(300 100% 80%);
+    0 oklch(0.889 0.104 208.497),
+    1 oklch(0.739 0.145 290.029),
+    2 oklch(0.889 0.104 208.497),
+    3 oklch(0.889 0.104 208.497),
+    4 oklch(0.739 0.145 290.029),
+    5 oklch(0.984 0.003 247.858),
+    7 oklch(0.836 0.036 248.26),
+    8 oklch(0.822 0.175 327.018);
 }

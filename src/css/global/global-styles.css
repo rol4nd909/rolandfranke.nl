@@ -1,6 +1,5 @@
 html {
   scrollbar-color: var(--color-primary-400) transparent;
-  scrollbar-width: thin;
   scrollbar-gutter: stable;
 
   @media (--motion-ok) {
@@ -68,8 +67,8 @@ body {
 @layer --baseline-status {
   .baseline-status::part(root) {
     --color-text: var(--text) !important;
-    --color-outline: hsl(from var(--text) h s l / 0.25) !important;
-    --color-background: color-mix(in hsl, var(--text), transparent 90%) !important;
+    --color-outline: oklch(from var(--text) l c h / 0.25) !important;
+    --color-background: color-mix(in oklch, var(--text), transparent 90%) !important;
   }
 }
 

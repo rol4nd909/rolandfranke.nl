@@ -13,7 +13,7 @@
   }
 
   &.lane--light {
-    --_bg: color-mix(in hsl, var(--text), var(--surface) 95%);
+    --_bg: color-mix(in oklch, var(--text), var(--surface) 95%);
 
     + .lane--light {
       padding-block-start: 0;
