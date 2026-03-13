@@ -29,6 +29,7 @@ module.exports = {
         'media-query-ranges': false,
         'custom-media-queries': true,
         'light-dark-function': false,
+        'oklab-function': false,
       }
     }),
     postcssGlobalData({
