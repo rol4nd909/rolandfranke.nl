@@ -16,16 +16,14 @@ em,
 .italic {
   font-style: italic;
   font-weight: var(--fw-normal);
-  /* Stylistic Sets for R */
-  font-feature-settings: 'ss05' on;
 }
 
 .ff-sans {
-  font-family: 'Instrument Sans', sans-serif;
+  font-family: var(--ff-sans);
 }
 
 .ff-serif {
-  font-family: 'Hedvig Letters Serif', serif;
+  font-family: var(--ff-serif);
 }
 
 .fs-5 {
@@ -77,14 +75,7 @@ code {
   background-color: color-mix(in oklch, var(--text), transparent 90%);
   color: light-dark(oklch(0.348 0.188 263.575), oklch(0.889 0.104 208.497));
   font-size: 80%;
-  font-family:
-    Consolas,
-    Monaco,
-    Lucida Console,
-    Liberation Mono,
-    DejaVu Sans Mono,
-    Bitstream Vera Sans Mono,
-    Courier New;
+  font-family: monospace;
 }
 
 pre {
@@ -96,7 +87,7 @@ pre {
   white-space: break-spaces;
 
   > code {
-    color: color-mix(in oklch, var(--surface), var(--text) 65%);
+    color: light-dark(oklch(0.301 0.08 2.356), oklch(0.862 0.046 356.087));
     background-color: transparent;
     font-family: 'FontWithASyntaxHighlighter', monospace;
     font-palette: --kung-fury-dark;
@@ -174,18 +165,18 @@ pre {
     4 oklch(0.44 0.16 303.373),
     5 oklch(0.113 0.009 242.173),
     7 oklch(0.415 0.016 248.216),
-    8 oklch(0.655 0.262 356.197);
+    8 oklch(0.406 0.187 328.361);
 }
 
 @font-palette-values --kung-fury-dark {
   font-family: 'FontWithASyntaxHighlighter';
   override-colors:
     0 oklch(0.889 0.104 208.497),
-    1 oklch(0.739 0.145 290.029),
+    1 oklch(0.843 0.085 292.108),
     2 oklch(0.889 0.104 208.497),
     3 oklch(0.889 0.104 208.497),
-    4 oklch(0.739 0.145 290.029),
+    4 oklch(0.843 0.085 292.108),
     5 oklch(0.984 0.003 247.858),
     7 oklch(0.836 0.036 248.26),
-    8 oklch(0.822 0.175 327.018);
+    8 oklch(0.862 0.132 326.643);
 }

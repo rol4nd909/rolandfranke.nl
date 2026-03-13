@@ -2,6 +2,7 @@
 import { SITE } from '@/data/siteData'
 import { SEO } from 'astro-seo'
 
+import Font from 'astro/components/Font.astro'
 import defaultImageFile from '/public/default-og-image.png'
 
 const {
@@ -93,34 +94,13 @@ if (typeof _image === 'string') {
                 },
             ],
             link: [
-                {
-                    rel: 'preload',
-                    href: '/fonts/InstrumentSans-Regular.woff2',
-                    crossorigin: 'anonymous',
-                    as: 'font',
-                    type: 'font/woff2',
-                },
-                {
-                    rel: 'preload',
-                    href: '/fonts/InstrumentSans-SemiBold.woff2',
-                    crossorigin: 'anonymous',
-                    as: 'font',
-                    type: 'font/woff2',
-                },
-                {
-                    rel: 'preload',
-                    href: '/fonts/HedvigLettersSerif-Regular.woff2',
-                    crossorigin: 'anonymous',
-                    as: 'font',
-                    type: 'font/woff2',
-                },
-                {
-                    rel: 'preload',
-                    href: '/fonts/FontWithASyntaxHighlighter-Regular.woff2',
-                    crossorigin: 'anonymous',
-                    as: 'font',
-                    type: 'font/woff2',
-                },
+                // {
+                //     rel: 'preload',
+                //     href: '/fonts/FontWithASyntaxHighlighter-Regular.woff2',
+                //     crossorigin: 'anonymous',
+                //     as: 'font',
+                //     type: 'font/woff2',
+                // },
                 { rel: 'icon', href: '/favicon-48x48.png', type: 'image/png', sizes: '48x48' },
                 { rel: 'icon', href: '/favicon-96x96.png', type: 'image/png', sizes: '96x96' },
                 { rel: 'icon', href: '/favicon.svg', type: 'image/svg+xml' },
@@ -137,4 +117,6 @@ if (typeof _image === 'string') {
             ],
         }}
     />
+    <Font cssVariable="--ff-sans" preload />
+    <Font cssVariable="--ff-serif" preload />
 </head>
