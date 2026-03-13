@@ -85,12 +85,4 @@
     1
   );
   --ease-out: cubic-bezier(0, 0, 0, 1);
-
-  /* main constrain */
-  --constrain-lg: 87rem;
-  --constrain-md: 69rem;
-  --constrain-sm: 57rem;
-  --constrain-xs: 51rem;
-
-  --gutter: 1.5rem;
 }

@@ -1,3 +1,13 @@
+:root {
+  /* main constrain */
+  --constrain-lg: 87rem;
+  --constrain-md: 69rem;
+  --constrain-sm: 57rem;
+  --constrain-xs: 50rem;
+
+  --gutter: 1.5rem;
+}
+
 .grid {
   display: grid;
   grid-template-columns:
