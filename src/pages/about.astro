@@ -1,13 +1,13 @@
 ---
+import CustomLink from '@/components/ui/CustomLink.astro'
 import FadeOutDown from '@/components/ui/FadeOutDown.astro'
 import Heading from '@/components/ui/Heading.astro'
 import Hero from '@/components/ui/Hero.astro'
-import Link from '@/components/ui/Link.astro'
 import BaseLayout from '@/layouts/BaseLayout.astro'
 ---
 
 <BaseLayout
-    title="About | Roland Franke"
+    title="About - Roland Franke"
     description="About Roland Franke — frontend developer focused on semantic HTML, modern CSS, accessibility and thoughtful web experiences."
 >
     <Hero data-grid="fullbleed">
@@ -78,8 +78,8 @@ import BaseLayout from '@/layouts/BaseLayout.astro'
 
         <h2>Why I write</h2>
         <p>
-            On <Link as="a" href="/frontend-stories/">Frontend Stories</Link> I share experiments, discoveries
-            and practical frontend insights.
+            On <CustomLink href="/frontend-stories/">Frontend Stories</CustomLink> I share experiments,
+            discoveries and practical frontend insights.
         </p>
 
         <p>

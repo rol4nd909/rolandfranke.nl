@@ -1,20 +1,14 @@
 ---
 import Logo from '@/icons/logo.svg'
 import DarkLightToggle from '@components/DarkLightToggle.astro'
-import Link from '@components/ui/Link.astro'
+import CustomLink from '@components/ui/CustomLink.astro'
 
 const { pathname } = Astro.url
 ---
 
 <header class="site-header">
     <a href="/" aria-current={pathname.slice(1) === '' ? 'page' : undefined}>
-        <Logo
-            width="48"
-            height="48"
-            aria-label="Logo: RF (Roland Franke)"
-            fill="currentColor"
-            role="img"
-        />
+        <Logo width="48" height="48" aria-label="Logo: RF (Roland Franke)" role="img" />
         <span class="sr-only"> - Home page</span>
     </a>
 
@@ -22,20 +16,18 @@ const { pathname } = Astro.url
         <nav aria-label="Primary">
             <ul class="menu">
                 <li>
-                    <Link
-                        as="a"
+                    <CustomLink
                         href="/frontend-stories"
                         aria-current={pathname.slice(1) === 'frontend-stories/'
                             ? 'page'
-                            : undefined}>Frontend Stories</Link
+                            : undefined}>Frontend Stories</CustomLink
                     >
                 </li>
                 <li>
-                    <Link
-                        as="a"
+                    <CustomLink
                         href="/about"
                         aria-current={pathname.slice(1) === 'about/' ? 'page' : undefined}
-                        >About</Link
+                        >About</CustomLink
                     >
                 </li>
             </ul>
@@ -75,6 +67,13 @@ const { pathname } = Astro.url
             row-gap: 1rem;
         }
 
+        > a {
+            --logo-bg: var(--color-neutral-100);
+            --logo-color: var(--color-primary-400);
+
+            display: grid;
+        }
+
         > div {
             display: flex;
             align-items: center;
@@ -88,13 +87,6 @@ const { pathname } = Astro.url
                 margin-inline-start: auto;
             }
         }
-    }
-
-    a:not(.btn) {
-        --logo-bg: var(--color-neutral-100);
-        --logo-color: var(--color-primary-400);
-
-        display: grid;
     }
 
     .menu {

@@ -3,8 +3,8 @@ import { type CollectionEntry } from 'astro:content'
 
 import FormattedDate from '@components/ui/FormattedDate.astro'
 import Badge from '@components/ui/Badge.astro'
-import Link from '@components/ui/Link.astro'
 import Heading from '@components/ui/Heading.astro'
+import CustomLink from '@components/ui/CustomLink.astro'
 
 type Props = {
     post: CollectionEntry<'posts'>
@@ -20,7 +20,7 @@ const slug = `/frontend-stories/${post.id}`
 <article>
     <header>
         <Heading tagName="h2" size="h3">
-            <Link as="a" href={slug} set:html={title} />
+            <CustomLink href={slug} set:html={title} />
         </Heading>
 
         <p class="flex">
@@ -36,7 +36,7 @@ const slug = `/frontend-stories/${post.id}`
             <FormattedDate {pubDate} />
         </p>
 
-        <div class="flex inline-wrap">
+        <div class="flex inline-wrap" role="group" aria-label="Categories">
             {tags.map((tag) => <Badge id={tag}>{tag}</Badge>)}
         </div>
     </header>

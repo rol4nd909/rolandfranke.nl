@@ -1,5 +1,5 @@
 ---
-import Link from '@components/ui/Link.astro'
+import CustomLink from '@components/ui/CustomLink.astro'
 
 type Props = {
     slug: string
@@ -25,13 +25,13 @@ const { slug, token, title, user, userName, preview, themeID } = Astro.props
     {...themeID && { 'data-theme-id': themeID }}
 >
     <p>
-        See the Pen <Link
-            as="a"
+        See the Pen <CustomLink
             href={`https://codepen.io/${userName}/pen/${slug}${token ? `/${token}` : ''}`}
-            target="blank">{title}</Link
+            target="blank">{title}</CustomLink
         > by
-        {user} (<Link as="a" href=`https://codepen.io/${userName}` target="blank">@{userName}</Link
-        >) on <Link as="a" href="https://codepen.io" target="blank">CodePen</Link>.
+        {user} (<CustomLink href=`https://codepen.io/${userName}` target="blank"
+            >@{userName}</CustomLink
+        >) on <CustomLink href="https://codepen.io" target="blank">CodePen</CustomLink>.
     </p>
 </div>
 <script is:inline src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>

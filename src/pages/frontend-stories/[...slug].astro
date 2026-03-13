@@ -7,7 +7,7 @@ import FadeOutDown from '@/components/ui/FadeOutDown.astro'
 import FormattedDate from '@/components/ui/FormattedDate.astro'
 import Hero from '@/components/ui/Hero.astro'
 import Heading from '@/components/ui/Heading.astro'
-import MDXLink from '@/components/ui/MDXLink.astro'
+import CustomLink from '@/components/ui/CustomLink.astro'
 
 export async function getStaticPaths() {
     const posts = await getCollection('posts', ({ data }) => !data.isDraft)
@@ -22,7 +22,7 @@ const { Content } = await render(post)
 const { title, description, image, pubDate, tags, author } = post.data
 ---
 
-<BaseLayout title=`${title} | Roland Franke` {description} ogType="article" image={image?.url}>
+<BaseLayout title=`${title} - Roland Franke` {description} ogType="article" image={image?.url}>
     <Hero data-grid="fullbleed">
         <FadeOutDown class="flow" data-column="medium">
             <Heading tagName="h1" size="h1" set:html={title} />
@@ -40,14 +40,14 @@ const { title, description, image, pubDate, tags, author } = post.data
                 <FormattedDate {pubDate} />
             </p>
 
-            <div class="flex inline-wrap">
+            <div class="flex inline-wrap" role="group" aria-label="Categories">
                 {tags.map((tag) => <Badge id={tag}>{tag}</Badge>)}
             </div>
         </FadeOutDown>
     </Hero>
 
     <div class="grid lane lane--light prose flow" data-grid="fullbleed">
-      <Content components={{ a: MDXLink }}/>
+      <Content components={{ a: CustomLink }}/>
     </div>
 </BaseLayout>
 

@@ -1,0 +1,71 @@
+---
+import IconExternalLink from '@/icons/icon-external-link.svg'
+
+const { href, ...rest }: Record<string, any> = Astro.props
+const site = new URL(import.meta.env.SITE).origin
+const isExternal = href?.startsWith('http') && new URL(href).origin !== site
+const attrs = isExternal ? { target: '_blank', rel: 'noopener noreferrer' } : {}
+---
+
+<a {href} {...attrs} {...rest}>
+    <span><slot /></span>
+
+    {isExternal && <IconExternalLink />}
+</a>
+
+<style>
+    a {
+        color: currentColor;
+        text-decoration: none;
+
+        > span {
+            background-image: linear-gradient(var(--color-primary-400) 0 0);
+            background-size: 0 0.3em;
+            background-position: 100% 100%;
+            background-repeat: no-repeat;
+            transition: background-size 0.5s var(--ease-elastic-2);
+        }
+
+        > svg {
+            vertical-align: -0.1lh;
+        }
+
+        @media (--is-mouse) {
+            &:hover {
+                > span {
+                    background-size: 100% 0.3em;
+                    background-position: 0 100%;
+                    transition-delay: 125ms;
+                }
+            }
+        }
+
+        &:focus-visible {
+            > span {
+                background-size: 100% 0.3em;
+                background-position: 0 100%;
+                transition-delay: 125ms;
+            }
+        }
+    }
+
+    :global(p) > a > span,
+    :global(li) > a > span {
+        background-size: 100% 0.3em;
+        background-position: 0 100%;
+    }
+
+    @media (--is-mouse) {
+        :global(p) > a:hover > span,
+        :global(li) > a:hover > span {
+            background-size: 0 0.3em;
+            background-position: 100% 100%;
+        }
+    }
+
+    :global(p) > a:focus-visible > span,
+    :global(li) > a:focus-visible > span {
+        background-size: 0 0.3em;
+        background-position: 100% 100%;
+    }
+</style>

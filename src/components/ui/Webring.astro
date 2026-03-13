@@ -1,14 +1,14 @@
 ---
-import Link from '@/components/ui/Link.astro'
 import Next from '@/icons/icon-next.svg'
 import Previous from '@/icons/icon-previous.svg'
 import Shuffle from '@/icons/icon-shuffle.svg'
+import CustomLink from '@components/ui/CustomLink.astro'
 
 const siteBaseURL = new URL(Astro.url)
 ---
 
 <div class="webring fs--1">
-    <p>Crawl the <Link as="a" href="https://CS.Sjoy.lol">CSS Webring</Link></p>
+    <p>Crawl the <CustomLink href="https://CS.Sjoy.lol">CSS Webring</CustomLink></p>
 
     <div>
         <a
@@ -16,7 +16,7 @@ const siteBaseURL = new URL(Astro.url)
             href=`https://webri.ng/webring/cssjoy/previous?via=${siteBaseURL}`
             class="icon-link"
         >
-            <Previous aria-hidden fill="currentColor" />
+            <Previous aria-hidden />
         </a>
 
         <a
@@ -24,7 +24,7 @@ const siteBaseURL = new URL(Astro.url)
             href=`https://webri.ng/webring/cssjoy/random?via=${siteBaseURL}`
             class="icon-link"
         >
-            <Shuffle aria-hidden fill="currentColor" />
+            <Shuffle aria-hidden />
         </a>
 
         <a
@@ -32,7 +32,7 @@ const siteBaseURL = new URL(Astro.url)
             href=`https://webri.ng/webring/cssjoy/next?via=${siteBaseURL}`
             class="icon-link"
         >
-            <Next aria-hidden fill="currentColor" />
+            <Next aria-hidden />
         </a>
     </div>
 </div>
