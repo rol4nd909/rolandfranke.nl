@@ -10,7 +10,7 @@ const attrs = isExternal ? { target: '_blank', rel: 'noopener noreferrer' } : {}
 <a {href} {...attrs} {...rest}>
     <span><slot /></span>
 
-    {isExternal && <IconExternalLink />}
+    {isExternal && <IconExternalLink width="1.5ch" height="1.5ch" />}
 </a>
 
 <style>
