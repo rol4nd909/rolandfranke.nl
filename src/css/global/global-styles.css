@@ -44,7 +44,15 @@ body {
   text-decoration-skip-ink: auto;
   color: currentColor;
 
-  &:is(:hover, :focus-visible) {
+  @media (--is-mouse) {
+    &:hover {
+      outline-color: var(--color-primary-400);
+      outline-offset: -0.25rem;
+      outline-width: 0.5rem;
+    }
+  }
+
+  &:focus-visible {
     outline-color: var(--color-primary-400);
     outline-offset: -0.25rem;
     outline-width: 0.5rem;
