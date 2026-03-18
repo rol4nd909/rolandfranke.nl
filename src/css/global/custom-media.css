@@ -15,6 +15,7 @@
 @custom-media --is-landscape (orientation: landscape);
 
 @custom-media --hd-color (dynamic-range: high);
+@custom-media --forced-color (forced-colors: active);
 
 @custom-media --is-touch (hover: none) and (pointer: coarse);
 @custom-media --is-stylus (hover: none) and (pointer: fine);

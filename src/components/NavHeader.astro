@@ -72,6 +72,11 @@ const { pathname } = Astro.url
             --logo-color: var(--color-primary-400);
 
             display: grid;
+
+            @media (--forced-color) {
+                --logo-bg: transparent;
+                --logo-color: currentColor;
+            }
         }
 
         > div {
