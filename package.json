@@ -15,9 +15,9 @@
     "@astrojs/mdx": "^5.0.2",
     "@astrojs/rss": "^4.0.17",
     "@astrojs/sitemap": "^3.7.1",
-    "astro": "6.0.6",
+    "astro": "6.0.8",
     "astro-seo": "^1.1.0",
-    "typescript": "^5.9.3"
+    "typescript": "^6.0.2"
   },
   "devDependencies": {
     "@csstools/postcss-global-data": "^4.0.0",
