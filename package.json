@@ -12,10 +12,10 @@
   "dependencies": {
     "@astro-community/astro-embed-baseline-status": "^0.2.2",
     "@astrojs/check": "^0.9.8",
-    "@astrojs/mdx": "^5.0.2",
-    "@astrojs/rss": "^4.0.17",
-    "@astrojs/sitemap": "^3.7.1",
-    "astro": "6.0.8",
+    "@astrojs/mdx": "^5.0.3",
+    "@astrojs/rss": "^4.0.18",
+    "@astrojs/sitemap": "^3.7.2",
+    "astro": "6.1.1",
     "astro-seo": "^1.1.0",
     "typescript": "^6.0.2"
   },
