@@ -1,0 +1,93 @@
+---
+import type { MarkdownHeading } from 'astro'
+
+const { headings } = Astro.props
+
+const toc: MarkdownHeading[] = headings.filter((heading: MarkdownHeading) => heading.depth === 2)
+---
+
+{
+    toc && toc.length > 0 && (
+        <nav class="toc" aria-label="Table of Contents">
+            <ul class="list">
+                {toc.map((heading) => (
+                    <li>
+                        <a href={`#${heading.slug}`}>{heading.text}</a>
+                    </li>
+                ))}
+            </ul>
+        </nav>
+    )
+}
+
+<style>
+    .toc {
+        display: none;
+    }
+
+    @supports (scroll-target-group: auto) {
+        .toc {
+            position: sticky;
+            inset-block-start: 1.5rem;
+            inset-inline-start: 0;
+            max-inline-size: var(--toc-width);
+
+            grid-column: medium;
+            grid-row: 1;
+            align-self: start;
+            float: left;
+
+            @media (width >= 53rem) {
+                display: block;
+            }
+        }
+
+        .list {
+            display: grid;
+            gap: 0.25rem;
+            padding-inline: 0;
+
+            scroll-target-group: auto;
+
+            li > a {
+                text-decoration: none;
+                display: inline-flex;
+                font-size: var(--fs--1);
+
+                &:not(:target-current) {
+                    letter-spacing: 0.0125rem;
+                }
+
+                &::before {
+                    content: '';
+                    inline-size: 1ch;
+                    aspect-ratio: 1;
+                    position: absolute;
+                    margin-block-start: 0.25lh;
+                    background-color: var(--color-primary-400);
+                    opacity: 0;
+                    transform: translateX(0);
+                    visibility: hidden;
+                    transition:
+                        opacity 0.5s ease,
+                        transform 1s ease,
+                        visibility 0.2s ease allow-discrete;
+                    /* ease-spring-4 from open props, thanks Adam :) */
+                    transition-timing-function: var(--ease-spring-4);
+                }
+
+                &:target-current {
+                    font-family: var(--ff-serif);
+                    font-weight: var(--fw-semibold);
+                    transform: translateX(0.75rem);
+
+                    &::before {
+                        opacity: 1;
+                        transform: translateX(-1.25rem);
+                        visibility: visible;
+                    }
+                }
+            }
+        }
+    }
+</style>

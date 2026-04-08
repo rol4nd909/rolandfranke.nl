@@ -6,6 +6,7 @@
   --constrain-xs: 50rem;
 
   --gutter: 1.5rem;
+  --toc-width: 16rem;
 }
 
 .grid {
@@ -23,7 +24,7 @@
     [medium-end] minmax(0, calc((var(--constrain-lg) - var(--constrain-md)) / 2))
     [large-end] minmax(var(--gutter, 1rem), 1fr) [fullbleed-end];
 
-  & > * {
+  & > :is(*) {
     grid-column: small;
   }
 

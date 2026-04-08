@@ -1,0 +1,21 @@
+---
+type Props = {
+    size?: 'large'
+}
+
+const { size } = Astro.props
+---
+
+<span class:list={[size]} aria-hidden="true">•</span>
+
+<style>
+    span {
+        font-size: 0.75rem;
+        color: var(--color-primary-400);
+        font-feature-settings: 'aalt' on;
+
+        &.large {
+            font-size: utopia.clamp(8, 16);
+        }
+    }
+</style>

@@ -10,12 +10,17 @@ import { BaselineStatus } from '@astro-community/astro-embed-baseline-status';
 import CodepenEmbed from '@components/ui/CodepenEmbed.astro';
 
 ## Introduction
+
 I still remember the days of tediously adjusting widths, trying to make layouts work across devices, only to have them fall apart on different screen sizes. My approach needed a change, and this led me to dive deep into CSS Grid. Over time, I adopted a system using named grid lines—a technique that became the backbone of my layouts, making them not only responsive but intuitive and easy to manage.
 
-### Discovering the Problem
+
+## Discovering the Problem
+
 Initially, I used a more basic layout structure with fixed widths and manual breakpoints. However, as projects grew more complex, this approach led to endless tweaks and adjustments. I needed a system that adapted easily across screen sizes without requiring constant micro-adjustments. That's when I discovered the potential of CSS Grid's named grid lines to bring precision and clarity to my layouts.
 
-### The Power of Named Grid Lines
+
+## The Power of Named Grid Lines
+
 One of my earliest realizations was that I could define named grid lines within my CSS, turning each layout section into a clearly defined area. Instead of relying on arbitrary pixel values, I could use names like `fullbleed`, `breakout`, `content` to create meaningful, reusable layouts.
 
 Here's a look at the structure I now use:
@@ -43,7 +48,9 @@ Here's a look at the structure I now use:
 
 In this setup, each named grid line acts as a landmark, allowing me to place elements precisely in the layout. Named lines like breakout-start or content-end serve as intuitive markers that not only give structure but also make future adjustments simpler and quicker.
 
-#### Adding Flexibility with Named Columns
+
+## Adding Flexibility with Named Columns
+
 Named grid lines allow me to control exactly where elements will start and end within the grid. For instance, using `data-column` attributes, I can effortlessly assign content to a column, making my code cleaner and my layout more adaptable:
 
 ```html
@@ -63,7 +70,9 @@ Named grid lines allow me to control exactly where elements will start and end w
 
 With this approach, each section of my layout naturally falls into its place, guided by the named grid lines. The layout remains flexible without requiring hard-coded widths, allowing it to adjust fluidly as screen sizes change.
 
-#### Achieving Full-Bleed Layouts
+
+## Achieving Full-Bleed Layouts
+
 One of the most powerful uses of named grid lines has been creating full-bleed sections that span the entire viewport width. By assigning the `data-column='fullbleed'` attribute, I can ensure that specific elements extend beyond the usual column constraints, perfect for hero sections or background images that demand extra visual impact.
 
 What's even more beneficial is that within this full-bleed section, I can apply the same grid structure with named lines, making it a grid within a grid. This means that even in a full-width layout, the internal content can still align to the established grid, giving me control over precise positioning while preserving the visual harmony with the rest of the page.
@@ -77,10 +86,14 @@ What's even more beneficial is that within this full-bleed section, I can apply 
 
 Using `subgrid` here lets the full-bleed section inherit the parent grid's structure, so any elements within it align consistently with the named lines defined in the main layout. This approach ensures that even my full-width elements don’t disrupt the layout flow; they simply extend beyond it while maintaining the familiar structure inside.
 
-#### Explore the Complete Grid System in Action
+
+### Explore the Complete Grid System in Action
+
 <CodepenEmbed slug='oNKaywm' themeID={56839} token='852225a5e1bd6e8bd566ecb77093cc8f' title='CSS Grid with Named Grid Lines' userName='ROL4ND909' user='Roland' preview />
 
-### Conclusion
+
+## Conclusion
+
 Named grid lines have turned CSS Grid into a tool I rely on in every project. They give me control over layout placement, enable intuitive adjustments, and allow each element to “know” its place in the structure. Using this system has saved me hours of trial and error, and it's become a key part of my development toolkit. I encourage anyone looking to create robust, adaptable layouts to try using named grid lines—they might just change the way you think about layout design.
 
 This journey has been a rewarding one, and I hope sharing my experience with named grid lines inspires you to experiment and build something equally adaptable and reliable.

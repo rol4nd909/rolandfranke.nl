@@ -6,67 +6,80 @@ author: Roland
 tags: ["css"]
 ---
 
-## The problem with sticky menus and what to do instead
+## Introduction
 
-_Designers_ use sticky menus (menus that stick to the edge of the viewport) to make them easy to access on long pages. But this fancy pattern hurts UX far more than it improves it.
-Here's why:
+Sticky menus are everywhere. They promise quick access to navigation, especially on long pages.
 
-1. **They constantly take up space**
-They get in the way of the actual content. And it's worse on small screens where space is more limited.
+But that convenience comes at a cost.
 
-2. **They obscure content**
-For example, Material Design's floating action button always gets in the way of the content behind it.
+Instead of improving usability, they often compete with the content, introduce edge cases, and create new problems. Especially on smaller screens and for keyboard users.
 
-3. **They break when you zoom in**
-When zooming in, the size of the sticky menu can increase to a point where there's little space for the content.
-On mobile, sticky menus may disappear upwards. They may also become misaligned or slightly cropped.
+### What goes wrong
 
-4. **They're difficult to access**
-If a sticky menu is taller than the content and viewport, users will be unable to access the bottom of the menu (in some browsers).
-Even if the content is taller than the menu, users still have to scroll to the bottom of the content to see the menu which is long winded.
-You could add an inner scroll bar to the menu. But [multiple scroll bars are hard to use](https://baymard.com/blog/inline-scroll-areas).
+**They take up space**
+They permanently reduce the space available for actual content. On small screens, that cost is even higher.
 
-5. **Internal page anchors feel broken when clicked twice**
-Some sticky menus contain links that take users to content down the page.
-When the user clicks the same link for a second time nothing happens, which makes the interface feel broken.
+**They cover content**
+They sit on top of the UI instead of working with it. Content, buttons, or links end up hidden behind them.
 
-6. **They appear closer than they are**
-Sticky menus are always visually accessible, but in reality are far away for keyboard users navigating with the tab key.
+**They don't hold up when zooming**
+Zoom in and things fall apart. Menus grow, layouts shift, and usable space disappears. Sometimes they even get cropped or misaligned.
 
-7. **They obscure links and other focusable elements**
-Users who navigate back up the page by keyboard may end up focusing on a link that's obscured by the sticky menu.
+**They're harder to use than they look**
+If the menu is taller than the viewport, parts of it become unreachable.
+Adding an inner scrollbar only makes things worse. Multiple scroll areas are frustrating to use.
 
-## The problem with sticky menus that appear on scroll and what to do instead
+**They break expectations**
+Anchor links inside sticky menus often stop working when clicked twice. Nothing happens, and the UI feels unreliable.
 
-**This seems smart because:**
+**They're misleading for keyboard users**
+They look “close”, but navigating to them can take a lot of tabbing.
 
-- the menu gets out of the way to allow users to focus on the content
-- it allows users to access the menu without having to scroll back to the top
+**They interfere with focus**
+Keyboard users can end up focusing elements hidden behind the menu.
 
-**But this approach is worse than regular sticky menus.**
 
-Here's why:
+## Sticky-on-scroll menus are even worse
 
-1. **They're distracting**
-This is because as the user scrolls the content to fit in the viewport, the menu will suddenly appear.
-Good design doesn't guess (wrongly) about what users need.
+Hiding the menu and showing it on scroll might seem like a fix. It isn't.
 
-2. **They're hard to control**
-This is because scrolling up too much reveals the menu when it's not wanted, and scrolling down a bit by accident will hide it when it is wanted.
-Good design doesn't take control away.
+### Why this pattern backfires
 
-3. **They cause dizziness and nausea**
-This is because [animation can cause dizziness, nausea, headaches and more](https://alistapart.com/article/designing-safer-web-animation-for-motion-sensitivity/).
-Good design avoids physical stress.
+**It's distracting**
+UI that appears while scrolling interrupts reading. It shifts attention away from the content.
 
-4. **They can impact performance**
-This is because JavaScript is needed to react to the scroll event which can drain the battery and degrade performance especially on low-powered devices.
+**It's unpredictable**
+Scroll a bit too far and it disappears. Scroll back and it suddenly shows up again. It's hard to control.
 
-Good design is lightweight.
+**It can make people feel sick**
+Unexpected motion isn't harmless. Animations like this can trigger dizziness or nausea.
 
-### What to do instead
+**It adds unnecessary complexity**
+You need JavaScript to track scroll behavior. That adds overhead, hurts performance, and drains battery on weaker devices.
 
-1. **Keep pages short**: Sticky menus are a symptom of long pages so fix the root cause.
-2. **Just let users scroll**: It's a myth that scrolling is a problem. Even on mobile, the top of the page is a flick or 2 away mostly.
-3. **Put relevant links in context**: For example, add a subscribe form to the end of a post or add a CTA to a pricing section.
-4. **Use a back-to-top link**: They're relatively unobtrusive (but only do this once you exhaust the other options).
+
+## What to do instead
+
+**Keep pages short**
+If you need a sticky menu, the page is probably too long. Fix that first.
+
+**Let users scroll**
+Scrolling is not a problem. Reaching the top of a page is fast, especially on mobile.
+
+**Place actions where they're needed**
+Put links and CTAs in context instead of hiding them in a global menu.
+
+**Use a back-to-top link (if needed)**
+Simple, predictable, and unobtrusive — but only after trying the options above.
+
+
+## Closing thoughts
+
+Sticky menus try to solve a navigation problem, but usually treat the symptom instead of the cause.
+
+Most of the time, better structure beats persistent UI.
+
+Shorter pages, clearer hierarchy, and well-placed actions make navigation feel natural — without needing elements that follow users around.
+
+Good UI doesn't fight the page.
+It works with it.

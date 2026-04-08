@@ -5,6 +5,7 @@ import FormattedDate from '@components/ui/FormattedDate.astro'
 import Badge from '@components/ui/Badge.astro'
 import Heading from '@components/ui/Heading.astro'
 import CustomLink from '@components/ui/CustomLink.astro'
+import Dot from '@components/ui/Dot.astro'
 
 type Props = {
     post: CollectionEntry<'posts'>
@@ -30,7 +31,8 @@ const slug = `/frontend-stories/${post.id}`
                         {' '}
                         by <span class="italic">{author}</span>
                     </span>
-                    <span class="dot" aria-hidden="true">•</span>
+
+                    <Dot />
                 )
             }
             <FormattedDate {pubDate} />
@@ -64,12 +66,6 @@ const slug = `/frontend-stories/${post.id}`
     header {
         display: grid;
         gap: 1rem;
-    }
-
-    .dot {
-        font-size: .75rem;
-        color: var(--color-primary-400);
-        font-feature-settings: 'aalt' on;
     }
 
     a {

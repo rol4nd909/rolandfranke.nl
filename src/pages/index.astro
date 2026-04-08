@@ -1,14 +1,15 @@
 ---
+import Dot from '@/components/ui/Dot.astro'
 import Hero from '@/components/ui/Hero.astro'
 import BaseLayout from '@layouts/BaseLayout.astro'
 ---
 
 <BaseLayout>
     <Hero class="hero--large" data-grid="fullbleed">
-        <h1 class="hero__title">roland<span>.</span></h1>
+        <h1 class="hero__title">roland<span aria-hidden="true">.</span></h1>
         <div class="hero__explain flex letter-spacing" aria-hidden="true">
             <span>[<span class="ff-serif">r<span class="underline">o</span>.land</span>]</span>
-            <span class="dot" aria-hidden="true">•</span>
+            <Dot size="large" />
             <span class="bold">frontend developer</span>
         </div>
         <p class="hero__content">
@@ -38,12 +39,6 @@ import BaseLayout from '@layouts/BaseLayout.astro'
         --letter-spacing: 3;
 
         font-size: utopia.clamp(20, 38);
-
-        .dot {
-            font-size: utopia.clamp(8, 16);
-            color: var(--color-primary-400);
-            font-feature-settings: 'aalt' on;
-        }
     }
 
     .hero__content {
