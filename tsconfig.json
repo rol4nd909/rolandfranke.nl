@@ -9,14 +9,13 @@
   ],
 
   "compilerOptions": {
-    "baseUrl": ".",
     "paths": {
-      "@/*": ["src/*"],
-      "@layouts/*": ["src/layouts/*"],
-      "@pages/*": ["src/pages/*"],
-      "@components/*": ["src/components/*"],
-      "@styles/*": ["src/css/*"],
-      "@utils/*": ["src/utils/*"],
+      "@/*": ["./src/*"],
+      "@layouts/*": ["./src/layouts/*"],
+      "@pages/*": ["./src/pages/*"],
+      "@components/*": ["./src/components/*"],
+      "@styles/*": ["./src/css/*"],
+      "@utils/*": ["./src/utils/*"],
       "@assets/*": ["src/assets/*"],
     }
   }
