@@ -144,6 +144,14 @@ pre {
     font-family: var(--ff-serif);
     font-size: var(--fs-1);
   }
+
+  blockquote {
+    margin-inline-start: var(--gutter);
+    padding-inline-start: var(--gutter);
+    /* font-size: var(--fs-1); */
+    font-family: var(--ff-serif);
+    border-inline-start: 0.5rem solid var(--color-primary-400);
+  }
 }
 
 /* 0 keywords, {} */

@@ -67,7 +67,10 @@ const { title, description, image, pubDate, tags, author } = post.data
             @supports (scroll-target-group: auto) {
                 grid-column: medium / xsmall;
                 grid-row: 1;
-                margin-inline-start: calc(var(--toc-width) + var(--gutter));
+
+                @media (width >= 53rem) {
+                    margin-inline-start: calc(var(--toc-width) + var(--gutter));
+                }
             }
         }
     }

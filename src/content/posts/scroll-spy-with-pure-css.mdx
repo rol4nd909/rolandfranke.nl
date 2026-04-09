@@ -1,0 +1,137 @@
+---
+title: 'Scroll Spy with Pure CSS using scroll-target-group'
+description: 'How the new CSS scroll-target-group and :target-current let you build a table of contents scroll spy without JavaScript.'
+pubDate: 2026-04-09
+author: Roland
+tags: ["css", "experimental"]
+---
+
+import { BaselineStatus } from '@astro-community/astro-embed-baseline-status';
+
+## Introduction
+
+Scroll spy navigation highlighting a table of contents link based on what section is visible has traditionally required JavaScript. You needed scroll listeners or an `IntersectionObserver` to watch positions and update state as the user scrolls.
+
+That's no longer strictly true.
+
+With the new CSS `scroll-target-group` property and the `:target-current` pseudo-class, the browser can handle active link tracking *natively*, letting you build scroll spy navigation using only HTML and CSS.
+
+I recently applied this on my this site for the TOC
+
+
+## The Scroll Spy Setup
+
+Below is the general pattern I used, inspired by the basic usage examples of `scroll-target-group`.
+
+
+### HTML Structure
+
+Your page has multiple content sections with unique IDs. Your TOC links point to those sections:
+
+```html
+<nav id="toc">
+  <ol>
+    <li><a href="#section-1">Section 1</a></li>
+    <li><a href="#section-2">Section 2</a></li>
+    <li><a href="#section-3">Section 3</a></li>
+  </ol>
+</nav>
+
+<section id="section-1">…</section>
+<section id="section-2">…</section>
+<section id="section-3">…</section>
+```
+
+This markup forms the basis of your scroll-spy. Because each nav link points to a corresponding heading section, the browser can automatically track which section is in view.
+
+
+### Turn the TOC into a `scroll-target-group`
+
+To enable CSS scroll tracking, you mark the container of your navigation links as a *scroll marker group container*:
+
+```css
+ol {
+  scroll-target-group: auto;
+}
+```
+
+This tells the browser:
+
+> "This container holds scroll markers linked to content sections, group them and track which one is active."
+
+Once that's done, the browser internally watches scroll positions and figures out which target section is “current”.
+
+
+### Style the Active Link with `:target-current`
+
+Native scroll spy magic comes from the `:target-current` pseudo-class.
+
+Within your scroll marker group container, the `<a>` link whose section is currently in view gets `:target-current` applied automatically.
+
+To highlight it, you just style that state:
+
+```css
+a:target-current {
+  color: red;
+  font-weight: bold;
+}
+```
+
+There's no JS toggling classes, no event listeners, and no IntersectionObserver the browser handles it all.
+
+
+## Why This Matters
+
+This is the same basic pattern shown in the MDN example for `scroll-target-group`, where an ordered list of links becomes a scroll marker set and the browser highlights whichever is current as the user scrolls.
+
+But by plugging in your own HTML structure your actual TOC and page sections you get a real, production-ready scroll spy.
+
+With this setup:
+
+- Your TOC highlights the current section automatically
+- Styling stays fully declarative
+- You can keep your JavaScript bundle lean
+
+
+## My Implementation Notes
+
+On my own site:
+
+- I applied this only on screens wider than 848px, where a persistent TOC makes sense
+- The feature works in Chromium-based browsers (Chrome, Edge) as progressive enhancement
+- On unsupported browsers, the TOC is not shown at all, so it doesn't break the experience
+
+This aligns with the current experimental status of `scroll-target-group` it's available in the latest Chromium engines but not yet in all browsers.
+
+
+## Progressive Enhancement
+
+Since not every browser supports this yet, wrap your styles in a feature query:
+
+```css
+@supports (scroll-target-group: auto) {
+  ol {
+    scroll-target-group: auto;
+  }
+  a:target-current {
+    color: red;
+    font-weight: bold;
+  }
+}
+```
+
+This ensures older browsers don't break, while capable ones get the native scroll spy experience.
+
+
+## Browser Support
+
+<BaselineStatus id="scroll-target-group" />
+
+This means the feature is great for *progressive enhancement* add it where it's supported, and fall back where it's not.
+
+
+## Closing Thoughts
+
+“Scroll spy” used to require a handful of JavaScript and careful scroll tracking logic. Now, you can express it entirely as a relationship between links and sections, and let the browser handle the rest.
+
+This move toward *declarative interaction* in CSS feels like a big step forward for UI patterns that were once inherently imperative. Keep an eye on this as browser support broadens, CSS-only scroll spy might become the default approach for in-page navigation going forward.
