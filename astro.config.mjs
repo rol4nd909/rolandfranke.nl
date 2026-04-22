@@ -34,7 +34,12 @@ export default defineConfig({
     }
   ],
 
-  integrations: [sitemap(), mdx()],
+  integrations: [
+    sitemap({
+      filter: (page) => page !== 'https://rolandfranke.nl/frontend-stories/wcag-22/',
+    }),
+    mdx()
+  ],
   markdown: {
     syntaxHighlight: false
   },
