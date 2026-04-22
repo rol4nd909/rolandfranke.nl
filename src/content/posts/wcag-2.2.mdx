@@ -1,0 +1,277 @@
+---
+title: WCAG 2.2 - Complete overzicht
+description: 'WCAG 2.2 bevat 56 criteria verdeeld over 4 principes: Waarneembaar, Bedienbaar, Begrijpelijk, Robuust. Elk criterium heeft specifieke eisen en testmethoden.'
+pubDate: 2026-04-22
+author: Roland
+tags: ["WCAG"]
+isDraft: true
+tocLevel: 3
+---
+
+De Richtlijnen voor Toegankelijkheid van Webcontent (WCAG) 2.2 definiëren hoe je webcontent toegankelijker maakt voor mensen met een functiebeperking. Toegankelijkheid betreft een breed scala van functiebeperkingen, waaronder visuele, auditieve, fysieke, spraak-, cognitieve, taal-, leer- en neurologische functiebeperkingen.
+
+## 1. Waarneembaar (Perceivable)
+
+### 1.1 Tekstalternatieven
+
+[1.1.1 Niet-tekstuele content](https://www.w3.org/Translations/WCAG22-nl/#non-text-content) <br />
+Alt-tekst of alternatief aanwezig. <br />
+Test: screenreader / images uit.
+
+
+### 1.2 Tijdgebaseerde media
+
+[1.2.1 Alleen audio en alleen video (vooraf opgenomen)](https://www.w3.org/Translations/WCAG22-nl/#audio-only-and-video-only-prerecorded) <br />
+Transcript of alternatief beschikbaar. <br />
+Test: zonder beeld/geluid begrijpen.
+
+[1.2.2 Ondertiteling (vooraf opgenomen)](https://www.w3.org/Translations/WCAG22-nl/#captions-prerecorded) <br />
+Video heeft captions. <br />
+Test: video zonder geluid.
+
+[1.2.3 Audiodescriptie of media-alternatief](https://www.w3.org/Translations/WCAG22-nl/#audio-description-or-media-alternative-prerecorded) <br />
+Visuele info beschreven. <br />
+Test: alleen luisteren.
+
+[1.2.4 Ondertiteling (live) (AA)](https://www.w3.org/Translations/WCAG22-nl/#captions-live) <br />
+Live captions aanwezig. <br />
+Test: livestream check.
+
+[1.2.5 Audiodescriptie (vooraf opgenomen) (AA)](https://www.w3.org/Translations/WCAG22-nl/#audio-description-prerecorded) <br />
+Extra audio beschrijving. <br />
+Test: video afhankelijk van visuals.
+
+
+### 1.3 Aanpasbaar
+
+[1.3.1 Info en relaties](https://www.w3.org/Translations/WCAG22-nl/#info-and-relationships) <br />
+Semantische HTML klopt. <br />
+Test: inspect / screenreader.
+
+[1.3.2 Betekenisvolle volgorde](https://www.w3.org/Translations/WCAG22-nl/#meaningful-sequence) <br />
+DOM volgorde logisch. <br />
+Test: tab door pagina.
+
+[1.3.3 Zintuiglijke eigenschappen](https://www.w3.org/Translations/WCAG22-nl/#meaningful-sequence) <br />
+Geen visuele-only instructies. <br />
+Test: zonder UI lezen.
+
+[1.3.4 Weergavestand (AA)](https://www.w3.org/Translations/WCAG22-nl/#orientation) <br />
+Werkt portrait/landscape. <br />
+Test: scherm draaien.
+
+[1.3.5 Identificeer doel input (AA)](https://www.w3.org/Translations/WCAG22-nl/#identify-input-purpose) <br />
+Input type correct (autocomplete). <br />
+Test: form inspect.
+
+
+### 1.4 Onderscheidbaar
+
+[1.4.1 Gebruik van kleur](https://www.w3.org/Translations/WCAG22-nl/#use-of-color) <br />
+Kleur is niet enige info. <br />
+Test: grayscale.
+
+[1.4.2 Geluidsbediening](https://www.w3.org/Translations/WCAG22-nl/#audio-control) <br />
+Automatisch geluid controleerbaar. <br />
+Test: geluid > 3s zonder controle.
+
+[1.4.3 Contrast (minimum) (AA)](https://www.w3.org/Translations/WCAG22-nl/#contrast-minimum) <br />
+Tekst voldoende contrast. <br />
+Test: contrast checker.
+
+[1.4.4 Herschalen van tekst (AA)](https://www.w3.org/Translations/WCAG22-nl/#resize-text) <br />
+Tot 200% zonder issues. <br />
+Test: browser zoom.
+
+[1.4.5 Afbeeldingen van tekst (AA)](https://www.w3.org/Translations/WCAG22-nl/#images-of-text) <br />
+Geen tekst in images. <br />
+Test: selecteerbaarheid.
+
+[1.4.10 Reflow (AA)](https://www.w3.org/Translations/WCAG22-nl/#reflow) <br />
+Geen horizontaal scrollen (320px). <br />
+Test: mobile viewport.
+
+[1.4.11 Contrast niet-tekstuele content (AA)](https://www.w3.org/Translations/WCAG22-nl/#non-text-contrast) <br />
+UI elementen zichtbaar. <br />
+Test: buttons/borders.
+
+[1.4.12 Tekstafstand (AA)](https://www.w3.org/Translations/WCAG22-nl/#text-spacing) <br />
+Spacing breekt layout niet. <br />
+Test: gebruik stylus chrome extension.
+
+[1.4.13 Hover/focus content (AA)](https://www.w3.org/Translations/WCAG22-nl/#content-on-hover-or-focus) <br />
+Tooltips blijven bruikbaar. <br />
+Test: hover/move mouse, sluitbaar, aanwijsbaar en aanhouden.
+
+
+## 2. Bedienbaar (Operable)
+
+### 2.1 Toetsenbord
+
+[2.1.1 Toetsenbord](https://www.w3.org/Translations/WCAG22-nl/#keyboard) <br />
+Alles werkt met keyboard. <br />
+Test: Tab/Enter.
+
+[2.1.2 Geen toetsenbordval](https://www.w3.org/Translations/WCAG22-nl/#no-keyboard-trap) <br />
+Niet vast komen te zitten. <br />
+Test: modals/tab loops.
+
+[2.1.4 Enkel teken sneltoetsen](https://www.w3.org/Translations/WCAG22-nl/#character-key-shortcuts) <br />
+Geen onverwachte shortcuts. <br />
+Test: random keys.
+
+
+### 2.2 Genoeg tijd
+
+[2.2.1 Timing aanpasbaar](https://www.w3.org/Translations/WCAG22-nl/#timing-adjustable) <br />
+Tijdslimieten aanpasbaar. <br />
+Test: sessies/forms.
+
+[2.2.2 Pauzeren, stoppen, verbergen](https://www.w3.org/Translations/WCAG22-nl/#pause-stop-hide) <br />
+Animaties controleerbaar. <br />
+Test: autoplay.
+
+
+### 2.3 Toevallen en fysieke reacties
+
+[2.3.1 Drie flitsen of beneden drempelwaarde](https://www.w3.org/Translations/WCAG22-nl/#three-flashes-or-below-threshold) <br />
+Geen epilepsie risico. <br />
+Test: visuele check.
+
+
+### 2.4 Navigeerbaar
+
+[2.4.1 Blokken omzeilen](https://www.w3.org/Translations/WCAG22-nl/#bypass-blocks) <br />
+Skip link aanwezig. <br />
+Test: eerste Tab.
+
+[2.4.2 Paginatitel](https://www.w3.org/Translations/WCAG22-nl/#page-titled) <br />
+Duidelijke title. <br />
+Test: browser tab.
+
+[2.4.3 Focus volgorde](https://www.w3.org/Translations/WCAG22-nl/#focus-order) <br />
+Logische tab flow. <br />
+Test: Tab navigatie.
+
+[2.4.4 Linkdoel (in context)](https://www.w3.org/Translations/WCAG22-nl/#link-purpose-in-context) <br />
+Links zijn duidelijk. <br />
+Test: links lezen.
+
+[2.4.5 Meerdere manieren (AA)](https://www.w3.org/Translations/WCAG22-nl/#multiple-ways) <br />
+Menu + search + sitemap. <br />
+Test: navigatie opties.
+
+[2.4.6 Koppen en labels (AA)](https://www.w3.org/Translations/WCAG22-nl/#headings-and-labels) <br />
+Duidelijke headings. <br />
+Test: heading scan.
+
+[2.4.7 Focus zichtbaar (AA)](https://www.w3.org/Translations/WCAG22-nl/#focus-visible) <br />
+Focus indicator zichtbaar. <br />
+Test: Tab highlight.
+
+[2.4.11 Focus niet bedekt (minimum) (AA)](https://www.w3.org/Translations/WCAG22-nl/#focus-not-obscured-minimum) <br />
+Focus niet verborgen. <br />
+Test: sticky header.
+
+
+### 2.5 Input & pointer
+
+[2.5.1 Aanwijzergebaren](https://www.w3.org/Translations/WCAG22-nl/#pointer-gestures) <br />
+Geen complexe gestures nodig. <br />
+Test: klik alternatief.
+
+[2.5.2 Aanwijzerannulering](https://www.w3.org/Translations/WCAG22-nl/#pointer-cancellation) <br />
+Actie kan geannuleerd worden. <br />
+Test: click vs mousedown.
+
+[2.5.3 Label in naam](https://www.w3.org/Translations/WCAG22-nl/#label-in-name) <br />
+Label = accessible name. <br />
+Test: screenreader.
+
+[2.5.4 Bewegingsactivering](https://www.w3.org/Translations/WCAG22-nl/#motion-actuation) <br />
+Motion kan uit. <br />
+Test: device settings.
+
+[2.5.7 Sleepbewegingen (AA)](https://www.w3.org/Translations/WCAG22-nl/#dragging-movements) <br />
+Drag heeft alternatief. <br />
+Test: zonder drag.
+
+[2.5.8 Grootte target (AA)](https://www.w3.org/Translations/WCAG22-nl/#target-size-minimum) <br />
+Min 24x24px. <br />
+Test: UI inspect.
+
+
+## 3. Begrijpelijk (Understandable)
+
+### 3.1 Leesbaar
+
+[3.1.1 Taal van de pagina](https://www.w3.org/Translations/WCAG22-nl/#language-of-page) <br />
+Lang attribuut aanwezig. <br />
+Test: HTML inspect `lang=""`.
+
+[3.1.2 Taal van onderdelen (AA)](https://www.w3.org/Translations/WCAG22-nl/#language-of-parts) <br />
+Taalwissels gemarkeerd. <br />
+Test: lang attributes.
+
+
+### 3.2 Voorspelbaar
+
+[3.2.1 Bij focus](https://www.w3.org/Translations/WCAG22-nl/#on-focus) <br />
+Geen onverwachte acties. <br />
+Test: tab gedrag.
+
+[3.2.2 Bij input](https://www.w3.org/Translations/WCAG22-nl/#on-input) <br />
+Geen context wijziging. <br />
+Test: forms.
+
+[3.2.3 Consistente navigatie (AA)](https://www.w3.org/Translations/WCAG22-nl/#consistent-navigation) <br />
+Menu consistent. <br />
+Test: pages.
+
+[3.2.4 Consistente identificatie (AA)](https://www.w3.org/Translations/WCAG22-nl/#consistent-identification) <br />
+Zelfde UI = zelfde betekenis. <br />
+Test: icons.
+
+[3.2.6 Consistente hulp](https://www.w3.org/Translations/WCAG22-nl/#consistent-help) <br />
+Help altijd op dezelfde plek. <br />
+Test: support UI.
+
+
+### 3.3 Assistentie bij invoer
+
+[3.3.1 Foutidentificatie](https://www.w3.org/Translations/WCAG22-nl/#error-identification) <br />
+Fouten duidelijk. <br />
+Test: empty submit.
+
+[3.3.2 Labels/instructies](https://www.w3.org/Translations/WCAG22-nl/#labels-or-instructions) <br />
+Velden duidelijk. <br />
+Test: no placeholder reliance.
+
+[3.3.3 Foutsuggestie (AA)](https://www.w3.org/Translations/WCAG22-nl/#error-suggestion) <br />
+Hulp bij fouten. <br />
+Test: invalid input.
+
+[3.3.4 Foutpreventie (wettelijk, financieel, gegevens) (AA)](https://www.w3.org/Translations/WCAG22-nl/#error-prevention-legal-financial-data) <br />
+Confirmatie bij risico acties. <br />
+Test: delete/payment.
+
+[3.3.7 Overbodige invoer](https://www.w3.org/Translations/WCAG22-nl/#redundant-entry) <br />
+Geen dubbele input. <br />
+Test: autofill reuse.
+
+[3.3.8 Toegankelijke authenticatie (AA)](https://www.w3.org/Translations/WCAG22-nl/#accessible-authentication-minimum) <br />
+Geen cognitieve barrières. <br />
+Test: login flow.
+
+
+## 4. Robuust (Robust)
+
+### 4.1 Compatibel
+
+[4.1.2 Naam, rol, waarde](https://www.w3.org/Translations/WCAG22-nl/#name-role-value) <br />
+ARIA correct toegepast. <br />
+Test: accessibility tree.
+
+[4.1.3 Statusberichten (AA)](https://www.w3.org/Translations/WCAG22-nl/#status-messages) <br />
+Dynamische updates aangekondigd. <br />
+Test: live regions.

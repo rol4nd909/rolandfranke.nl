@@ -1,17 +1,26 @@
 ---
 import type { MarkdownHeading } from 'astro'
 
-const { headings } = Astro.props
+interface Props {
+    headings: MarkdownHeading[] // Array of headings from your markdown content
+    levels?: 2 | 3 | 4 // How many levels of headers to show in TOC (default: 2)
+}
 
-const toc: MarkdownHeading[] = headings.filter((heading: MarkdownHeading) => heading.depth === 2)
+const { headings, levels = 2 } = Astro.props
+
+const filteredHeadings = headings.filter((heading) => heading.depth <= levels)
 ---
 
 {
-    toc && toc.length > 0 && (
+    filteredHeadings && filteredHeadings.length > 0 && (
         <nav class="toc" aria-label="Table of Contents">
             <ul class="list">
-                {toc.map((heading) => (
-                    <li>
+                {filteredHeadings.map((heading) => (
+                    <li
+                        class:list={{
+                            subitem: heading.depth === 3,
+                        }}
+                    >
                         <a href={`#${heading.slug}`}>{heading.text}</a>
                     </li>
                 ))}
@@ -87,6 +96,10 @@ const toc: MarkdownHeading[] = headings.filter((heading: MarkdownHeading) => hea
                         visibility: visible;
                     }
                 }
+            }
+
+            .subitem {
+                padding-inline-start: 1rem;
             }
         }
     }

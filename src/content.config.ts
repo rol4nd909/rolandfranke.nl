@@ -19,6 +19,10 @@ const posts = defineCollection({
       })
       .optional(),
     isDraft: z.boolean().optional(),
+    tocLevel: z
+      .number()
+      .refine((value): value is 2 | 3 | 4 => [2, 3, 4].includes(value))
+      .default(2),
     tags: z.array(z.string()),
   }),
 })
