@@ -24,16 +24,12 @@ const staticPages = Object.keys(pageModules)
 
         const rawUrl = path.replace('./', '/').replace('/index.astro', '/').replace('.astro', '/')
 
-        console.log({ rawUrl })
-
         return {
             url: rawUrl,
             label: formatLabelFromUrl(rawUrl),
         }
     })
     .filter((page): page is SitemapNode => page !== null)
-
-console.log({ staticPages, pageModules })
 
 // 📝 blog posts
 const posts = await getCollection('posts')
