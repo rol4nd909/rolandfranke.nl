@@ -17,8 +17,8 @@ type Props = {
     showWebring?: boolean
 }
 
+const { pathname } = Astro.url
 const currentYear = new Date().getFullYear()
-
 const { title, description, ogType, image, footerType = 'dark', showWebring = true } = Astro.props
 ---
 
@@ -41,7 +41,12 @@ const { title, description, ogType, image, footerType = 'dark', showWebring = tr
                 >.
             </p>
             <p class="footer-text fs--1">
-                <CustomLink href="/sitemap">sitemap</CustomLink>
+                <CustomLink
+                    href="/sitemap/"
+                    aria-current={pathname.slice(1) === 'sitemap/' ? 'page' : undefined}
+                >
+                    sitemap
+                </CustomLink>
             </p>
 
             {showWebring && <Webring />}
