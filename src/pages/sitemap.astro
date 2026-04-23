@@ -1,0 +1,73 @@
+---
+import { getCollection } from 'astro:content'
+
+import { type SitemapNode } from '@/types/sitemap'
+
+import { buildSitemapTree } from '@/utils/buildSitemapTree'
+import { formatBlogPosts } from '@/utils/formatBlogPosts'
+import { formatLabelFromUrl } from '@/utils/sitemap'
+
+import FadeOutDown from '@/components/ui/FadeOutDown.astro'
+import Heading from '@/components/ui/Heading.astro'
+import Hero from '@/components/ui/Hero.astro'
+import SitemapTree from '@/components/ui/SitemapTree.astro'
+import BaseLayout from '@/layouts/BaseLayout.astro'
+
+// 🌐 static pages
+const pageModules = import.meta.glob('./**/*.astro')
+
+const staticPages = Object.keys(pageModules)
+    .map((path) => {
+        if (path.includes('404') || path.includes('[')) {
+            return null
+        }
+
+        const rawUrl = path.replace('./', '/').replace('/index.astro', '/').replace('.astro', '/')
+
+        console.log({ rawUrl })
+
+        return {
+            url: rawUrl,
+            label: formatLabelFromUrl(rawUrl),
+        }
+    })
+    .filter((page): page is SitemapNode => page !== null)
+
+console.log({ staticPages, pageModules })
+
+// 📝 blog posts
+const posts = await getCollection('posts')
+const formattedPosts = formatBlogPosts(posts)
+
+const blogPages = formattedPosts.map((post) => ({
+    url: `/frontend-stories/${post.id}/`,
+    label: post.data.title,
+    pubDate: post.data.pubDate,
+}))
+
+// 🔗 combine
+const pages = [...staticPages, ...blogPages]
+
+// 🌳 build tree
+const tree = buildSitemapTree(pages)
+---
+
+<BaseLayout
+    title="Sitemap - Roland Franke"
+    description="Sitemap of Roland Franke's personal website, listing all pages and frontend stories for easy navigation."
+>
+    <Hero data-grid="fullbleed">
+        <FadeOutDown class="flow" data-column="medium">
+            <Heading tagName="h1" size="h1">Sitemap</Heading>
+        </FadeOutDown>
+    </Hero>
+
+    <div class="grid lane lane--light prose flow" data-grid="fullbleed">
+        <p>
+            This sitemap is generated automatically based on the site's structure. It includes all
+            static pages and frontend stories, organized for easy navigation.
+        </p>
+
+        <SitemapTree nodes={tree} />
+    </div>
+</BaseLayout>

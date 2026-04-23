@@ -1,0 +1,81 @@
+---
+import type { SitemapNode } from '@/types/sitemap'
+import CustomLink from './CustomLink.astro'
+
+type Props = {
+    nodes: SitemapNode[]
+}
+
+const { nodes } = Astro.props
+---
+
+<ul>
+    {
+        nodes.map((node: SitemapNode) => (
+            <li>
+                {node.url ? (
+                    <CustomLink href={node.url}>{node.label}</CustomLink>
+                ) : (
+                    <span>{node.label}</span>
+                )}
+
+                {node.children?.length ? (
+                    <ul>
+                        {node.children.map((child: SitemapNode) => (
+                            <li>
+                                {child.url ? (
+                                    <CustomLink href={child.url}>{child.label}</CustomLink>
+                                ) : (
+                                    <span>{child.label}</span>
+                                )}
+                            </li>
+                        ))}
+                    </ul>
+                ) : null}
+            </li>
+        ))
+    }
+</ul>
+
+<style>
+    ul {
+        --flow-space: 1.5rem;
+
+        display: grid;
+        gap: 0.5rem;
+
+        > li {
+            &:has(ul) > a {
+                anchor-name: --parent;
+            }
+
+            > ul {
+                margin-block-start: 1rem;
+                padding-inline-start: 1.5rem;
+
+                ::marker {
+                    content: '';
+                }
+
+                > li {
+                    anchor-name: --child;
+                    anchor-scope: --child;
+
+                    &::after {
+                        content: '';
+                        position: absolute;
+
+                        inset-block-start: anchor(--parent end);
+                        inset-inline-start: calc(anchor(--parent start) - 1rem);
+                        inset-block-end: anchor(--child center);
+                        inset-inline-end: calc(anchor(--child start) + 0.5rem);
+
+                        border: 1px solid color-mix(in oklch, var(--text), var(--surface) 50%);
+                        border-block-start-color: transparent;
+                        border-inline-end-color: transparent;
+                    }
+                }
+            }
+        }
+    }
+</style>

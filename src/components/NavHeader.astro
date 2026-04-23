@@ -17,7 +17,7 @@ const { pathname } = Astro.url
             <ul class="menu">
                 <li>
                     <CustomLink
-                        href="/frontend-stories"
+                        href="/frontend-stories/"
                         aria-current={pathname.slice(1) === 'frontend-stories/'
                             ? 'page'
                             : undefined}>Frontend Stories</CustomLink
@@ -25,7 +25,7 @@ const { pathname } = Astro.url
                 </li>
                 <li>
                     <CustomLink
-                        href="/about"
+                        href="/about/"
                         aria-current={pathname.slice(1) === 'about/' ? 'page' : undefined}
                         >About</CustomLink
                     >

@@ -6,6 +6,7 @@ import NavHeader from '@/components/NavHeader.astro'
 import SkipLink from '@/components/SkipLink.astro'
 import Webring from '@/components/ui/Webring.astro'
 import Badge from '@/components/ui/Badge.astro'
+import CustomLink from '@/components/ui/CustomLink.astro'
 
 type Props = {
     title?: string
@@ -38,6 +39,9 @@ const { title, description, ogType, image, footerType = 'dark', showWebring = tr
                 © {currentYear} Roland Franke. Built with semantic HTML and a healthy love for <Badge
                     id="CSS">CSS</Badge
                 >.
+            </p>
+            <p class="footer-text fs--1">
+                <CustomLink href="/sitemap">sitemap</CustomLink>
             </p>
 
             {showWebring && <Webring />}
