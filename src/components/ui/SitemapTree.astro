@@ -57,6 +57,9 @@ const { nodes } = Astro.props
                     content: '';
                 }
 
+                /* needed for safari no full support for ::marker */
+                list-style-type: none;
+
                 > li {
                     anchor-name: --child;
                     anchor-scope: --child;
