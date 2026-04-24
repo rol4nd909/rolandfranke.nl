@@ -1,13 +1,19 @@
 ---
 import IconExternalLink from '@/icons/icon-external-link.svg'
+import type { HTMLAttributes } from 'astro/types'
 
-const { href, ...rest }: Record<string, any> = Astro.props
+type Props = HTMLAttributes<'a'> & {
+    href: string
+    className?: 'reversed'
+}
+
+const { href, className, ...rest } = Astro.props as Props
 const site = new URL(import.meta.env.SITE).origin
 const isExternal = href?.startsWith('http') && new URL(href).origin !== site
 const attrs = isExternal ? { target: '_blank', rel: 'noopener noreferrer' } : {}
 ---
 
-<a {href} {...attrs} {...rest}>
+<a {href} class={className} {...attrs} {...rest}>
     <span><slot /></span>
 
     {isExternal && <IconExternalLink width="1.5ch" height="1.5ch" />}
@@ -20,8 +26,8 @@ const attrs = isExternal ? { target: '_blank', rel: 'noopener noreferrer' } : {}
 
         > span {
             background-image: linear-gradient(var(--color-primary-400) 0 0);
-            background-size: 0 0.3em;
-            background-position: 100% 100%;
+            background-size: 100% 0.3em;
+            background-position: 0 100%;
             background-repeat: no-repeat;
             transition: background-size 0.5s var(--ease-elastic-2);
         }
@@ -33,8 +39,8 @@ const attrs = isExternal ? { target: '_blank', rel: 'noopener noreferrer' } : {}
         @media (--is-mouse) {
             &:hover {
                 > span {
-                    background-size: 100% 0.3em;
-                    background-position: 0 100%;
+                    background-size: 0 0.3em;
+                    background-position: 100% 100%;
                     transition-delay: 125ms;
                 }
             }
@@ -42,30 +48,26 @@ const attrs = isExternal ? { target: '_blank', rel: 'noopener noreferrer' } : {}
 
         &:focus-visible {
             > span {
-                background-size: 100% 0.3em;
-                background-position: 0 100%;
+                background-size: 0 0.3em;
+                background-position: 100% 100%;
                 transition-delay: 125ms;
             }
         }
-    }
 
-    :global(p) > a > span,
-    :global(li) > a > span {
-        background-size: 100% 0.3em;
-        background-position: 0 100%;
-    }
+        &.reversed {
+            > span {
+                background-size: 0 0.3em;
+                background-position: 100% 100%;
+            }
 
-    @media (--is-mouse) {
-        :global(p) > a:hover > span,
-        :global(li) > a:hover > span {
-            background-size: 0 0.3em;
-            background-position: 100% 100%;
+            @media (--is-mouse) {
+                &:hover {
+                    > span {
+                        background-size: 100% 0.3em;
+                        background-position: 0 100%;
+                    }
+                }
+            }
         }
-    }
-
-    :global(p) > a:focus-visible > span,
-    :global(li) > a:focus-visible > span {
-        background-size: 0 0.3em;
-        background-position: 100% 100%;
     }
 </style>

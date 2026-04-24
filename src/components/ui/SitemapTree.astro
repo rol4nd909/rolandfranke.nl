@@ -14,7 +14,9 @@ const { nodes } = Astro.props
         nodes.map((node: SitemapNode) => (
             <li>
                 {node.url ? (
-                    <CustomLink href={node.url}>{node.label}</CustomLink>
+                    <CustomLink href={node.url} className="reversed">
+                        {node.label}
+                    </CustomLink>
                 ) : (
                     <span>{node.label}</span>
                 )}
@@ -24,7 +26,9 @@ const { nodes } = Astro.props
                         {node.children.map((child: SitemapNode) => (
                             <li>
                                 {child.url ? (
-                                    <CustomLink href={child.url}>{child.label}</CustomLink>
+                                    <CustomLink href={child.url} className="reversed">
+                                        {child.label}
+                                    </CustomLink>
                                 ) : (
                                     <span>{child.label}</span>
                                 )}
