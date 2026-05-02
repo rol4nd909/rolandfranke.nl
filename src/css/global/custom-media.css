@@ -28,3 +28,6 @@
 @custom-media --for-tablet-l-up (width >= 56.25em);
 @custom-media --for-desktop-up (width >= 75em);
 @custom-media --for-big-desktop-up (width >= 112.5em);
+
+@custom-media --small-nav (width < 40.5rem);
+@custom-media --large-nav (width >= 40.5rem);

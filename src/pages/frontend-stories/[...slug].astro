@@ -25,7 +25,7 @@ const { Content, headings } = await render(post)
 const { title, description, image, pubDate, tags, author, tocLevel } = post.data
 ---
 
-<BaseLayout title=`${title} - Roland Franke` {description} ogType="article" image={image?.url}>
+<BaseLayout title=`${title} - Roland Franke` {description} ogType="article" image={image?.url} isStory={true}>
     <Hero data-grid="fullbleed">
         <FadeOutDown class="flow" data-column="medium">
             <Heading tagName="h1" size="h1" set:html={title} />

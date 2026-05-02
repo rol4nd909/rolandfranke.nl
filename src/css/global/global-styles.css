@@ -8,6 +8,11 @@ html {
 }
 
 body {
+  --_size: 3rem;
+  --_offset: calc(var(--_size) / 2);
+  --_line: color-mix(in oklch, var(--text), var(--surface) 80%);
+
+  display: grid;
   margin: 0;
   font-family: var(--ff-sans);
   font-size: var(--fs-0);
@@ -19,6 +24,32 @@ body {
   font-feature-settings:
     'ss11' on,
     'ss05' on;
+
+  &::before,
+  &::after {
+    content: '';
+    z-index: -1;
+    inset: 0;
+    pointer-events: none;
+    position: absolute;
+  }
+
+  &::before {
+    background-image:
+      linear-gradient(90deg, var(--_line) 1px, transparent 1px var(--_size)),
+      linear-gradient(var(--_line) 1px, transparent 1px var(--_size));
+    background-position: var(--_offset) var(--_offset);
+    background-size: var(--_size) var(--_size);
+    background-attachment: fixed;
+  }
+
+  &::after {
+    background-image: linear-gradient(to top left, var(--surface) 40%, transparent);
+  }
+}
+
+.scroll-lock {
+  overflow: hidden;
 }
 
 :is(:focus-visible) {
@@ -104,27 +135,6 @@ body {
     :root {
       view-transition-name: --dark-light;
     }
-
-    .site-header {
-      view-transition-name: --header;
-    }
-
-    /* main {
-      view-transition-name: --main;
-    }
-
-    ::view-transition-group(--main) {
-      animation-timing-function: var(--ease);
-      animation-duration: 0.5s;
-    }
-
-    ::view-transition-old(--main) {
-      animation-name: --scale-out;
-    }
-
-    ::view-transition-new(--main) {
-      animation-name: --scale-in;
-    } */
 
     html:active-view-transition-type(dark-light) {
       main,

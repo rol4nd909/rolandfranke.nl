@@ -1,4 +1,8 @@
-<button class="theme-toggle icon-link" id="themeToggle" type="button">
+---
+
+---
+
+<button id="themeToggle">
     <svg class="sun-and-moon" aria-hidden="true" width="24" height="24" viewBox="0 0 24 24">
         <mask class="moon" id="moon-mask">
             <rect x="0" y="0" width="100%" height="100%" fill="white"></rect>
@@ -84,15 +88,17 @@
 </script>
 
 <style>
-    .theme-toggle {
-        --size: 3rem;
+    button {
+        --size: var(--icon-button-size, 3rem);
         --icon-fill: currentColor;
 
         block-size: var(--size);
         inline-size: var(--size);
+        padding: 0.5rem;
 
         background: none;
         border: none;
+        border-radius: 100%;
         cursor: pointer;
         color: inherit;
 
@@ -103,7 +109,10 @@
             inline-size: 100%;
             block-size: 100%;
             stroke-linecap: round;
-            transition: color 0.5s calc(var(--toggle-delay) / 2) var(--ease);
+            transition:
+                color 0.5s calc(var(--toggle-delay) / 2) var(--ease),
+                scale 0.7s var(--ease-spring),
+                rotate 0.7s var(--ease-spring);
         }
     }
 
@@ -154,7 +163,25 @@
         }
     }
 
+    [color-scheme='dark'] {
+        button {
+            @media (--is-mouse) {
+                &:hover > svg {
+                    scale: 1.15;
+                }
+            }
+        }
+    }
+
     [color-scheme='light'] {
+        button {
+            @media (--is-mouse) {
+                &:hover > svg {
+                    rotate: 10deg;
+                }
+            }
+        }
+
         .sun-and-moon {
             & > .sun {
                 transform: scale(1.75);
