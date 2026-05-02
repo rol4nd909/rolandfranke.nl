@@ -7,6 +7,7 @@ import SkipLink from '@/components/SkipLink.astro'
 import Webring from '@/components/ui/Webring.astro'
 import Badge from '@/components/ui/Badge.astro'
 import CustomLink from '@/components/ui/CustomLink.astro'
+import StickyHeader from '@/components/header/StickyHeader.astro'
 
 type Props = {
     title?: string
@@ -15,11 +16,20 @@ type Props = {
     image?: string
     footerType?: 'dark' | 'light'
     showWebring?: boolean
+    isStory?: boolean
 }
 
 const { pathname } = Astro.url
 const currentYear = new Date().getFullYear()
-const { title, description, ogType, image, footerType = 'dark', showWebring = true } = Astro.props
+const {
+    title,
+    description,
+    ogType,
+    image,
+    footerType = 'dark',
+    showWebring = true,
+    isStory,
+} = Astro.props
 ---
 
 <!doctype html>
@@ -28,7 +38,7 @@ const { title, description, ogType, image, footerType = 'dark', showWebring = tr
 
     <body nojs>
         <SkipLink>Skip to content</SkipLink>
-        <NavHeader />
+        <StickyHeader {isStory} />
 
         <main class="grid" id="main" aria-label="Main content" tabindex="-1">
             <slot />
@@ -54,10 +64,12 @@ const { title, description, ogType, image, footerType = 'dark', showWebring = tr
     </body>
 </html>
 
+<script is:inline>
+    document.body.removeAttribute('nojs')
+</script>
+
 <script>
     const originalTitle = document.title
-
-    document.body.removeAttribute('nojs')
 
     document.addEventListener('visibilitychange', () => {
         document.hidden ? (document.title = 'Aw, Snap! 🤯') : (document.title = originalTitle)

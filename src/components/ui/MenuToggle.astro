@@ -1,0 +1,87 @@
+---
+type Props = {
+    ariaControls?: string
+    ariaExpanded?: boolean
+}
+
+const { ariaControls, ariaExpanded = false } = Astro.props
+---
+
+<button aria-controls={ariaControls} aria-expanded={ariaExpanded}>
+    <svg aria-hidden="true" viewBox="0 0 100 100">
+        <path d="M20 29h73v64L25 25"></path>
+        <path d="M20 50h60"></path>
+        <path d="M20 71h73V7L25 75"></path>
+    </svg>
+    <span class="sr-only">menu</span>
+</button>
+
+<style>
+    button {
+        --size: var(--icon-button-size, 3rem);
+
+        block-size: var(--size);
+        inline-size: var(--size);
+        padding: 0;
+        margin: 0;
+
+        background: none;
+        border: none;
+        border-radius: 100%;
+        cursor: pointer;
+        color: inherit;
+
+        touch-action: manipulation;
+        -webkit-tap-highlight-color: transparent;
+
+        /* Animated SVG icon */
+        > svg {
+            width: 100%;
+            height: 100%;
+
+            > path {
+                transition:
+                    stroke-dasharray 1s cubic-bezier(0.4, 0, 0.2, 1),
+                    stroke-dashoffset 1s cubic-bezier(0.4, 0, 0.2, 1),
+                    transform 0.25s;
+                fill: none;
+                stroke: currentColor;
+                stroke-width: 0.375rem;
+
+                &:nth-child(odd) {
+                    stroke-dasharray: 60 300;
+                }
+
+                &:nth-child(2) {
+                    stroke-dasharray: 60 60;
+                }
+            }
+        }
+
+        @media (--small-nav) {
+            &[aria-expanded='true'] {
+                > svg > path {
+                    &:nth-child(odd) {
+                        stroke-dasharray: 90 300;
+                        stroke-dashoffset: -160;
+                    }
+
+                    &:nth-child(2) {
+                        stroke-dasharray: 1 60;
+                        stroke-dashoffset: -30;
+                    }
+                }
+            }
+        }
+
+        @media (--is-mouse) {
+            &:is(:hover, :focus-visible) {
+                > svg {
+                    > path:nth-child(2) {
+                        transform: translateX(-6px);
+                    }
+                }
+            }
+        }
+    }
+</style>

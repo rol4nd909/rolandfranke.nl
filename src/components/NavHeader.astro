@@ -68,10 +68,19 @@ const { pathname } = Astro.url
         }
 
         > a {
+            --size: var(--icon-button-size, 3rem);
             --logo-bg: var(--color-neutral-100);
             --logo-color: var(--color-primary-400);
 
             display: grid;
+
+            block-size: var(--size);
+            inline-size: var(--size);
+
+            > svg {
+                block-size: 100%;
+                inline-size: 100%;
+            }
 
             @media (--forced-color) {
                 --logo-bg: transparent;
@@ -86,9 +95,6 @@ const { pathname } = Astro.url
             flex-grow: 1;
 
             > div {
-                flex-shrink: 0;
-                min-block-size: 3rem;
-                min-inline-size: 3rem;
                 margin-inline-start: auto;
             }
         }

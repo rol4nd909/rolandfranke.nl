@@ -1,0 +1,296 @@
+---
+import Logo from '@/icons/logo.svg'
+import DarkLightToggle from '@components/DarkLightToggle.astro'
+import CustomLink from '@components/ui/CustomLink.astro'
+import MenuToggle from '@components/ui/MenuToggle.astro'
+
+type Props = {
+    isStory?: boolean
+}
+
+const { isStory } = Astro.props
+const { pathname } = Astro.url
+---
+
+<header class="js_header" data-story={isStory}>
+    <header-layout class="js_header-layout">
+        <a
+            href="/"
+            class="logo js_logo"
+            aria-current={pathname.slice(1) === '' ? 'page' : undefined}
+        >
+            <Logo width="48" height="48" aria-label="Logo: RF (Roland Franke)" role="img" />
+            <span class="sr-only"> - Home page</span>
+        </a>
+
+        <nav aria-label="Primary">
+            <div class="menu-list js_menu-list" id="menuList">
+                <ul class="menu">
+                    <li>
+                        <CustomLink
+                            href="/frontend-stories/"
+                            aria-current={pathname.slice(1) === 'frontend-stories/'
+                                ? 'page'
+                                : undefined}>Frontend Stories</CustomLink
+                        >
+                    </li>
+                    <li>
+                        <CustomLink
+                            href="/about/"
+                            aria-current={pathname.slice(1) === 'about/' ? 'page' : undefined}
+                            >About</CustomLink
+                        >
+                    </li>
+                </ul>
+
+                <DarkLightToggle />
+            </div>
+
+            <div class="menu-toggle js_toggle">
+                <MenuToggle ariaControls="menuList" />
+            </div>
+        </nav>
+
+        <!-- This is the progress indicator -->
+        <svg class="progress-indicator" aria-hidden="true">
+            <rect
+                x="calc(var(--stroke) / 2)"
+                y="calc(var(--stroke) / 2)"
+                width="calc(100% - (var(--stroke) * 1px))"
+                height="calc(100% - (var(--stroke) * 1px))"
+                rx="calc((var(--nav-height-unit-less) / 2) - var(--stroke) + 2)"
+                ry="calc((var(--nav-height-unit-less) / 2) - var(--stroke) + 2)"></rect>
+        </svg>
+    </header-layout>
+</header>
+
+<script>
+    import { HeaderController } from './HeaderController'
+
+    document.addEventListener('DOMContentLoaded', () => {
+        new HeaderController({
+            headerSelector: '.js_header',
+            toggleSelector: '.js_toggle > button',
+            menuSelector: '.js_menu-list',
+        })
+    })
+</script>
+
+<style>
+    header {
+        justify-self: center;
+
+        margin-block: var(--nav-offset);
+        padding-inline: var(--nav-gutter);
+
+        @supports (container-type: scroll-state) {
+            &[data-story='true'] {
+                position: sticky;
+                inset-block-start: 1rem;
+                z-index: 10;
+
+                container-type: scroll-state;
+                container-name: --sticky;
+            }
+        }
+
+        > header-layout {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            block-size: var(--nav-height);
+            inline-size: calc(100vi - (var(--nav-gutter) * 2));
+            max-inline-size: var(--constrain-lg);
+            padding-inline: 0.5rem;
+
+            border-radius: 100vi;
+            background-color: var(--surface-2);
+            box-shadow: var(--shadow);
+
+            transition-property: inline-size;
+            transition-duration: 400ms;
+            transition-timing-function: var(--elastic-in);
+
+            container-name: --nav-bar;
+            container-type: inline-size;
+
+            @container --sticky scroll-state(stuck: block-start) {
+                transition-duration: 125ms;
+                transition-delay: 250ms;
+                transition-timing-function: var(--ease);
+
+                inline-size: calc(20rem - (var(--gutter) * 2));
+
+                /* open state expands the header */
+                .open & {
+                    transition-duration: 400ms;
+                    transition-delay: 0s;
+                    transition-timing-function: var(--elastic-in);
+
+                    inline-size: calc(100vi - (var(--nav-gutter) * 2));
+                }
+            }
+
+            > nav {
+                display: flex;
+                align-items: center;
+
+                anchor-name: --nav-container;
+            }
+        }
+    }
+
+    .logo {
+        --size: var(--icon-button-size, 3rem);
+        --logo-bg: var(--color-neutral-100);
+        --logo-color: var(--color-primary-400);
+
+        display: grid;
+
+        block-size: var(--size);
+        inline-size: var(--size);
+        border-radius: 100%;
+        overflow: clip;
+
+        > svg {
+            block-size: 100%;
+            inline-size: 100%;
+        }
+
+        @media (--small-nav) {
+            z-index: 2;
+        }
+
+        @media (--forced-color) {
+            --logo-bg: transparent;
+            --logo-color: currentColor;
+        }
+    }
+
+    .menu-list {
+        display: flex;
+        align-items: center;
+        gap: 1.5rem;
+
+        > ul {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            padding: 0;
+        }
+
+        /* Hide the menu-list when the header is compact
+           happens when header is stuck and shrinks it's inline-size*/
+        @container --nav-bar (inline-size < 36.5rem) {
+            display: none;
+        }
+
+        @media (--small-nav) {
+            position: fixed;
+            inset: 0;
+            z-index: 1;
+            align-content: start;
+            justify-items: center;
+            gap: calc(var(--gutter) * 4);
+
+            display: none;
+            opacity: 0;
+            scale: 0.95;
+
+            transition-property: display, opacity, scale;
+            transition-behavior: allow-discrete;
+            transform-origin: top;
+
+            .closing & {
+                transition-duration: 500ms;
+            }
+
+            @container --sticky scroll-state(stuck: block-start) {
+                transition-delay: 250ms;
+            }
+
+            padding: 1.5rem;
+            padding-block-start: calc((var(--nav-height) + (var(--nav-offset) * 2) * 2));
+            background-color: var(--surface-2);
+
+            > ul {
+                display: grid;
+                gap: calc(var(--gutter) * 2);
+                justify-items: center;
+                text-align: center;
+
+                font-family: var(--ff-serif);
+                font-size: var(--fs-1);
+            }
+
+            .open & {
+                display: grid;
+                opacity: 1;
+                scale: 1;
+
+                transition-duration: 500ms;
+
+                @starting-style {
+                    opacity: 0;
+                    scale: 0.95;
+                }
+            }
+        }
+    }
+
+    .menu-toggle {
+        display: none;
+        align-items: center;
+        justify-content: center;
+
+        anchor-name: --menu-toggle;
+
+        @container --nav-bar (inline-size < 36.5rem) {
+            display: grid;
+        }
+
+        @media (--small-nav) {
+            z-index: 2;
+        }
+    }
+
+    .progress-indicator {
+        --stroke: 3;
+
+        position: absolute;
+        inset: 0;
+        block-size: 100%;
+        inline-size: 100%;
+        pointer-events: none;
+        opacity: 0;
+
+        > rect {
+            fill: none;
+            stroke: var(--color-primary-400);
+            stroke-width: var(--stroke);
+            stroke-dasharray: 623;
+            stroke-dashoffset: -623;
+
+            animation-name: --progress;
+            animation-timing-function: linear;
+            animation-timeline: scroll(y);
+        }
+
+        /* [data-story='true'] & { */
+        @container --nav-bar (inline-size = 16rem) {
+            @container --sticky scroll-state(stuck: block-start) {
+                transition: opacity 125ms ease-in;
+                opacity: 1;
+            }
+        }
+        /* } */
+    }
+
+    @keyframes --progress {
+        to {
+            stroke-dashoffset: -1240;
+        }
+    }
+</style>

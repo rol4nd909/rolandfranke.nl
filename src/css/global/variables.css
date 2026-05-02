@@ -6,13 +6,25 @@
 
   --text: light-dark(var(--color-neutral-900), var(--color-neutral-100));
   --surface: light-dark(var(--color-neutral-100), var(--color-neutral-900));
+  --surface-2: color-mix(in oklch, var(--text), var(--surface) 95%);
+
+  --shadow:
+    rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px,
+    rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.1) 0px 2px 4px -2px;
+
+  /* Navigation props */
+  --nav-height-unit-less: 64;
+  --nav-height: calc((var(--nav-height-unit-less) / 16) * 1rem);
+  --nav-gutter: utopia.clamp(24, 72, 960); /* The 960 value is the minumun constrain value */
+  --nav-offset: 1rem;
+
+  --icon-button-size: 3rem;
 
   /*
     iOS 17.5 needs this
     light-dark() won't work with the color-mix()
     for example: `color-mix(in oklch, var(--text), var(--surface) 90%);`
     does not work with the above --text and --surface custom properties
-  */
   [color-scheme='light'] {
     --text: var(--color-neutral-900);
     --surface: var(--color-neutral-100);
@@ -22,6 +34,7 @@
     --text: var(--color-neutral-100);
     --surface: var(--color-neutral-900);
   }
+  */
 
   /* typography */
   --fw-normal: 400;
@@ -81,8 +94,6 @@
     0.998 78.9%,
     1
   );
-  --ease-out: cubic-bezier(0, 0, 0, 1);
-
   --ease-spring-4: linear(
     0,
     0.009,
@@ -105,6 +116,24 @@
     0.998 53.3%,
     1.009 59.1% 63.7%,
     0.998 78.9%,
+    1
+  );
+  --elastic-in: linear(
+    0,
+    0.003,
+    0.01,
+    0.02,
+    0.015,
+    -0.015,
+    -0.05,
+    -0.09,
+    -0.08,
+    0,
+    0.18,
+    0.42,
+    0.68,
+    0.88,
+    0.97,
     1
   );
 }

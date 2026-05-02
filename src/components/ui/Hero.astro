@@ -17,7 +17,7 @@ const { class: providedProps, ...rest } = Astro.props
         --_line: color-mix(in oklch, var(--text), var(--surface) 80%);
 
         position: relative;
-        min-block-size: 50vh;
+        min-block-size: calc(50vb - (var(--nav-height) + (var(--nav-offset) * 2)));
         isolation: isolate;
 
         &::before,
@@ -45,8 +45,9 @@ const { class: providedProps, ...rest } = Astro.props
         &.hero--large {
             align-content: center;
             row-gap: utopia.clamp(16, 32);
-            min-block-size: 100svh;
-            padding-block: var(--header-height);
+
+            min-block-size: calc(100svb - (var(--nav-height) + (var(--nav-offset) * 2)));
+            padding-block-end: calc(var(--nav-height) + (var(--nav-offset) * 2));
         }
 
         &:has(> :only-child) {
