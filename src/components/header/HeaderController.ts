@@ -83,6 +83,10 @@ export class HeaderController {
 
       return
     }
+
+    const firstFocusable = this.getFocusables()[0]
+
+    firstFocusable?.focus()
   }
 
   private close(): void {
@@ -91,11 +95,10 @@ export class HeaderController {
     this.state = 'closing'
 
     this.header.classList.remove('open')
-    this.header.classList.add('closing')
-
     this.toggle.setAttribute('aria-expanded', 'false')
 
     if (this.isMobile()) {
+      this.header.classList.add('closing')
       this.unlock()
 
       window.setTimeout(() => {
@@ -108,10 +111,9 @@ export class HeaderController {
     }
 
     window.setTimeout(() => {
-      this.header.classList.remove('closing')
       this.state = 'closed'
-      this.toggle.focus()
-    }, this.getAnimationDuration(this.menu))
+      this.focusToggleWhenVisible()
+    }, this.getAnimationDuration(this.header))
   }
 
   private forceClose(): void {
@@ -120,9 +122,7 @@ export class HeaderController {
     this.header.classList.remove('open', 'closing')
     this.toggle.setAttribute('aria-expanded', 'false')
 
-    if (this.isMobile()) {
-      this.unlock()
-    }
+    this.unlock()
   }
 
   /* ---------------------------------- */
@@ -189,7 +189,7 @@ export class HeaderController {
 
   private getFocusables(): HTMLElement[] {
     return Array.from(
-      this.menu.querySelectorAll<HTMLElement>(
+      this.header.querySelectorAll<HTMLElement>(
         'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])'
       )
     )
@@ -203,6 +203,30 @@ export class HeaderController {
     return [this.toggle, ...menuItems, themeToggle, homeLink].filter(
       (element): element is HTMLElement => Boolean(element)
     )
+  }
+
+  /* ---------------------------------- */
+  /* Focus helpers */
+  /* ---------------------------------- */
+
+  private focusToggleWhenVisible(): void {
+    const attemptFocus = (): void => {
+      const styles = getComputedStyle(this.toggle)
+
+      const isVisible =
+        this.toggle.offsetParent !== null &&
+        styles.display !== 'none' &&
+        styles.visibility !== 'hidden'
+
+      if (!isVisible) {
+        requestAnimationFrame(attemptFocus)
+        return
+      }
+
+      this.toggle.focus()
+    }
+
+    requestAnimationFrame(attemptFocus)
   }
 
   /* ---------------------------------- */
