@@ -13,7 +13,7 @@ const { pathname } = Astro.url
 ---
 
 <header class="js_header" data-story={isStory}>
-    <header-layout class="js_header-layout">
+    <header-layout>
         <a
             href="/"
             class="logo js_logo"
@@ -78,7 +78,8 @@ const { pathname } = Astro.url
 
 <style>
     header {
-        justify-self: center;
+        display: grid;
+        justify-content: center;
 
         margin-block: var(--nav-offset);
         padding-inline: var(--nav-gutter);
@@ -86,7 +87,7 @@ const { pathname } = Astro.url
         @supports (container-type: scroll-state) {
             &[data-story='true'] {
                 position: sticky;
-                inset-block-start: 1rem;
+                inset-block-start: var(--nav-offset);
                 z-index: 10;
 
                 container-type: scroll-state;
@@ -136,8 +137,6 @@ const { pathname } = Astro.url
             > nav {
                 display: flex;
                 align-items: center;
-
-                anchor-name: --nav-container;
             }
         }
     }
@@ -154,6 +153,12 @@ const { pathname } = Astro.url
         border-radius: 100%;
         overflow: clip;
 
+        transition: border-radius 0.5s var(--ease);
+
+        @container --sticky scroll-state(stuck: block-start) {
+            transition-delay: 250ms;
+        }
+
         > svg {
             block-size: 100%;
             inline-size: 100%;
@@ -161,6 +166,10 @@ const { pathname } = Astro.url
 
         @media (--small-nav) {
             z-index: 2;
+
+            .open & {
+                border-radius: 0;
+            }
         }
 
         @media (--forced-color) {

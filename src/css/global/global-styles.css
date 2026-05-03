@@ -12,7 +12,6 @@ body {
   --_offset: calc(var(--_size) / 2);
   --_line: color-mix(in oklch, var(--text), var(--surface) 80%);
 
-  display: grid;
   margin: 0;
   font-family: var(--ff-sans);
   font-size: var(--fs-0);
