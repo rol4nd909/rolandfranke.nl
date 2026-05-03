@@ -127,5 +127,5 @@ textarea:not([rows]) {
 
 /* Anything that has been anchored to should have extra scroll margin */
 :target {
-  scroll-margin-block: 1.5rem;
+  scroll-margin-block: calc(var(--nav-height) + (var(--nav-offset) * 2));
 }
