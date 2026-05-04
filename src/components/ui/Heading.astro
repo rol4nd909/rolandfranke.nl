@@ -1,4 +1,6 @@
 ---
+import type { HTMLAttributes } from 'astro/types'
+
 const headingOptions = {
     h1: 'fs-5',
     h2: 'fs-4',
@@ -8,13 +10,13 @@ const headingOptions = {
     h6: 'fs-0',
 }
 
-type Props = {
+type Props = HTMLAttributes<'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'> & {
     tagName: keyof typeof headingOptions
     size: keyof typeof headingOptions
 }
 
-const { tagName, size } = Astro.props
+const { tagName, size, ...rest } = Astro.props
 const Tag = tagName
 ---
 
-<Tag class:list={['ff-serif', headingOptions[size]]}><slot /></Tag>
+<Tag class:list={['ff-serif', headingOptions[size]]} {...rest}><slot /></Tag>

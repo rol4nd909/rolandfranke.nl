@@ -28,7 +28,9 @@ const { title, description, image, pubDate, tags, author, tocLevel } = post.data
 <BaseLayout title=`${title} - Roland Franke` {description} ogType="article" image={image?.url} isStory={true}>
     <Hero data-grid="fullbleed">
         <FadeOutDown class="flow" data-column="medium">
-            <Heading tagName="h1" size="h1" set:html={title} />
+            <Heading tagName="h1" size="h1" id="page-heading">
+                {title}
+            </Heading>
 
             <p class="flex">
                 {
@@ -53,9 +55,9 @@ const { title, description, image, pubDate, tags, author, tocLevel } = post.data
     <div class="grid lane lane--light" data-grid="fullbleed">
         <TableOfContents headings={headings} levels={tocLevel} />
 
-        <div class="prose flow">
+        <article class="prose flow" id="article-content" tabindex="-1">
           <Content components={{ a: CustomLink }}/>
-        </div>
+        </article>
     </div>
 </BaseLayout>
 

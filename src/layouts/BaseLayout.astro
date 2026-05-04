@@ -37,10 +37,10 @@ const {
     <BaseHead {title} {description} {ogType} {image} />
 
     <body nojs>
-        <SkipLink>Skip to content</SkipLink>
+        <SkipLink href="#page-heading">Skip to content</SkipLink>
         <StickyHeader {isStory} />
 
-        <main class="grid" id="main" aria-label="Main content" tabindex="-1">
+        <main class="grid" aria-label="Main content">
             <slot />
         </main>
 

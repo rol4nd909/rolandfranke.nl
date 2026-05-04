@@ -7,7 +7,7 @@ type Props = HTMLAttributes<'a'> & {
     className?: 'reversed'
 }
 
-const { href, className, ...rest } = Astro.props as Props
+const { href, className, ...rest } = Astro.props
 const site = new URL(import.meta.env.SITE).origin
 const isExternal = href?.startsWith('http') && new URL(href).origin !== site
 const attrs = isExternal ? { target: '_blank', rel: 'noopener noreferrer' } : {}
