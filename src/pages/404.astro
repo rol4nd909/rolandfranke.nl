@@ -1,4 +1,5 @@
 ---
+import Heading from '@/components/ui/Heading.astro'
 import Hero from '@/components/ui/Hero.astro'
 import BaseLayout from '@layouts/BaseLayout.astro'
 ---
@@ -9,9 +10,9 @@ import BaseLayout from '@layouts/BaseLayout.astro'
     showWebring={false}
 >
     <Hero class="hero--large text-center" data-grid="fullbleed">
-        <h1 class="hero__title">
+        <Heading tagName="h1" size="h1" class="hero__title" id="page-heading">
             <span>&#123;</span> 404 <span>&#125;</span>
-        </h1>
+        </Heading>
         <p class="hero__content">Oeps not found the page you're looking for</p>
     </Hero>
 </BaseLayout>

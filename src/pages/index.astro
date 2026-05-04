@@ -1,12 +1,15 @@
 ---
 import Dot from '@/components/ui/Dot.astro'
+import Heading from '@/components/ui/Heading.astro'
 import Hero from '@/components/ui/Hero.astro'
 import BaseLayout from '@layouts/BaseLayout.astro'
 ---
 
 <BaseLayout>
     <Hero class="hero--large" data-grid="fullbleed">
-        <h1 class="hero__title">roland<span aria-hidden="true">.</span></h1>
+        <Heading tagName="h1" size="h1" class="hero__title" id="page-heading">
+            roland<span aria-hidden="true">.</span>
+        </Heading>
         <div class="hero__explain flex letter-spacing" aria-hidden="true">
             <span>[<span class="ff-serif">r<span class="underline">o</span>.land</span>]</span>
             <Dot size="large" />

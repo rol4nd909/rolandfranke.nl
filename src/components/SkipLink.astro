@@ -1,4 +1,14 @@
-<a href="#main"><slot /></a>
+---
+import type { HTMLAttributes } from 'astro/types'
+
+type Props = HTMLAttributes<'a'> & {
+    href: string
+}
+
+const { href, ...rest } = Astro.props
+---
+
+<a {href} {...rest}><slot /></a>
 
 <style>
     a {
