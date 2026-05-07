@@ -15,14 +15,14 @@ const { href, ...rest } = Astro.props
         display: flex;
         background-color: var(--color-primary-400);
         padding-inline: 2ch;
-        translate: 0 -150%;
+        translate: 0 -200%;
         position: absolute;
         z-index: 100;
-        inset: 1.5rem 1.5rem auto;
+        inset-block-start: 0.5rem;
+        inset-inline-start: 0.5rem;
         font-weight: var(--fw-semibold);
         color: var(--color-white);
         text-decoration: none;
-        min-block-size: 3rem;
         align-items: center;
         justify-content: center;
         transition: translate 0.25s var(--ease-elastic-2);

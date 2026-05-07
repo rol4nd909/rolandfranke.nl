@@ -40,7 +40,7 @@ const filteredHeadings = headings.filter((heading) => heading.depth <= levels)
     @supports (scroll-target-group: auto) {
         .toc {
             position: sticky;
-            inset-block-start: 1.5rem;
+            inset-block-start: 2rem;
             inset-inline-start: 0;
             max-inline-size: var(--toc-width);
 
@@ -50,7 +50,7 @@ const filteredHeadings = headings.filter((heading) => heading.depth <= levels)
             float: left;
 
             @media (width >= 53rem) {
-                display: block;
+                display: grid;
             }
 
             /* skiplink */
@@ -63,6 +63,7 @@ const filteredHeadings = headings.filter((heading) => heading.depth <= levels)
                     position: static;
                     translate: 0;
                     inline-size: max-content;
+                    transform: 1 1;
                 }
             }
         }

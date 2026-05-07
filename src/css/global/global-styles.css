@@ -47,10 +47,6 @@ body {
   }
 }
 
-.scroll-lock {
-  overflow: hidden;
-}
-
 :is(:focus-visible) {
   outline-color: var(--color-primary-400);
   outline-offset: 0.25rem;

@@ -14,12 +14,14 @@ const { as: Tag = 'div', class: providedProps, ...props } = Astro.props
 </Tag>
 
 <style>
-    @media (--motion-ok) {
-        @supports (animation-timeline: scroll()) {
-            .fade-out-down {
-                animation: --fade-out-down linear forwards;
-                animation-timeline: scroll(root);
-                animation-range: 0 50vh;
+    @media (--for-tablet-p-up) {
+        @media (--motion-ok) {
+            @supports (animation-timeline: scroll()) {
+                .fade-out-down {
+                    animation: --fade-out-down linear forwards;
+                    animation-timeline: scroll(root);
+                    animation-range: 0 50vh;
+                }
             }
         }
     }
