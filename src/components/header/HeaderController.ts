@@ -1,34 +1,51 @@
-type MenuState = 'closed' | 'open' | 'closing'
 type ViewportMode = 'mobile' | 'desktop'
 
 interface HeaderControllerOptions {
   headerSelector: string
   toggleSelector: string
-  menuSelector: string
+  closeSelector: string
+  openSelector: string
+  dialogSelector: string
 }
 
 export class HeaderController {
+  /* ---------------------------------- */
+  /* Elements */
+  /* ---------------------------------- */
+
   private header: HTMLElement
   private toggle: HTMLButtonElement
-  private menu: HTMLElement
+  private closeButton: HTMLButtonElement
+  private openButton: HTMLButtonElement
+  private dialog: HTMLDialogElement
 
-  private state: MenuState = 'closed'
+  /* ---------------------------------- */
+  /* State */
+  /* ---------------------------------- */
+
   private mode: ViewportMode = 'desktop'
-
   private mediaQuery: MediaQueryList
+
+  /* ---------------------------------- */
+  /* Setup */
+  /* ---------------------------------- */
 
   constructor(options: HeaderControllerOptions) {
     const header = document.querySelector(options.headerSelector)
     const toggle = document.querySelector(options.toggleSelector)
-    const menu = document.querySelector(options.menuSelector)
+    const closeButton = document.querySelector(options.closeSelector)
+    const openButton = document.querySelector(options.openSelector)
+    const dialog = document.querySelector(options.dialogSelector)
 
-    if (!header || !toggle || !menu) {
+    if (!header || !toggle || !closeButton || !openButton || !dialog) {
       throw new Error('HeaderController: missing elements')
     }
 
     this.header = header as HTMLElement
     this.toggle = toggle as HTMLButtonElement
-    this.menu = menu as HTMLElement
+    this.closeButton = closeButton as HTMLButtonElement
+    this.openButton = openButton as HTMLButtonElement
+    this.dialog = dialog as HTMLDialogElement
 
     this.mediaQuery = window.matchMedia('(width >= 40.5rem)')
 
@@ -36,7 +53,7 @@ export class HeaderController {
   }
 
   /* ---------------------------------- */
-  /* Init */
+  /* Initialization */
   /* ---------------------------------- */
 
   private init(): void {
@@ -45,20 +62,16 @@ export class HeaderController {
 
     this.mediaQuery.addEventListener('change', () => {
       this.updateMode()
-      this.forceClose()
+      this.reset()
     })
   }
 
   /* ---------------------------------- */
-  /* Mode */
+  /* Viewport mode */
   /* ---------------------------------- */
 
   private updateMode(): void {
     this.mode = this.mediaQuery.matches ? 'desktop' : 'mobile'
-  }
-
-  private isMobile(): boolean {
-    return this.mode === 'mobile'
   }
 
   private isDesktop(): boolean {
@@ -66,211 +79,190 @@ export class HeaderController {
   }
 
   /* ---------------------------------- */
-  /* State */
+  /* Public interactions */
   /* ---------------------------------- */
 
   private open(): void {
-    this.state = 'open'
+    this.setExpanded(true)
 
-    this.header.classList.add('open')
-    this.header.classList.remove('closing')
-
-    this.toggle.setAttribute('aria-expanded', 'true')
-
-    if (this.isMobile()) {
-      this.lock()
-      this.toggle.focus()
-
+    // Desktop behaviour: CSS-driven menu
+    if (this.isDesktop()) {
+      this.header.classList.add('open')
+      this.getFocusables()[0]?.focus()
       return
     }
 
-    const firstFocusable = this.getFocusables()[0]
-
-    firstFocusable?.focus()
+    // Mobile behaviour: native dialog
+    this.dialog.showModal()
+    this.lock()
   }
 
-  private close(): void {
-    if (this.state === 'closed') return
+  private close(options: { restoreFocus?: boolean } = {}): void {
+    const { restoreFocus = true } = options
 
-    this.state = 'closing'
+    this.setExpanded(false)
 
-    this.header.classList.remove('open')
-    this.toggle.setAttribute('aria-expanded', 'false')
+    // Desktop behaviour
+    if (this.isDesktop()) {
+      const headerLayout = this.header.querySelector<HTMLElement>('header-layout')
+      if (!headerLayout) return
 
-    if (this.isMobile()) {
-      this.header.classList.add('closing')
-      this.unlock()
+      this.header.classList.remove('open')
 
-      window.setTimeout(() => {
-        this.header.classList.remove('closing')
-        this.state = 'closed'
+      if (!restoreFocus) return
+
+      this.onNextTransitionEnd(headerLayout, () => {
         this.toggle.focus()
-      }, this.getAnimationDuration(this.menu))
+      })
 
       return
     }
 
-    window.setTimeout(() => {
-      this.state = 'closed'
-      this.focusToggleWhenVisible()
-    }, this.getAnimationDuration(this.header))
+    // Mobile behaviour
+    this.closeDialogIfNeeded()
+    this.unlock()
   }
 
-  private forceClose(): void {
-    this.state = 'closed'
+  private toggleMenu = (): void => {
+    if (this.isDesktop()) {
+      const isOpen = this.header.classList.contains('open')
+      isOpen ? this.close() : this.open()
+      return
+    }
 
-    this.header.classList.remove('open', 'closing')
-    this.toggle.setAttribute('aria-expanded', 'false')
+    this.dialog.open ? this.close() : this.open()
+  }
 
+  private reset(): void {
+    this.header.classList.remove('open')
+    this.setExpanded(false)
+
+    this.closeDialogIfNeeded()
     this.unlock()
   }
 
   /* ---------------------------------- */
-  /* Interaction */
+  /* Dialog helpers */
   /* ---------------------------------- */
 
-  private toggleMenu = (): void => {
-    if (this.state === 'open') {
-      this.close()
-      return
+  private closeDialogIfNeeded(): void {
+    if (this.dialog.open) {
+      this.dialog.close()
     }
-
-    this.open()
   }
 
+  /* ---------------------------------- */
+  /* Accessibility state */
+  /* ---------------------------------- */
+
+  private setExpanded(value: boolean): void {
+    this.toggle.setAttribute('aria-expanded', String(value))
+    this.openButton.setAttribute('aria-expanded', String(value))
+  }
+
+  /* ---------------------------------- */
+  /* Keyboard interactions */
+  /* ---------------------------------- */
+
   private onKeyDown = (event: KeyboardEvent): void => {
-    if (this.state !== 'open') return
+    if (!this.isDesktop()) return
 
     if (event.key === 'Escape') {
       this.close()
-      return
-    }
-
-    if (this.isMobile() && event.key === 'Tab') {
-      this.trapFocus(event)
     }
   }
+
+  /* ---------------------------------- */
+  /* Scroll behaviour (desktop only) */
+  /* ---------------------------------- */
 
   private onScroll = (): void => {
-    if (this.isDesktop() && this.state === 'open') {
-      this.close()
-    }
+    if (!this.isDesktop()) return
+
+    const isOpen = this.header.classList.contains('open')
+    if (!isOpen) return
+
+    this.close()
   }
 
   /* ---------------------------------- */
-  /* Focus */
+  /* Focus management */
   /* ---------------------------------- */
-
-  private trapFocus(event: KeyboardEvent): void {
-    const focusables = this.isMobile() ? this.getMobileFocusableElements() : this.getFocusables()
-
-    if (!focusables.length) return
-
-    const currentIndex = focusables.indexOf(document.activeElement as HTMLElement)
-
-    if (currentIndex === -1) return
-
-    event.preventDefault()
-
-    const direction = event.shiftKey ? -1 : 1
-
-    let nextIndex = currentIndex + direction
-
-    if (nextIndex < 0) {
-      nextIndex = focusables.length - 1
-    }
-
-    if (nextIndex >= focusables.length) {
-      nextIndex = 0
-    }
-
-    focusables[nextIndex].focus()
-  }
 
   private getFocusables(): HTMLElement[] {
     return Array.from(
       this.header.querySelectorAll<HTMLElement>(
-        'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])'
+        `
+        a[href],
+        button:not([disabled]),
+        [tabindex]:not([tabindex="-1"])
+        `
       )
-    )
+    ).filter((el) => {
+      const style = getComputedStyle(el)
+      return style.display !== 'none' && style.visibility !== 'hidden'
+    })
   }
 
-  private getMobileFocusableElements(): HTMLElement[] {
-    const homeLink = this.header.querySelector<HTMLElement>('.js_logo')
-    const menuItems = Array.from(this.menu.querySelectorAll<HTMLElement>('a[href]'))
-    const themeToggle = this.header.querySelector<HTMLElement>('#themeToggle')
+  private onNextTransitionEnd(element: HTMLElement, callback: () => void): void {
+    const handle = (event: TransitionEvent): void => {
+      if (event.currentTarget !== element) return
 
-    return [this.toggle, ...menuItems, themeToggle, homeLink].filter(
-      (element): element is HTMLElement => Boolean(element)
-    )
-  }
-
-  /* ---------------------------------- */
-  /* Focus helpers */
-  /* ---------------------------------- */
-
-  private focusToggleWhenVisible(): void {
-    const attemptFocus = (): void => {
-      const styles = getComputedStyle(this.toggle)
-
-      const isVisible =
-        this.toggle.offsetParent !== null &&
-        styles.display !== 'none' &&
-        styles.visibility !== 'hidden'
-
-      if (!isVisible) {
-        requestAnimationFrame(attemptFocus)
-        return
-      }
-
-      this.toggle.focus()
+      element.removeEventListener('transitionend', handle)
+      callback()
     }
 
-    requestAnimationFrame(attemptFocus)
+    element.addEventListener('transitionend', handle)
+  }
+
+  private onFocusIn = (event: FocusEvent): void => {
+    if (!this.isDesktop()) return
+
+    const isOpen = this.header.classList.contains('open')
+    if (!isOpen) return
+
+    const target = event.target as Node
+
+    // Als focus buiten header komt → sluiten
+    if (!this.header.contains(target)) {
+      this.close({ restoreFocus: false })
+    }
   }
 
   /* ---------------------------------- */
-  /* A11y helpers */
+  /* Scroll locking */
   /* ---------------------------------- */
 
   private lock(): void {
-    document.body.classList.add('scroll-lock')
-
-    Array.from(document.body.children).forEach((element) => {
-      if (element !== this.header) {
-        element.setAttribute('inert', '')
-      }
-    })
+    document.documentElement.style.overflow = 'hidden'
   }
 
   private unlock(): void {
-    document.body.classList.remove('scroll-lock')
-
-    document.querySelectorAll('[inert]').forEach((el) => {
-      el.removeAttribute('inert')
-    })
+    document.documentElement.style.overflow = ''
   }
 
   /* ---------------------------------- */
-  /* Utils */
-  /* ---------------------------------- */
-
-  private getAnimationDuration(element: HTMLElement): number {
-    const style = getComputedStyle(element)
-
-    const duration = parseFloat(style.transitionDuration) || 0.25
-    const delay = parseFloat(style.transitionDelay) || 0
-
-    return (duration + delay) * 1000
-  }
-
-  /* ---------------------------------- */
-  /* Events */
+  /* Event binding */
   /* ---------------------------------- */
 
   private bindEvents(): void {
     this.toggle.addEventListener('click', this.toggleMenu)
+    this.closeButton.addEventListener('click', this.toggleMenu)
+    this.openButton.addEventListener('click', this.toggleMenu)
+
     window.addEventListener('keydown', this.onKeyDown)
     window.addEventListener('scroll', this.onScroll, { passive: true })
+    window.addEventListener('focusin', this.onFocusIn)
+
+    // Sync dialog state (native close)
+    this.dialog.addEventListener('close', () => {
+      this.setExpanded(false)
+      this.unlock()
+    })
+
+    this.dialog.addEventListener('cancel', (event) => {
+      event.preventDefault()
+      this.close()
+    })
   }
 }

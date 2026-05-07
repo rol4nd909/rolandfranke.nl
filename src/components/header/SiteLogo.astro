@@ -1,0 +1,40 @@
+---
+import LogoSvg from '@/icons/logo.svg'
+
+type Props = {
+    pathName: string
+}
+
+const { pathName } = Astro.props
+---
+
+<a href="/" class="logo" aria-current={pathName.slice(1) === '' ? 'page' : undefined}>
+    <LogoSvg width="48" height="48" aria-label="Logo: RF (Roland Franke)" role="img" />
+    <span class="sr-only"> - Home page</span>
+</a>
+
+<style>
+    .logo {
+        --size: var(--icon-button-size, 3rem);
+        --logo-bg: var(--color-neutral-100);
+        --logo-color: var(--color-primary-400);
+
+        display: grid;
+
+        block-size: var(--size);
+        inline-size: var(--size);
+        margin: 0.5rem;
+        border-radius: 100%;
+        overflow: clip;
+
+        > svg {
+            block-size: 100%;
+            inline-size: 100%;
+        }
+
+        @media (--forced-color) {
+            --logo-bg: transparent;
+            --logo-color: currentColor;
+        }
+    }
+</style>

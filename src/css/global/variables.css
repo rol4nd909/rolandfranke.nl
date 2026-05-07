@@ -15,26 +15,10 @@
   /* Navigation props */
   --nav-height-unit-less: 64;
   --nav-height: calc((var(--nav-height-unit-less) / 16) * 1rem);
-  --nav-gutter: utopia.clamp(24, 72, 960); /* The 960 value is the minumun constrain value */
+  --nav-gutter: utopia.clamp(16, 72, 960); /* The 960 value is the minumun constrain value */
   --nav-offset: 1rem;
 
   --icon-button-size: 3rem;
-
-  /*
-    iOS 17.5 needs this
-    light-dark() won't work with the color-mix()
-    for example: `color-mix(in oklch, var(--text), var(--surface) 90%);`
-    does not work with the above --text and --surface custom properties
-  [color-scheme='light'] {
-    --text: var(--color-neutral-900);
-    --surface: var(--color-neutral-100);
-  }
-
-  [color-scheme='dark'] {
-    --text: var(--color-neutral-100);
-    --surface: var(--color-neutral-900);
-  }
-  */
 
   /* typography */
   --fw-normal: 400;

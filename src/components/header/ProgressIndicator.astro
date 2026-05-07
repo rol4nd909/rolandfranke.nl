@@ -1,0 +1,50 @@
+---
+import type { HTMLAttributes } from 'astro/types'
+
+type Props = HTMLAttributes<'svg'> & {
+    className: string
+}
+
+const { className, ...rest } = Astro.props
+---
+
+<svg class={className} {...rest}>
+    <rect
+        x="calc(var(--stroke) / 2)"
+        y="calc(var(--stroke) / 2)"
+        width="calc(100% - (var(--stroke) * 1px))"
+        height="calc(100% - (var(--stroke) * 1px))"
+        rx="calc((var(--nav-height-unit-less) / 2) - var(--stroke) + 2)"
+        ry="calc((var(--nav-height-unit-less) / 2) - var(--stroke) + 2)"></rect>
+</svg>
+
+<style>
+    svg {
+        --stroke: 3;
+
+        position: absolute;
+        inset: 0;
+        block-size: 100%;
+        inline-size: 100%;
+        pointer-events: none;
+        opacity: 0;
+
+        > rect {
+            fill: none;
+            stroke: var(--color-primary-400);
+            stroke-width: var(--stroke);
+            stroke-dasharray: 623;
+            stroke-dashoffset: -623;
+
+            animation-name: --progress;
+            animation-timing-function: linear;
+            animation-timeline: scroll(y);
+        }
+    }
+
+    @keyframes --progress {
+        to {
+            stroke-dashoffset: -1240;
+        }
+    }
+</style>
