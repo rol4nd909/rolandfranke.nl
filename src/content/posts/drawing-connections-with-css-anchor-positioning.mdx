@@ -11,7 +11,7 @@ import CodepenEmbed from '@components/ui/CodepenEmbed.astro';
 
 ## Introduction
 
-Every now and then, CSS gets a new feature that makes you pause and think: *wait… we can do **that** now?* That was exactly my reaction after watching a short by Kevin Powell on **CSS Anchor Positioning**.
+Every now and then, CSS gets a new feature that makes you pause and think: <i>wait… we can do <b>that</b> now?</i> That was exactly my reaction after watching a short by Kevin Powell on <b>CSS Anchor Positioning</b>.
 
 The idea is deceptively simple: let one element position itself relative to another, without JavaScript, without fragile DOM assumptions, and without extra wrapper elements. Naturally, I had to try it myself.
 
@@ -37,7 +37,7 @@ Anchor positioning changes that equation.
 
 ## Enter Anchor Positioning
 
-CSS Anchor Positioning lets you **name an element as an anchor** and then reference its geometry elsewhere using the `anchor()` function.
+CSS Anchor Positioning lets you <b>name an element as an anchor</b> and then reference its geometry elsewhere using the `anchor()` function.
 
 At a high level, the flow looks like this:
 
@@ -97,7 +97,7 @@ This is where the `anchor()` function really shines.
 
 ### Reading the Code
 
-Each `anchor()` call resolves to a **real layout value** taken from another element:
+Each `anchor()` call resolves to a <b>real layout value</b> taken from another element:
 
 - `anchor(--comment end)` → the block-end edge of the comment
 - `anchor(--comment start)` → the inline-start edge of the comment
@@ -110,7 +110,7 @@ No magic numbers. No recalculation when content grows. The line simply follows t
 
 ## Why This Is Exciting
 
-What I love most about anchor positioning is that it feels like **layout-aware CSS**.
+What I love most about anchor positioning is that it feels like <b>layout-aware CSS</b>.
 
 Some immediate benefits:
 
@@ -119,14 +119,14 @@ Some immediate benefits:
 - Fewer wrapper elements and cleaner markup
 - Much easier to reason about intent
 
-This feels especially powerful for UI patterns where *relationships* matter more than strict placement.
+This feels especially powerful for UI patterns where <i>relationships</i> matter more than strict placement.
 
 
 ## Browser Support (Reality Check)
 
 <BaselineStatus id="anchor-positioning" />
 
-The `anchor()` function has recently reached Baseline: **Newly available**, which means it's supported in the latest versions of major browsers.
+The `anchor()` function has recently reached Baseline: <b>Newly available</b>, which means it's supported in the latest versions of major browsers.
 
 That said, anchor positioning as a whole is still evolving. While `anchor()` itself is available, related anchor positioning features like `anchor-name` and `anchor-scope` may still be behind flags or
 rolling out gradually, depending on the browser.
@@ -151,7 +151,7 @@ If you inspect the code, you'll notice how little CSS is actually required to ma
 
 ## Closing Thoughts
 
-Anchor positioning feels like a missing puzzle piece. Instead of asking *“where should this element go?”* we can finally say *“this belongs **there**, relative to that.”*
+Anchor positioning feels like a missing puzzle piece. Instead of asking <i>“where should this element go?”</i> we can finally say <i>“this belongs <b>there</b>, relative to that.”</i>
 
 This opens the door to patterns like tooltips, popovers, annotations, and visual relationships that stay correct without ever reaching for JavaScript.
 

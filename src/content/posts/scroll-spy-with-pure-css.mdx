@@ -14,7 +14,7 @@ Scroll spy navigation highlighting a table of contents link based on what sectio
 
 That's no longer strictly true.
 
-With the new CSS `scroll-target-group` property and the `:target-current` pseudo-class, the browser can handle active link tracking *natively*, letting you build scroll spy navigation using only HTML and CSS.
+With the new CSS `scroll-target-group` property and the `:target-current` pseudo-class, the browser can handle active link tracking <i>natively</i>, letting you build scroll spy navigation using only HTML and CSS.
 
 I recently applied this on my this site for the TOC
 
@@ -47,7 +47,7 @@ This markup forms the basis of your scroll-spy. Because each nav link points to 
 
 ### Turn the TOC into a `scroll-target-group`
 
-To enable CSS scroll tracking, you mark the container of your navigation links as a *scroll marker group container*:
+To enable CSS scroll tracking, you mark the container of your navigation links as a <i>scroll marker group container</i>:
 
 ```css
 ol {
@@ -127,11 +127,11 @@ This ensures older browsers don't break, while capable ones get the native scrol
 
 <BaselineStatus id="scroll-target-group" />
 
-This means the feature is great for *progressive enhancement* add it where it's supported, and fall back where it's not.
+This means the feature is great for <i>progressive enhancement</i> add it where it's supported, and fall back where it's not.
 
 
 ## Closing Thoughts
 
 “Scroll spy” used to require a handful of JavaScript and careful scroll tracking logic. Now, you can express it entirely as a relationship between links and sections, and let the browser handle the rest.
 
-This move toward *declarative interaction* in CSS feels like a big step forward for UI patterns that were once inherently imperative. Keep an eye on this as browser support broadens, CSS-only scroll spy might become the default approach for in-page navigation going forward.
+This move toward <i>declarative interaction</i> in CSS feels like a big step forward for UI patterns that were once inherently imperative. Keep an eye on this as browser support broadens, CSS-only scroll spy might become the default approach for in-page navigation going forward.
