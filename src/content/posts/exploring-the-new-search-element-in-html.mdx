@@ -47,8 +47,9 @@ Use it as a wrapper around a search form:
 ```html
 <search>
   <form action="/search" method="get">
-    <input type="search" name="q" placeholder="Search..." aria-label="Search">
-    <button type="submit">🔍</button>
+    <label for="search">Search</label>
+    <input id="search" type="search" name="q" placeholder="Search...">
+    <button type="submit" aria-label="search">🔍</button>
   </form>
 </search>
 ```
