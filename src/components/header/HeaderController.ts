@@ -1,10 +1,6 @@
-type ViewportMode = 'mobile' | 'desktop'
-
 interface HeaderControllerOptions {
   headerSelector: string
   toggleSelector: string
-  closeSelector: string
-  openSelector: string
   dialogSelector: string
 }
 
@@ -15,39 +11,30 @@ export class HeaderController {
 
   private header: HTMLElement
   private toggle: HTMLButtonElement
-  private closeButton: HTMLButtonElement
-  private openButton: HTMLButtonElement
   private dialog: HTMLDialogElement
 
   /* ---------------------------------- */
-  /* State */
+  /* Responsive */
   /* ---------------------------------- */
 
-  private mode: ViewportMode = 'desktop'
-  private mediaQuery: MediaQueryList
+  private mediaQuery = window.matchMedia('(width >= 40.5rem)')
 
   /* ---------------------------------- */
   /* Setup */
   /* ---------------------------------- */
 
   constructor(options: HeaderControllerOptions) {
-    const header = document.querySelector(options.headerSelector)
-    const toggle = document.querySelector(options.toggleSelector)
-    const closeButton = document.querySelector(options.closeSelector)
-    const openButton = document.querySelector(options.openSelector)
-    const dialog = document.querySelector(options.dialogSelector)
+    const header = document.querySelector<HTMLElement>(options.headerSelector)
+    const toggle = document.querySelector<HTMLButtonElement>(options.toggleSelector)
+    const dialog = document.querySelector<HTMLDialogElement>(options.dialogSelector)
 
-    if (!header || !toggle || !closeButton || !openButton || !dialog) {
+    if (!header || !toggle || !dialog) {
       throw new Error('HeaderController: missing elements')
     }
 
-    this.header = header as HTMLElement
-    this.toggle = toggle as HTMLButtonElement
-    this.closeButton = closeButton as HTMLButtonElement
-    this.openButton = openButton as HTMLButtonElement
-    this.dialog = dialog as HTMLDialogElement
-
-    this.mediaQuery = window.matchMedia('(width >= 40.5rem)')
+    this.header = header
+    this.toggle = toggle
+    this.dialog = dialog
 
     this.init()
   }
@@ -57,107 +44,64 @@ export class HeaderController {
   /* ---------------------------------- */
 
   private init(): void {
-    this.updateMode()
     this.bindEvents()
 
     this.mediaQuery.addEventListener('change', () => {
-      this.updateMode()
       this.reset()
     })
   }
 
   /* ---------------------------------- */
-  /* Viewport mode */
+  /* Helpers */
   /* ---------------------------------- */
-
-  private updateMode(): void {
-    this.mode = this.mediaQuery.matches ? 'desktop' : 'mobile'
-  }
 
   private isDesktop(): boolean {
-    return this.mode === 'desktop'
+    return this.mediaQuery.matches
+  }
+
+  private isOpen(): boolean {
+    return this.header.classList.contains('open')
   }
 
   /* ---------------------------------- */
-  /* Public interactions */
+  /* Desktop menu */
   /* ---------------------------------- */
 
   private open(): void {
-    this.setExpanded(true)
+    this.header.classList.add('open')
+    this.toggle.setAttribute('aria-expanded', 'true')
 
-    // Desktop behaviour: CSS-driven menu
-    if (this.isDesktop()) {
-      this.header.classList.add('open')
-      this.getFocusables()[0]?.focus()
-      return
-    }
-
-    // Mobile behaviour: native dialog
-    this.dialog.showModal()
-    this.lock()
+    this.getFocusables()[0]?.focus()
   }
 
   private close(options: { restoreFocus?: boolean } = {}): void {
     const { restoreFocus = true } = options
 
-    this.setExpanded(false)
+    const headerLayout = this.header.querySelector<HTMLElement>('header-layout')
 
-    // Desktop behaviour
-    if (this.isDesktop()) {
-      const headerLayout = this.header.querySelector<HTMLElement>('header-layout')
-      if (!headerLayout) return
+    this.header.classList.remove('open')
+    this.toggle.setAttribute('aria-expanded', 'false')
 
-      this.header.classList.remove('open')
+    if (!restoreFocus || !headerLayout) return
 
-      if (!restoreFocus) return
-
-      this.onNextTransitionEnd(headerLayout, () => {
-        this.toggle.focus()
-      })
-
-      return
-    }
-
-    // Mobile behaviour
-    this.closeDialogIfNeeded()
-    this.unlock()
+    this.onNextTransitionEnd(headerLayout, () => {
+      this.toggle.focus()
+    })
   }
 
   private toggleMenu = (): void => {
-    if (this.isDesktop()) {
-      const isOpen = this.header.classList.contains('open')
-      isOpen ? this.close() : this.open()
-      return
-    }
-
-    this.dialog.open ? this.close() : this.open()
+    this.isOpen() ? this.close() : this.open()
   }
 
   private reset(): void {
     this.header.classList.remove('open')
-    this.setExpanded(false)
+    this.toggle.setAttribute('aria-expanded', 'false')
 
-    this.closeDialogIfNeeded()
-    this.unlock()
-  }
-
-  /* ---------------------------------- */
-  /* Dialog helpers */
-  /* ---------------------------------- */
-
-  private closeDialogIfNeeded(): void {
     if (this.dialog.open) {
       this.dialog.close()
     }
-  }
 
-  /* ---------------------------------- */
-  /* Accessibility state */
-  /* ---------------------------------- */
-
-  private setExpanded(value: boolean): void {
-    this.toggle.setAttribute('aria-expanded', String(value))
-    this.openButton.setAttribute('aria-expanded', String(value))
+    this.unlock()
   }
 
   /* ---------------------------------- */
@@ -166,6 +110,7 @@ export class HeaderController {
 
   private onKeyDown = (event: KeyboardEvent): void => {
     if (!this.isDesktop()) return
+    if (!this.isOpen()) return
 
     if (event.key === 'Escape') {
       this.close()
@@ -178,9 +123,7 @@ export class HeaderController {
 
   private onScroll = (): void => {
     if (!this.isDesktop()) return
-
-    const isOpen = this.header.classList.contains('open')
-    if (!isOpen) return
+    if (!this.isOpen()) return
 
     this.close()
   }
@@ -204,22 +147,9 @@ export class HeaderController {
     })
   }
 
-  private onNextTransitionEnd(element: HTMLElement, callback: () => void): void {
-    const handle = (event: TransitionEvent): void => {
-      if (event.currentTarget !== element) return
-
-      element.removeEventListener('transitionend', handle)
-      callback()
-    }
-
-    element.addEventListener('transitionend', handle)
-  }
-
   private onFocusIn = (event: FocusEvent): void => {
     if (!this.isDesktop()) return
-
-    const isOpen = this.header.classList.contains('open')
-    if (!isOpen) return
+    if (!this.isOpen()) return
 
     const target = event.target as Node
 
@@ -227,6 +157,24 @@ export class HeaderController {
     if (!this.header.contains(target)) {
       this.close({ restoreFocus: false })
     }
+  }
+
+  /* ---------------------------------- */
+  /* Transition helpers */
+  /* ---------------------------------- */
+
+  private onNextTransitionEnd(element: HTMLElement, callback: () => void): void {
+    const handle = (event: TransitionEvent): void => {
+      if (event.currentTarget !== element) return
+
+      element.removeEventListener('transitionend', handle)
+
+      callback()
+    }
+
+    element.addEventListener('transitionend', handle, {
+      once: true,
+    })
   }
 
   /* ---------------------------------- */
@@ -247,22 +195,18 @@ export class HeaderController {
 
   private bindEvents(): void {
     this.toggle.addEventListener('click', this.toggleMenu)
-    this.closeButton.addEventListener('click', this.toggleMenu)
-    this.openButton.addEventListener('click', this.toggleMenu)
 
     window.addEventListener('keydown', this.onKeyDown)
     window.addEventListener('scroll', this.onScroll, { passive: true })
     window.addEventListener('focusin', this.onFocusIn)
 
-    // Sync dialog state (native close)
-    this.dialog.addEventListener('close', () => {
-      this.setExpanded(false)
-      this.unlock()
-    })
+    this.dialog.addEventListener('toggle', () => {
+      if (this.dialog.open) {
+        this.lock()
+        return
+      }
 
-    this.dialog.addEventListener('cancel', (event) => {
-      event.preventDefault()
-      this.close()
+      this.unlock()
     })
   }
 }

@@ -39,8 +39,9 @@ const { pathname } = Astro.url
 
                 <MenuToggle
                     className="btn-open js_nav-open"
+                    command="show-modal"
+                    commandfor="menuDialog"
                     aria-haspopup="dialog"
-                    aria-expanded="false"
                     aria-controls="menuDialog"
                 >
                     menu
@@ -55,7 +56,12 @@ const { pathname } = Astro.url
 <dialog class="js_menu-dialog" id="menuDialog" aria-label="Navigation">
     <dialog-header>
         <SiteLogo pathName={pathname} />
-        <MenuToggle className="btn-close js_nav-close" autofocus>close menu</MenuToggle>
+        <MenuToggle
+            className="btn-close js_nav-close"
+            command="close"
+            commandfor="menuDialog"
+            autofocus>close menu</MenuToggle
+        >
     </dialog-header>
 
     <nav aria-label="Main">
@@ -286,8 +292,6 @@ const { pathname } = Astro.url
         new HeaderController({
             headerSelector: '.js_header',
             toggleSelector: '.js_toggle',
-            closeSelector: '.js_nav-close',
-            openSelector: '.js_nav-open',
             dialogSelector: '.js_menu-dialog',
         })
     })
