@@ -1,6 +1,7 @@
 // @ts-check
 import { defineConfig, fontProviders } from 'astro/config';
 
+import { satteri } from '@astrojs/markdown-satteri';
 import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
 
@@ -34,6 +35,14 @@ export default defineConfig({
     }
   ],
 
+  // Markdown configuration
+  markdown: {
+    syntaxHighlight: false,
+    processor: satteri({
+      features: { directive: true }
+    })
+  },
+
   integrations: [
     sitemap({
       filter: (page) =>
@@ -42,9 +51,7 @@ export default defineConfig({
     }),
     mdx()
   ],
-  markdown: {
-    syntaxHighlight: false
-  },
+
   redirects: {
     '/frontend-stories/exploring-the-new--search-element-in-html/': '/frontend-stories/exploring-the-new-search-element-in-html/',
   }
