@@ -100,8 +100,6 @@ export class HeaderController {
     if (this.dialog.open) {
       this.dialog.close()
     }
-
-    this.unlock()
   }
 
   /* ---------------------------------- */
@@ -178,18 +176,6 @@ export class HeaderController {
   }
 
   /* ---------------------------------- */
-  /* Scroll locking */
-  /* ---------------------------------- */
-
-  private lock(): void {
-    document.documentElement.style.overflow = 'hidden'
-  }
-
-  private unlock(): void {
-    document.documentElement.style.overflow = ''
-  }
-
-  /* ---------------------------------- */
   /* Event binding */
   /* ---------------------------------- */
 
@@ -199,14 +185,5 @@ export class HeaderController {
     window.addEventListener('keydown', this.onKeyDown)
     window.addEventListener('scroll', this.onScroll, { passive: true })
     window.addEventListener('focusin', this.onFocusIn)
-
-    this.dialog.addEventListener('toggle', () => {
-      if (this.dialog.open) {
-        this.lock()
-        return
-      }
-
-      this.unlock()
-    })
   }
 }

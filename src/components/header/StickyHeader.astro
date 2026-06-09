@@ -53,7 +53,7 @@ const { pathname } = Astro.url
     </header-layout>
 </header>
 
-<dialog class="js_menu-dialog" id="menuDialog" aria-label="Navigation">
+<dialog class="js_menu-dialog" id="menuDialog" aria-label="Navigation" closedby="any">
     <dialog-header>
         <SiteLogo pathName={pathname} />
         <MenuToggle
@@ -190,6 +190,8 @@ const { pathname } = Astro.url
     }
 
     dialog {
+        overscroll-behavior: contain;
+
         grid-template-rows: auto 1fr;
         align-items: start;
         gap: 1.5rem;
@@ -202,7 +204,7 @@ const { pathname } = Astro.url
         color: inherit;
         border: none;
         padding: 1rem;
-        background-color: var(--surface-2);
+        background-color: transparent;
 
         @media (--motion-ok) {
             transition-property: opacity, display, overlay;
@@ -238,6 +240,9 @@ const { pathname } = Astro.url
 
     dialog::backdrop {
         --size: 3rem;
+
+        overflow: hidden;
+        overscroll-behavior: contain;
 
         position-anchor: --toggle;
         inset: auto;
