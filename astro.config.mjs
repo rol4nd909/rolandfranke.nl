@@ -47,6 +47,7 @@ export default defineConfig({
     sitemap({
       filter: (page) =>
         page !== 'https://rolandfranke.nl/frontend-stories/wcag-22/' &&
+        page !== 'https://rolandfranke.nl/frontend-stories/toc-test/' &&
         page !== 'https://rolandfranke.nl/frontend-stories/the-problem-with-sticky-menus/',
     }),
     mdx()
