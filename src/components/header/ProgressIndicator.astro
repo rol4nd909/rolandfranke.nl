@@ -8,14 +8,15 @@ type Props = HTMLAttributes<'svg'> & {
 const { className, ...rest } = Astro.props
 ---
 
-<svg class={className} {...rest}>
+<svg class={className} {...rest} data-progress-svg>
     <rect
         x="calc(var(--stroke) / 2)"
         y="calc(var(--stroke) / 2)"
         width="calc(100% - (var(--stroke) * 1px))"
         height="calc(100% - (var(--stroke) * 1px))"
         rx="calc((var(--nav-height-unit-less) / 2) - var(--stroke) + 2)"
-        ry="calc((var(--nav-height-unit-less) / 2) - var(--stroke) + 2)"></rect>
+        ry="calc((var(--nav-height-unit-less) / 2) - var(--stroke) + 2)"
+        data-progress-rect></rect>
 </svg>
 
 <style>
@@ -27,14 +28,14 @@ const { className, ...rest } = Astro.props
         block-size: 100%;
         inline-size: 100%;
         pointer-events: none;
-        opacity: 0;
+        /* opacity: 0; */
 
         > rect {
             fill: none;
             stroke: var(--color-primary-400);
             stroke-width: var(--stroke);
-            stroke-dasharray: 623;
-            stroke-dashoffset: -623;
+            stroke-dasharray: var(--progress-length);
+            stroke-dashoffset: var(--progress-length);
 
             animation-name: --progress;
             animation-timing-function: linear;
@@ -44,7 +45,39 @@ const { className, ...rest } = Astro.props
 
     @keyframes --progress {
         to {
-            stroke-dashoffset: -1240;
+            stroke-dashoffset: 0;
         }
     }
 </style>
+
+<script>
+    const initProgressIndicator = (): void => {
+        const svg = document.querySelector('[data-progress-svg]') as SVGSVGElement | null
+
+        if (!svg) return
+
+        const rect = svg.querySelector('[data-progress-rect]') as SVGRectElement | null
+
+        if (!rect) return
+
+        let previousLength = 0
+
+        const updateLength = (): void => {
+            const length = Math.round(rect.getTotalLength())
+
+            if (length === previousLength) return
+
+            previousLength = length
+
+            svg.style.setProperty('--progress-length', String(length))
+        }
+
+        updateLength()
+
+        const resizeObserver = new ResizeObserver(updateLength)
+
+        resizeObserver.observe(svg)
+    }
+
+    initProgressIndicator()
+</script>

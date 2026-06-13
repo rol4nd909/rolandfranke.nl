@@ -49,7 +49,7 @@ const { pathname } = Astro.url
             </nav-toggle>
         </header-collapse>
 
-        <ProgressIndicator className="progress" aria-hidden="true" />
+        {isStory && <ProgressIndicator className="progress" aria-hidden="true" />}
     </header-layout>
 </header>
 
