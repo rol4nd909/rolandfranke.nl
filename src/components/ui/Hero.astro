@@ -16,8 +16,10 @@ const { class: providedProps, ...rest } = Astro.props
         --_offset: calc(var(--_size) / 2);
         --_line: color-mix(in oklch, var(--text), var(--surface) 80%);
 
+        --_nav-offset: calc(var(--nav-height) + (var(--nav-offset) * 2));
+
         position: relative;
-        min-block-size: calc(60vb - (var(--nav-height) + (var(--nav-offset) * 2)));
+        min-block-size: calc(60vb - var(--_nav-offset));
         isolation: isolate;
 
         &::before,
@@ -46,8 +48,8 @@ const { class: providedProps, ...rest } = Astro.props
             align-content: center;
             row-gap: utopia.clamp(16, 32);
 
-            min-block-size: calc(100svb - (var(--nav-height) + (var(--nav-offset) * 2)));
-            padding-block-end: calc(var(--nav-height) + (var(--nav-offset) * 2));
+            min-block-size: calc(100svb - var(--_nav-offset));
+            padding-block-end: var(--_nav-offset);
         }
 
         &:has(> :only-child) {
