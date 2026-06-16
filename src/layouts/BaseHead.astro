@@ -41,6 +41,31 @@ if (typeof _image === 'string') {
         {noindex}
         {nofollow}
         charset="UTF-8"
+        openGraph={{
+            basic: {
+                url: canonical,
+                title: ogTitle,
+                type: ogType,
+                image: _image?.src ? _image.src : defaultImage.toString(),
+            },
+            image: {
+                url: image.toString(),
+                secureUrl: image.toString(),
+                alt: ogTitle,
+                height: _image?.height,
+                width: _image?.width,
+                type: _image?.format && `image/${_image.format}`,
+            },
+        }}
+        twitter={{
+            creator: '@rolandfranke',
+            image: image ? image.toString() : undefined,
+            imageAlt: ogTitle,
+            title: ogTitle,
+            site: '@rolandfranke',
+            description: description,
+            card: image ? 'summary_large_image' : 'summary',
+        }}
         extend={{
             meta: [
                 {
@@ -104,31 +129,6 @@ if (typeof _image === 'string') {
                     title: "RSS Feed for Roland's Frontend Stories",
                 },
             ],
-        }}
-        openGraph={{
-            basic: {
-                url: canonical,
-                title: ogTitle,
-                type: ogType,
-                image: _image?.src ? _image.src : defaultImage.toString(),
-            },
-            image: {
-                url: image.toString(),
-                secureUrl: image.toString(),
-                alt: ogTitle,
-                height: _image?.height,
-                width: _image?.width,
-                type: _image?.format && `image/${_image.format}`,
-            },
-        }}
-        twitter={{
-            creator: '@rolandfranke',
-            image: image ? image.toString() : undefined,
-            imageAlt: ogTitle,
-            title: ogTitle,
-            site: '@rolandfranke',
-            description: description,
-            card: image ? 'summary_large_image' : 'summary',
         }}
     />
     <Font cssVariable="--ff-sans" preload />
