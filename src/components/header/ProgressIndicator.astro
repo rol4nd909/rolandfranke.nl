@@ -10,12 +10,12 @@ const { className, ...rest } = Astro.props
 
 <svg class={className} {...rest} data-progress-svg>
     <rect
-        x="calc(var(--_stroke-offset))"
-        y="calc(var(--_stroke-offset))"
-        width="calc(var(--_stroke-size))"
-        height="calc(var(--_stroke-size))"
-        rx="calc(var(--_stroke-radius))"
-        ry="calc(var(--_stroke-radius))"
+        x="var(--_stroke-offset)"
+        y="var(--_stroke-offset)"
+        width="var(--_stroke-size)"
+        height="var(--_stroke-size)"
+        rx="var(--_stroke-radius)"
+        ry="var(--_stroke-radius)"
         data-progress-rect></rect>
 </svg>
 
