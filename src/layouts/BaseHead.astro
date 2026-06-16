@@ -41,31 +41,6 @@ if (typeof _image === 'string') {
         {noindex}
         {nofollow}
         charset="UTF-8"
-        openGraph={{
-            basic: {
-                url: canonical,
-                title: ogTitle,
-                type: ogType,
-                image: _image?.src ? _image.src : defaultImage.toString(),
-            },
-            image: {
-                url: image.toString(),
-                secureUrl: image.toString(),
-                alt: ogTitle,
-                height: _image?.height,
-                width: _image?.width,
-                type: _image?.format && `image/${_image.format}`,
-            },
-        }}
-        twitter={{
-            creator: '@rolandfranke',
-            image: image ? image.toString() : undefined,
-            imageAlt: ogTitle,
-            title: ogTitle,
-            site: '@rolandfranke',
-            description: description,
-            card: image ? 'summary_large_image' : 'summary',
-        }}
         extend={{
             meta: [
                 {
@@ -75,6 +50,20 @@ if (typeof _image === 'string') {
                 {
                     name: 'viewport',
                     content: 'width=device-width, initial-scale=1',
+                },
+                {
+                    name: 'color-scheme',
+                    content: 'dark light',
+                },
+                {
+                    name: 'theme-color',
+                    content: 'oklch(0.9 0.02 107)',
+                    media: '(prefers-color-scheme: light)',
+                },
+                {
+                    name: 'theme-color',
+                    content: 'oklch(0.22 0.02 249)',
+                    media: '(prefers-color-scheme: dark)',
                 },
                 {
                     name: 'apple-mobile-web-app-title',
@@ -91,20 +80,6 @@ if (typeof _image === 'string') {
                 {
                     name: 'og:site_name',
                     content: SITE.title,
-                },
-                {
-                    name: 'color-scheme',
-                    content: 'dark light',
-                },
-                {
-                    name: 'theme-color',
-                    content: 'oklch(0.9 0.02 107)',
-                    media: '(prefers-color-scheme: light)',
-                },
-                {
-                    name: 'theme-color',
-                    content: 'oklch(0.22 0.02 249)',
-                    media: '(prefers-color-scheme: dark)',
                 },
             ],
             link: [
@@ -129,6 +104,31 @@ if (typeof _image === 'string') {
                     title: "RSS Feed for Roland's Frontend Stories",
                 },
             ],
+        }}
+        openGraph={{
+            basic: {
+                url: canonical,
+                title: ogTitle,
+                type: ogType,
+                image: _image?.src ? _image.src : defaultImage.toString(),
+            },
+            image: {
+                url: image.toString(),
+                secureUrl: image.toString(),
+                alt: ogTitle,
+                height: _image?.height,
+                width: _image?.width,
+                type: _image?.format && `image/${_image.format}`,
+            },
+        }}
+        twitter={{
+            creator: '@rolandfranke',
+            image: image ? image.toString() : undefined,
+            imageAlt: ogTitle,
+            title: ogTitle,
+            site: '@rolandfranke',
+            description: description,
+            card: image ? 'summary_large_image' : 'summary',
         }}
     />
     <Font cssVariable="--ff-sans" preload />
