@@ -9,14 +9,7 @@ const { className, ...rest } = Astro.props
 ---
 
 <svg class={className} {...rest} data-progress-svg>
-    <rect
-        x="var(--_stroke-offset)"
-        y="var(--_stroke-offset)"
-        width="var(--_stroke-size)"
-        height="var(--_stroke-size)"
-        rx="var(--_stroke-radius)"
-        ry="var(--_stroke-radius)"
-        data-progress-rect></rect>
+    <rect data-progress-rect></rect>
 </svg>
 
 <style>
@@ -35,6 +28,15 @@ const { className, ...rest } = Astro.props
         /* opacity: 0; */
 
         > rect {
+            block-size: var(--_stroke-size);
+            inline-size: var(--_stroke-size);
+
+            x: var(--_stroke-offset);
+            y: var(--_stroke-offset);
+
+            rx: var(--_stroke-radius);
+            ry: var(--_stroke-radius);
+
             fill: none;
             stroke: var(--color-primary-400);
             stroke-width: var(--stroke);
