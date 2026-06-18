@@ -189,6 +189,7 @@ const { pathname } = Astro.url
         }
     }
 
+    /*   Closed state of the dialog   */
     dialog {
         overscroll-behavior: contain;
 
@@ -196,87 +197,62 @@ const { pathname } = Astro.url
         align-items: start;
         gap: 1.5rem;
 
+        color: inherit;
+        border: none;
+        padding-block: 1rem;
+        padding-inline: var(--nav-gutter);
+        background-color: transparent;
+
         block-size: 100%;
         inline-size: 100%;
         max-block-size: 100%;
         max-inline-size: 100%;
-
-        color: inherit;
-        border: none;
-        padding: 1rem;
-        background-color: transparent;
-
-        @media (--motion-ok) {
-            transition-property: opacity, display, overlay;
-            transition-duration: 0.5s;
-            transition-delay: 0s;
-            transition-behavior: allow-discrete;
-            transition-timing-function: linear;
-        }
-
         opacity: 0;
-
-        &[open] {
-            display: grid;
-
-            opacity: 1;
-
-            @media (--motion-ok) {
-                transition-delay: 0.25s;
-                transition-timing-function: var(--ease-spring);
-            }
-
-            @starting-style {
-                opacity: 0;
-            }
-        }
+        transition:
+            opacity 0.3s allow-discrete,
+            display 0.3s allow-discrete,
+            overlay 0.3s allow-discrete;
 
         > dialog-header {
             display: flex;
             align-items: center;
             justify-content: space-between;
         }
-    }
 
-    dialog::backdrop {
-        --size: 3rem;
+        /* Transition the :backdrop when the dialog modal is promoted to the top layer */
+        &::backdrop {
+            overflow: hidden;
+            overscroll-behavior: contain;
 
-        overflow: hidden;
-        overscroll-behavior: contain;
-
-        position-anchor: --toggle;
-        inset: auto;
-        top: calc(anchor(center) - (var(--size) / 2));
-        left: calc(anchor(center) - (var(--size) / 2));
-        width: var(--size);
-        block-size: var(--size);
-
-        border-radius: 100%;
-        outline: 1rem solid var(--color-primary-400);
-        background-color: var(--surface-2);
-
-        @media (--motion-ok) {
-            transition-property: scale, display, overlay;
-            transition-duration: 0.5s;
-            transition-behavior: allow-discrete;
-            transition-timing-function: linear;
+            background-color: var(--surface);
+            opacity: 0;
+            transition: opacity 0.3s allow-discrete;
         }
-
-        scale: 0;
     }
 
-    dialog[open]::backdrop {
-        scale: 50;
+    /*   Open state of the dialog  */
+    dialog[open] {
+        display: grid;
+        opacity: 1;
+        transform: translateY(0);
 
-        @media (--motion-ok) {
-            transition-duration: 4s;
-            transition-timing-function: var(--ease-spring);
+        &::backdrop {
+            opacity: 1;
         }
     }
 
     @starting-style {
+        /*   Before-open state  */
+        /* Needs to be after the previous dialog[open] rule to take effect,
+    as the specificity is the same */
+        dialog[open] {
+            opacity: 0;
+        }
+
+        /* This starting-style rule cannot be nested inside the above selector
+because the nesting selector cannot represent pseudo-elements. */
         dialog[open]::backdrop {
-            scale: 0;
+            opacity: 0;
         }
     }
 
