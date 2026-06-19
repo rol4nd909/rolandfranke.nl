@@ -34,13 +34,15 @@ if (typeof _image === 'string') {
 ---
 
 <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="dark light" />
     <SEO
         {title}
         {description}
         {canonical}
         {noindex}
         {nofollow}
-        charset="UTF-8"
         openGraph={{
             basic: {
                 url: canonical,
@@ -71,14 +73,6 @@ if (typeof _image === 'string') {
                 {
                     name: 'generator',
                     content: Astro.generator,
-                },
-                {
-                    name: 'viewport',
-                    content: 'width=device-width, initial-scale=1',
-                },
-                {
-                    name: 'color-scheme',
-                    content: 'dark light',
                 },
                 {
                     name: 'theme-color',

@@ -8,7 +8,7 @@ type Props = HTMLAttributes<'button'> & {
 const { className, ...rest } = Astro.props
 ---
 
-<button class={className} {...rest}>
+<button class={className} {...rest} type="button">
     <svg aria-hidden="true" viewBox="0 0 100 100">
         <path d="M20 29h73v64L25 25"></path>
         <path d="M20 50h60"></path>
