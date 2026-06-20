@@ -40,8 +40,8 @@ const { className, ...rest } = Astro.props
             fill: none;
             stroke: var(--color-primary-400);
             stroke-width: var(--stroke);
-            stroke-dasharray: var(--progress-length);
-            stroke-dashoffset: var(--progress-length);
+            stroke-dasharray: var(--progress-length, 2847);
+            stroke-dashoffset: var(--progress-length, 2847);
 
             animation-name: --progress;
             animation-timing-function: linear;

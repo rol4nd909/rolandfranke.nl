@@ -78,12 +78,18 @@ const { pathname } = Astro.url
         padding-inline: var(--nav-gutter);
         pointer-events: none;
 
-        @supports (container-type: scroll-state) {
-            &[data-story='true'] {
+        &[data-story='true'] {
+            /*
+             * Sticky positioning is only needed when `animation-timeline` is supported,
+             * as the scroll progress indicator depends on it.
+             */
+            @supports (animation-timeline: scroll()) {
                 position: sticky;
                 inset-block-start: var(--nav-offset);
                 z-index: 10;
+            }
 
+            @supports (container-type: scroll-state) {
                 container-type: scroll-state;
                 container-name: --sticky;
             }
