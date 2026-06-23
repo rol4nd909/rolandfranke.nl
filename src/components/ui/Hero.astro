@@ -49,7 +49,7 @@ const { class: providedProps, ...rest } = Astro.props
             padding-block-end: utopia.clamp(48, 96);
         }
 
-        :global(:only-child) {
+        > :global(:only-child) {
             align-content: end;
             max-inline-size: calc(var(--constrain-sm) + 3rem);
 
