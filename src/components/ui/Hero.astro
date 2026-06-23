@@ -16,10 +16,7 @@ const { class: providedProps, ...rest } = Astro.props
         --_offset: calc(var(--_size) / 2);
         --_line: color-mix(in oklch, var(--text), var(--surface) 80%);
 
-        --_nav-offset: calc(var(--nav-height) + (var(--nav-offset) * 2));
-
         position: relative;
-        min-block-size: calc(60vb - var(--_nav-offset));
         isolation: isolate;
 
         &::before,
@@ -48,23 +45,15 @@ const { class: providedProps, ...rest } = Astro.props
             align-content: center;
             row-gap: utopia.clamp(16, 32);
 
-            min-block-size: calc(100svb - var(--_nav-offset));
-            padding-block-end: var(--_nav-offset);
+            min-block-size: 90svb;
+            padding-block-end: utopia.clamp(48, 96);
         }
 
-        &:has(> :only-child) {
-            padding-block: 0;
+        :global(> :only-child) {
+            align-content: end;
+            max-inline-size: calc(var(--constrain-sm) + 3rem);
 
-            :global(> :only-child) {
-                padding-block-start: var(--header-height);
-                padding-block-end: utopia.clamp(48, 96, 400, 600);
-                align-content: end;
-                max-inline-size: calc(var(--constrain-sm) + 3rem);
-
-                .hero--large & {
-                    row-gap: inherit;
-                }
-            }
+            padding-block: utopia.clamp(48, 96);
         }
     }
 </style>

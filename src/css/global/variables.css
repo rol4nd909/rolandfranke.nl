@@ -13,8 +13,6 @@
     rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.1) 0px 2px 4px -2px;
 
   /* Navigation props */
-  --nav-height-unit-less: 64;
-  --nav-height: calc((var(--nav-height-unit-less) / 16) * 1rem);
   --nav-gutter: utopia.clamp(16, 72, 960); /* The 960 value is the minumun constrain value */
   --nav-offset: 1rem;
 

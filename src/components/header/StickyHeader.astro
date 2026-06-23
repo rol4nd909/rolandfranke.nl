@@ -103,7 +103,6 @@ const { pathname } = Astro.url
 
             pointer-events: auto;
 
-            block-size: var(--nav-height);
             inline-size: calc(100vi - (var(--nav-gutter) * 2));
             max-inline-size: var(--constrain-lg);
 
@@ -174,6 +173,7 @@ const { pathname } = Astro.url
 
                 .nav-list {
                     visibility: hidden;
+                    block-size: 0;
                 }
 
                 @container --nav-bar (inline-size >= 37rem) {
@@ -181,6 +181,7 @@ const { pathname } = Astro.url
 
                     .nav-list {
                         visibility: visible;
+                        block-size: auto;
                     }
 
                     .btn-toggle {

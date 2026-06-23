@@ -18,14 +18,12 @@ const { className, ...rest } = Astro.props
 
         --_stroke-offset: calc((var(--stroke) / 2) * 1px);
         --_stroke-size: calc(100% - (var(--stroke) * 1px));
-        --_stroke-radius: calc(((var(--nav-height-unit-less) / 2) - var(--stroke) + 2) * 1px);
 
         position: absolute;
         inset: 0;
         block-size: 100%;
         inline-size: 100%;
         pointer-events: none;
-        /* opacity: 0; */
 
         > rect {
             block-size: var(--_stroke-size);
@@ -34,8 +32,7 @@ const { className, ...rest } = Astro.props
             x: var(--_stroke-offset);
             y: var(--_stroke-offset);
 
-            rx: var(--_stroke-radius);
-            ry: var(--_stroke-radius);
+            ry: 50%;
 
             fill: none;
             stroke: var(--color-primary-400);
