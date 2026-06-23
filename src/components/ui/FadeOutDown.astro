@@ -18,7 +18,9 @@ const { as: Tag = 'div', class: providedProps, ...props } = Astro.props
         @media (--motion-ok) {
             @supports (animation-timeline: scroll()) {
                 .fade-out-down {
-                    animation: --fade-out-down linear forwards;
+                    animation-name: --fade-out-down;
+                    animation-timing-function: linear;
+                    animation-fill-mode: forwards;
                     animation-timeline: scroll(root);
                     animation-range: 0 50vh;
                 }
