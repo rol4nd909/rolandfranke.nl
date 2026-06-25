@@ -36,15 +36,18 @@
     }
 
     const onClick = () => {
-        if (!document.startViewTransition) {
+        document.startViewTransition(() => {
             toggleTheme()
-            return
-        }
-
-        document.startViewTransition({
-            update: toggleTheme,
-            types: ['dark-light'],
         })
+        // if (!document.startViewTransition) {
+        //     toggleTheme()
+        //     return
+        // }
+
+        // document.startViewTransition({
+        //     update: toggleTheme,
+        //     types: ['dark-light'],
+        // })
     }
 
     const getColorPreference = () => {

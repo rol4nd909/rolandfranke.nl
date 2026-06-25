@@ -131,22 +131,15 @@ body {
       view-transition-name: dark-light;
     }
 
-    html:active-view-transition-type(dark-light) {
-      main,
-      .site-header {
-        view-transition-name: none;
-      }
+    ::view-transition-old(dark-light) {
+      animation: none;
+      z-index: -1;
+    }
 
-      &::view-transition-old(dark-light) {
-        animation: none;
-        z-index: -1;
-      }
-
-      &::view-transition-new(dark-light) {
-        animation: --reveal 0.75s var(--spring);
-        clip-path: inset(0 0 0 0);
-        z-index: 2;
-      }
+    ::view-transition-new(dark-light) {
+      animation: --reveal 0.75s var(--spring);
+      clip-path: inset(0 0 0 0);
+      z-index: 2;
     }
   }
 
