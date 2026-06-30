@@ -2,6 +2,20 @@ html {
   scrollbar-color: var(--color-primary-400) transparent;
   scrollbar-gutter: stable;
 
+  /*
+    * --clip-path for the dark-light transition
+    * --toggle-delay Used in the dark-light toggle button
+  */
+  &[color-scheme='light'] {
+    --clip-path: 100% 0 0 0;
+    --toggle-delay: 0.4s;
+  }
+
+  &[color-scheme='dark'] {
+    --clip-path: 0 0 100% 0;
+    --toggle-delay: 0.15s;
+  }
+
   @media (--motion-ok) {
     scroll-behavior: smooth;
   }
@@ -112,26 +126,10 @@ body {
 }
 
 @layer --view-transitions {
-  html[color-scheme='light'] {
-    --from: 100% 0 0 0;
-    --toggle-delay: 0.4s;
-  }
-
-  html[color-scheme='dark'] {
-    --from: 0 0 100% 0;
-    --toggle-delay: 0.15s;
-  }
-
   @media (--motion-ok) {
     @view-transition {
       navigation: auto;
     }
-
-    /* html:active-view-transition {
-      :root {
-        view-transition-name: dark-light;
-      }
-    } */
 
     html:active-view-transition-type(dark-light) {
       &::view-transition-old(root) {
@@ -146,24 +144,24 @@ body {
       }
     }
   }
+}
 
-  @layer --keyframes {
-    @keyframes --reveal {
-      from {
-        clip-path: inset(var(--from));
-      }
+@layer --keyframes {
+  @keyframes --reveal {
+    from {
+      clip-path: inset(var(--clip-path));
     }
+  }
 
-    @keyframes --scale-out {
-      to {
-        scale: 0;
-      }
+  @keyframes --scale-out {
+    to {
+      scale: 0;
     }
+  }
 
-    @keyframes --scale-in {
-      from {
-        scale: 0;
-      }
+  @keyframes --scale-in {
+    from {
+      scale: 0;
     }
   }
 }
