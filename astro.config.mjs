@@ -9,6 +9,13 @@ import sitemap from '@astrojs/sitemap';
 export default defineConfig({
   site: 'https://rolandfranke.nl',
 
+  vite: {
+    build: {
+      // Minify CSS with esbuild instead of csso to avoid issues with :target pseudo-class in CSS selectors
+      cssMinify: 'esbuild'
+    },
+  },
+
   fonts: [
     {
       name: 'Instrument Sans',
