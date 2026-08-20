@@ -12,11 +12,11 @@
   "dependencies": {
     "@astro-community/astro-embed-baseline-status": "^0.2.2",
     "@astrojs/check": "^0.9.10",
-    "@astrojs/markdown-satteri": "^0.3.6",
-    "@astrojs/mdx": "^7.0.6",
+    "@astrojs/markdown-satteri": "^0.3.7",
+    "@astrojs/mdx": "^7.0.7",
     "@astrojs/rss": "^4.0.19",
     "@astrojs/sitemap": "^3.7.3",
-    "astro": "7.2.3",
+    "astro": "7.2.4",
     "astro-seo": "^1.1.0",
     "typescript": "^6.0.3"
   },
