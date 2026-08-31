@@ -5,6 +5,8 @@ import { satteri } from '@astrojs/markdown-satteri';
 import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
 
+import llmsMd from 'astro-llms-md';
+
 // https://astro.build/config
 export default defineConfig({
   site: 'https://rolandfranke.nl',
@@ -57,7 +59,15 @@ export default defineConfig({
         page !== 'https://rolandfranke.nl/frontend-stories/toc-test/' &&
         page !== 'https://rolandfranke.nl/frontend-stories/the-problem-with-sticky-menus/',
     }),
-    mdx()
+    mdx(),
+    llmsMd({
+      generateIndividualMd: false,
+      exclude: [
+        "frontend-stories/the-problem-with-sticky-menus",
+        "frontend-stories/toc-test",
+        "frontend-stories/wcag-22"
+      ]
+    })
   ],
 
   redirects: {
