@@ -1,0 +1,187 @@
+---
+title: 'CSS field-sizing: content Is Finally Baseline'
+description: 'Learn how CSS field-sizing: content lets inputs and textareas size themselves to their content without JavaScript.'
+pubDate: 2026-08-26
+author: Roland
+tags: ["css", "baseline"]
+---
+
+import { BaselineStatus } from '@astro-community/astro-embed-baseline-status';
+
+## Introduction
+
+Getting a form control to size itself based on its content has traditionally been surprisingly difficult.
+
+An `<input>` has a default width. If you want it to grow as the user types, you usually end up measuring the content with JavaScript, listening for input events, or using some clever CSS workaround.
+
+That's no longer necessary.
+
+With the `field-sizing` property, CSS can tell form controls to size themselves based on their content.
+
+And as of June 2026, `field-sizing` is Baseline Newly Available.
+
+
+## The Problem
+
+Consider a simple input:
+
+```html
+<label for="name">Name</label>
+<input id="name" type="text">
+```
+
+By default, the input has a predefined size. It doesn't care whether the user enters:
+
+```text
+Bob
+```
+
+or:
+
+```text
+John and Jane Doe
+```
+
+The control itself stays the same size.
+
+You can of course choose a suitable `width`, but that doesn't make the control adapt to its content.
+
+This is where `field-sizing: content` comes in.
+
+
+## Let CSS Size the Input
+
+The CSS is remarkably simple:
+
+```css
+input {
+  field-sizing: content;
+}
+```
+
+That's it.
+
+The input now sizes itself according to its content.
+
+As the user types, the field grows.
+
+When the content becomes shorter, it shrinks again.
+
+No JavaScript. No measuring text. No event listeners.
+
+
+### Add Some Limits
+
+In practice, you probably don't want an input growing indefinitely across the page.
+
+That's where `min-inline-size` and `max-inline-size` become useful:
+
+```css
+input {
+  field-sizing: content;
+
+  min-inline-size: 10ch;
+  max-inline-size: min(100%, 30ch);
+}
+```
+
+The input now has a sensible minimum size, while still being able to grow with its content.
+
+This is an important detail when using `field-sizing: content`: don't immediately add a fixed `width` to the element, because that defeats much of the content-based sizing behaviour.
+
+
+## It Works with Textareas Too
+
+`field-sizing: content` isn't limited to single-line inputs.
+
+It also works with `<textarea>`:
+
+```html
+<label for="message">Message</label>
+<textarea id="message"></textarea>
+```
+
+```css
+textarea {
+  field-sizing: content;
+
+  min-inline-size: 20ch;
+  max-inline-size: min(100%, 60ch);
+
+  min-block-size: 3.5rlh;
+  max-block-size: 10.5rlh;
+}
+```
+
+The textarea can now grow as content is entered, both horizontally and vertically, until it reaches the available or explicitly defined limits.
+
+Once it reaches those limits, normal scrolling takes over.
+
+This makes `field-sizing: content` particularly interesting for things like comments, messages and other variable-length form fields.
+
+
+## Why This Matters
+
+What I like about `field-sizing` is that it removes an entire category of JavaScript.
+
+The browser already knows how large the content is. It also already knows how form controls should behave when their available space is constrained.
+
+There shouldn't really be a reason for application code to duplicate that logic just to make an input grow with its contents.
+
+This is a good example of where the platform is catching up with patterns that developers have been implementing themselves for years.
+
+
+## A Small but Important Detail
+
+There is one thing to keep in mind when using `field-sizing: content`.
+
+Without a minimum width, an empty input can become extremely small because there is no content to size it around.
+
+For example:
+
+```css
+input {
+  field-sizing: content;
+}
+```
+
+can result in an empty input being roughly the width of the text cursor.
+
+Adding a `min-inline-size` is therefore often a good idea:
+
+```css
+input {
+  field-sizing: content;
+  min-inline-size: 10ch;
+}
+```
+
+This gives the browser control over the intrinsic sizing while still providing a sensible starting point.
+
+
+## Browser Support
+
+<BaselineStatus id="field-sizing" />
+
+`field-sizing` is now Baseline 2026 and is supported in current versions of Chrome, Edge, Firefox and Safari.
+
+This means you can start using `field-sizing: content` in production today, without needing a browser-specific workaround for modern browsers.
+
+As with any relatively new CSS feature, older browsers may not support it. In those browsers, the form control simply falls back to its default sizing behaviour, making `field-sizing` a good fit for progressive enhancement.
+
+
+## Closing Thoughts
+
+`field-sizing: content` is a small CSS feature, but it's exactly the kind of feature I like seeing land in the platform.
+
+A common UI behaviour that previously required JavaScript can now be expressed declaratively:
+
+```css
+field-sizing: content;
+```
+
+One line replaces a surprising amount of potential application code.
+
+CSS keeps getting better at describing not just how things should look, but how they should behave.
+
+And I'm very happy to see this one finally become Baseline.
