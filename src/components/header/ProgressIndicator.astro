@@ -8,8 +8,8 @@ type Props = HTMLAttributes<'svg'> & {
 const { className, ...rest } = Astro.props
 ---
 
-<svg class={className} {...rest} data-progress-svg>
-    <rect data-progress-rect></rect>
+<svg class={className} {...rest}>
+    <rect data-progress-rect pathLength="1"></rect>
 </svg>
 
 <style>
@@ -37,8 +37,8 @@ const { className, ...rest } = Astro.props
             fill: none;
             stroke: var(--color-primary-400);
             stroke-width: var(--stroke);
-            stroke-dasharray: var(--progress-length, 2847);
-            stroke-dashoffset: var(--progress-length, 2847);
+            stroke-dasharray: 1;
+            stroke-dashoffset: 1;
 
             animation-name: --progress;
             animation-timing-function: linear;
@@ -52,35 +52,3 @@ const { className, ...rest } = Astro.props
         }
     }
 </style>
-
-<script>
-    const initProgressIndicator = (): void => {
-        const svg = document.querySelector('[data-progress-svg]') as SVGSVGElement | null
-
-        if (!svg) return
-
-        const rect = svg.querySelector('[data-progress-rect]') as SVGRectElement | null
-
-        if (!rect) return
-
-        let previousLength = 0
-
-        const updateLength = (): void => {
-            const length = Math.round(rect.getTotalLength())
-
-            if (length === previousLength) return
-
-            previousLength = length
-
-            svg.style.setProperty('--progress-length', String(length))
-        }
-
-        updateLength()
-
-        const resizeObserver = new ResizeObserver(updateLength)
-
-        resizeObserver.observe(svg)
-    }
-
-    initProgressIndicator()
-</script>
