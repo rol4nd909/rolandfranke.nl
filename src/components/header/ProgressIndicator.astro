@@ -40,9 +40,15 @@ const { className, ...rest } = Astro.props
             stroke-dasharray: 1;
             stroke-dashoffset: 1;
 
-            animation-name: --progress;
-            animation-timing-function: linear;
-            animation-timeline: scroll(y);
+            @supports (animation-timeline: scroll()) {
+                animation-name: --progress;
+                animation-timing-function: linear;
+                animation-fill-mode: forwards;
+
+                animation-timeline: --article;
+                animation-range-start: entry calc(100% - utopia.clamp(48, 96));
+                animation-range-end: exit calc(0% + utopia.clamp(48, 96));
+            }
         }
     }
 

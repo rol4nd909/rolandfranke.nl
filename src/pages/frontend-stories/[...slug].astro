@@ -81,4 +81,12 @@ const { title, description, image, pubDate, tags, author, tocLevel } = post.data
     .flex {
         gap: 1rem;
     }
+
+    article {
+      view-timeline: --article;
+    }
+
+    :global(:root) {
+      timeline-scope: --article;
+    }
 </style>
