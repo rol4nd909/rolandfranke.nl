@@ -26,7 +26,8 @@ export default defineConfig({
       options: {
         variants: [
           { src: ['./src/assets/fonts/InstrumentSans-Regular.woff2'] },
-          { src: ['./src/assets/fonts/InstrumentSans-SemiBold.woff2'] }
+          { src: ['./src/assets/fonts/InstrumentSans-SemiBold.woff2'] },
+          { src: ['./src/assets/fonts/InstrumentSans-Italic.woff2'] }
         ]
       },
     },
