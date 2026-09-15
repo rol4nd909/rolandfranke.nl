@@ -58,12 +58,15 @@ export default defineConfig({
       filter: (page) =>
         page !== 'https://rolandfranke.nl/frontend-stories/wcag-22/' &&
         page !== 'https://rolandfranke.nl/frontend-stories/toc-test/' &&
-        page !== 'https://rolandfranke.nl/frontend-stories/the-problem-with-sticky-menus/',
+        page !== 'https://rolandfranke.nl/frontend-stories/the-problem-with-sticky-menus/' &&
+        page !== 'https://rolandfranke.nl/frontend-stories/a-css-reading-progress-bar-that-tracks-the-article/',
+
     }),
     mdx(),
     llmsMd({
       generateIndividualMd: false,
       exclude: [
+        "frontend-stories/a-css-reading-progress-bar-that-tracks-the-article",
         "frontend-stories/the-problem-with-sticky-menus",
         "frontend-stories/toc-test",
         "frontend-stories/wcag-22"

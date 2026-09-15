@@ -1,0 +1,442 @@
+---
+title: 'A CSS Reading Progress Bar That Tracks the Article'
+description: 'Build a CSS-only reading progress indicator that tracks the article itself, not the entire page, using view-timeline and timeline-scope.'
+pubDate: 2026-09-15
+author: Roland
+tags: ["css", "experimental"]
+isDraft: true
+---
+
+import { BaselineStatus } from '@astro-community/astro-embed-baseline-status';
+
+## Introduction
+
+Reading progress indicators are a nice little enhancement for long-form content.
+
+The usual CSS-only approach is surprisingly simple. Tie an animation to the document scroll position and scale a bar from `0` to `1` as the user scrolls.
+
+The problem is that `scroll()` tracks the scroll progress of the page.
+
+But what if the page has a header, a hero, some content before the article, related content after it, and a footer?
+
+The progress indicator still represents the entire document.
+
+What I wanted was slightly different:
+
+> **I want the progress bar to represent the reading progress of the article itself.**
+
+And that's exactly what I've implemented on this site.
+
+If you're reading this story on my site, the progress indicator at the top of the page is already using this approach. It tracks the article you're reading, not the entire document.
+
+No JavaScript. No calculations. Just CSS.
+
+
+## The Usual Reading Progress Bar
+
+There are already plenty of examples of CSS-only reading progress indicators using scroll-driven animations.
+
+The basic idea is straightforward: connect the animation to the root scroll timeline.
+
+For example:
+
+```css
+.progress {
+  scale: 0 1;
+  transform-origin: left;
+
+  animation: progress linear both;
+  animation-timeline: scroll();
+}
+
+@keyframes progress {
+  to {
+    scale: 1 1;
+  }
+}
+```
+
+As the document scrolls from top to bottom, the animation progresses from `0%` to `100%`.
+
+This is a great use case for `animation-timeline: scroll()`.
+
+But it answers a slightly different question: <br />
+*How far have I scrolled through the document?*
+
+For a reading progress indicator, the question we really want to answer is: <br />
+*How far have I scrolled through this article?*
+
+Those aren't necessarily the same thing.
+
+
+## The Problem with a Real Article
+
+Imagine a page structured like this:
+
+```html
+<body>
+  <header>...</header>
+
+  <main>
+    <div class="hero">...</div>
+
+    <article>
+      With a long story you want to track...
+    </article>
+  </main>
+
+  <footer>...</footer>
+
+  <div class="progress" aria-hidden="true"></div>
+</body>
+```
+
+If the progress bar uses:
+
+```css
+animation-timeline: scroll();
+```
+
+the animation starts when the document starts scrolling and finishes when the document reaches the bottom.
+
+*The header counts.*<br />
+*The hero counts.*<br />
+*The article counts.*<br />
+*The footer counts.*
+
+There is a better way.
+
+
+## Give the Article Its Own Timeline
+
+Instead of asking the document scroll position to control the animation, we can create a **view progress timeline for the article**.
+
+That's what `view-timeline` is for.
+
+```css
+article {
+  view-timeline: --article;
+}
+```
+
+This gives the article a named view timeline called `--article`.
+
+A view timeline tracks an element as it moves through its scrollport. Unlike a regular scroll progress timeline, the timeline belongs to the element being observed.
+
+Now we have something that represents the article moving through the viewport.
+
+But there is one problem.
+
+Our progress bar isn't inside the article.
+
+It's outside of it:
+
+```html
+<article>...</article>
+
+<div class="progress"></div>
+```
+
+So how can the progress bar access `--article`?
+
+That's where `timeline-scope` comes in.
+
+
+## Bringing the Timeline Into Scope
+
+First, declare the timeline at the root:
+
+```css
+:root {
+  timeline-scope: --article;
+}
+```
+
+This makes the named timeline available to descendants of the element where `timeline-scope` is declared.
+
+Now the progress indicator can use the article's timeline:
+
+```css
+.progress {
+  animation-timeline: --article;
+}
+```
+
+We have effectively connected two otherwise unrelated elements:
+
+No JavaScript is involved in moving information between the two elements.
+
+The article creates the timeline.
+
+The progress indicator consumes it.
+
+
+## Defining the Reading Range
+
+There is one more important piece.
+
+A view timeline has several possible ranges describing how an element enters, moves through and leaves the scrollport.
+
+For the reading indicator, I want the animation to represent the article from the moment it has entered the viewport until the moment it has completely left it.
+
+That's where `animation-range` comes in:
+
+```css
+.progress {
+  animation-range-start: entry 100%;
+  animation-range-end: exit 0%;
+}
+```
+
+Together, the relevant CSS looks like this:
+
+```css
+:root {
+  timeline-scope: --article;
+}
+
+article {
+  view-timeline: --article;
+}
+
+.progress {
+  position: fixed;
+  inset: 0 0 auto;
+  z-index: 1;
+
+  block-size: 0.5rem;
+  background-color: hotpink;
+
+  scale: 0 1;
+  transform-origin: left;
+
+  animation-name: --progress;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+
+  animation-timeline: --article;
+  animation-range-start: entry 100%;
+  animation-range-end: exit 0%;
+}
+
+@keyframes --progress {
+  to {
+    scale: 1 1;
+  }
+}
+```
+
+And that's the whole trick.
+
+
+## What Is Actually Happening?
+
+The important part isn't really the animation. The animation itself is almost trivial:
+
+```css
+@keyframes --progress {
+  to {
+    scale: 1 1;
+  }
+}
+```
+
+The interesting part is the timeline.
+
+The article defines it:
+
+```css
+article {
+  view-timeline: --article;
+}
+```
+
+The root makes that timeline available:
+
+```css
+:root {
+  timeline-scope: --article;
+}
+```
+
+And the progress bar consumes it:
+
+```css
+.progress {
+  animation-timeline: --article;
+}
+```
+
+This means the progress bar isn't measuring how far the user has travelled through the document.
+
+It's responding to how far the **article has travelled through the scrollport**.
+
+That's a subtle difference, but it makes the result much more useful.
+
+
+## Why `timeline-scope` Matters
+
+Normally, named animation timelines have a limited scope.
+
+`timeline-scope` lets you extend that scope so another element can use a named timeline created elsewhere in the document tree. This is useful when the element being tracked and the element being animated aren't in the same subtree.
+
+In this example, that's exactly what we need.
+
+The article owns the timeline.
+
+The progress indicator lives somewhere completely different.
+
+```html
+<main>
+  <div class="hero">...</div>
+
+  <article>
+    ...
+  </article>
+</main>
+
+<div class="progress"></div>
+```
+
+There is no need to restructure the HTML just to make the animation work.
+
+`timeline-scope` lets the timeline cross that boundary.
+
+
+## Why Not Just Use `animation-range`?
+
+You might wonder whether this could be solved with a normal document scroll timeline and a carefully chosen `animation-range`.
+
+To some extent, yes.
+
+You could calculate where the article starts and where it ends and use those values to limit the animation.
+
+But that couples the animation to the layout.
+
+If the hero changes height, the range changes.
+
+If the article moves, the range changes.
+
+If the layout changes at a breakpoint, the range changes.
+
+With a view timeline, the relationship is semantic instead:
+
+> Track this element.
+
+That is much closer to what we actually mean by reading progress.
+
+
+## The Nice Part: The Article Can Move
+
+Another thing I like about this approach is that the article doesn't need to be in a particular position on the page.
+
+It could be preceded by:
+
+* a header
+* a hero
+* an introduction
+* advertisements
+* related content
+* anything else
+
+The progress timeline still belongs to the article.
+
+This makes the technique much more reusable than a progress bar tied to the document's total scroll range.
+
+
+## Progressive Enhancement
+
+Scroll-driven animations are still not universally available.
+
+The individual pieces used here, including `animation-timeline`, `view-timeline` and `timeline-scope`, are still marked as limited availability on MDN.
+
+That doesn't mean the entire experience needs a JavaScript fallback.
+
+A reading progress indicator is enhancement rather than essential functionality.
+
+The article remains perfectly readable without it.
+
+For example, the feature can be isolated behind a feature query:
+
+```css
+@supports (animation-timeline: --article) and
+          (view-timeline: --article) and
+          (timeline-scope: --article) {
+  :root {
+    timeline-scope: --article;
+  }
+
+  article {
+    view-timeline: --article;
+  }
+
+  .progress {
+    animation: --progress linear both;
+    animation-timeline: --article;
+    animation-range: entry 100% exit 0%;
+  }
+}
+```
+
+The browser either gets the enhanced reading indicator or simply gets the article.
+
+No JavaScript required.
+
+
+## What I Like About This
+
+This is one of those CSS features where the syntax is probably more complicated than the problem appears to be.
+
+But once you understand the relationship between the pieces, it becomes quite elegant:
+
+```text
+article
+  ↓
+view-timeline
+  ↓
+named timeline
+  ↓
+timeline-scope
+  ↓
+progress indicator
+```
+
+The browser handles the relationship between the element and the viewport.
+
+CSS handles the animation.
+
+And the DOM doesn't need to change just to make those two things communicate.
+
+
+## Browser Support
+
+<BaselineStatus id="scroll-driven-animations" />
+
+The features used in this example are still evolving across browsers, so this technique is best treated as progressive enhancement.
+
+A reading progress indicator is a good candidate for this. If a browser doesn't support the required timeline features, the article remains fully usable. The progress indicator simply isn't shown.
+
+As browser support improves, the same HTML can progressively gain the enhanced experience.
+
+
+## Closing Thoughts
+
+A CSS-only reading progress bar isn't particularly new anymore.
+
+The interesting part is deciding **what the progress actually represents**.
+
+A document-level scroll timeline tells you how far you've travelled through the page.
+
+A view timeline lets you track a specific element.
+
+Combine that with `timeline-scope`, and the progress indicator can live independently from the article while still being driven by the article's position in the viewport.
+
+That's the part I find interesting.
+
+Not another way to make a bar grow from left to right, but a more precise way to describe **what that progress means**.
+
+CSS is getting increasingly good at expressing these relationships declaratively.
+
+And sometimes the interesting part isn't the animation at all.
+
+It's the timeline.
