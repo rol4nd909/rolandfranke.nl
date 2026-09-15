@@ -1,15 +1,14 @@
 ---
 import Dot from '@/components/ui/Dot.astro'
-import Heading from '@/components/ui/Heading.astro'
 import Hero from '@/components/ui/Hero.astro'
 import BaseLayout from '@layouts/BaseLayout.astro'
 ---
 
 <BaseLayout>
     <Hero class="hero--large" data-grid="fullbleed">
-        <Heading tagName="h1" size="h1" class="hero__title" id="page-heading" tabindex="-1">
+        <h1 class="hero__title" id="page-heading" tabindex="-1">
             roland<span aria-hidden="true">.</span>
-        </Heading>
+        </h1>
         <div class="hero__explain flex letter-spacing" aria-hidden="true">
             <span>[<span class="ff-serif">r<span class="underline">o</span>.land</span>]</span>
             <Dot size="large" />
@@ -26,6 +25,8 @@ import BaseLayout from '@layouts/BaseLayout.astro'
 <style>
     .hero__title {
         /* fix to align the title with text after it */
+        margin-inline-start: -0.085ch;
+        font-weight: var(--fw-semibold);
         font-size: utopia.clamp(80, 260, 320, 1200);
         white-space: nowrap;
 
