@@ -46,8 +46,9 @@ const { className, ...rest } = Astro.props
                 animation-fill-mode: forwards;
 
                 animation-timeline: --article;
+                /* start a bit earlier because of the padding of the article */
                 animation-range-start: entry calc(100% - utopia.clamp(48, 96));
-                animation-range-end: exit calc(0% + utopia.clamp(48, 96));
+                animation-range-end: exit 0%;
             }
         }
     }
