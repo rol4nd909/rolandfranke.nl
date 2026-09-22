@@ -12,25 +12,23 @@ const { headings, levels = 2 } = Astro.props
 const filteredHeadings = headings.filter((heading) => heading.depth <= levels)
 ---
 
-{
-    filteredHeadings && filteredHeadings.length > 0 && (
-        <nav class="toc" aria-label="Table of Contents">
-            <SkipLink href="#article-content">Skip to article content</SkipLink>
+{filteredHeadings && filteredHeadings.length > 0 && (
+    <nav class="toc" aria-label="Table of Contents">
+        <SkipLink href="#article-content">Skip to article content</SkipLink>
 
-            <ul class="list">
-                {filteredHeadings.map((heading) => (
-                    <li
-                        class:list={{
-                            subitem: heading.depth === 3,
-                        }}
-                    >
-                        <a href={`#${heading.slug}`}>{heading.text}</a>
-                    </li>
-                ))}
-            </ul>
-        </nav>
-    )
-}
+        <ul class="list">
+            {filteredHeadings.map((heading) => (
+                <li
+                    class:list={{
+                        subitem: heading.depth === 3,
+                    }}
+                >
+                    <a href={`#${heading.slug}`}>{heading.text}</a>
+                </li>
+            ))}
+        </ul>
+    </nav>
+)}
 
 <style>
     .toc {
@@ -103,6 +101,8 @@ const filteredHeadings = headings.filter((heading) => heading.depth <= levels)
                 }
 
                 &:target-current {
+                    --toc-current: 1;
+
                     font-family: var(--ff-serif);
                     font-weight: var(--fw-semibold);
                     transform: translateX(0.75rem);
@@ -121,3 +121,38 @@ const filteredHeadings = headings.filter((heading) => heading.depth <= levels)
         }
     }
 </style>
+
+<script>
+    // :target-current is currently not exposed to assistive technologies,
+    // so sync its state to aria-current until CSS supports this natively.
+    // See https://chromium-review.googlesource.com/c/chromium/src/+/6853905
+    if (CSS.supports('selector(:target-current)')) {
+        const links: NodeListOf<HTMLAnchorElement> = document.querySelectorAll('.toc .list li > a')
+
+        const updateAriaCurrent = (): void => {
+            links.forEach((link: HTMLAnchorElement) => {
+                const isCurrent: boolean =
+                    getComputedStyle(link).getPropertyValue('--toc-current').trim() === '1'
+
+                if (isCurrent) {
+                    link.setAttribute('aria-current', 'location')
+                    return
+                }
+
+                link.removeAttribute('aria-current')
+            })
+        }
+
+        links.forEach((link: HTMLAnchorElement) => {
+            link.addEventListener('transitionstart', (event: TransitionEvent) => {
+                if (event.propertyName !== 'opacity') {
+                    return
+                }
+
+                updateAriaCurrent()
+            })
+        })
+
+        updateAriaCurrent()
+    }
+</script>
