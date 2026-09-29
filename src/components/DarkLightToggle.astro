@@ -1,5 +1,4 @@
 ---
-
 ---
 
 <button id="themeToggle" type="button">
@@ -9,7 +8,13 @@
             <circle cx="0" cy="10" r="6" fill="black"></circle>
         </mask>
 
-        <circle class="sun" cx="12" cy="12" r="6" mask="url(#moon-mask)" fill="currentColor"
+        <circle
+            class="sun"
+            cx="12"
+            cy="12"
+            r="6"
+            mask="url(#moon-mask)"
+            fill="currentColor"
         ></circle>
         <g class="sun-beams" stroke="currentColor">
             <line x1="12" y1="1" x2="12" y2="3"></line>
@@ -134,7 +139,7 @@
 
         & > .sun-beams {
             stroke: var(--icon-fill);
-            stroke-width: 0.125rem;
+            stroke-width: 2;
         }
 
         @media (--motion-ok) {

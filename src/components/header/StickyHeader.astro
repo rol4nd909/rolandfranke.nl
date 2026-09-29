@@ -60,8 +60,10 @@ const { pathname } = Astro.url
             className="btn-close js_nav-close"
             command="close"
             commandfor="menuDialog"
-            autofocus>close menu</MenuToggle
+            autofocus
         >
+            close menu
+        </MenuToggle>
     </dialog-header>
 
     <nav aria-label="Main">
@@ -80,9 +82,9 @@ const { pathname } = Astro.url
 
         &[data-story='true'] {
             /*
-             * Sticky positioning is only needed when `animation-timeline` is supported,
-             * as the scroll progress indicator depends on it.
-             */
+                 * Sticky positioning is only needed when `animation-timeline` is supported,
+                 * as the scroll progress indicator depends on it.
+                 */
             @supports (animation-timeline: scroll()) {
                 position: sticky;
                 inset-block-start: var(--nav-offset);
@@ -251,13 +253,13 @@ const { pathname } = Astro.url
     @starting-style {
         /*   Before-open state  */
         /* Needs to be after the previous dialog[open] rule to take effect,
-    as the specificity is the same */
+        as the specificity is the same */
         dialog[open] {
             opacity: 0;
         }
 
         /* This starting-style rule cannot be nested inside the above selector
-because the nesting selector cannot represent pseudo-elements. */
+    because the nesting selector cannot represent pseudo-elements. */
         dialog[open]::backdrop {
             opacity: 0;
         }

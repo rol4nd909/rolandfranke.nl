@@ -14,7 +14,9 @@ const { className, ...rest } = Astro.props
         <path d="M20 50h60"></path>
         <path d="M20 71h73V7L25 75"></path>
     </svg>
-    <span class="sr-only"><slot /></span>
+    <span class="sr-only">
+        <slot />
+    </span>
 </button>
 
 <style>
@@ -49,7 +51,7 @@ const { className, ...rest } = Astro.props
                     transform 0.7s var(--ease-spring);
                 fill: none;
                 stroke: currentColor;
-                stroke-width: 0.375rem;
+                stroke-width: 6;
 
                 &:nth-child(odd) {
                     stroke-dasharray: 60 300;

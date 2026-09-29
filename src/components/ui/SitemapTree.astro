@@ -10,35 +10,33 @@ const { nodes } = Astro.props
 ---
 
 <ul>
-    {
-        nodes.map((node: SitemapNode) => (
-            <li>
-                {node.url ? (
-                    <CustomLink href={node.url} className="reversed">
-                        {node.label}
-                    </CustomLink>
-                ) : (
-                    <span>{node.label}</span>
-                )}
+    {nodes.map((node: SitemapNode) => (
+        <li>
+            {node.url ? (
+                <CustomLink href={node.url} className="reversed">
+                    {node.label}
+                </CustomLink>
+            ) : (
+                <span>{node.label}</span>
+            )}
 
-                {node.children?.length ? (
-                    <ul>
-                        {node.children.map((child: SitemapNode) => (
-                            <li>
-                                {child.url ? (
-                                    <CustomLink href={child.url} className="reversed">
-                                        {child.label}
-                                    </CustomLink>
-                                ) : (
-                                    <span>{child.label}</span>
-                                )}
-                            </li>
-                        ))}
-                    </ul>
-                ) : null}
-            </li>
-        ))
-    }
+            {node.children?.length ? (
+                <ul>
+                    {node.children.map((child: SitemapNode) => (
+                        <li>
+                            {child.url ? (
+                                <CustomLink href={child.url} className="reversed">
+                                    {child.label}
+                                </CustomLink>
+                            ) : (
+                                <span>{child.label}</span>
+                            )}
+                        </li>
+                    ))}
+                </ul>
+            ) : null}
+        </li>
+    ))}
 </ul>
 
 <style>
@@ -74,7 +72,7 @@ const { nodes } = Astro.props
 
                         inset-block-start: anchor(--parent end);
                         inset-inline-start: calc(anchor(--parent start) - 1rem);
-                        inset-block-end: anchor(--child center);
+                        inset-block-end: calc(anchor(--child start) - 0.5lh);
                         inset-inline-end: calc(anchor(--child start) + 0.5rem);
 
                         border: 1px solid color-mix(in oklch, var(--text), var(--surface) 50%);
