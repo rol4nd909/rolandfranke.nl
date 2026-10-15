@@ -1,0 +1,250 @@
+---
+title: 'My Interop 2027 CSS Wishlist: 10 Features'
+description: 'My personal CSS wishlist for Interop 2027, from scroll-driven interfaces and better layouts to smoother transitions and customizable form controls.'
+pubDate: 2026-10-15
+author: Roland
+tags: ["css"]
+---
+
+## Intro
+
+CSS keeps getting better. Features that once required JavaScript, extra markup, or complicated workarounds are becoming possible with a few lines of CSS.
+
+But having a feature in one browser isn't enough. I want to use modern CSS without constantly checking which browser supports it or building fallbacks for every other engine.
+
+With Interop 2027 on the horizon, here are ten CSS features I'd love to see become more interoperable. This is my personal wishlist, ranked by how much I want to use these features in everyday frontend development.
+
+
+## 1. [CSS Container Scroll-State Queries](https://github.com/web-platform-tests/interop/issues/1364)
+
+Container queries already let us adapt a component to the space available to it. Scroll-state queries take this a step further by allowing styles to respond to the scroll state of a container.
+
+For example, imagine a sticky header that changes its appearance once it becomes stuck, or a component that reacts when its scroll container reaches a particular state.
+
+```css
+.sticky-header {
+  position: sticky;
+  top: 0;
+  container-type: scroll-state;
+}
+
+@container scroll-state(stuck: top) {
+  .sticky-header {
+    box-shadow: 0 2px 8px rgb(0 0 0 / 10%);
+  }
+}
+```
+
+No scroll event listeners. No JavaScript checking positions on every scroll. Just CSS responding to the state of the layout.
+
+This is exactly the kind of functionality I want to see working consistently across browsers.
+
+
+## 2. [Scroll-Triggered Animations](https://github.com/web-platform-tests/interop/issues/1433)
+
+Scroll-driven animations are already an exciting addition to CSS, but I want to see scroll-triggered animations become a dependable part of the platform too.
+
+Think about revealing an element when it enters the viewport, animating a section as the reader reaches it, or triggering a visual effect at a specific point in an article.
+
+These interactions are common on modern websites, yet they often rely on JavaScript and `IntersectionObserver`.
+
+I'd love to build more of these experiences directly in CSS, with predictable behavior across browsers and without having to maintain custom JavaScript for every animation.
+
+The goal isn't to animate everything. It's to make the animations we do need easier to build and maintain.
+
+
+## 3. [CSS Scroll Markers](https://github.com/web-platform-tests/interop/issues/1406)
+
+Carousels are everywhere, but their navigation controls can require quite a bit of extra markup and JavaScript.
+
+CSS scroll markers offer a more declarative approach. With features such as `::scroll-marker` and `::scroll-marker-group`, we can create navigation markers for items in a scroll container and style them with CSS.
+
+Imagine a carousel where the browser handles the relationship between the slides and their navigation markers, including which marker represents the current target.
+
+```css
+.carousel {
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+}
+
+.carousel > * {
+  scroll-snap-align: start;
+}
+```
+
+The example above is already useful on its own. Scroll markers could take it further by providing the navigation UI without requiring us to build and synchronize a separate set of controls.
+
+I'd love to see this become a reliable option for accessible, CSS-first carousels.
+
+
+## 4. [CSS `line-clamp`](https://github.com/web-platform-tests/interop/issues/1379)
+
+Sometimes a card title or description needs to fit within a fixed number of lines. A consistent card layout is difficult to achieve when one description takes up two lines and another takes up six.
+
+The `line-clamp` property provides a straightforward way to limit the number of lines displayed.
+
+```css
+.card-description {
+  line-clamp: 3;
+}
+```
+
+That's much easier to read than older combinations of properties and browser-specific workarounds.
+
+What I want from Interop 2027 is consistent support and behavior, so I can use this property without worrying about differences between browsers.
+
+One important detail: clamping should remain a presentation decision. The full content should still be available when users need it, especially when the text contains important information.
+
+
+## 5. [CSS Grid Lanes](https://github.com/web-platform-tests/interop/issues/1445)
+
+Masonry layouts have been a long-standing challenge for CSS developers. We can approximate them using columns, JavaScript libraries, or carefully designed grid layouts, but each approach comes with trade-offs.
+
+CSS Grid Lanes aims to bring masonry-style layouts closer to the native CSS Grid model.
+
+This would be particularly useful for card collections, image galleries, and other layouts where items have different heights.
+
+Instead of relying on JavaScript to calculate positions or using a layout technique that changes the visual order, I'd like to be able to describe the layout in CSS and let the browser handle the rest.
+
+For component libraries and design systems, a native solution would also mean less custom code to maintain.
+
+This is one of the features I'm most excited about. A reliable, interoperable masonry solution would be a welcome addition to everyday CSS.
+
+
+## 6. [CSS Gap Decorations](https://github.com/web-platform-tests/interop/issues/1374)
+
+CSS Grid and Flexbox make it easy to create layouts with gaps between items. But what if I want to draw a line through those gaps?
+
+Today, that often means adding borders to individual items, introducing pseudo-elements, or creating additional markup. Those solutions can become complicated when items wrap or the layout changes responsively.
+
+Gap decorations aim to make it possible to draw lines directly within the gaps of grid and flex layouts.
+
+For example, a grid could have separators between its rows and columns without every individual card needing to manage its own borders.
+
+This would be especially useful for data-heavy layouts, navigation, and component libraries where consistent spacing and separators are part of the design system.
+
+I'd love to see this become a native styling capability rather than another problem we have to solve separately for every layout.
+
+
+## 7. [Transitions for `display` and `content-visibility`](https://github.com/web-platform-tests/interop/issues/1384)
+
+Animating an element's opacity or transform is straightforward. Making an element appear or disappear smoothly is a different story.
+
+Properties such as `display` and `content-visibility` have discrete behavior, which means they don't transition in the same way as properties such as `opacity`.
+
+CSS has already made progress here with `transition-behavior: allow-discrete` and `@starting-style`.
+
+```css
+.dialog {
+  opacity: 0;
+  display: none;
+  transition:
+    opacity 200ms ease,
+    display 200ms allow-discrete;
+}
+
+.dialog.is-open {
+  opacity: 1;
+  display: block;
+}
+
+@starting-style {
+  .dialog.is-open {
+    opacity: 0;
+  }
+}
+```
+
+This makes entry and exit transitions much easier to implement without JavaScript managing animation timing.
+
+However, support for transitions involving `display` and `content-visibility` still differs between browser engines.
+
+I'd like to see these capabilities become more consistent, so we can build smoother interfaces while keeping the underlying CSS simple.
+
+
+## 8. [Custom Properties in Size Container Queries](https://github.com/web-platform-tests/interop/issues/1344)
+
+CSS custom properties are incredibly useful for sharing values across components and stylesheets. Unfortunately, they can't currently be used everywhere we'd like, including as values in size container query conditions.
+
+Imagine defining a breakpoint once and reusing it in multiple container queries.
+
+```css
+:root {
+  --card-breakpoint: 30rem;
+}
+
+@container (width > var(--card-breakpoint)) {
+  .card {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+  }
+}
+```
+
+The example illustrates the syntax I'd like to be able to use. It isn't currently valid CSS because `var()` cannot be substituted into a size container query condition.
+
+Being able to use custom properties here would make responsive component styles more consistent and easier to maintain.
+
+For design systems with multiple components sharing the same responsive rules, this could reduce duplication and make changes much easier to manage.
+
+It's not the flashiest feature on this list, but it's the kind of improvement that could make a real difference to my daily work.
+
+
+## 9. [`flex-wrap: balance`](https://github.com/web-platform-tests/interop/issues/1350)
+
+Flexbox is great for arranging items in a row and allowing them to wrap when there isn't enough space. But the resulting distribution isn't always what we want.
+
+Imagine a group of navigation items, tags, or buttons wrapping onto multiple lines. Depending on the available width, the final line might contain just one item while the previous lines are much more crowded.
+
+A balanced wrapping option could help distribute items more evenly across lines.
+
+```css
+.tag-list {
+  display: flex;
+  flex-wrap: balance;
+  gap: 0.5rem;
+}
+```
+
+This illustrates the behavior I'd like to have available, rather than syntax you can use in browsers today.
+
+The idea is simple: let the browser find a more balanced distribution instead of relying on carefully chosen widths or JavaScript to rearrange the items.
+
+I'd find this particularly useful for responsive components where the content is dynamic and the number or size of items can change.
+
+
+## 10. [Customizable `<select>`](https://github.com/web-platform-tests/interop/issues/1393)
+
+Native form controls are great because browsers already provide much of the functionality and accessibility behavior we need. Unfortunately, styling a native `<select>` to match a design system has traditionally been difficult.
+
+That's why customizable select elements are on my wishlist.
+
+The newer CSS capabilities around customizable selects allow developers to take more control over the appearance of the control and its picker while retaining the native HTML element.
+
+For example, the newer `appearance: base-select` approach opens up styling possibilities that weren't previously available with a traditional select.
+
+```css
+select,
+::picker(select) {
+  appearance: base-select;
+}
+```
+
+This is only the starting point. The real appeal is being able to style the button, options, picker, and selected state much more freely.
+
+I'd love to see this work consistently across browsers. It could make building accessible form controls that fit a design system considerably easier, without immediately reaching for a custom JavaScript component.
+
+Of course, native semantics and keyboard interaction still matter. More styling freedom should make accessible controls easier to build, not easier to break.
+
+
+## Closing Thoughts
+
+My Interop 2027 wishlist is mostly about making CSS more capable and more dependable.
+
+I want better control over scroll-driven interfaces, more flexible layouts, simpler transitions, and more styling freedom for everyday elements. Most importantly, I want to use these features without having to wonder whether they'll behave differently in another browser.
+
+Some of these features are already usable in certain browsers, while others still need more work. Interop isn't necessarily about inventing new CSS. It's about making existing and emerging features work consistently across browser engines.
+
+If even a few of these make meaningful progress in Interop 2027, that would be a win for frontend developers.
+
+What CSS feature would make your own wishlist?
