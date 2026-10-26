@@ -1,8 +1,5 @@
 ::selection {
-  background-color: light-dark(
-    oklch(from var(--color-primary-400) l c h / 0.25),
-    oklch(from var(--color-primary-400) l c h / 0.5)
-  );
+  background-color: var(--highlight);
 }
 
 h1,

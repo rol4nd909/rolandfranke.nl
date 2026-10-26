@@ -8,6 +8,11 @@
   --surface: light-dark(var(--color-neutral-100), var(--color-neutral-900));
   --surface-2: color-mix(in oklch, var(--text), var(--surface) 95%);
 
+  --highlight: light-dark(
+    oklch(from var(--color-primary-400) l c h / 0.25),
+    oklch(from var(--color-primary-400) l c h / 0.5)
+  );
+
   --shadow:
     rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px,
     rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.1) 0px 2px 4px -2px;

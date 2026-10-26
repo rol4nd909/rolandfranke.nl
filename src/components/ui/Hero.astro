@@ -14,10 +14,7 @@ const { class: providedProps, ...rest } = Astro.props
     div {
         --_size: 3rem;
         --_offset: calc(var(--_size) / 2);
-        --_line: light-dark(
-            oklch(from var(--color-primary-400) l c h / 0.25),
-            oklch(from var(--color-primary-400) l c h / 0.5)
-        );
+        --_line: var(--highlight);
 
         position: relative;
         isolation: isolate;
