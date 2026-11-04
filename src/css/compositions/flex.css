@@ -1,7 +1,7 @@
 .flex {
   display: flex;
   align-items: center;
-  gap: utopia.clamp(16, 24);
+  gap: round(down, --fluid-size(1rem, 1.5rem), 4px);
 }
 
 .inline-wrap {

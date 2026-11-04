@@ -1,0 +1,5 @@
+@function --fluid-size(--min, --max, --vmin: 600px, --vmax: 1200px) {
+  --progress: progress(100cqi, var(--vmin), var(--vmax));
+
+  result: calc(var(--min) + var(--progress) * (var(--max) - var(--min)));
+}

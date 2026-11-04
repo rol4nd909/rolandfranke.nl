@@ -1,16 +1,15 @@
 ---
 import { type CollectionEntry } from 'astro:content'
 
-import FormattedDate from '@components/ui/FormattedDate.astro'
 import Badge from '@components/ui/Badge.astro'
-import Heading from '@components/ui/Heading.astro'
 import CustomLink from '@components/ui/CustomLink.astro'
 import Dot from '@components/ui/Dot.astro'
+import FormattedDate from '@components/ui/FormattedDate.astro'
+import Heading from '@components/ui/Heading.astro'
 
 type Props = {
     post: CollectionEntry<'posts'>
 }
-
 
 const { post } = Astro.props
 const { title, description, pubDate, tags, author } = post.data
@@ -21,25 +20,27 @@ const slug = `/frontend-stories/${post.id}`
 <article>
     <header>
         <Heading tagName="h2" size="h3">
-            <CustomLink href={slug} set:html={title} className='reversed' />
+            <CustomLink href={slug} set:html={title} className="reversed" />
         </Heading>
 
         <p class="flex">
-            {
-                author && (
+            {author && (
+                <>
                     <span>
                         {' '}
                         by <i>{author}</i>
                     </span>
 
                     <Dot />
-                )
-            }
+                </>
+            )}
             <FormattedDate {pubDate} />
         </p>
 
         <div class="flex inline-wrap" role="group" aria-label="Categories">
-            {tags.map((tag) => <Badge id={tag}>{tag}</Badge>)}
+            {tags.map((tag) => (
+                <Badge id={tag}>{tag}</Badge>
+            ))}
         </div>
     </header>
 
@@ -47,6 +48,8 @@ const slug = `/frontend-stories/${post.id}`
 </article>
 
 <style>
+    @import '../../css/global/functions.css';
+
     .flex {
         gap: 1rem;
     }
@@ -54,12 +57,12 @@ const slug = `/frontend-stories/${post.id}`
     article {
         grid-column: xsmall;
         display: grid;
-        gap: utopia.clamp(16, 32);
+        gap: round(down, --fluid-size(1rem, 2rem), 4px);
         position: relative;
 
         + article {
             border-top: 1px solid var(--color-primary-400);
-            padding-top: utopia.clamp(48, 96);
+            padding-top: round(down, --fluid-size(3rem, 6rem), 4px);
         }
     }
 
@@ -69,10 +72,10 @@ const slug = `/frontend-stories/${post.id}`
     }
 
     a {
-      &::after {
-        content: '';
-        position: absolute;
-        inset: 0;
-      }
+        &::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+        }
     }
 </style>

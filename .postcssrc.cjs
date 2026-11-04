@@ -1,12 +1,6 @@
 const postcssPresetEnv = require('postcss-preset-env')
 const postcssCustomMedia = require('postcss-custom-media');
 const postcssGlobalData = require('@csstools/postcss-global-data');
-const postcssUtopia = require('postcss-utopia');
-
-const { min, max } = {
-  min: '600',
-  max: '1200'
-};
 
 module.exports = {
   plugins: [
@@ -38,9 +32,5 @@ module.exports = {
       ]
     }),
     postcssCustomMedia(),
-    postcssUtopia({
-      minWidth: min, // Default minimum viewport based on design tokens
-      maxWidth: max, // Default maximum viewport based on design tokens
-    })
   ]
 };

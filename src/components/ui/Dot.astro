@@ -6,16 +6,20 @@ type Props = {
 const { size } = Astro.props
 ---
 
-<span class:list={[size]} aria-hidden="true">•</span>
+<span class:list={[size]} aria-hidden="true">
+    •
+</span>
 
 <style>
+    @import '../../css/global/functions.css';
+
     span {
         font-size: 0.75rem;
         color: var(--color-primary-400);
         font-feature-settings: 'aalt' on;
 
         &.large {
-            font-size: utopia.clamp(8, 16);
+            font-size: round(down, --fluid-size(0.5rem, 1rem), 2px);
         }
     }
 </style>

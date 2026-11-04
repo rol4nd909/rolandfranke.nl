@@ -1,6 +1,6 @@
 .lane {
-  row-gap: utopia.clamp(48, 96);
-  padding-block: utopia.clamp(48, 96);
+  row-gap: round(down, --fluid-size(3rem, 6rem), 4px);
+  padding-block: round(down, --fluid-size(3rem, 6rem), 4px);
   background-color: var(--_bg);
   transform: translate3d(0, 0, 0);
 
@@ -20,11 +20,7 @@
     }
   }
 
-  /* &:first-child:not(.lane--light) {
-    padding-block-start: calc(utopia.clamp(48, 96) / 2);
-  } */
-
   .hero + &:not(.lane--light) {
-    padding-block-start: calc(utopia.clamp(48, 96) / 2);
+    padding-block-start: round(down, calc(--fluid-size(3rem, 6rem) / 2), 4px);
   }
 }

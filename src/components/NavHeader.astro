@@ -18,17 +18,20 @@ const { pathname } = Astro.url
                 <li>
                     <CustomLink
                         href="/frontend-stories/"
-                        aria-current={pathname.slice(1) === 'frontend-stories/'
-                            ? 'page'
-                            : undefined}>Frontend Stories</CustomLink
+                        aria-current={
+                            pathname.slice(1) === 'frontend-stories/' ? 'page' : undefined
+                        }
                     >
+                        Frontend Stories
+                    </CustomLink>
                 </li>
                 <li>
                     <CustomLink
                         href="/about/"
                         aria-current={pathname.slice(1) === 'about/' ? 'page' : undefined}
-                        >About</CustomLink
                     >
+                        About
+                    </CustomLink>
                 </li>
             </ul>
         </nav>
@@ -40,6 +43,8 @@ const { pathname } = Astro.url
 </header>
 
 <style>
+    @import '../css/global/functions.css';
+
     header {
         position: absolute;
         inset: 0 0 auto;
@@ -50,7 +55,7 @@ const { pathname } = Astro.url
 
         padding-block: 1.5rem;
         /* The 960 value is the minumun constrain value */
-        padding-inline: utopia.clamp(24, 72, 960);
+        padding-inline: round(down, --fluid-size(1.5rem, 4.5rem, 960px), 4px);
 
         @media (--for-phone-only) {
             flex-direction: column;
@@ -83,7 +88,7 @@ const { pathname } = Astro.url
         > div {
             display: flex;
             align-items: center;
-            gap: utopia.clamp(16, 24);
+            gap: round(down, --fluid-size(1rem, 1.5rem), 4px);
             flex-grow: 1;
 
             > div {
@@ -94,7 +99,7 @@ const { pathname } = Astro.url
 
     .menu {
         display: flex;
-        gap: utopia.clamp(16, 24);
+        gap: round(down, --fluid-size(1rem, 1.5rem), 4px);
         padding-inline: 0;
     }
 </style>

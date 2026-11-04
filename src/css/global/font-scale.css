@@ -1,12 +1,17 @@
 :root {
-  @utopia typeScale({
-    minFontSize: 18,
-    maxFontSize: 20,
-    minTypeScale: 1.2,
-    maxTypeScale: 1.25,
-    positiveSteps: 5,
-    negativeSteps: 2,
-    prefix: "fs",
-    relativeTo: "container"
-  });
+  --fs-small: 1.125rem;
+  --fs-large: 1.25rem;
+  --fs-base: --fluid-size(var(--fs-small), var(--fs-large));
+
+  --type-scale-small: 1.2;
+  --type-scale-large: 1.25;
+  --type-scale: --fluid-size(var(--type-scale-small), var(--type-scale-large));
+
+  --fs--1: round(down, calc(var(--fs-base) * pow(var(--type-scale), -1)), 1px);
+  --fs-0: round(down, calc(var(--fs-base) * pow(var(--type-scale), 0)), 2px);
+  --fs-1: round(down, calc(var(--fs-base) * pow(var(--type-scale), 1)), 2px);
+  --fs-2: round(down, calc(var(--fs-base) * pow(var(--type-scale), 2)), 2px);
+  --fs-3: round(down, calc(var(--fs-base) * pow(var(--type-scale), 3)), 2px);
+  --fs-4: round(down, calc(var(--fs-base) * pow(var(--type-scale), 4)), 2px);
+  --fs-5: round(down, calc(var(--fs-base) * pow(var(--type-scale), 5)), 2px);
 }

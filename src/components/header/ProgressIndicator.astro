@@ -13,6 +13,8 @@ const { className, ...rest } = Astro.props
 </svg>
 
 <style>
+    @import '../../css/global/functions.css';
+
     svg {
         --stroke: 3;
 
@@ -47,7 +49,7 @@ const { className, ...rest } = Astro.props
 
                 animation-timeline: --article;
                 /* start a bit earlier because of the padding of the article */
-                animation-range-start: entry calc(100% - utopia.clamp(48, 96));
+                animation-range-start: entry calc(100% - round(down, --fluid-size(3rem, 6rem), 4px));
                 animation-range-end: exit 0%;
             }
         }
